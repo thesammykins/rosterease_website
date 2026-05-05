@@ -35,6 +35,7 @@ const isContact = currentPath === "/contact";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#f3eee6" />
+    <link rel="icon" type="image/svg+xml" href={appIcon.src} />
     <link rel="canonical" href={canonicalUrl} />
     <title>{fullTitle}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -64,7 +65,7 @@ const isContact = currentPath === "/contact";
 
     <header class="re-site-header">
       <div class="re-shell re-site-header__inner">
-          <a href="/" class="re-brand" aria-label="Go to the RosterEase overview page">
+        <a href="/" class="re-brand" aria-label="Go to the RosterEase overview page">
           <span class="re-brand__icon">
             <img src={appIcon.src} alt="" width="36" height="36" aria-hidden="true" />
           </span>
