@@ -1,0 +1,396 @@
+---
+import { Image } from "astro:assets";
+import RosterEaseLayout from "../layouts/RosterEaseLayout.astro";
+import { SUPPORT_EMAIL, SUPPORT_MAILTO } from "../lib/rosterease";
+import todayShot from "../assets/rosterease/screenshots/app-store-today.png";
+import patternShot from "../assets/rosterease/screenshots/onboarding-pattern.png";
+import reviewShot from "../assets/rosterease/screenshots/onboarding-review.png";
+import calendarShot from "../assets/rosterease/screenshots/app-store-calendar.png";
+import workplacesShot from "../assets/rosterease/screenshots/app-store-workplaces.png";
+import exceptionShot from "../assets/rosterease/screenshots/support-shift-exception.png";
+
+const keyPoints = [
+  {
+    title: "See the next shift immediately",
+    text: "Today opens with the next shift, time, workplace, and the next few days in one place.",
+  },
+  {
+    title: "Import instead of rebuilding",
+    text: "Bring in roster information from screenshots, PDFs, or pasted text when that is faster than starting from zero.",
+  },
+  {
+    title: "Adjust the roster when real life changes it",
+    text: "Handle recurring patterns and one-off changes without losing the month around them.",
+  },
+];
+
+const chapters = [
+  { id: "opening-view", title: "Opening view" },
+  { id: "building-the-roster", title: "Building the roster" },
+  { id: "planning-and-changes", title: "Planning and changes" },
+];
+
+const TESTFLIGHT_URL = "https://testflight.apple.com/join/PZdK93CP";
+---
+
+<RosterEaseLayout
+  title="RosterEase"
+  description="RosterEase is an iPhone app for shift workers who want the Today view to make the next shift obvious and the rest of the roster easier to manage."
+>
+  <section class="re-hero">
+    <div class="re-shell re-hero__grid">
+      <div class="re-hero__copy">
+        <p class="re-kicker">RosterEase for iPhone</p>
+        <h1 class="re-hero__title">Know what shift is next without digging through the roster.</h1>
+        <p class="re-lede">
+          RosterEase is built around the Today screen: the next shift, the workplace, and the next
+          few days all land in one calm view the moment the app opens.
+        </p>
+
+        <div class="re-button-row">
+          <a
+            class="re-button re-button--primary"
+            href={TESTFLIGHT_URL}
+            data-testflight-url
+            target="_blank"
+            rel="noopener"
+          >
+            Join TestFlight beta
+          </a>
+          <a class="re-button re-button--secondary" href="#screens">Browse screens</a>
+        </div>
+
+        <p class="re-hero__aside">
+          Built for shift workers who need today to be obvious before they think about anything else.
+        </p>
+        <div class="re-hero__support">
+          <span class="re-hero__support-label">Today view</span>
+          <p>
+            The next shift card, workplace, and upcoming days stay visible together so the app does
+            the first bit of thinking for you.
+          </p>
+        </div>
+      </div>
+
+      <div class="re-hero__art re-hero__art--bleed">
+        <div class="re-hero-stage" aria-hidden="true"></div>
+        <figure class="re-hero-phone">
+          <Image
+            src={todayShot}
+            alt="RosterEase Today view showing the next shift card, workplace, and upcoming shifts."
+            widths={[700, 980, 1260]}
+            sizes="(max-width: 1120px) 88vw, 44rem"
+            format="avif"
+            quality={92}
+            loading="eager"
+            fetchpriority="high"
+          />
+        </figure>
+
+        <aside class="re-hero-index">
+          {
+            keyPoints.map((row) => (
+              <div class="re-hero-index__row">
+                <span>{row.title}</span>
+                <p>{row.text}</p>
+              </div>
+            ))
+          }
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="re-beta" id="beta">
+    <div class="re-shell">
+      <div class="re-beta__card">
+        <div class="re-beta__copy">
+          <span class="re-beta__chip">Now in TestFlight</span>
+          <h2 class="re-beta__title">Try RosterEase before it hits the App Store.</h2>
+          <p class="re-beta__body">
+            Currently testing with a small group of shift workers in Australia. Join the
+            TestFlight beta to try it early and shape what ships.
+          </p>
+        </div>
+        <div class="re-beta__cta">
+          <a
+            class="re-button re-button--primary"
+            href={TESTFLIGHT_URL}
+            data-testflight-url
+            target="_blank"
+            rel="noopener"
+          >
+            Join the TestFlight beta
+          </a>
+          <p class="re-beta__fineprint">
+            Requires the TestFlight app. <a href="/privacy">Read the privacy policy</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="re-screens-guide" id="screens">
+    <div class="re-shell re-screens-guide__layout">
+      <aside class="re-screens-index">
+        <p class="re-screens-index__label">Chapters</p>
+        <ol class="re-screens-index__list">
+          {
+            chapters.map((chapter, index) => (
+              <li>
+                <a href={`#${chapter.id}`}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{chapter.title}</strong>
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+      </aside>
+
+      <div class="re-screens-guide__stack">
+        <article class="re-screen-chapter" id="opening-view">
+          <header class="re-screen-chapter__header">
+            <span class="re-screen-chapter__number">01</span>
+            <div class="re-screen-chapter__heading">
+              <p class="re-kicker">Opening view</p>
+              <h2 class="re-section-title re-screen-chapter__title">Start with what matters today.</h2>
+              <p class="re-body-copy">
+                The hero already centers Today. Here it sits as the anchor for the rest of the
+                app: one calm screen that tells you what shift is next before you think about setup
+                or planning.
+              </p>
+            </div>
+          </header>
+
+          <div class="re-band re-band--screen-story">
+            <div class="re-band__copy">
+              <p class="re-kicker">Today</p>
+              <h3 class="re-band__title">See the next shift straight away</h3>
+              <p class="re-band__text">
+                The Today screen keeps the next shift, workplace, and upcoming days together so the
+                day is understandable the moment the app opens.
+              </p>
+              <ul class="re-detail-list re-detail-list--compact">
+                <li>Shows the next shift, workplace, and nearby days on one screen.</li>
+                <li>Best when you need to know what is coming up right now, not browse the whole month.</li>
+              </ul>
+            </div>
+
+            <figure class="re-band__media re-band__media--phone">
+              <Image
+                src={todayShot}
+                alt="RosterEase Today view showing the next shift card, workplace, and upcoming shifts."
+                widths={[620, 860, 1120]}
+                sizes="(max-width: 1120px) 82vw, 28rem"
+                format="avif"
+                quality={92}
+                loading="eager"
+              />
+            </figure>
+          </div>
+        </article>
+
+        <article class="re-screen-chapter" id="building-the-roster">
+          <header class="re-screen-chapter__header">
+            <span class="re-screen-chapter__number">02</span>
+            <div class="re-screen-chapter__heading">
+              <p class="re-kicker">Building the roster</p>
+              <h2 class="re-section-title re-screen-chapter__title">
+                Build the repeating cycle once, then check it before saving.
+              </h2>
+              <p class="re-body-copy">
+                Setup stays split into two quiet steps: define the repeating pattern, then check
+                the generated roster before it becomes the live schedule.
+              </p>
+            </div>
+          </header>
+
+          <div class="re-band re-band--screen-story">
+            <div class="re-band__copy">
+              <p class="re-kicker">Setup flow</p>
+              <h3 class="re-band__title">Pattern builder and review work as a pair.</h3>
+              <p class="re-band__text">
+                One screen defines the structure of the roster. The next screen makes sure the
+                generated result looks right before you commit to it.
+              </p>
+
+              <ol class="re-ruled-list">
+                <li class="re-ruled-list__item">
+                  <span class="re-ruled-list__number">01</span>
+                  <div>
+                    <h4>Pattern builder</h4>
+                    <p>
+                      Set the cycle length, anchor date, and repeating shift sequence that the
+                      roster should generate from.
+                    </p>
+                  </div>
+                </li>
+                <li class="re-ruled-list__item">
+                  <span class="re-ruled-list__number">02</span>
+                  <div>
+                    <h4>Review</h4>
+                    <p>
+                      Check the hours, the rotation summary, and the generated schedule before it
+                      becomes the live roster.
+                    </p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+
+            <figure class="re-band__media re-band__media--collage">
+              <div class="re-pattern-board">
+                <div class="re-shot-crop re-shot-crop--pattern-main">
+                  <Image
+                    src={patternShot}
+                    alt="RosterEase pattern builder showing cycle length, anchor date, and assigned shifts."
+                    widths={[760, 1040, 1320]}
+                    sizes="(max-width: 1120px) 82vw, 32rem"
+                    format="avif"
+                    quality={92}
+                    loading="eager"
+                  />
+                </div>
+
+                <div class="re-shot-crop re-shot-crop--pattern-detail">
+                  <Image
+                    src={reviewShot}
+                    alt="RosterEase onboarding review screen showing pattern summary, average weekly hours, and a schedule preview."
+                    widths={[360, 520, 760]}
+                    sizes="(max-width: 1120px) 42vw, 13rem"
+                    format="avif"
+                    quality={92}
+                    loading="eager"
+                  />
+                </div>
+              </div>
+            </figure>
+          </div>
+        </article>
+
+        <article class="re-screen-chapter" id="planning-and-changes">
+          <header class="re-screen-chapter__header">
+            <span class="re-screen-chapter__number">03</span>
+            <div class="re-screen-chapter__heading">
+              <p class="re-kicker">Planning and changes</p>
+              <h2 class="re-section-title re-screen-chapter__title">
+                Read ahead over the month, then fix the day that changed.
+              </h2>
+              <p class="re-body-copy">
+                Once the roster exists, the rest of the app helps you read ahead, keep workplaces
+                separated, and edit one-off changes without touching the whole rotation.
+              </p>
+            </div>
+          </header>
+
+          <div class="re-screen-chapter__stack">
+            <div class="re-band re-band--screen-story">
+              <div class="re-band__copy">
+                <p class="re-kicker">Calendar</p>
+                <h3 class="re-band__title">Read the month as a pattern</h3>
+                <p class="re-band__text">
+                  Calendar keeps runs of shifts, leave, and changeovers visible instead of
+                  compressing the roster into tiny labels.
+                </p>
+                <ul class="re-detail-list re-detail-list--compact">
+                  <li>Makes active weeks and upcoming runs easier to scan at a glance.</li>
+                  <li>Useful when you need to plan further ahead than the next shift.</li>
+                </ul>
+              </div>
+
+              <figure class="re-band__media re-band__media--calendar">
+                <Image
+                  src={calendarShot}
+                  alt="RosterEase calendar view showing a month of color-coded shifts."
+                  widths={[860, 1180, 1460]}
+                  sizes="(max-width: 1120px) 82vw, 42rem"
+                  format="avif"
+                  quality={92}
+                  loading="eager"
+                />
+              </figure>
+            </div>
+
+            <div class="re-planning__row">
+              <article class="re-card">
+                <figure class="re-card__media re-card__media--workplaces">
+                  <Image
+                    src={workplacesShot}
+                    alt="RosterEase workplaces view showing multiple workplace cards and sync status."
+                    widths={[560, 780, 1040]}
+                    sizes="(max-width: 1120px) 82vw, 22rem"
+                    format="avif"
+                    quality={92}
+                    loading="eager"
+                  />
+                </figure>
+
+                <div class="re-card__copy">
+                  <p class="re-kicker">Workplaces</p>
+                  <h3 class="re-card__title">Keep multiple roster sources organised</h3>
+                  <p class="re-card__text">
+                    Workplaces separate different roster sources and sync settings without losing the
+                    overall picture of your schedule.
+                  </p>
+                </div>
+              </article>
+
+              <article class="re-card">
+                <figure class="re-card__media re-card__media--exception">
+                  <Image
+                    src={exceptionShot}
+                    alt="RosterEase edit shift screen showing a one-off shift exception with date, workplace, shift type, and times."
+                    widths={[560, 780, 1040]}
+                    sizes="(max-width: 1120px) 82vw, 22rem"
+                    format="avif"
+                    quality={92}
+                    loading="eager"
+                  />
+                </figure>
+
+                <div class="re-card__copy">
+                  <p class="re-kicker">Exceptions</p>
+                  <h3 class="re-card__title">Handle one-off changes cleanly</h3>
+                  <p class="re-card__text">
+                    Change one date, one workplace, or one shift time without rebuilding the whole
+                    recurring pattern around it.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="re-frontpage-panel">
+    <div class="re-shell re-frontpage-panel__grid">
+      <div class="re-frontpage-panel__copy">
+        <p class="re-kicker">Support</p>
+        <h2 class="re-section-title">Need help with the app or a roster import?</h2>
+        <p class="re-body-copy">
+          Support is handled by email. Reach out any time and you'll get a real reply.
+        </p>
+
+        <div class="re-button-row">
+          <a class="re-button re-button--primary" href="/contact">Contact support</a>
+          <a class="re-button re-button--secondary" href="/privacy">Privacy policy</a>
+        </div>
+      </div>
+
+      <aside class="re-support-panel re-support-panel--frontpage">
+        <p class="re-support-panel__label">Email</p>
+        <h3 class="re-support-panel__title">{SUPPORT_EMAIL}</h3>
+        <p class="re-body-copy">
+          Questions about a roster import, a recurring pattern, or anything that isn't behaving the
+          way you expect — email is the fastest way to get help.
+        </p>
+        <div class="re-button-row re-support-panel__actions">
+          <a class="re-button re-button--primary" href={SUPPORT_MAILTO}>Email support</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</RosterEaseLayout>

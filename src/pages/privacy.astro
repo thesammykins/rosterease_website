@@ -1,0 +1,176 @@
+---
+import RosterEaseLayout from "../layouts/RosterEaseLayout.astro";
+import { SUPPORT_EMAIL, SUPPORT_MAILTO, TESTFLIGHT_EMAIL, TESTFLIGHT_MAILTO } from "../lib/rosterease";
+
+const quickFacts = [
+  {
+    label: "Applies to",
+    value: "RosterEase website and iPhone app",
+  },
+  {
+    label: "Optional permissions",
+    value: "Calendar, photos, files, and clipboard",
+  },
+  {
+    label: "Support",
+    value: SUPPORT_EMAIL,
+    href: SUPPORT_MAILTO,
+  },
+  {
+    // TODO: update "Effective date" to the actual public-launch date before going live.
+    label: "Effective date",
+    value: "15 April 2026",
+  },
+];
+
+const sections = [
+  {
+    title: "Overview",
+    paragraphs: [
+      "This Privacy Policy explains how RosterEase handles information when you use the RosterEase website or mobile app.",
+      "It is written as a plain, general policy for the current version of the product.",
+    ],
+  },
+  {
+    title: "Information you provide",
+    paragraphs: [
+      "If you contact RosterEase, you may provide information such as your name, email address, and anything else you include in the message.",
+      "If you use the app, you may also choose to add or import schedule information, shift types, workplaces, notes, and preferences.",
+    ],
+  },
+  {
+    title: "App data and optional permissions",
+    paragraphs: [
+      "RosterEase is designed so schedule data can remain on your device where practical.",
+      "If you choose to use optional permissions such as calendar access, photo access, file access, or clipboard import, that access is used only for the feature you asked the app to perform.",
+      "For example, calendar access may be used to write shifts to a calendar you choose, and photo or file access may be used to import roster information into the app.",
+    ],
+  },
+  {
+    title: "Website and technical information",
+    paragraphs: [
+      "When you visit the website, standard technical information may be received, such as browser type, device information, IP address, and normal request or diagnostic data.",
+      "This information may be used to operate, secure, and improve the website.",
+    ],
+  },
+  {
+    title: "How information is used",
+    paragraphs: [
+      "Information may be used to operate, maintain, and improve the website and app, provide the features you request, respond to support messages, and protect the security and integrity of the service.",
+      "If you use optional product features, the related information is used only to provide those features.",
+    ],
+  },
+  {
+    title: "Sharing",
+    paragraphs: [
+      "RosterEase does not sell your personal information.",
+      "Information may be shared with service providers or technical partners when reasonably necessary to operate the website or app, comply with legal obligations, enforce terms, or protect rights, safety, and security.",
+    ],
+  },
+  {
+    title: "Retention",
+    paragraphs: [
+      "Information is retained for as long as reasonably necessary to provide the website or app, fulfill legal obligations, resolve disputes, and enforce agreements.",
+      "Information stored in the app may remain on your device until you delete it, remove the app, or replace it with new imported or restored data.",
+    ],
+  },
+  {
+    title: "Security",
+    paragraphs: [
+      "Reasonable steps are taken to protect information, but no method of storage or transmission is completely secure.",
+      "Absolute security cannot be guaranteed.",
+    ],
+  },
+  {
+    title: "Your choices",
+    paragraphs: [
+      "You can choose whether to contact RosterEase and what information to include.",
+      "You can choose whether to grant optional app permissions such as calendar, photos, files, or clipboard access.",
+      "You can stop using the app or website at any time.",
+    ],
+  },
+  {
+    title: "TestFlight beta participation",
+    paragraphs: [
+      "RosterEase is currently distributed for testing through Apple's TestFlight programme. If you join the beta, Apple may collect information such as your TestFlight account details, device and OS version, app installs, crash logs, and any feedback you submit through TestFlight.",
+      'That information is handled by Apple under their TestFlight privacy terms: <a href="https://www.apple.com/legal/privacy/data/en/test-flight/" target="_blank" rel="noopener">apple.com/legal/privacy/data/en/test-flight</a>.',
+      "Crash and feedback data shared with the developer through TestFlight is used only to diagnose issues and improve the app before it ships to the App Store.",
+      `You can also send beta feedback directly to <a href="${TESTFLIGHT_MAILTO}">${TESTFLIGHT_EMAIL}</a>.`,
+    ],
+  },
+  {
+    title: "Contact",
+    paragraphs: [
+      `If you have questions about this Privacy Policy, use the contact page on this site or email ${SUPPORT_EMAIL}.`,
+    ],
+  },
+];
+---
+
+<RosterEaseLayout
+  title="Privacy Policy"
+  description="Read the RosterEase Privacy Policy for the website and mobile app."
+>
+  <section class="re-subpage-hero">
+    <div class="re-shell re-subpage-hero__grid re-subpage-hero__grid--policy">
+      <div class="re-subpage-hero__copy">
+        <p class="re-kicker">Privacy Policy</p>
+        <h1 class="re-page-title">A plain policy for the current version of RosterEase.</h1>
+        <p class="re-lede re-subpage-hero__lede">
+          This page covers the RosterEase website and mobile app, including optional import and
+          calendar features.
+        </p>
+      </div>
+
+      <aside class="re-fact-sheet">
+        <span class="re-fact-sheet__label">Quick facts</span>
+        <dl class="re-fact-sheet__list">
+          {
+            quickFacts.map((fact) => (
+              <div class="re-fact-sheet__row">
+                <dt>{fact.label}</dt>
+                <dd>
+                  {fact.href ? <a href={fact.href}>{fact.value}</a> : fact.value}
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section class="re-policy-section">
+    <div class="re-shell re-policy-grid">
+      <nav class="re-policy-nav" aria-label="Policy contents">
+        <span class="re-policy-nav__label">Contents</span>
+        <ol>
+          {
+            sections.map((section, index) => (
+              <li>
+                <a href={`#policy-${index + 1}`}>{section.title}</a>
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+
+      <div class="re-policy-stack">
+        {
+          sections.map((section, index) => (
+            <article class="re-policy-article" id={`policy-${index + 1}`}>
+              <span class="re-policy-article__number" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+
+              <div class="re-policy-article__body">
+                <h2>{section.title}</h2>
+                {section.paragraphs.map((paragraph) => <p set:html={paragraph} />)}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</RosterEaseLayout>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title>RosterEase app icon</title>
+  <desc>A calm app icon with a staggered shift card that reads as a roster timeline.</desc>
+  <defs>
+    <linearGradient id="bg" x1="112" y1="112" x2="912" y2="912" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0070EB"/>
+      <stop offset="1" stop-color="#0B6FB8"/>
+    </linearGradient>
+    <radialGradient id="glowTop" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(262 210) rotate(90) scale(260)">
+      <stop offset="0" stop-color="#CFE4FF" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#CFE4FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowBottom" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(786 786) rotate(90) scale(300)">
+      <stop offset="0" stop-color="#B9D8FF" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#B9D8FF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="surface" x1="222" y1="188" x2="802" y2="824" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EEF2FB"/>
+    </linearGradient>
+    <filter id="cardShadow" x="104" y="120" width="816" height="832" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="24" stdDeviation="24" flood-color="#031124" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <circle cx="262" cy="210" r="260" fill="url(#glowTop)"/>
+  <circle cx="786" cy="786" r="300" fill="url(#glowBottom)"/>
+
+  <g filter="url(#cardShadow)">
+    <rect x="152" y="152" width="720" height="720" rx="100" fill="url(#surface)"/>
+  </g>
+
+  <circle cx="452" cy="248" r="15" fill="#5C6B73" fill-opacity="0.62"/>
+  <circle cx="512" cy="248" r="15" fill="#5C6B73" fill-opacity="0.62"/>
+  <circle cx="572" cy="248" r="15" fill="#5C6B73" fill-opacity="0.62"/>
+
+  <rect x="212" y="356" width="400" height="100" rx="50" fill="#0F8A70"/>
+  <rect x="412" y="496" width="400" height="100" rx="50" fill="#7A4CE0"/>
+  <rect x="382" y="636" width="260" height="100" rx="50" fill="#B7791F"/>
+
+  <rect x="212" y="356" width="400" height="100" rx="50" fill="none" stroke="#0B6FB8" stroke-opacity="0.08" stroke-width="2"/>
+  <rect x="412" y="496" width="400" height="100" rx="50" fill="none" stroke="#0B6FB8" stroke-opacity="0.08" stroke-width="2"/>
+  <rect x="382" y="636" width="260" height="100" rx="50" fill="none" stroke="#0B6FB8" stroke-opacity="0.08" stroke-width="2"/>
+
+  <path d="M212 406H612" fill="none" stroke="#FFFFFF" stroke-opacity="0.14" stroke-width="8" stroke-linecap="round"/>
+  <path d="M412 546H812" fill="none" stroke="#FFFFFF" stroke-opacity="0.14" stroke-width="8" stroke-linecap="round"/>
+  <path d="M382 686H642" fill="none" stroke="#FFFFFF" stroke-opacity="0.14" stroke-width="8" stroke-linecap="round"/>
+
+  <rect x="152.5" y="152.5" width="719" height="719" rx="99.5" fill="none" stroke="#DCE4F3" stroke-width="1"/>
+</svg>

@@ -1,0 +1,121 @@
+---
+import "../styles/rosterease.css";
+import appIcon from "../assets/rosterease/rosterease-app-icon.svg";
+// 1200x630 landscape OG composite (scaled from app-store-today.png + brand-tinted padding via sips).
+import ogImageAsset from "../assets/rosterease/og-image.png";
+import { SUPPORT_EMAIL } from "../lib/rosterease";
+
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "RosterEase is an iPhone app for shift workers who want their roster, repeating pattern, and calendar view to stay readable.",
+} = Astro.props;
+
+const supportEmail = SUPPORT_EMAIL;
+const fullTitle = title === "RosterEase" ? title : `${title} | RosterEase`;
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+// Normalize canonical against the (trailing-slash-stripped) current path so canonical
+// stays stable regardless of how the URL was requested (with/without trailing slash, query, hash).
+const canonicalUrl = new URL(currentPath, Astro.url).href;
+const ogImageUrl = new URL(ogImageAsset.src, Astro.url).href;
+const ogImageAlt = "RosterEase — iPhone app for shift workers";
+const isOverview = currentPath === "/";
+const isPrivacy = currentPath === "/privacy";
+const isContact = currentPath === "/contact";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f3eee6" />
+    <link rel="canonical" href={canonicalUrl} />
+    <title>{fullTitle}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RosterEase" />
+    <meta property="og:locale" content="en_AU" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content={String(ogImageAsset.width)} />
+    <meta property="og:image:height" content={String(ogImageAsset.height)} />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+  </head>
+  <body class="re-body">
+    <a class="re-skip-link" href="#content">Skip to content</a>
+
+    <header class="re-site-header">
+      <div class="re-shell re-site-header__inner">
+          <a href="/" class="re-brand" aria-label="Go to the RosterEase overview page">
+          <span class="re-brand__icon">
+            <img src={appIcon.src} alt="" width="36" height="36" aria-hidden="true" />
+          </span>
+          <span class="re-brand__wordmark">RosterEase</span>
+        </a>
+
+        <nav class="re-nav" aria-label="RosterEase navigation">
+          <a href="/" aria-current={isOverview ? "page" : undefined}>Overview</a>
+          <a href="/#screens">Screens</a>
+          <a href="/privacy" aria-current={isPrivacy ? "page" : undefined}>Privacy</a>
+          <a href="/contact" aria-current={isContact ? "page" : undefined}>Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="content" class="re-site-main" tabindex="-1">
+      <slot />
+    </main>
+
+    <footer class="re-site-footer">
+      <div class="re-shell re-footer">
+        <div class="re-footer__brand">
+          <a href="/" class="re-brand re-brand--footer" aria-label="Go to the RosterEase overview page">
+            <span class="re-brand__icon">
+              <img src={appIcon.src} alt="" width="36" height="36" aria-hidden="true" />
+            </span>
+            <span class="re-brand__wordmark">RosterEase</span>
+          </a>
+
+          <p>
+            An iPhone app for shift workers who want today, the pattern, and the rest of the month
+            to stay readable.
+          </p>
+        </div>
+
+        <div class="re-footer__meta">
+          <div class="re-footer__links">
+            <a href="/">Overview</a>
+            <a href="/#screens">Screens</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/contact">Contact</a>
+          </div>
+
+          <div class="re-footer__actions">
+            <a href="https://samanthamyers.au">Main site</a>
+            <a class="re-footer__email" href={`mailto:${supportEmail}`}>
+              {supportEmail}
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
