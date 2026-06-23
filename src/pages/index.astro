@@ -375,17 +375,21 @@ const showcaseFlows = [
         <div class="re-beta__copy">
           <span class="re-beta__chip">Tester launch</span>
           <h2 class="re-beta__title">Join TestFlight if you want to help shape 1.0.</h2>
-          <p class="re-beta__body">
-            The most useful feedback right now is fresh-install onboarding, import examples, calendar sync behavior,
-            Field Worker routes, privacy lock/widgets, iPad layout, accessibility settings, backup, restore, and reset.
-            We are also learning how people receive shifts and rosters, so failed roster imports are useful when you can share a redacted example.
-          </p>
+          <ul class="re-beta__list">
+            <li>Fresh-install onboarding and first-run setup.</li>
+            <li>Roster imports, calendar sync, Field Worker routes, privacy lock/widgets, and iPad layout.</li>
+            <li>Accessibility settings, backup, restore, reset, and redacted failed-import examples.</li>
+          </ul>
         </div>
         <div class="re-beta__cta">
           <a class="re-button re-button--primary" href={TESTFLIGHT_URL} target="_blank" rel="noopener" data-testflight-url>
             Join TestFlight
           </a>
-          <p class="re-beta__fineprint">Requires Apple TestFlight. Import examples can go to <a href={TESTFLIGHT_MAILTO}>{TESTFLIGHT_EMAIL}</a>; remove names, addresses, phone numbers, employee IDs, client identifiers, and private support or medical notes first. <a href="/privacy">Read privacy details</a>.</p>
+          <div class="re-beta__fineprint">
+            <p>Requires Apple TestFlight.</p>
+            <p>Import examples can go to <a href={TESTFLIGHT_MAILTO}>{TESTFLIGHT_EMAIL}</a>.</p>
+            <p>Remove names, addresses, phone numbers, employee IDs, client identifiers, and private support or medical notes first. <a href="/privacy">Read privacy details</a>.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -431,12 +435,15 @@ const showcaseFlows = [
     const name = container.getAttribute("data-lottie");
     if (!name) continue;
     loadAnimation(name).then((animationData) => {
-      lottie.loadAnimation({
+      const animation = lottie.loadAnimation({
         container,
         renderer: "svg",
         loop: !prefersReducedMotion,
         autoplay: !prefersReducedMotion,
         animationData,
+      });
+      animation.addEventListener("DOMLoaded", () => {
+        container.dataset.lottieReady = "true";
       });
     });
   }

@@ -29,13 +29,25 @@ const isContact = currentPath === "/contact";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="system">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#f6f8f5" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#101612" media="(prefers-color-scheme: dark)" />
+    <script is:inline>
+      (() => {
+        try {
+          const theme = localStorage.getItem("rosterease-theme");
+          if (theme === "light" || theme === "dark" || theme === "system") {
+            document.documentElement.dataset.theme = theme;
+          }
+        } catch {
+          document.documentElement.dataset.theme = "system";
+        }
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href={appIcon.src} />
     <link rel="canonical" href={canonicalUrl} />
     <title>{fullTitle}</title>
@@ -73,6 +85,22 @@ const isContact = currentPath === "/contact";
           <a href="/privacy" aria-current={isPrivacy ? "page" : undefined}>Privacy</a>
           <a href="/contact" aria-current={isContact ? "page" : undefined}>Contact</a>
         </nav>
+
+        <fieldset class="re-theme-switch" aria-label="Colour theme">
+          <legend>Theme</legend>
+          <label>
+            <input type="radio" name="re-theme" value="light" />
+            <span>Light</span>
+          </label>
+          <label>
+            <input type="radio" name="re-theme" value="dark" />
+            <span>Dark</span>
+          </label>
+          <label>
+            <input type="radio" name="re-theme" value="system" checked />
+            <span>System</span>
+          </label>
+        </fieldset>
       </div>
     </header>
 
@@ -112,5 +140,33 @@ const isContact = currentPath === "/contact";
         </div>
       </div>
     </footer>
+    <script>
+      const THEME_STORAGE_KEY = "rosterease-theme";
+      const themeChoices = new Set(["light", "dark", "system"]);
+      const themeInputs = Array.from(document.querySelectorAll('input[name="re-theme"]'));
+
+      function storedTheme() {
+        const value = localStorage.getItem(THEME_STORAGE_KEY);
+        return themeChoices.has(value) ? value : "system";
+      }
+
+      function applyTheme(theme) {
+        const nextTheme = themeChoices.has(theme) ? theme : "system";
+        document.documentElement.dataset.theme = nextTheme;
+        for (const input of themeInputs) {
+          input.checked = input.value === nextTheme;
+        }
+      }
+
+      applyTheme(storedTheme());
+
+      for (const input of themeInputs) {
+        input.addEventListener("change", () => {
+          if (!input.checked) return;
+          localStorage.setItem(THEME_STORAGE_KEY, input.value);
+          applyTheme(input.value);
+        });
+      }
+    </script>
   </body>
 </html>
