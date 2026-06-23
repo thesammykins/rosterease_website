@@ -88,16 +88,16 @@ const isContact = currentPath === "/contact";
 
         <fieldset class="re-theme-switch" aria-label="Colour theme">
           <legend>Theme</legend>
-          <label>
-            <input type="radio" name="re-theme" value="light" />
+          <label for="re-theme-light">
+            <input id="re-theme-light" type="radio" name="re-theme" value="light" aria-label="Use light theme" />
             <span>Light</span>
           </label>
-          <label>
-            <input type="radio" name="re-theme" value="dark" />
+          <label for="re-theme-dark">
+            <input id="re-theme-dark" type="radio" name="re-theme" value="dark" aria-label="Use dark theme" />
             <span>Dark</span>
           </label>
-          <label>
-            <input type="radio" name="re-theme" value="system" checked />
+          <label for="re-theme-system">
+            <input id="re-theme-system" type="radio" name="re-theme" value="system" checked aria-label="Use system theme" />
             <span>System</span>
           </label>
         </fieldset>

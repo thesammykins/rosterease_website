@@ -194,7 +194,7 @@ const showcaseFlows = [
     </div>
   </section>
 
-  <section class="re-motion-section" aria-label="How RosterEase works">
+  <section class="re-motion-section" aria-label="How RosterEase works" data-motion-sequence>
     <div class="re-shell re-motion-grid">
       <div class="re-motion-copy">
         <h2 class="re-section-title">From roster chaos to a readable work day.</h2>
@@ -419,33 +419,106 @@ const showcaseFlows = [
 
 
 <script>
-  import lottie from "lottie-web/build/player/lottie_light";
+  import lottie from "lottie-web";
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const animationCache = new Map();
+  const LOTTIE_LOAD_TIMEOUT_MS = 4000;
 
   async function loadAnimation(name) {
     if (!animationCache.has(name)) {
-      animationCache.set(name, fetch(`/lottie/${name}.json`).then((response) => response.json()));
+      animationCache.set(
+        name,
+        fetch(`/lottie/${name}.json`).then(async (response) => {
+          if (!response.ok) {
+            throw new Error(`Lottie ${name} failed with HTTP ${response.status}`);
+          }
+          try {
+            return await response.json();
+          } catch (error) {
+            const parseError = new Error(`Lottie ${name} returned invalid JSON`);
+            parseError.name = "LottieParseError";
+            throw parseError;
+          }
+        }),
+      );
     }
     return animationCache.get(name);
   }
 
-  for (const container of document.querySelectorAll("[data-lottie]")) {
+  function markLottieError(container, message) {
+    container.dataset.lottieError = message;
+    delete container.dataset.lottieReady;
+  }
+
+  async function mountLottie(container) {
     const name = container.getAttribute("data-lottie");
-    if (!name) continue;
-    loadAnimation(name).then((animationData) => {
+    if (!name) return;
+
+    container.dataset.lottieState = "loading";
+    let didResolve = false;
+    const timeout = window.setTimeout(() => {
+      if (!didResolve) markLottieError(container, "timeout");
+    }, LOTTIE_LOAD_TIMEOUT_MS);
+
+    try {
+      const animationData = await loadAnimation(name);
       const animation = lottie.loadAnimation({
         container,
         renderer: "svg",
-        loop: !prefersReducedMotion,
-        autoplay: !prefersReducedMotion,
+        loop: true,
+        autoplay: false,
         animationData,
+        rendererSettings: {
+          preserveAspectRatio: "xMidYMid meet",
+        },
       });
+
       animation.addEventListener("DOMLoaded", () => {
-        container.dataset.lottieReady = "true";
+        window.requestAnimationFrame(() => {
+          didResolve = true;
+          window.clearTimeout(timeout);
+          container.dataset.lottieReady = "true";
+          container.dataset.lottieState = prefersReducedMotion ? "static" : "playing";
+
+          if (prefersReducedMotion) {
+            animation.goToAndStop(0, true);
+            return;
+          }
+
+          animation.play();
+        });
       });
-    });
+
+      animation.addEventListener("data_failed", () => {
+        didResolve = true;
+        window.clearTimeout(timeout);
+        markLottieError(container, "data-failed");
+      });
+    } catch (error) {
+      didResolve = true;
+      window.clearTimeout(timeout);
+      markLottieError(container, error instanceof Error && error.name === "LottieParseError" ? "parse-failed" : "fetch-failed");
+    }
+  }
+
+  for (const container of document.querySelectorAll("[data-lottie]")) {
+    mountLottie(container);
+  }
+
+  const motionSection = document.querySelector("[data-motion-sequence]");
+  if (motionSection && !prefersReducedMotion) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        motionSection.classList.add("is-in-view");
+        observer.disconnect();
+      },
+      { threshold: 0.28 },
+    );
+    observer.observe(motionSection);
+  } else {
+    motionSection?.classList.add("is-in-view");
   }
 
   for (const root of document.querySelectorAll("[data-route-showcase]")) {
