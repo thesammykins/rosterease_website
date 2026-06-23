@@ -4,3 +4,4 @@ export const SUPPORT_EMAIL = "support@rosterease.app";
 export const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}`;
 export const TESTFLIGHT_EMAIL = "testflight@rosterease.app";
 export const TESTFLIGHT_MAILTO = `mailto:${TESTFLIGHT_EMAIL}`;
+export const TESTFLIGHT_URL = "https://testflight.apple.com/join/PZdK93CP";

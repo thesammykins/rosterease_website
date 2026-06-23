@@ -5,11 +5,11 @@ import { SUPPORT_EMAIL, SUPPORT_MAILTO, TESTFLIGHT_EMAIL, TESTFLIGHT_MAILTO } fr
 const quickFacts = [
   {
     label: "Applies to",
-    value: "RosterEase website and iPhone app",
+    value: "RosterEase website, iPhone app, and iPad app",
   },
   {
     label: "Optional permissions",
-    value: "Calendar, photos, files, and clipboard",
+    value: "Calendar, photos, files, clipboard, and Apple Maps estimates",
   },
   {
     label: "Support",
@@ -17,9 +17,8 @@ const quickFacts = [
     href: SUPPORT_MAILTO,
   },
   {
-    // TODO: update "Effective date" to the actual public-launch date before going live.
     label: "Effective date",
-    value: "15 April 2026",
+    value: "23 June 2026",
   },
 ];
 
@@ -35,7 +34,7 @@ const sections = [
     title: "Information you provide",
     paragraphs: [
       "If you contact RosterEase, you may provide information such as your name, email address, and anything else you include in the message.",
-      "If you use the app, you may also choose to add or import schedule information, shift types, workplaces, notes, and preferences.",
+      "If you use the app, you may also choose to add or import schedule information, shift types, workplaces, clients, visit stops, addresses, notes, travel preferences, and app settings.",
     ],
   },
   {
@@ -43,13 +42,14 @@ const sections = [
     paragraphs: [
       "RosterEase is designed so schedule data can remain on your device where practical.",
       "If you choose to use optional permissions such as calendar access, photo access, file access, or clipboard import, that access is used only for the feature you asked the app to perform.",
-      "For example, calendar access may be used to write shifts to a calendar you choose, and photo or file access may be used to import roster information into the app.",
+      "For example, calendar access may be used to write shifts to a calendar you choose, and photo or file access may be used to import roster or client information into the app. Calendar event notes use generic RosterEase copy by default; private shift notes are included only if you turn that setting on.",
     ],
   },
   {
     title: "Website and technical information",
     paragraphs: [
       "When you visit the website, standard technical information may be received, such as browser type, device information, IP address, and normal request or diagnostic data.",
+      "The website uses system fonts and local static assets; it does not intentionally load third-party font files from Google Fonts or another font CDN.",
       "This information may be used to operate, secure, and improve the website.",
     ],
   },
@@ -57,7 +57,7 @@ const sections = [
     title: "How information is used",
     paragraphs: [
       "Information may be used to operate, maintain, and improve the website and app, provide the features you request, respond to support messages, and protect the security and integrity of the service.",
-      "If you use optional product features, the related information is used only to provide those features.",
+      "If you use optional product features, the related information is used only to provide those features. Apple Maps travel estimates are off by default; if enabled, RosterEase uses address text for estimates and does not include client names or notes in the estimate request.",
     ],
   },
   {
@@ -85,7 +85,7 @@ const sections = [
     title: "Your choices",
     paragraphs: [
       "You can choose whether to contact RosterEase and what information to include.",
-      "You can choose whether to grant optional app permissions such as calendar, photos, files, or clipboard access.",
+      "You can choose whether to grant optional app permissions such as calendar, photos, files, or clipboard access. You can also choose whether to enable Apple Maps estimates and whether private shift notes are copied into Calendar events.",
       "You can stop using the app or website at any time.",
     ],
   },
@@ -95,7 +95,7 @@ const sections = [
       "RosterEase is currently distributed for testing through Apple's TestFlight programme. If you join the beta, Apple may collect information such as your TestFlight account details, device and OS version, app installs, crash logs, and any feedback you submit through TestFlight.",
       'That information is handled by Apple under their TestFlight privacy terms: <a href="https://www.apple.com/legal/privacy/data/en/test-flight/" target="_blank" rel="noopener">apple.com/legal/privacy/data/en/test-flight</a>.',
       "Crash and feedback data shared with the developer through TestFlight is used only to diagnose issues and improve the app before it ships to the App Store.",
-      `You can also send beta feedback directly to <a href="${TESTFLIGHT_MAILTO}">${TESTFLIGHT_EMAIL}</a>.`,
+      `You can also send beta feedback directly to <a href="${TESTFLIGHT_MAILTO}">${TESTFLIGHT_EMAIL}</a>. RosterEase is still learning how people receive shifts and rosters; if an import fails and you can share an example, remove names, addresses, phone numbers, employee IDs, client identifiers, and private support or medical notes unless those details are essential and you have consent.`,
     ],
   },
   {
@@ -109,7 +109,7 @@ const sections = [
 
 <RosterEaseLayout
   title="Privacy Policy"
-  description="Read the RosterEase Privacy Policy for the website and mobile app."
+  description="Read the RosterEase Privacy Policy for the website, TestFlight build, iPhone app, and iPad app."
 >
   <section class="re-subpage-hero">
     <div class="re-shell re-subpage-hero__grid re-subpage-hero__grid--policy">
@@ -117,8 +117,8 @@ const sections = [
         <p class="re-kicker">Privacy Policy</p>
         <h1 class="re-page-title">A plain policy for the current version of RosterEase.</h1>
         <p class="re-lede re-subpage-hero__lede">
-          This page covers the RosterEase website and mobile app, including optional import and
-          calendar features.
+          This page covers the RosterEase website and mobile app, including optional import,
+          calendar sync, field-route, widget, backup, and TestFlight feedback features.
         </p>
       </div>
 

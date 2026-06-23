@@ -1,6 +1,6 @@
 ---
 import RosterEaseLayout from "../layouts/RosterEaseLayout.astro";
-import { SUPPORT_EMAIL, TESTFLIGHT_MAILTO } from "../lib/rosterease";
+import { SUPPORT_EMAIL, TESTFLIGHT_EMAIL, TESTFLIGHT_MAILTO } from "../lib/rosterease";
 
 const supportEmail = SUPPORT_EMAIL;
 const supportMailto = `mailto:${supportEmail}?subject=${encodeURIComponent("RosterEase Support")}`;
@@ -11,8 +11,8 @@ const actions = [
   {
     panelClass: "re-action-panel re-action-panel--support",
     label: "General support",
-    title: "Need help setting up or reading the roster?",
-    text: "Use this for importing a roster, building the pattern, managing workplaces, calendar sync questions, or anything else that feels unclear.",
+    title: "Need help with setup, import, route planning, or calendar sync?",
+    text: "Use this for Shift Worker setup, Field Worker routes, importing rosters or client lists, managing workplaces or clients, calendar sync questions, backup/restore/reset, or anything else that feels unclear.",
     href: supportMailto,
     buttonLabel: "Email support",
     buttonClass: "re-button re-button--primary",
@@ -21,7 +21,7 @@ const actions = [
     panelClass: "re-action-panel re-action-panel--bug",
     label: "Bug report",
     title: "Something not behaving the way it should?",
-    text: "If the app crashes, imports the wrong shift, or does something unexpected, send a report with enough detail for it to be reproduced.",
+    text: "If the app crashes, imports the wrong shift or client, mishandles a route day, syncs unexpectedly, or does something odd, send enough detail for it to be reproduced.",
     href: bugMailto,
     buttonLabel: "Report a bug",
     buttonClass: "re-button re-button--secondary",
@@ -30,7 +30,7 @@ const actions = [
     panelClass: "re-action-panel re-action-panel--feedback",
     label: "Feedback",
     title: "Have an idea that would make the app easier to use?",
-    text: "Send product feedback, workflow suggestions, or examples of shift problems you want RosterEase to handle better.",
+    text: "Send product feedback, workflow suggestions, accessibility notes, or examples of shift and field-work problems you want RosterEase to handle better. If a roster import fails and you can share an example, remove names, addresses, phone numbers, employee IDs, client identifiers, and private support or medical notes first.",
     href: feedbackMailto,
     buttonLabel: "Send feedback",
     buttonClass: "re-button re-button--secondary",
@@ -40,7 +40,9 @@ const actions = [
 const whatHelps = [
   "A short description of what happened.",
   "The iPhone model and iOS version you are using.",
-  "A screenshot, sample roster, or the step that triggered the issue if you can share it.",
+  "A screenshot, redacted sample roster, redacted route/client example, or the step that triggered the issue if you can share it.",
+  "Remove names, addresses, phone numbers, employee IDs, client identifiers, and private support or medical notes unless they are essential and you have consent.",
+  `For TestFlight roster import failures, send shareable examples to ${TESTFLIGHT_EMAIL}.`,
 ];
 ---
 
@@ -63,7 +65,7 @@ const whatHelps = [
         <span class="re-address-panel__label">Support email</span>
         <a class="re-address-panel__link" href={supportMailto}>{supportEmail}</a>
         <p>
-          For setup help, importing a roster, sync questions, bug reports, or product feedback.
+          For setup help, imports, routes, sync questions, privacy settings, bug reports, or product feedback. TestFlight roster examples can go to <a href={TESTFLIGHT_MAILTO}>{TESTFLIGHT_EMAIL}</a> after you remove names, addresses, phone numbers, employee IDs, client identifiers, and private notes.
         </p>
       </aside>
     </div>

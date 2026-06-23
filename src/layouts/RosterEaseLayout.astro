@@ -12,7 +12,7 @@ export interface Props {
 
 const {
   title,
-  description = "RosterEase is an iPhone app for shift workers who want their roster, repeating pattern, and calendar view to stay readable.",
+  description = "RosterEase is an iPhone and iPad app for shift workers and field workers who want roster, route, import, privacy, widget, and calendar tools in one planner.",
 } = Astro.props;
 
 const supportEmail = SUPPORT_EMAIL;
@@ -22,7 +22,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 // stays stable regardless of how the URL was requested (with/without trailing slash, query, hash).
 const canonicalUrl = new URL(currentPath, Astro.url).href;
 const ogImageUrl = new URL(ogImageAsset.src, Astro.url).href;
-const ogImageAlt = "RosterEase — iPhone app for shift workers";
+const ogImageAlt = "RosterEase - two-mode roster and route planner";
 const isOverview = currentPath === "/";
 const isPrivacy = currentPath === "/privacy";
 const isContact = currentPath === "/contact";
@@ -34,16 +34,11 @@ const isContact = currentPath === "/contact";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f3eee6" />
+    <meta name="theme-color" content="#f6f8f5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#101612" media="(prefers-color-scheme: dark)" />
     <link rel="icon" type="image/svg+xml" href={appIcon.src} />
     <link rel="canonical" href={canonicalUrl} />
     <title>{fullTitle}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="RosterEase" />
     <meta property="og:locale" content="en_AU" />
@@ -96,8 +91,7 @@ const isContact = currentPath === "/contact";
           </a>
 
           <p>
-            An iPhone app for shift workers who want today, the pattern, and the rest of the month
-            to stay readable.
+            An iPhone and iPad app for shift workers and field workers preparing for a 1.0 launch through TestFlight feedback.
           </p>
         </div>
 
