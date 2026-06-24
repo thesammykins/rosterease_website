@@ -173,6 +173,15 @@ const showcaseFlows = [
       </div>
 
       <div class="re-launch-hero__media" aria-label="RosterEase Shift Worker and Field Worker screenshots">
+        <div class="re-lottie re-hero-journey-lottie" data-lottie="hero-journey" data-lottie-once aria-hidden="true">
+          <svg class="re-lottie-fallback" viewBox="0 0 96 64">
+            <path d="M12 42c14-20 34 4 50-18" />
+            <rect x="12" y="12" width="26" height="18" rx="5" />
+            <rect x="58" y="34" width="24" height="18" rx="6" />
+            <path d="M72 14l10 5v8c0 7-4 12-10 15-6-3-10-8-10-15v-8l10-5z" />
+            <path d="M67 27l4 4 7-9" />
+          </svg>
+        </div>
         <figure class="re-device-shot re-device-shot--front">
           <Image src={shiftTodayShot} alt="RosterEase Shift Worker Today screen showing the next shift and upcoming roster." widths={[520, 760, 980]} sizes="(max-width: 960px) 72vw, 24rem" format="avif" quality={92} loading="eager" fetchpriority="high" />
         </figure>
@@ -191,6 +200,44 @@ const showcaseFlows = [
           <p>{text}</p>
         </article>
       ))}
+    </div>
+  </section>
+
+  <section class="re-journey-section" aria-labelledby="journey-title" data-motion-sequence>
+    <div class="re-shell re-journey-grid">
+      <div class="re-journey-copy">
+        <p class="re-kicker">Workday journey</p>
+        <h2 class="re-section-title" id="journey-title">Your roster, shaped into the day.</h2>
+        <p class="re-body-copy">
+          RosterEase is designed around a simple path: capture the work details you already have,
+          turn them into a readable plan, then keep routes, calendar sync, widgets, and private notes deliberate.
+        </p>
+        <div class="re-journey-steps" aria-label="RosterEase workday journey">
+          <span>Import</span>
+          <span>Plan</span>
+          <span>Route</span>
+          <span>Protect</span>
+        </div>
+      </div>
+
+      <div class="re-journey-stage" aria-label="RosterEase journey from imported roster to protected work day">
+        <figure class="re-journey-phone re-journey-phone--primary">
+          <Image src={shiftTodayShot} alt="RosterEase Shift Worker Today screen with the next shift and upcoming roster." widths={[420, 620, 820]} sizes="(max-width: 720px) 58vw, 18rem" format="avif" quality={90} loading="lazy" />
+        </figure>
+        <figure class="re-journey-phone re-journey-phone--secondary">
+          <Image src={fieldTodayShot} alt="RosterEase Field Worker Today screen with route progress and visit timing." widths={[360, 520, 720]} sizes="(max-width: 720px) 42vw, 14rem" format="avif" quality={88} loading="lazy" />
+        </figure>
+        <div class="re-lottie re-workday-journey-lottie" data-lottie="workday-journey" aria-hidden="true">
+          <svg class="re-lottie-fallback" viewBox="0 0 96 64">
+            <rect x="10" y="12" width="28" height="20" rx="6" />
+            <path d="M18 22h12M16 42c12-18 28 5 43-13" />
+            <circle cx="16" cy="42" r="4" />
+            <circle cx="59" cy="29" r="4" />
+            <path d="M74 14l10 5v9c0 7-4 12-10 15-6-3-10-8-10-15v-9l10-5z" />
+            <path d="M69 28l4 4 8-10" />
+          </svg>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -454,6 +501,7 @@ const showcaseFlows = [
   async function mountLottie(container) {
     const name = container.getAttribute("data-lottie");
     if (!name) return;
+    const shouldLoop = container.getAttribute("data-lottie-loop") !== "false" && !container.hasAttribute("data-lottie-once");
 
     container.dataset.lottieState = "loading";
     let didResolve = false;
@@ -466,7 +514,7 @@ const showcaseFlows = [
       const animation = lottie.loadAnimation({
         container,
         renderer: "svg",
-        loop: true,
+        loop: shouldLoop,
         autoplay: false,
         animationData,
         rendererSettings: {
@@ -490,6 +538,10 @@ const showcaseFlows = [
         });
       });
 
+      animation.addEventListener("complete", () => {
+        container.dataset.lottieState = "complete";
+      });
+
       animation.addEventListener("data_failed", () => {
         didResolve = true;
         window.clearTimeout(timeout);
@@ -506,19 +558,21 @@ const showcaseFlows = [
     mountLottie(container);
   }
 
-  const motionSection = document.querySelector("[data-motion-sequence]");
-  if (motionSection && !prefersReducedMotion) {
+  const motionSections = Array.from(document.querySelectorAll("[data-motion-sequence]"));
+  if (motionSections.length && !prefersReducedMotion) {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting) return;
-        motionSection.classList.add("is-in-view");
-        observer.disconnect();
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add("is-in-view");
+          observer.unobserve(entry.target);
+        }
       },
       { threshold: 0.28 },
     );
-    observer.observe(motionSection);
+    for (const section of motionSections) observer.observe(section);
   } else {
-    motionSection?.classList.add("is-in-view");
+    for (const section of motionSections) section.classList.add("is-in-view");
   }
 
   for (const root of document.querySelectorAll("[data-route-showcase]")) {

@@ -1983,6 +1983,25 @@ body.re-body {
     rgba(255, 255, 255, 0.78);
 }
 
+.re-hero-journey-lottie {
+  position: absolute;
+  top: -3%;
+  left: -5%;
+  z-index: 3;
+  width: 108%;
+  height: 103%;
+  border-radius: 36px;
+  background: transparent;
+  box-shadow: none;
+  opacity: 0.96;
+  pointer-events: none;
+  contain: layout paint;
+}
+
+.re-hero-journey-lottie > svg:not(.re-lottie-fallback) {
+  opacity: 0.9;
+}
+
 .re-device-shot {
   position: absolute;
   margin: 0;
@@ -2001,7 +2020,7 @@ body.re-body {
 .re-device-shot--front {
   right: 6%;
   bottom: 0;
-  z-index: 2;
+  z-index: 4;
   width: min(68%, 28rem);
   animation: re-hero-front-settle 780ms cubic-bezier(0.2, 0, 0, 1) both;
 }
@@ -2013,6 +2032,114 @@ body.re-body {
   width: min(47%, 19rem);
   opacity: 0.96;
   animation: re-hero-back-settle 880ms cubic-bezier(0.2, 0, 0, 1) 80ms both;
+}
+
+.re-journey-section {
+  padding: var(--re-section-space) 0 0;
+  overflow: hidden;
+}
+
+.re-journey-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+
+.re-journey-copy {
+  display: grid;
+  gap: 18px;
+  max-width: 36rem;
+}
+
+.re-journey-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.re-journey-steps span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--re-line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--re-surface) 84%, transparent);
+  color: var(--re-accent);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.re-journey-stage {
+  position: relative;
+  min-height: clamp(28rem, 49vw, 42rem);
+  border: 1px solid var(--re-line);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 70% 20%, color-mix(in srgb, var(--re-shift) 14%, transparent), transparent 17rem),
+    radial-gradient(circle at 22% 76%, color-mix(in srgb, var(--re-route) 15%, transparent), transparent 18rem),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.68));
+  box-shadow: 0 26px 64px rgba(32, 49, 43, 0.1);
+  overflow: hidden;
+  opacity: 0;
+  transform: translate3d(18px, 18px, 0) scale(0.985);
+}
+
+.re-journey-section.is-in-view .re-journey-stage {
+  animation: re-journey-stage-enter 420ms cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+.re-journey-phone {
+  position: absolute;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(21, 27, 24, 0.16);
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 22px 50px rgba(32, 49, 43, 0.14);
+}
+
+.re-journey-phone img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.re-journey-phone--primary {
+  right: 8%;
+  bottom: -5%;
+  z-index: 3;
+  width: min(42%, 18rem);
+}
+
+.re-journey-phone--secondary {
+  left: 8%;
+  top: 8%;
+  z-index: 1;
+  width: min(32%, 13rem);
+  opacity: 0.86;
+}
+
+.re-workday-journey-lottie {
+  position: absolute;
+  top: 4%;
+  left: 4%;
+  z-index: 2;
+  width: 94%;
+  height: 92%;
+  border-radius: 28px;
+  background: transparent;
+  box-shadow: none;
+  pointer-events: none;
+  contain: layout paint;
+}
+
+.re-workday-journey-lottie > svg:not(.re-lottie-fallback) {
+  opacity: 0.92;
 }
 
 .re-capability-strip {
@@ -2135,7 +2262,8 @@ body.re-body {
 
 @media (max-width: 1120px) {
   .re-launch-hero__grid,
-  .re-product-grid {
+  .re-product-grid,
+  .re-journey-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2163,6 +2291,14 @@ body.re-body {
     min-height: 31rem;
   }
 
+  .re-hero-journey-lottie {
+    top: 0;
+    left: -10%;
+    width: 120%;
+    height: 96%;
+    opacity: 0.82;
+  }
+
   .re-device-shot--front {
     width: 74%;
     right: 0;
@@ -2170,6 +2306,30 @@ body.re-body {
 
   .re-device-shot--back {
     width: 52%;
+  }
+
+  .re-journey-stage {
+    min-height: clamp(22rem, 98vw, 31rem);
+    border-radius: 22px;
+  }
+
+  .re-journey-phone--primary {
+    right: 4%;
+    width: min(54%, 15rem);
+  }
+
+  .re-journey-phone--secondary {
+    left: 4%;
+    top: 10%;
+    width: min(38%, 10.5rem);
+  }
+
+  .re-workday-journey-lottie {
+    top: 4%;
+    left: -6%;
+    width: 114%;
+    height: 89%;
+    opacity: 0.9;
   }
 
   .re-feature-matrix article {
@@ -2483,6 +2643,29 @@ body.re-body {
   isolation: isolate;
 }
 
+.re-lottie.re-hero-journey-lottie,
+.re-lottie.re-workday-journey-lottie {
+  display: block;
+  position: absolute;
+  background: transparent;
+  box-shadow: none;
+  contain: layout paint;
+}
+
+.re-lottie.re-hero-journey-lottie {
+  top: -3%;
+  left: -5%;
+  width: 108%;
+  height: 103%;
+}
+
+.re-lottie.re-workday-journey-lottie {
+  top: 4%;
+  left: 4%;
+  width: 94%;
+  height: 92%;
+}
+
 .re-lottie > svg:not(.re-lottie-fallback) {
   position: absolute;
   inset: 0;
@@ -2552,6 +2735,18 @@ body.re-body {
   }
 }
 
+@keyframes re-journey-stage-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(18px, 18px, 0) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
 @keyframes re-hero-front-settle {
   from {
     opacity: 0;
@@ -2587,7 +2782,8 @@ body.re-body {
   .re-device-shot--front,
   .re-device-shot--back,
   .re-motion-section.is-in-view .re-motion-card,
-  .re-motion-section.is-in-view .re-lottie[data-lottie-ready="true"] {
+  .re-motion-section.is-in-view .re-lottie[data-lottie-ready="true"],
+  .re-journey-section.is-in-view .re-journey-stage {
     animation: none;
   }
 
@@ -2602,6 +2798,11 @@ body.re-body {
   }
 
   .re-motion-card {
+    opacity: 1;
+    transform: none;
+  }
+
+  .re-journey-stage {
     opacity: 1;
     transform: none;
   }
@@ -2650,6 +2851,10 @@ body.re-body {
   font-weight: 800;
   letter-spacing: 0;
   transition: background-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+
+.re-showcase__mode[aria-selected="false"] {
+  color: #24423b;
 }
 
 .re-showcase__mode[aria-selected="true"] {
@@ -2959,7 +3164,7 @@ body.re-body {
 .re-testflight-note a,
 .re-beta__fineprint a,
 .re-address-panel p a {
-  color: var(--re-accent);
+  color: #12685e;
   font-weight: 800;
   overflow-wrap: anywhere;
   text-decoration: underline;
@@ -3052,6 +3257,7 @@ body.re-body {
   .re-note-panel,
   .re-media-panel,
   .re-index-panel__row,
+  .re-journey-stage,
   .re-showcase__panel {
     border-color: var(--re-line);
     background: rgba(32, 43, 36, 0.82);
@@ -3059,6 +3265,7 @@ body.re-body {
   }
 
   .re-launch-hero__media::before,
+  .re-journey-stage,
   .re-beta__card--launch,
   .re-showcase__panel {
     background:
@@ -3078,6 +3285,7 @@ body.re-body {
   }
 
   .re-device-shot,
+  .re-journey-phone,
   .re-showcase__screen,
   .re-screenshot-grid figure {
     border-color: rgba(234, 246, 236, 0.18);
@@ -3092,9 +3300,23 @@ body.re-body {
     color: var(--re-text);
   }
 
+  .re-showcase__switch {
+    background: rgba(10, 24, 19, 0.86);
+  }
+
+  .re-showcase__mode[aria-selected="false"] {
+    background: rgba(255, 255, 255, 0.08);
+    color: #d8eee8;
+  }
+
   .re-lottie,
   .re-mode-icon {
     background: color-mix(in srgb, var(--re-accent) 18%, #101612);
+  }
+
+  .re-hero-journey-lottie,
+  .re-workday-journey-lottie {
+    background: transparent;
   }
 
   .re-mode-icon--route {
@@ -3157,6 +3379,7 @@ body.re-body {
 :root[data-theme="light"] .re-note-panel,
 :root[data-theme="light"] .re-media-panel,
 :root[data-theme="light"] .re-index-panel__row,
+:root[data-theme="light"] .re-journey-stage,
 :root[data-theme="light"] .re-showcase__panel {
   border-color: var(--re-line);
   background: var(--re-surface-strong);
@@ -3164,6 +3387,7 @@ body.re-body {
 }
 
 :root[data-theme="light"] .re-launch-hero__media::before,
+:root[data-theme="light"] .re-journey-stage,
 :root[data-theme="light"] .re-beta__card--launch,
 :root[data-theme="light"] .re-showcase__panel {
   background:
@@ -3179,11 +3403,28 @@ body.re-body {
   color: #ffffff;
 }
 
+:root[data-theme="light"] .re-showcase__switch {
+  background: rgba(255, 255, 255, 0.72);
+}
+
+:root[data-theme="light"] .re-showcase__mode[aria-selected="false"] {
+  background: color-mix(in srgb, var(--re-surface) 82%, transparent);
+  color: #24423b;
+}
+
 :root[data-theme="light"] .re-route-line__dot,
 :root[data-theme="light"] .re-showcase__arrow {
   background: #ffffff;
   border-color: var(--re-line-strong);
   color: var(--re-text);
+}
+
+:root[data-theme="light"] .re-testflight-note a,
+:root[data-theme="light"] .re-beta__fineprint a,
+:root[data-theme="light"] .re-address-panel p a,
+:root[data-theme="light"] .re-policy-article__body a,
+:root[data-theme="light"] .re-fact-sheet__row a {
+  color: #12685e;
 }
 
 :root[data-theme="dark"] {
@@ -3245,6 +3486,7 @@ body.re-body {
 :root[data-theme="dark"] .re-note-panel,
 :root[data-theme="dark"] .re-media-panel,
 :root[data-theme="dark"] .re-index-panel__row,
+:root[data-theme="dark"] .re-journey-stage,
 :root[data-theme="dark"] .re-showcase__panel {
   border-color: var(--re-line);
   background: rgba(32, 43, 36, 0.82);
@@ -3252,6 +3494,7 @@ body.re-body {
 }
 
 :root[data-theme="dark"] .re-launch-hero__media::before,
+:root[data-theme="dark"] .re-journey-stage,
 :root[data-theme="dark"] .re-beta__card--launch,
 :root[data-theme="dark"] .re-showcase__panel {
   background:
@@ -3271,6 +3514,7 @@ body.re-body {
 }
 
 :root[data-theme="dark"] .re-device-shot,
+:root[data-theme="dark"] .re-journey-phone,
 :root[data-theme="dark"] .re-showcase__screen,
 :root[data-theme="dark"] .re-screenshot-grid figure {
   border-color: rgba(234, 246, 236, 0.18);
@@ -3285,9 +3529,23 @@ body.re-body {
   color: var(--re-text);
 }
 
+:root[data-theme="dark"] .re-showcase__switch {
+  background: rgba(10, 24, 19, 0.86);
+}
+
+:root[data-theme="dark"] .re-showcase__mode[aria-selected="false"] {
+  background: rgba(255, 255, 255, 0.08);
+  color: #d8eee8;
+}
+
 :root[data-theme="dark"] .re-lottie,
 :root[data-theme="dark"] .re-mode-icon {
   background: color-mix(in srgb, var(--re-accent) 18%, #101612);
+}
+
+:root[data-theme="dark"] .re-hero-journey-lottie,
+:root[data-theme="dark"] .re-workday-journey-lottie {
+  background: transparent;
 }
 
 :root[data-theme="dark"] .re-mode-icon--route {
@@ -3442,6 +3700,7 @@ body.re-body {
 
   .re-product-section,
   .re-screenshot-band,
+  .re-journey-section,
   .re-motion-section,
   .re-showcase {
     padding-top: var(--re-section-space);
