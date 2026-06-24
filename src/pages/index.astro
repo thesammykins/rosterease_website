@@ -263,23 +263,24 @@ const showcaseFlows = [
   <section class="re-motion-section" aria-label="How RosterEase works" data-motion-sequence>
     <div class="re-shell re-motion-grid">
       <div class="re-motion-copy">
-        <h2 class="re-section-title">From messy source to useful day plan.</h2>
+        <h2 class="re-section-title">From roster chaos to a plan you can trust.</h2>
         <p class="re-body-copy">
-          The app is for people who already have the work details somewhere else and need a calmer way to review, adjust, and carry them.
+          RosterEase is for the moment when the work details already exist somewhere else — and you need them clear enough to carry through the day.
         </p>
       </div>
       <div class="re-motion-rail">
         {motionItems.map((item) => (
           <article class="re-motion-card">
-            <div class={`re-lottie re-lottie--${item.animation}`} data-lottie={item.animation} aria-hidden="true">
+            <div class={`re-motion-visual re-motion-visual--${item.animation}`} aria-hidden="true">
+              <span class="re-motion-visual__glow"></span>
               {item.animation === "import" && (
-                <svg class="re-lottie-fallback" viewBox="0 0 64 64"><rect x="18" y="12" width="28" height="40" rx="7"/><path d="M24 25h16M24 33h12M32 43l7-7M32 43l-7-7"/></svg>
+                <svg class="re-motion-icon" viewBox="0 0 64 64"><rect x="18" y="12" width="28" height="40" rx="7"/><path d="M24 25h16M24 33h12M32 43l7-7M32 43l-7-7"/><path class="re-motion-icon__accent" d="M22 17h20"/></svg>
               )}
               {item.animation === "route" && (
-                <svg class="re-lottie-fallback" viewBox="0 0 64 64"><path d="M16 46c8-20 26 4 34-22"/><circle cx="16" cy="46" r="5"/><circle cx="50" cy="24" r="5"/><path d="M30 24h8M34 20v8"/></svg>
+                <svg class="re-motion-icon" viewBox="0 0 64 64"><path d="M16 46c8-20 26 4 34-22"/><circle cx="16" cy="46" r="5"/><circle cx="50" cy="24" r="5"/><path class="re-motion-icon__accent" d="M30 24h8M34 20v8"/></svg>
               )}
               {item.animation === "privacy" && (
-                <svg class="re-lottie-fallback" viewBox="0 0 64 64"><path d="M32 8l18 8v15c0 12-7 20-18 25-11-5-18-13-18-25V16l18-8z"/><path d="M25 32l5 5 10-12"/></svg>
+                <svg class="re-motion-icon" viewBox="0 0 64 64"><path d="M32 8l18 8v15c0 12-7 20-18 25-11-5-18-13-18-25V16l18-8z"/><path class="re-motion-icon__accent" d="M25 32l5 5 10-12"/></svg>
               )}
             </div>
             <div>
@@ -296,11 +297,9 @@ const showcaseFlows = [
     <div class="re-shell re-product-grid">
       <div class="re-product-copy">
         <p class="re-kicker">Current app</p>
-        <h2 class="re-section-title">Two guided modes, one practical rhythm.</h2>
+        <h2 class="re-section-title">Designed for the day you actually work.</h2>
         <p class="re-body-copy">
-          Onboarding starts with the way you work. Shift Worker keeps patterns, workplaces,
-          sync, and exceptions together. Field Worker keeps clients, visits, work days,
-          travel buffers, and route progress close at hand.
+          RosterEase starts with your work pattern, then keeps the details close: shifts and workplaces for rostered days, clients and route progress for field days, and privacy controls for both.
         </p>
       </div>
       <div class="re-feature-matrix">
@@ -477,8 +476,8 @@ const showcaseFlows = [
       <div class="re-beta__card re-beta__card--launch">
         <div class="re-beta__copy">
           <span class="re-beta__chip">TestFlight invitation</span>
-          <h2 class="re-beta__title">Help shape RosterEase before 1.0.</h2>
-          <p class="re-beta__body">Try the current build, follow your normal setup path, and tell us where imports, privacy wording, or day planning still feel unclear.</p>
+          <h2 class="re-beta__title">Try RosterEase before 1.0 and help shape what ships.</h2>
+          <p class="re-beta__body">Use the current build with a real setup path and tell us where importing, privacy wording, or day planning still needs to feel calmer.</p>
           <ul class="re-beta__list">
             <li>Fresh-install onboarding, mode choice, and first-run setup.</li>
             <li>Roster imports, Calendar sync, Field Worker routes, privacy lock, widgets, and iPad layout.</li>
@@ -503,7 +502,7 @@ const showcaseFlows = [
     <div class="re-shell re-frontpage-panel__grid">
       <div class="re-frontpage-panel__copy">
         <p class="re-kicker">Support</p>
-        <h2 class="re-section-title">Share the real-world details that make planning difficult.</h2>
+        <h2 class="re-section-title">Bring us the roster mess worth solving.</h2>
         <p class="re-body-copy">
           A confusing roster import, a route day that feels wrong, or a privacy setting that needs clearer wording is exactly the feedback needed before 1.0. If you can share a roster that fails import, redact names, addresses, phone numbers, employee IDs, client identifiers, and private notes before sending it to the dedicated TestFlight email.
         </p>
@@ -524,121 +523,6 @@ const showcaseFlows = [
 
 <script>
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let lottieLibraryPromise;
-  const animationCache = new Map();
-  const mountedLotties = new WeakSet();
-  const LOTTIE_LOAD_TIMEOUT_MS = 4000;
-
-  async function loadLottieLibrary() {
-    if (!lottieLibraryPromise) {
-      lottieLibraryPromise = import("lottie-web").then((module) => module.default || module);
-    }
-    return lottieLibraryPromise;
-  }
-
-  async function loadAnimation(name) {
-    if (!animationCache.has(name)) {
-      animationCache.set(
-        name,
-        fetch(`/lottie/${name}.json`).then(async (response) => {
-          if (!response.ok) {
-            throw new Error(`Lottie ${name} failed with HTTP ${response.status}`);
-          }
-          try {
-            return await response.json();
-          } catch (error) {
-            const parseError = new Error(`Lottie ${name} returned invalid JSON`);
-            parseError.name = "LottieParseError";
-            throw parseError;
-          }
-        }),
-      );
-    }
-    return animationCache.get(name);
-  }
-
-  function markLottieError(container, message) {
-    container.dataset.lottieError = message;
-    delete container.dataset.lottieReady;
-  }
-
-  async function mountLottie(container) {
-    if (mountedLotties.has(container)) return;
-    const name = container.getAttribute("data-lottie");
-    if (!name) return;
-    mountedLotties.add(container);
-    const shouldLoop = container.getAttribute("data-lottie-loop") !== "false" && !container.hasAttribute("data-lottie-once");
-
-    container.dataset.lottieState = "loading";
-    let didResolve = false;
-    const timeout = window.setTimeout(() => {
-      if (!didResolve) markLottieError(container, "timeout");
-    }, LOTTIE_LOAD_TIMEOUT_MS);
-
-    try {
-      const [lottie, animationData] = await Promise.all([loadLottieLibrary(), loadAnimation(name)]);
-      const animation = lottie.loadAnimation({
-        container,
-        renderer: "svg",
-        loop: shouldLoop,
-        autoplay: false,
-        animationData,
-        rendererSettings: {
-          preserveAspectRatio: "xMidYMid meet",
-        },
-      });
-
-      animation.addEventListener("DOMLoaded", () => {
-        window.requestAnimationFrame(() => {
-          didResolve = true;
-          window.clearTimeout(timeout);
-          container.dataset.lottieReady = "true";
-          container.dataset.lottieState = prefersReducedMotion ? "static" : "playing";
-
-          if (prefersReducedMotion) {
-            animation.goToAndStop(0, true);
-            return;
-          }
-
-          animation.play();
-        });
-      });
-
-      animation.addEventListener("complete", () => {
-        container.dataset.lottieState = "complete";
-      });
-
-      animation.addEventListener("data_failed", () => {
-        didResolve = true;
-        window.clearTimeout(timeout);
-        markLottieError(container, "data-failed");
-      });
-    } catch (error) {
-      didResolve = true;
-      window.clearTimeout(timeout);
-      markLottieError(container, error instanceof Error && error.name === "LottieParseError" ? "parse-failed" : "fetch-failed");
-    }
-  }
-
-  const lottieContainers = Array.from(document.querySelectorAll("[data-lottie]"));
-  if (lottieContainers.length) {
-    if ("IntersectionObserver" in window) {
-      const lottieObserver = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (!entry.isIntersecting) continue;
-            lottieObserver.unobserve(entry.target);
-            mountLottie(entry.target);
-          }
-        },
-        { rootMargin: "360px 0px", threshold: 0.01 },
-      );
-      for (const container of lottieContainers) lottieObserver.observe(container);
-    } else {
-      for (const container of lottieContainers) mountLottie(container);
-    }
-  }
-
   const motionSections = Array.from(document.querySelectorAll("[data-motion-sequence]"));
   if (motionSections.length && !prefersReducedMotion) {
     const observer = new IntersectionObserver(

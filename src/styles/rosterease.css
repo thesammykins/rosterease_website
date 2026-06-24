@@ -2013,25 +2013,6 @@ body.re-body {
     0 30px 70px rgba(13, 25, 20, 0.08);
 }
 
-.re-hero-journey-lottie {
-  position: absolute;
-  top: -3%;
-  left: -5%;
-  z-index: 3;
-  width: 108%;
-  height: 103%;
-  border-radius: 36px;
-  background: transparent;
-  box-shadow: none;
-  opacity: 0.7;
-  pointer-events: none;
-  contain: layout paint;
-}
-
-.re-hero-journey-lottie > svg:not(.re-lottie-fallback) {
-  opacity: 0.78;
-}
-
 .re-device-shot {
   position: absolute;
   margin: 0;
@@ -2536,13 +2517,6 @@ body.re-body {
     margin-bottom: 0.25rem;
   }
 
-  .re-hero-journey-lottie {
-    top: 4%;
-    left: -3%;
-    width: 106%;
-    height: 88%;
-    opacity: 0.58;
-  }
 
   .re-device-shot--front {
     top: 5%;
@@ -2883,17 +2857,6 @@ body.re-body {
   animation-delay: 140ms;
 }
 
-.re-lottie {
-  width: 96px;
-  height: 96px;
-  border-radius: 20px;
-  background:
-    radial-gradient(circle at 35% 28%, color-mix(in srgb, var(--re-accent) 18%, transparent), transparent 46%),
-    linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.58)),
-    color-mix(in srgb, var(--re-accent) 10%, var(--re-bg));
-  overflow: hidden;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--re-accent) 14%, transparent);
-}
 
 .re-motion-card h3 {
   margin: 0 0 8px;
@@ -2937,91 +2900,6 @@ body.re-body {
     padding: 12px 14px 12px 10px;
   }
 
-  .re-lottie {
-    width: 68px;
-    height: 68px;
-    border-radius: 16px;
-  }
-}
-
-.re-lottie {
-  position: relative;
-  display: grid;
-  place-items: center;
-  contain: strict;
-  isolation: isolate;
-}
-
-.re-lottie.re-hero-journey-lottie {
-  display: block;
-  position: absolute;
-  background: transparent;
-  box-shadow: none;
-  contain: layout paint;
-}
-
-.re-lottie.re-hero-journey-lottie {
-  top: -3%;
-  left: -5%;
-  width: 108%;
-  height: 103%;
-}
-
-
-@media (max-width: 720px) {
-  .re-lottie.re-hero-journey-lottie {
-    top: 4%;
-    left: -3%;
-    width: 106%;
-    height: 88%;
-  }
-
-}
-
-.re-lottie > svg:not(.re-lottie-fallback) {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  width: 100% !important;
-  height: 100% !important;
-  overflow: hidden;
-  opacity: 0.94;
-}
-
-.re-motion-section.is-in-view .re-lottie[data-lottie-ready="true"] {
-  animation: re-lottie-panel-breathe 3600ms cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-
-.re-lottie[data-lottie-error] {
-  box-shadow:
-    inset 0 0 0 1px color-mix(in srgb, var(--re-route) 28%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--re-route) 12%, transparent);
-}
-
-.re-lottie-fallback {
-  position: relative;
-  z-index: 2;
-  width: 48px;
-  height: 48px;
-  fill: none;
-  stroke: var(--re-accent);
-  stroke-width: 3.2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: opacity 180ms cubic-bezier(0.2, 0, 0, 1);
-}
-
-.re-lottie[data-lottie-ready="true"] .re-lottie-fallback {
-  opacity: 0;
-}
-
-.re-lottie--route .re-lottie-fallback {
-  stroke: var(--re-route);
-}
-
-.re-lottie--privacy .re-lottie-fallback {
-  stroke: var(--re-accent);
-  fill: color-mix(in srgb, var(--re-accent) 12%, transparent);
 }
 
 @keyframes re-motion-card-enter {
@@ -3036,16 +2914,6 @@ body.re-body {
   }
 }
 
-@keyframes re-lottie-panel-breathe {
-  0%,
-  100% {
-    transform: translateY(0) scale(1);
-  }
-
-  50% {
-    transform: translateY(-2px) scale(1.012);
-  }
-}
 
 @keyframes re-journey-stage-enter {
   from {
@@ -3118,18 +2986,11 @@ body.re-body {
   }
 }
 
-@media (max-width: 720px) {
-  .re-lottie-fallback {
-    width: 38px;
-    height: 38px;
-  }
-}
 
 @media (prefers-reduced-motion: reduce) {
   .re-device-shot--front,
   .re-device-shot--back,
   .re-motion-section.is-in-view .re-motion-card,
-  .re-motion-section.is-in-view .re-lottie[data-lottie-ready="true"],
   .re-journey-section.is-in-view .re-journey-stage,
   .re-journey-section.is-in-view .re-source-card,
   .re-journey-section.is-in-view .re-spine-step,
@@ -3427,13 +3288,13 @@ body.re-body {
   position: relative;
   display: grid;
   place-items: center;
-  min-height: clamp(35rem, 62vw, 50rem);
+  min-height: clamp(30rem, 54vw, 42rem);
   perspective: 1200px;
 }
 
 .re-showcase__screen {
   position: absolute;
-  width: min(74vw, 26rem);
+  width: min(76vw, 28rem);
   max-height: min(78vh, 48rem);
   margin: 0;
   overflow: hidden;
@@ -3754,14 +3615,10 @@ body.re-body {
     color: #d8eee8;
   }
 
-  .re-lottie,
   .re-mode-icon {
     background: color-mix(in srgb, var(--re-accent) 18%, #101612);
   }
 
-  .re-hero-journey-lottie {
-    background: transparent;
-  }
 
   .re-mode-icon--route {
     background: color-mix(in srgb, var(--re-route) 20%, #101612);
@@ -3982,14 +3839,10 @@ body.re-body {
   color: #d8eee8;
 }
 
-:root[data-theme="dark"] .re-lottie,
 :root[data-theme="dark"] .re-mode-icon {
   background: color-mix(in srgb, var(--re-accent) 18%, #101612);
 }
 
-:root[data-theme="dark"] .re-hero-journey-lottie {
-  background: transparent;
-}
 
 :root[data-theme="dark"] .re-mode-icon--route {
   background: color-mix(in srgb, var(--re-route) 20%, #101612);
@@ -4171,19 +4024,6 @@ body.re-body {
     padding: 12px 14px 12px 10px;
   }
 
-  .re-lottie {
-    width: 68px;
-    height: 68px;
-  }
-
-  .re-lottie > svg:not(.re-lottie-fallback) {
-    display: block !important;
-  }
-
-  .re-lottie-fallback {
-    width: 36px;
-    height: 36px;
-  }
 
   .re-showcase__header {
     gap: 14px;
@@ -4433,11 +4273,6 @@ body.re-body {
     width: min(34%, 15rem);
   }
 
-  .re-hero-journey-lottie,
-  .re-lottie.re-hero-journey-lottie {
-    left: 2%;
-    width: 96%;
-  }
 }
 
 @media (max-width: 720px) {
@@ -5511,5 +5346,109 @@ body.re-body {
   :root[data-theme="system"] .re-showcase__mode[aria-selected="true"] .re-showcase__mode-title,
   :root[data-theme="system"] .re-showcase__mode[aria-selected="true"] .re-showcase__mode-hint {
     color: #101612;
+  }
+}
+
+/* Theme-aware motion illustrations: CSS/SVG replaces fixed-colour Lottie assets. */
+.re-motion-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  border: 1px solid color-mix(in srgb, var(--re-accent) 24%, var(--re-line));
+  border-radius: 22px;
+  overflow: hidden;
+  color: var(--re-accent);
+  background:
+    radial-gradient(circle at 32% 28%, color-mix(in srgb, var(--re-accent) 20%, transparent), transparent 42%),
+    linear-gradient(180deg, color-mix(in srgb, var(--re-surface-strong) 94%, transparent), color-mix(in srgb, var(--re-surface) 76%, transparent));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 42%, transparent),
+    0 14px 34px rgba(32, 49, 43, 0.08);
+  isolation: isolate;
+}
+
+.re-motion-visual--route {
+  color: var(--re-route);
+  border-color: color-mix(in srgb, var(--re-route) 28%, var(--re-line));
+  background:
+    radial-gradient(circle at 32% 28%, color-mix(in srgb, var(--re-route) 18%, transparent), transparent 42%),
+    linear-gradient(180deg, color-mix(in srgb, var(--re-surface-strong) 94%, transparent), color-mix(in srgb, var(--re-surface) 76%, transparent));
+}
+
+.re-motion-visual__glow {
+  position: absolute;
+  inset: auto -18% -28% 18%;
+  height: 46%;
+  border-radius: 999px;
+  background: color-mix(in srgb, currentColor 18%, transparent);
+  filter: blur(14px);
+  opacity: 0.72;
+}
+
+.re-motion-icon {
+  position: relative;
+  z-index: 1;
+  width: 50px;
+  height: 50px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.re-motion-icon__accent {
+  stroke: var(--re-text);
+  opacity: 0.88;
+}
+
+.re-motion-visual--privacy .re-motion-icon {
+  fill: color-mix(in srgb, var(--re-accent) 13%, transparent);
+}
+
+.re-motion-section.is-in-view .re-motion-visual {
+  animation: re-motion-visual-breathe 3600ms cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes re-motion-visual-breathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-2px) scale(1.012); }
+}
+
+@media (max-width: 720px) {
+  .re-motion-visual {
+    width: 68px;
+    height: 68px;
+    border-radius: 17px;
+  }
+
+  .re-motion-icon {
+    width: 38px;
+    height: 38px;
+    stroke-width: 3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .re-motion-section.is-in-view .re-motion-visual {
+    animation: none;
+  }
+}
+
+:root[data-theme="dark"] .re-motion-visual,
+:root[data-theme="dark"] .re-motion-visual--route {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 18px 40px rgba(0, 0, 0, 0.34);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="system"] .re-motion-visual,
+  :root[data-theme="system"] .re-motion-visual--route {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 18px 40px rgba(0, 0, 0, 0.34);
   }
 }
