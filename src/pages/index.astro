@@ -27,10 +27,10 @@ const modes = [
 ];
 
 const capabilities = [
-  ["Import", "Bring in rosters from screenshots, PDFs, files, or pasted text when manual setup is slower."],
-  ["Planning", "Use Today, Calendar, route days, and iPad-friendly layouts to keep the week readable."],
-  ["Privacy", "Keep private notes on device by default; Maps estimates and Calendar shift notes are explicit opt-ins."],
-  ["Widgets", "See useful roster or route summaries, with private placeholders when privacy lock is enabled."],
+  ["Capture", "Start with the roster, screenshot, PDF, file, or pasted text you already have."],
+  ["Shape", "Turn it into shifts, visits, route days, and a week that is easier to scan."],
+  ["Choose", "Keep Calendar notes, Maps estimates, widgets, and privacy lock settings deliberate."],
+  ["Refine", "Use TestFlight feedback to tighten imports, setup, accessibility, and iPad layouts."],
 ];
 
 const motionItems = [
@@ -46,9 +46,16 @@ const motionItems = [
   },
   {
     animation: "privacy",
-    title: "Keep sensitive details deliberate",
-    text: "Private notes stay local by default; Calendar note sharing and Apple Maps estimates are explicit choices.",
+    title: "Decide what leaves the app",
+    text: "Local notes stay local by default, while Calendar details and Apple Maps estimates are choices you make in settings.",
   },
+];
+
+const privacyPoints = [
+  ["Local notes by default", "Private shift, workplace, client, and visit notes are kept on device unless you choose another path."],
+  ["Generic Calendar notes", "Calendar entries avoid sensitive notes by default, with more detail only if you choose to include it."],
+  ["Maps estimates opt-in", "Address-based Apple Maps travel estimates stay off until you enable them for the workflows that need them."],
+  ["Redacted feedback", "Failed-import examples are useful for testing, but names, addresses, IDs, client identifiers, and private notes should be removed first."],
 ];
 
 const showcaseFlows = [
@@ -56,6 +63,7 @@ const showcaseFlows = [
     id: "shift",
     label: "Shift Worker",
     accent: "shift",
+    modeHint: "Roster patterns, workplaces, and calendar control",
     title: "A roster becomes a day you can actually follow.",
     text: "Shift Worker mode keeps repeating rosters, one-off changes, workplaces, calendar sync, and privacy controls in one readable flow.",
     steps: [
@@ -93,11 +101,12 @@ const showcaseFlows = [
     id: "field",
     label: "Field Worker",
     accent: "field",
+    modeHint: "Client visits, route progress, and private defaults",
     title: "A route day becomes ordered, private, and practical.",
     text: "Field Worker mode is built for client visits, route progress, local travel buffers, work days, and address-aware choices that stay deliberate.",
     steps: [
       {
-        label: "Route",
+        label: "Today",
         title: "Start from the next visit",
         text: "Today shows route progress, visit order, windows, local travel buffers, and when Maps estimates are still off.",
         image: fieldTodayShot,
@@ -142,9 +151,9 @@ const showcaseFlows = [
           Import a screenshot, PDF, file, or pasted roster; shape it into shifts, visits, and route days;
           then keep Calendar, widgets, and privacy settings under your control.
         </p>
-        <div class="re-mode-tabs" aria-label="RosterEase modes">
+        <div class="re-mode-tabs re-mode-tabs--compact" aria-label="RosterEase modes">
           {modes.map((mode) => (
-            <article class="re-mode-tabs__panel">
+            <article class="re-mode-tabs__panel re-mode-tabs__panel--compact">
               <div class={`re-mode-icon re-mode-icon--${mode.icon}`} aria-hidden="true">
                 {mode.icon === "calendar" ? (
                   <svg viewBox="0 0 32 32" role="img"><rect x="6" y="8" width="20" height="18" rx="5"/><path d="M11 5v6M21 5v6M10 15h12M11 20h4M18 20h3"/></svg>
@@ -152,11 +161,8 @@ const showcaseFlows = [
                   <svg viewBox="0 0 32 32" role="img"><path d="M8 24c5-9 11 1 16-8"/><circle cx="8" cy="24" r="3"/><circle cx="24" cy="16" r="3"/><path d="M14 12h4M16 10v4"/></svg>
                 )}
               </div>
-              <span>{mode.label}</span>
-              <p>{mode.title}</p>
-              <ul>
-                {mode.points.map((point) => <li>{point}</li>)}
-              </ul>
+              <span>For {mode.label.toLowerCase()}s</span>
+              <p>{mode.icon === "calendar" ? "Repeating shifts, changes, and workplace days." : "Visits, clients, route days, and leave-by timing."}</p>
             </article>
           ))}
         </div>
@@ -172,15 +178,16 @@ const showcaseFlows = [
         </p>
       </div>
 
-      <div class="re-launch-hero__media" aria-label="RosterEase Shift Worker and Field Worker screenshots">
-        <div class="re-lottie re-hero-journey-lottie" data-lottie="hero-journey" data-lottie-once aria-hidden="true">
-          <svg class="re-lottie-fallback" viewBox="0 0 96 64">
-            <path d="M12 42c14-20 34 4 50-18" />
-            <rect x="12" y="12" width="26" height="18" rx="5" />
-            <rect x="58" y="34" width="24" height="18" rx="6" />
-            <path d="M72 14l10 5v8c0 7-4 12-10 15-6-3-10-8-10-15v-8l10-5z" />
-            <path d="M67 27l4 4 7-9" />
-          </svg>
+      <div class="re-launch-hero__media" aria-label="RosterEase turns roster inputs into a Today plan">
+        <div class="re-hero-source-stack" aria-hidden="true">
+          <span class="re-hero-source-card re-hero-source-card--screenshot">Roster screenshot</span>
+          <span class="re-hero-source-card re-hero-source-card--pdf">PDF</span>
+          <span class="re-hero-source-card re-hero-source-card--paste">Pasted shift list</span>
+        </div>
+        <div class="re-hero-flow-line" aria-hidden="true">
+          <span>Import</span>
+          <span>Shape</span>
+          <span>Plan</span>
         </div>
         <figure class="re-device-shot re-device-shot--front">
           <Image src={shiftTodayShot} alt="RosterEase Shift Worker Today screen showing the next shift and upcoming roster." widths={[520, 760, 980]} sizes="(max-width: 960px) 72vw, 24rem" format="avif" quality={92} loading="eager" fetchpriority="high" />
@@ -188,6 +195,10 @@ const showcaseFlows = [
         <figure class="re-device-shot re-device-shot--back">
           <Image src={fieldTodayShot} alt="RosterEase Field Worker Today screen showing visit progress, route timing, and client stops." widths={[420, 620, 820]} sizes="(max-width: 960px) 48vw, 18rem" format="avif" quality={90} loading="eager" />
         </figure>
+        <div class="re-hero-output-card" aria-hidden="true">
+          <span>Today plan ready</span>
+          <p>Calendar + widgets optional</p>
+        </div>
       </div>
     </div>
   </section>
@@ -209,8 +220,8 @@ const showcaseFlows = [
         <p class="re-kicker">Workday journey</p>
         <h2 class="re-section-title" id="journey-title">Your roster, shaped into the day.</h2>
         <p class="re-body-copy">
-          RosterEase is designed around a simple path: capture the work details you already have,
-          turn them into a readable plan, then keep routes, calendar sync, widgets, and private notes deliberate.
+          RosterEase follows the path most workdays already take: capture the details you were given,
+          turn them into a readable plan, then decide which extras belong in Calendar, widgets, maps, or feedback.
         </p>
         <div class="re-journey-steps" aria-label="RosterEase workday journey">
           <span>Import</span>
@@ -220,40 +231,30 @@ const showcaseFlows = [
         </div>
       </div>
 
-      <div class="re-journey-stage" aria-label="RosterEase journey from imported roster to protected work day">
-        <div class="re-journey-source-stack" aria-hidden="true">
-          <span class="re-source-card re-source-card--photo"><i></i><b></b><b></b><b></b></span>
-          <span class="re-source-card re-source-card--file"><i></i><b></b><b></b></span>
-          <span class="re-source-card re-source-card--paste"><i></i><b></b><b></b><b></b></span>
+      <div class="re-journey-stage" aria-hidden="true">
+        <div class="re-journey-source-stack">
+          <span class="re-source-card re-source-card--screenshot"><i>Screenshot</i><b></b><b></b><b></b></span>
+          <span class="re-source-card re-source-card--pdf"><i>PDF</i><b></b><b></b></span>
+          <span class="re-source-card re-source-card--paste"><i>Pasted roster</i><b></b><b></b><b></b></span>
+          <span class="re-source-card re-source-card--clients"><i>Client list</i><b></b><b></b></span>
         </div>
-        <div class="re-journey-plan-card" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
+
+        <div class="re-journey-spine">
+          <span class="re-spine-step re-spine-step--import">Import</span>
+          <span class="re-spine-step re-spine-step--shape">Shape</span>
+          <span class="re-spine-step re-spine-step--protect">Protect</span>
         </div>
-        <div class="re-journey-callouts" aria-hidden="true">
-          <span class="re-journey-callout re-journey-callout--import">Import</span>
-          <span class="re-journey-callout re-journey-callout--plan">Plan</span>
-          <span class="re-journey-callout re-journey-callout--protect">Protect</span>
-        </div>
-        <figure class="re-journey-phone re-journey-phone--primary">
-          <Image src={shiftTodayShot} alt="RosterEase Shift Worker Today screen with the next shift and upcoming roster." widths={[420, 620, 820]} sizes="(max-width: 720px) 58vw, 18rem" format="avif" quality={90} loading="lazy" />
-        </figure>
-        <figure class="re-journey-phone re-journey-phone--secondary">
-          <Image src={fieldTodayShot} alt="RosterEase Field Worker Today screen with route progress and visit timing." widths={[360, 520, 720]} sizes="(max-width: 720px) 42vw, 14rem" format="avif" quality={88} loading="lazy" />
-        </figure>
-        <div class="re-journey-privacy-seal" aria-hidden="true">
-          <span></span>
-        </div>
-        <div class="re-lottie re-workday-journey-lottie" data-lottie="workday-journey" aria-hidden="true">
-          <svg class="re-lottie-fallback" viewBox="0 0 96 64">
-            <rect x="10" y="12" width="28" height="20" rx="6" />
-            <path d="M18 22h12M16 42c12-18 28 5 43-13" />
-            <circle cx="16" cy="42" r="4" />
-            <circle cx="59" cy="29" r="4" />
-            <path d="M74 14l10 5v9c0 7-4 12-10 15-6-3-10-8-10-15v-9l10-5z" />
-            <path d="M69 28l4 4 8-10" />
-          </svg>
+
+        <div class="re-journey-outcome-card">
+          <figure class="re-journey-phone re-journey-phone--primary">
+            <Image src={shiftTodayShot} alt="" widths={[420, 620, 820]} sizes="(max-width: 720px) 62vw, 16rem" format="avif" quality={90} loading="lazy" />
+          </figure>
+          <div class="re-journey-output-chips">
+            <span>Today</span>
+            <span>Calendar</span>
+            <span>Widget</span>
+            <span class="re-output-chip--lock">Privacy lock</span>
+          </div>
         </div>
       </div>
     </div>
@@ -262,9 +263,9 @@ const showcaseFlows = [
   <section class="re-motion-section" aria-label="How RosterEase works" data-motion-sequence>
     <div class="re-shell re-motion-grid">
       <div class="re-motion-copy">
-        <h2 class="re-section-title">From roster chaos to a readable work day.</h2>
+        <h2 class="re-section-title">From messy source to useful day plan.</h2>
         <p class="re-body-copy">
-          The app is for people who already have the work details somewhere else and need them turned into something usable on their phone or iPad.
+          The app is for people who already have the work details somewhere else and need a calmer way to review, adjust, and carry them.
         </p>
       </div>
       <div class="re-motion-rail">
@@ -295,11 +296,11 @@ const showcaseFlows = [
     <div class="re-shell re-product-grid">
       <div class="re-product-copy">
         <p class="re-kicker">Current app</p>
-        <h2 class="re-section-title">Built for the messy middle between a roster and the actual day.</h2>
+        <h2 class="re-section-title">Two guided modes, one practical rhythm.</h2>
         <p class="re-body-copy">
-          RosterEase starts from the mode you choose during onboarding. Shift Worker focuses on
-          patterns, workplaces, calendar sync, and exceptions. Field Worker focuses on clients,
-          visit stops, work days, local travel buffers, and route progress.
+          Onboarding starts with the way you work. Shift Worker keeps patterns, workplaces,
+          sync, and exceptions together. Field Worker keeps clients, visits, work days,
+          travel buffers, and route progress close at hand.
         </p>
       </div>
       <div class="re-feature-matrix">
@@ -315,9 +316,20 @@ const showcaseFlows = [
         </article>
         <article>
           <span>03</span>
-          <h3>Keep privacy explicit</h3>
-          <p>Calendar notes stay generic by default. Apple Maps travel estimates are off until you choose address-based estimates.</p>
+          <h3>Keep sharing explicit</h3>
+          <p>Notes, Calendar details, Maps estimates, backup, restore, reset, and privacy lock are surfaced as choices rather than assumptions.</p>
         </article>
+        <div class="re-product-mode-details" aria-label="RosterEase mode details">
+          {modes.map((mode) => (
+            <article class={`re-product-mode-detail re-product-mode-detail--${mode.icon}`}>
+              <span>{mode.label}</span>
+              <h3>{mode.title}</h3>
+              <ul>
+                {mode.points.map((point) => <li>{point}</li>)}
+              </ul>
+            </article>
+          ))}
+        </div>
       </div>
     </div>
   </section>
@@ -346,7 +358,9 @@ const showcaseFlows = [
             tabindex={flowIndex === 0 ? "0" : "-1"}
             data-showcase-mode={flow.id}
           >
-            <span>{flow.label}</span>
+            <span class="re-showcase__mode-kicker">{flow.accent === "shift" ? "Mode 01" : "Mode 02"}</span>
+            <span class="re-showcase__mode-title">{flow.label}</span>
+            <span class="re-showcase__mode-hint">{flow.modeHint}</span>
           </button>
         ))}
       </div>
@@ -367,7 +381,7 @@ const showcaseFlows = [
               <p>{flow.text}</p>
             </div>
 
-            <div class="re-route-line" aria-label={`${flow.label} journey steps`}>
+            <div class="re-route-line" aria-label={`${flow.label} guided demo steps`}>
               {flow.steps.map((step, stepIndex) => (
                 <button
                   class="re-route-line__stop"
@@ -378,7 +392,10 @@ const showcaseFlows = [
                   aria-current={stepIndex === 0 ? "step" : undefined}
                 >
                   <span class="re-route-line__dot" aria-hidden="true"></span>
-                  <span>{step.label}</span>
+                  <span class="re-route-line__text">
+                    <span class="re-route-line__count">Step {stepIndex + 1}</span>
+                    <span class="re-route-line__label">{step.label}</span>
+                  </span>
                 </button>
               ))}
             </div>
@@ -414,7 +431,7 @@ const showcaseFlows = [
               </button>
             </div>
 
-            <div class="re-showcase__dots" aria-label={`${flow.label} screenshot controls`}>
+            <div class="re-showcase__dots" aria-label={`${flow.label} quick screenshot controls`}>
               {flow.steps.map((step, stepIndex) => (
                 <button
                   type="button"
@@ -434,16 +451,38 @@ const showcaseFlows = [
     </div>
   </section>
 
+  <section class="re-privacy-band" aria-labelledby="privacy-band-title">
+    <div class="re-shell re-privacy-band__grid">
+      <div class="re-privacy-band__copy">
+        <p class="re-kicker">Privacy by default</p>
+        <h2 class="re-section-title" id="privacy-band-title">Useful planning, without making sensitive sharing automatic.</h2>
+        <p class="re-body-copy">
+          RosterEase is being shaped around local-first defaults and clear opt-ins, especially for notes,
+          Calendar details, route estimates, and tester feedback.
+        </p>
+      </div>
+      <div class="re-privacy-band__list">
+        {privacyPoints.map(([title, text]) => (
+          <article>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <section class="re-beta" id="beta">
     <div class="re-shell">
       <div class="re-beta__card re-beta__card--launch">
         <div class="re-beta__copy">
-          <span class="re-beta__chip">Tester launch</span>
-          <h2 class="re-beta__title">Join TestFlight if you want to help shape 1.0.</h2>
+          <span class="re-beta__chip">TestFlight invitation</span>
+          <h2 class="re-beta__title">Help shape RosterEase before 1.0.</h2>
+          <p class="re-beta__body">Try the current build, follow your normal setup path, and tell us where imports, privacy wording, or day planning still feel unclear.</p>
           <ul class="re-beta__list">
-            <li>Fresh-install onboarding and first-run setup.</li>
-            <li>Roster imports, calendar sync, Field Worker routes, privacy lock/widgets, and iPad layout.</li>
-            <li>Accessibility settings, backup, restore, reset, and redacted failed-import examples.</li>
+            <li>Fresh-install onboarding, mode choice, and first-run setup.</li>
+            <li>Roster imports, Calendar sync, Field Worker routes, privacy lock, widgets, and iPad layout.</li>
+            <li>Accessibility settings, backup, restore, reset, and safely redacted failed-import examples.</li>
           </ul>
         </div>
         <div class="re-beta__cta">
@@ -452,7 +491,7 @@ const showcaseFlows = [
           </a>
           <div class="re-beta__fineprint">
             <p>Requires Apple TestFlight.</p>
-            <p>Import examples can go to <a href={TESTFLIGHT_MAILTO}>{TESTFLIGHT_EMAIL}</a>.</p>
+            <p>Feedback and redacted import examples can go to <a href={TESTFLIGHT_MAILTO}>{TESTFLIGHT_EMAIL}</a>.</p>
             <p>Remove names, addresses, phone numbers, employee IDs, client identifiers, and private support or medical notes first. <a href="/privacy">Read privacy details</a>.</p>
           </div>
         </div>
