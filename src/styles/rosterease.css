@@ -2079,13 +2079,13 @@ body.re-body {
 
 .re-journey-stage {
   position: relative;
-  min-height: clamp(27rem, 42vw, 36rem);
+  min-height: clamp(29rem, 44vw, 38rem);
   border: 1px solid var(--re-line);
   border-radius: 34px;
   background:
-    radial-gradient(circle at 74% 16%, color-mix(in srgb, var(--re-accent) 14%, transparent), transparent 18rem),
-    radial-gradient(circle at 18% 82%, color-mix(in srgb, var(--re-route) 11%, transparent), transparent 17rem),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.84), rgba(237, 244, 239, 0.66));
+    radial-gradient(circle at 78% 18%, color-mix(in srgb, var(--re-shift) 14%, transparent), transparent 16rem),
+    radial-gradient(circle at 22% 70%, color-mix(in srgb, var(--re-accent) 18%, transparent), transparent 18rem),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.84), rgba(229, 239, 232, 0.62));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.66),
     0 32px 80px rgba(18, 32, 25, 0.11);
@@ -2104,8 +2104,148 @@ body.re-body {
   pointer-events: none;
 }
 
+.re-journey-stage::after {
+  content: "";
+  position: absolute;
+  inset: 16% 8% 16% 36%;
+  z-index: 1;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent),
+    radial-gradient(circle at 72% 50%, rgba(111, 214, 199, 0.14), transparent 38%);
+  opacity: 0.72;
+  pointer-events: none;
+  transform: rotate(-7deg);
+}
+
 .re-journey-section.is-in-view .re-journey-stage {
   animation: re-journey-stage-enter 420ms cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+.re-journey-source-stack {
+  position: absolute;
+  left: 6%;
+  top: 13%;
+  z-index: 4;
+  width: min(28%, 12.5rem);
+  min-height: 13rem;
+  pointer-events: none;
+}
+
+.re-source-card {
+  position: absolute;
+  display: grid;
+  gap: 8px;
+  width: 82%;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 18px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.72), rgba(232, 242, 235, 0.48));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    0 18px 42px rgba(11, 25, 18, 0.16);
+  transform-origin: 50% 100%;
+}
+
+.re-source-card i,
+.re-source-card b {
+  display: block;
+  border-radius: 999px;
+}
+
+.re-source-card i {
+  inline-size: 28px;
+  block-size: 7px;
+  background: #6fd6c7;
+}
+
+.re-source-card b {
+  inline-size: 100%;
+  block-size: 6px;
+  background: rgba(21, 27, 24, 0.13);
+}
+
+.re-source-card b:nth-child(3) {
+  inline-size: 74%;
+}
+
+.re-source-card b:nth-child(4) {
+  inline-size: 48%;
+}
+
+.re-source-card--photo {
+  left: 0;
+  top: 0;
+  transform: rotate(-8deg);
+}
+
+.re-source-card--file {
+  left: 12%;
+  top: 54px;
+  transform: rotate(3deg);
+}
+
+.re-source-card--paste {
+  left: 2%;
+  top: 111px;
+  transform: rotate(-2deg);
+}
+
+.re-journey-section.is-in-view .re-source-card--photo {
+  animation: re-source-card-settle 560ms cubic-bezier(0.2, 0, 0, 1) 70ms both;
+}
+
+.re-journey-section.is-in-view .re-source-card--file {
+  animation: re-source-card-settle 560ms cubic-bezier(0.2, 0, 0, 1) 130ms both;
+}
+
+.re-journey-section.is-in-view .re-source-card--paste {
+  animation: re-source-card-settle 560ms cubic-bezier(0.2, 0, 0, 1) 190ms both;
+}
+
+.re-journey-plan-card {
+  position: absolute;
+  left: 39%;
+  top: 31%;
+  z-index: 5;
+  display: grid;
+  gap: 10px;
+  width: min(22%, 10rem);
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.56);
+  border-radius: 20px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.78), rgba(243, 249, 245, 0.58));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.78),
+    0 20px 48px rgba(11, 25, 18, 0.13);
+  opacity: 0.92;
+  pointer-events: none;
+}
+
+.re-journey-plan-card span {
+  display: block;
+  block-size: 8px;
+  border-radius: 999px;
+  background: rgba(21, 27, 24, 0.14);
+}
+
+.re-journey-plan-card span:first-child {
+  inline-size: 46%;
+  background: #8fb1ff;
+}
+
+.re-journey-plan-card span:nth-child(2) {
+  inline-size: 88%;
+}
+
+.re-journey-plan-card span:nth-child(3) {
+  inline-size: 64%;
+}
+
+.re-journey-section.is-in-view .re-journey-plan-card {
+  animation: re-plan-card-arrive 620ms cubic-bezier(0.2, 0, 0, 1) 230ms both;
 }
 
 .re-journey-phone {
@@ -2125,27 +2265,87 @@ body.re-body {
 }
 
 .re-journey-phone--primary {
-  right: 8%;
-  bottom: 5%;
+  right: 6%;
+  bottom: 6%;
   z-index: 3;
-  width: min(38%, 16rem);
+  width: min(40%, 17rem);
 }
 
 .re-journey-phone--secondary {
-  left: 9%;
-  top: 12%;
-  z-index: 1;
-  width: min(30%, 12rem);
-  opacity: 0.8;
+  left: 55%;
+  top: 8%;
+  z-index: 2;
+  width: min(27%, 11.25rem);
+  opacity: 0.78;
+}
+
+.re-journey-privacy-seal {
+  position: absolute;
+  right: 4%;
+  top: 13%;
+  z-index: 6;
+  display: grid;
+  place-items: center;
+  inline-size: 4.25rem;
+  block-size: 4.25rem;
+  border: 1px solid rgba(111, 214, 199, 0.42);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 36% 24%, rgba(255, 255, 255, 0.3), transparent 38%),
+    linear-gradient(145deg, rgba(22, 99, 90, 0.92), rgba(11, 42, 36, 0.96));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 18px 45px rgba(5, 18, 14, 0.22);
+  pointer-events: none;
+}
+
+.re-journey-privacy-seal span {
+  position: relative;
+  display: block;
+  inline-size: 1.85rem;
+  block-size: 2.1rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(220, 255, 248, 0.88));
+  clip-path: polygon(50% 0, 88% 16%, 82% 62%, 50% 100%, 18% 62%, 12% 16%);
+  transform: translateY(1px);
+}
+
+.re-journey-privacy-seal span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  inline-size: 0.62rem;
+  block-size: 0.48rem;
+  border: 2px solid #16635a;
+  border-radius: 3px;
+  transform: translate(-50%, -8%);
+}
+
+.re-journey-privacy-seal span::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 34%;
+  inline-size: 0.54rem;
+  block-size: 0.48rem;
+  border: 2px solid #16635a;
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+  transform: translateX(-50%);
+}
+
+.re-journey-section.is-in-view .re-journey-privacy-seal {
+  animation: re-privacy-seal-arrive 580ms cubic-bezier(0.2, 0, 0, 1) 320ms both;
 }
 
 .re-workday-journey-lottie {
   position: absolute;
-  top: 7%;
-  left: 6%;
+  top: 9%;
+  left: 8%;
   z-index: 2;
-  width: 88%;
-  height: 84%;
+  width: 84%;
+  height: 78%;
   border-radius: 28px;
   background: transparent;
   box-shadow: none;
@@ -2154,7 +2354,7 @@ body.re-body {
 }
 
 .re-workday-journey-lottie > svg:not(.re-lottie-fallback) {
-  opacity: 0.84;
+  opacity: 0.9;
 }
 
 .re-capability-strip {
@@ -2340,27 +2540,67 @@ body.re-body {
   }
 
   .re-journey-stage {
-    min-height: clamp(22rem, 92vw, 28rem);
+    min-height: clamp(24rem, 104vw, 31rem);
     border-radius: 26px;
   }
 
+  .re-journey-source-stack {
+    left: 5%;
+    top: 10%;
+    width: 34%;
+    min-height: 10rem;
+  }
+
+  .re-source-card {
+    padding: 10px;
+    border-radius: 14px;
+  }
+
+  .re-source-card--file {
+    top: 42px;
+  }
+
+  .re-source-card--paste {
+    top: 84px;
+  }
+
+  .re-journey-plan-card {
+    left: 37%;
+    top: 34%;
+    width: 27%;
+    padding: 11px;
+    border-radius: 16px;
+  }
+
   .re-journey-phone--primary {
-    right: 6%;
-    bottom: 8%;
-    width: min(48%, 13.25rem);
+    right: 4%;
+    bottom: 7%;
+    width: min(45%, 12rem);
   }
 
   .re-journey-phone--secondary {
-    left: 7%;
+    left: 49%;
+    top: 9%;
+    width: min(29%, 8rem);
+  }
+
+  .re-journey-privacy-seal {
+    right: 3%;
     top: 14%;
-    width: min(34%, 9.25rem);
+    inline-size: 3.15rem;
+    block-size: 3.15rem;
+  }
+
+  .re-journey-privacy-seal span {
+    inline-size: 1.38rem;
+    block-size: 1.56rem;
   }
 
   .re-workday-journey-lottie {
-    top: 9%;
-    left: 1%;
-    width: 98%;
-    height: 78%;
+    top: 13%;
+    left: 4%;
+    width: 92%;
+    height: 72%;
     opacity: 0.78;
   }
 
@@ -2691,10 +2931,10 @@ body.re-body {
 }
 
 .re-lottie.re-workday-journey-lottie {
-  top: 7%;
-  left: 6%;
-  width: 88%;
-  height: 84%;
+  top: 9%;
+  left: 8%;
+  width: 84%;
+  height: 78%;
 }
 
 @media (max-width: 720px) {
@@ -2706,10 +2946,10 @@ body.re-body {
   }
 
   .re-lottie.re-workday-journey-lottie {
-    top: 9%;
-    left: 1%;
-    width: 98%;
-    height: 78%;
+    top: 13%;
+    left: 4%;
+    width: 92%;
+    height: 72%;
   }
 }
 
@@ -2794,6 +3034,41 @@ body.re-body {
   }
 }
 
+@keyframes re-source-card-settle {
+  from {
+    opacity: 0;
+    transform: translate3d(-22px, 18px, 0) rotate(-10deg) scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes re-plan-card-arrive {
+  from {
+    opacity: 0;
+    transform: translate3d(-18px, 12px, 0) scale(0.94);
+  }
+
+  to {
+    opacity: 0.92;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes re-privacy-seal-arrive {
+  from {
+    opacity: 0;
+    transform: translate3d(14px, -10px, 0) scale(0.82);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
 @keyframes re-hero-front-settle {
   from {
     opacity: 0;
@@ -2830,7 +3105,10 @@ body.re-body {
   .re-device-shot--back,
   .re-motion-section.is-in-view .re-motion-card,
   .re-motion-section.is-in-view .re-lottie[data-lottie-ready="true"],
-  .re-journey-section.is-in-view .re-journey-stage {
+  .re-journey-section.is-in-view .re-journey-stage,
+  .re-journey-section.is-in-view .re-source-card,
+  .re-journey-section.is-in-view .re-journey-plan-card,
+  .re-journey-section.is-in-view .re-journey-privacy-seal {
     animation: none;
   }
 

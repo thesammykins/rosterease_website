@@ -221,12 +221,25 @@ const showcaseFlows = [
       </div>
 
       <div class="re-journey-stage" aria-label="RosterEase journey from imported roster to protected work day">
+        <div class="re-journey-source-stack" aria-hidden="true">
+          <span class="re-source-card re-source-card--photo"><i></i><b></b><b></b><b></b></span>
+          <span class="re-source-card re-source-card--file"><i></i><b></b><b></b></span>
+          <span class="re-source-card re-source-card--paste"><i></i><b></b><b></b><b></b></span>
+        </div>
+        <div class="re-journey-plan-card" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
         <figure class="re-journey-phone re-journey-phone--primary">
           <Image src={shiftTodayShot} alt="RosterEase Shift Worker Today screen with the next shift and upcoming roster." widths={[420, 620, 820]} sizes="(max-width: 720px) 58vw, 18rem" format="avif" quality={90} loading="lazy" />
         </figure>
         <figure class="re-journey-phone re-journey-phone--secondary">
           <Image src={fieldTodayShot} alt="RosterEase Field Worker Today screen with route progress and visit timing." widths={[360, 520, 720]} sizes="(max-width: 720px) 42vw, 14rem" format="avif" quality={88} loading="lazy" />
         </figure>
+        <div class="re-journey-privacy-seal" aria-hidden="true">
+          <span></span>
+        </div>
         <div class="re-lottie re-workday-journey-lottie" data-lottie="workday-journey" aria-hidden="true">
           <svg class="re-lottie-fallback" viewBox="0 0 96 64">
             <rect x="10" y="12" width="28" height="20" rx="6" />
