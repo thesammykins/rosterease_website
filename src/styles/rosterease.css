@@ -5347,3 +5347,169 @@ body.re-body {
     width: 44%;
   }
 }
+
+/* Theme-aware WCAG tokens — these must remain after the readability override above. */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --re-bg: #f6f8f5;
+  --re-bg-soft: #e8eee8;
+  --re-surface: #ffffff;
+  --re-surface-strong: #fbfdf9;
+  --re-text: #151b18;
+  --re-muted: #4f473c;
+  --re-soft: #5c5348;
+  --re-line: rgba(21, 27, 24, 0.2);
+  --re-line-strong: rgba(21, 27, 24, 0.3);
+  --re-accent: #16635a;
+  --re-accent-soft: rgba(22, 99, 90, 0.1);
+  --re-route: #a15f00;
+  --re-shift: #335fba;
+  --re-focus-ring: #174ea6;
+  --re-shadow: 0 24px 58px rgba(32, 49, 43, 0.11);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --re-bg: #101612;
+  --re-bg-soft: #172019;
+  --re-surface: #18221c;
+  --re-surface-strong: #202b24;
+  --re-text: #f5faf4;
+  --re-muted: #d4ded6;
+  --re-soft: #bdc9c0;
+  --re-line: rgba(234, 246, 236, 0.22);
+  --re-line-strong: rgba(234, 246, 236, 0.36);
+  --re-accent: #8de7dc;
+  --re-accent-soft: rgba(141, 231, 220, 0.18);
+  --re-route: #ffd08a;
+  --re-shift: #a9c3ff;
+  --re-focus-ring: #ffe08a;
+  --re-shadow: 0 24px 58px rgba(0, 0, 0, 0.34);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="system"] {
+    color-scheme: dark;
+    --re-bg: #101612;
+    --re-bg-soft: #172019;
+    --re-surface: #18221c;
+    --re-surface-strong: #202b24;
+    --re-text: #f5faf4;
+    --re-muted: #d4ded6;
+    --re-soft: #bdc9c0;
+    --re-line: rgba(234, 246, 236, 0.22);
+    --re-line-strong: rgba(234, 246, 236, 0.36);
+    --re-accent: #8de7dc;
+    --re-accent-soft: rgba(141, 231, 220, 0.18);
+    --re-route: #ffd08a;
+    --re-shift: #a9c3ff;
+    --re-focus-ring: #ffe08a;
+    --re-shadow: 0 24px 58px rgba(0, 0, 0, 0.34);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root[data-theme="system"] {
+    color-scheme: light;
+    --re-bg: #f6f8f5;
+    --re-bg-soft: #e8eee8;
+    --re-surface: #ffffff;
+    --re-surface-strong: #fbfdf9;
+    --re-text: #151b18;
+    --re-muted: #4f473c;
+    --re-soft: #5c5348;
+    --re-line: rgba(21, 27, 24, 0.2);
+    --re-line-strong: rgba(21, 27, 24, 0.3);
+    --re-accent: #16635a;
+    --re-accent-soft: rgba(22, 99, 90, 0.1);
+    --re-route: #a15f00;
+    --re-shift: #335fba;
+    --re-focus-ring: #174ea6;
+    --re-shadow: 0 24px 58px rgba(32, 49, 43, 0.11);
+  }
+}
+
+:root[data-theme="dark"] .re-kicker,
+:root[data-theme="dark"] .re-mode-tabs__panel span,
+:root[data-theme="dark"] .re-journey-steps span,
+:root[data-theme="dark"] .re-spine-step,
+:root[data-theme="dark"] .re-showcase__mode-kicker,
+:root[data-theme="dark"] .re-route-line__count {
+  color: var(--re-accent);
+}
+
+:root[data-theme="dark"] .re-showcase__mode-hint,
+:root[data-theme="dark"] .re-showcase__mode[aria-selected="true"] .re-showcase__mode-hint {
+  color: var(--re-muted);
+}
+
+:root[data-theme="dark"] .re-hero-source-card,
+:root[data-theme="dark"] .re-hero-output-card,
+:root[data-theme="dark"] .re-source-card,
+:root[data-theme="dark"] .re-spine-step,
+:root[data-theme="dark"] .re-journey-output-chips span {
+  background-color: rgba(32, 43, 36, 0.94);
+  color: var(--re-text);
+}
+
+:root[data-theme="dark"] .re-capability-strip__grid article,
+:root[data-theme="dark"] .re-motion-card,
+:root[data-theme="dark"] .re-feature-matrix article,
+:root[data-theme="dark"] .re-product-mode-detail,
+:root[data-theme="dark"] .re-privacy-band__list article,
+:root[data-theme="dark"] .re-beta__card,
+:root[data-theme="dark"] .re-support-panel,
+:root[data-theme="dark"] .re-showcase__panel {
+  box-shadow: var(--re-shadow);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="system"] .re-kicker,
+  :root[data-theme="system"] .re-mode-tabs__panel span,
+  :root[data-theme="system"] .re-journey-steps span,
+  :root[data-theme="system"] .re-spine-step,
+  :root[data-theme="system"] .re-showcase__mode-kicker,
+  :root[data-theme="system"] .re-route-line__count {
+    color: var(--re-accent);
+  }
+
+  :root[data-theme="system"] .re-showcase__mode-hint,
+  :root[data-theme="system"] .re-showcase__mode[aria-selected="true"] .re-showcase__mode-hint {
+    color: var(--re-muted);
+  }
+
+  :root[data-theme="system"] .re-hero-source-card,
+  :root[data-theme="system"] .re-hero-output-card,
+  :root[data-theme="system"] .re-source-card,
+  :root[data-theme="system"] .re-spine-step,
+  :root[data-theme="system"] .re-journey-output-chips span {
+    background-color: rgba(32, 43, 36, 0.94);
+    color: var(--re-text);
+  }
+
+  :root[data-theme="system"] .re-capability-strip__grid article,
+  :root[data-theme="system"] .re-motion-card,
+  :root[data-theme="system"] .re-feature-matrix article,
+  :root[data-theme="system"] .re-product-mode-detail,
+  :root[data-theme="system"] .re-privacy-band__list article,
+  :root[data-theme="system"] .re-beta__card,
+  :root[data-theme="system"] .re-support-panel,
+  :root[data-theme="system"] .re-showcase__panel {
+    box-shadow: var(--re-shadow);
+  }
+}
+
+/* Selected showcase tabs use a light selected surface in dark themes; keep child labels dark. */
+:root[data-theme="dark"] .re-showcase__mode[aria-selected="true"] .re-showcase__mode-kicker,
+:root[data-theme="dark"] .re-showcase__mode[aria-selected="true"] .re-showcase__mode-title,
+:root[data-theme="dark"] .re-showcase__mode[aria-selected="true"] .re-showcase__mode-hint {
+  color: #101612;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="system"] .re-showcase__mode[aria-selected="true"] .re-showcase__mode-kicker,
+  :root[data-theme="system"] .re-showcase__mode[aria-selected="true"] .re-showcase__mode-title,
+  :root[data-theme="system"] .re-showcase__mode[aria-selected="true"] .re-showcase__mode-hint {
+    color: #101612;
+  }
+}
