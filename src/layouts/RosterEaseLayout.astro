@@ -3,7 +3,7 @@ import "../styles/rosterease.css";
 import appIcon from "../assets/rosterease/rosterease-app-icon.svg";
 // 1200x630 landscape OG composite (scaled from app-store-today.png + brand-tinted padding via sips).
 import ogImageAsset from "../assets/rosterease/og-image.png";
-import { SUPPORT_EMAIL } from "../lib/rosterease";
+import { SUPPORT_EMAIL, TESTFLIGHT_URL } from "../lib/rosterease";
 
 export interface Props {
   title: string;
@@ -85,6 +85,10 @@ const isContact = currentPath === "/contact";
           <a href="/privacy" aria-current={isPrivacy ? "page" : undefined}>Privacy</a>
           <a href="/contact" aria-current={isContact ? "page" : undefined}>Contact</a>
         </nav>
+
+        <a class="re-header-cta" href={TESTFLIGHT_URL} target="_blank" rel="noopener" data-testflight-url>
+          Join TestFlight
+        </a>
 
         <fieldset class="re-theme-switch" aria-label="Colour theme">
           <legend>Theme</legend>

@@ -131,16 +131,16 @@ const showcaseFlows = [
 
 <RosterEaseLayout
   title="RosterEase"
-  description="RosterEase is a TestFlight iPhone and iPad app for shift workers and field workers who need roster, route, import, calendar, privacy, and widget tools in one local-first planner."
+  description="RosterEase turns messy rosters into a clear daily work plan with import, calendar, widget, route, and privacy tools for iPhone and iPad."
 >
   <section class="re-hero re-hero--launch">
     <div class="re-shell re-launch-hero__grid">
       <div class="re-launch-hero__copy">
         <p class="re-kicker">RosterEase TestFlight</p>
-        <h1 class="re-hero__title">RosterEase</h1>
+        <h1 class="re-hero__title">Turn messy rosters into a clear daily work plan.</h1>
         <p class="re-lede">
-          RosterEase turns awkward work schedule inputs into a practical day plan: shifts, patterns,
-          client visits, routes, calendar sync, widgets, import, backup, and privacy controls.
+          Import a screenshot, PDF, file, or pasted roster; shape it into shifts, visits, and route days;
+          then keep Calendar, widgets, and privacy settings under your control.
         </p>
         <div class="re-mode-tabs" aria-label="RosterEase modes">
           {modes.map((mode) => (
@@ -167,8 +167,8 @@ const showcaseFlows = [
           <a class="re-button re-button--secondary" href="#product">See the product</a>
         </div>
         <p class="re-testflight-note">
-          We are still learning how people receive shifts and rosters. If an import fails and you can share an example, remove names, addresses, phone numbers, employee IDs, client identifiers, and private support or medical notes before sending it to
-          <a href={TESTFLIGHT_MAILTO}>{TESTFLIGHT_EMAIL}</a> after joining TestFlight.
+          Local-first by design, with sensitive sharing kept deliberate. <a href="/privacy">Read privacy details</a>
+          or send redacted TestFlight examples to <a href={TESTFLIGHT_MAILTO}>{TESTFLIGHT_EMAIL}</a>.
         </p>
       </div>
 
@@ -230,6 +230,11 @@ const showcaseFlows = [
           <span></span>
           <span></span>
           <span></span>
+        </div>
+        <div class="re-journey-callouts" aria-hidden="true">
+          <span class="re-journey-callout re-journey-callout--import">Import</span>
+          <span class="re-journey-callout re-journey-callout--plan">Plan</span>
+          <span class="re-journey-callout re-journey-callout--protect">Protect</span>
         </div>
         <figure class="re-journey-phone re-journey-phone--primary">
           <Image src={shiftTodayShot} alt="RosterEase Shift Worker Today screen with the next shift and upcoming roster." widths={[420, 620, 820]} sizes="(max-width: 720px) 58vw, 18rem" format="avif" quality={90} loading="lazy" />
@@ -459,7 +464,7 @@ const showcaseFlows = [
     <div class="re-shell re-frontpage-panel__grid">
       <div class="re-frontpage-panel__copy">
         <p class="re-kicker">Support</p>
-        <h2 class="re-section-title">Send real examples, not polished bug reports.</h2>
+        <h2 class="re-section-title">Share the real-world details that make planning difficult.</h2>
         <p class="re-body-copy">
           A confusing roster import, a route day that feels wrong, or a privacy setting that needs clearer wording is exactly the feedback needed before 1.0. If you can share a roster that fails import, redact names, addresses, phone numbers, employee IDs, client identifiers, and private notes before sending it to the dedicated TestFlight email.
         </p>
@@ -479,11 +484,18 @@ const showcaseFlows = [
 
 
 <script>
-  import lottie from "lottie-web";
-
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let lottieLibraryPromise;
   const animationCache = new Map();
+  const mountedLotties = new WeakSet();
   const LOTTIE_LOAD_TIMEOUT_MS = 4000;
+
+  async function loadLottieLibrary() {
+    if (!lottieLibraryPromise) {
+      lottieLibraryPromise = import("lottie-web").then((module) => module.default || module);
+    }
+    return lottieLibraryPromise;
+  }
 
   async function loadAnimation(name) {
     if (!animationCache.has(name)) {
@@ -512,8 +524,10 @@ const showcaseFlows = [
   }
 
   async function mountLottie(container) {
+    if (mountedLotties.has(container)) return;
     const name = container.getAttribute("data-lottie");
     if (!name) return;
+    mountedLotties.add(container);
     const shouldLoop = container.getAttribute("data-lottie-loop") !== "false" && !container.hasAttribute("data-lottie-once");
 
     container.dataset.lottieState = "loading";
@@ -523,7 +537,7 @@ const showcaseFlows = [
     }, LOTTIE_LOAD_TIMEOUT_MS);
 
     try {
-      const animationData = await loadAnimation(name);
+      const [lottie, animationData] = await Promise.all([loadLottieLibrary(), loadAnimation(name)]);
       const animation = lottie.loadAnimation({
         container,
         renderer: "svg",
@@ -567,8 +581,23 @@ const showcaseFlows = [
     }
   }
 
-  for (const container of document.querySelectorAll("[data-lottie]")) {
-    mountLottie(container);
+  const lottieContainers = Array.from(document.querySelectorAll("[data-lottie]"));
+  if (lottieContainers.length) {
+    if ("IntersectionObserver" in window) {
+      const lottieObserver = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            lottieObserver.unobserve(entry.target);
+            mountLottie(entry.target);
+          }
+        },
+        { rootMargin: "360px 0px", threshold: 0.01 },
+      );
+      for (const container of lottieContainers) lottieObserver.observe(container);
+    } else {
+      for (const container of lottieContainers) mountLottie(container);
+    }
   }
 
   const motionSections = Array.from(document.querySelectorAll("[data-motion-sequence]"));
