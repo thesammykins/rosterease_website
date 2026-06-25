@@ -1,20 +1,20 @@
 ---
 import RosterEaseLayout from "../layouts/RosterEaseLayout.astro";
-import { SUPPORT_EMAIL, TESTFLIGHT_EMAIL, TESTFLIGHT_MAILTO } from "../lib/rosterease";
+import { SUPPORT_EMAIL } from "../lib/rosterease";
 
-const supportEmail = SUPPORT_EMAIL;
-const supportMailto = `mailto:${supportEmail}?subject=${encodeURIComponent("RosterEase Support")}`;
-const bugMailto = `mailto:${supportEmail}?subject=${encodeURIComponent("RosterEase Bug Report")}`;
-const feedbackMailto = `${TESTFLIGHT_MAILTO}?subject=${encodeURIComponent("RosterEase Feedback")}`;
+const fallbackSupportMailto = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent("RosterEase Support")}`;
+const fallbackBugMailto = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent("RosterEase Bug Report")}`;
+const fallbackFeedbackMailto = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent("RosterEase Feedback")}`;
 
 const actions = [
   {
     panelClass: "re-action-panel re-action-panel--support",
     label: "General support",
     title: "Need help with setup, import, route planning, or calendar sync?",
-    text: "Use this for Shift Worker setup, Field Worker routes, importing rosters or client lists, managing workplaces or clients, calendar sync questions, backup/restore/reset, or anything else that feels unclear.",
-    href: supportMailto,
-    buttonLabel: "Email support",
+    text: "Tell us what you were trying to do and where it stopped making sense. This is the best place for setup help, imports, routes, calendar sync, backup, restore, reset, or account-adjacent questions.",
+    href: fallbackSupportMailto,
+    subject: "RosterEase Support",
+    buttonLabel: "Get support",
     buttonClass: "re-button re-button--primary",
   },
   {
@@ -22,7 +22,8 @@ const actions = [
     label: "Bug report",
     title: "Something not behaving the way it should?",
     text: "If the app crashes, imports the wrong shift or client, mishandles a route day, syncs unexpectedly, or does something odd, send enough detail for it to be reproduced.",
-    href: bugMailto,
+    href: fallbackBugMailto,
+    subject: "RosterEase Bug Report",
     buttonLabel: "Report a bug",
     buttonClass: "re-button re-button--secondary",
   },
@@ -30,8 +31,9 @@ const actions = [
     panelClass: "re-action-panel re-action-panel--feedback",
     label: "Feedback",
     title: "Have an idea that would make the app easier to use?",
-    text: "Send product feedback, workflow suggestions, accessibility notes, or examples of shift and field-work problems you want RosterEase to handle better. If a roster import fails and you can share an example, remove names, addresses, phone numbers, employee IDs, client identifiers, and private support or medical notes first.",
-    href: feedbackMailto,
+    text: "Send product feedback, workflow suggestions, accessibility notes, or examples of shift and field-work problems you want RosterEase to handle better. If you include a roster, import source, route, client list, screenshot, or PDF, redact sensitive details first.",
+    href: fallbackFeedbackMailto,
+    subject: "RosterEase Feedback",
     buttonLabel: "Send feedback",
     buttonClass: "re-button re-button--secondary",
   },
@@ -41,31 +43,39 @@ const whatHelps = [
   "A short description of what happened.",
   "The iPhone model and iOS version you are using.",
   "A screenshot, redacted sample roster, redacted route/client example, or the step that triggered the issue if you can share it.",
-  "Remove names, addresses, phone numbers, employee IDs, client identifiers, and private support or medical notes unless they are essential and you have consent.",
-  `For TestFlight roster import failures, send shareable examples to ${TESTFLIGHT_EMAIL}.`,
+  "Remove names, addresses, phone numbers, employee IDs, client identifiers, private support notes, medical notes, and any workplace-confidential details before attaching anything.",
+  "If you are using the TestFlight build, include the build number shown in TestFlight or in the app if you can find it.",
 ];
 ---
 
 <RosterEaseLayout
   title="Contact"
-  description="Contact RosterEase support by email."
+  description="Get RosterEase support for setup, import, routes, calendar sync, privacy settings, bug reports, and product feedback."
 >
   <section class="re-subpage-hero">
     <div class="re-shell re-subpage-hero__grid">
       <div class="re-subpage-hero__copy">
         <p class="re-kicker">Contact</p>
-        <h1 class="re-page-title">Support is handled by email.</h1>
+        <h1 class="re-page-title">We’ll help you get RosterEase working.</h1>
         <p class="re-lede re-subpage-hero__lede">
-          Use the shortcut that matches what you need. Each link opens your mail client with the
-          subject already filled in.
+          Choose the closest option and your mail app will open with a prepared subject line.
+          A short tracking code is added automatically so follow-up messages are easier to connect.
         </p>
       </div>
 
       <aside class="re-address-panel">
-        <span class="re-address-panel__label">Support email</span>
-        <a class="re-address-panel__link" href={supportMailto}>{supportEmail}</a>
+        <span class="re-address-panel__label">Support starts here</span>
+        <a
+          class="re-button re-button--primary"
+          href={fallbackSupportMailto}
+          data-support-mailto
+          data-support-subject="RosterEase Support"
+        >
+          Get support
+        </a>
         <p>
-          For setup help, imports, routes, sync questions, privacy settings, bug reports, or product feedback. TestFlight roster examples can go to <a href={TESTFLIGHT_MAILTO}>{TESTFLIGHT_EMAIL}</a> after you remove names, addresses, phone numbers, employee IDs, client identifiers, and private notes.
+          For setup help, imports, routes, sync questions, privacy settings, bug reports, or product feedback.
+          Please redact roster, client, patient, employee, workplace, payroll, and health details before sending examples.
         </p>
       </aside>
     </div>
@@ -79,7 +89,9 @@ const whatHelps = [
             <span class="re-action-panel__label">{action.label}</span>
             <h2>{action.title}</h2>
             <p>{action.text}</p>
-            <a class={action.buttonClass} href={action.href}>{action.buttonLabel}</a>
+            <a class={action.buttonClass} href={action.href} data-support-mailto data-support-subject={action.subject}>
+              {action.buttonLabel}
+            </a>
           </article>
         ))
       }
@@ -94,3 +106,31 @@ const whatHelps = [
     </div>
   </section>
 </RosterEaseLayout>
+
+<script define:vars={{ supportMailbox: SUPPORT_EMAIL }}>
+  const supportLinks = Array.from(document.querySelectorAll("[data-support-mailto]"));
+
+  function supportToken() {
+    const bytes = new Uint8Array(4);
+    if (globalThis.crypto?.getRandomValues) {
+      globalThis.crypto.getRandomValues(bytes);
+    } else {
+      for (let index = 0; index < bytes.length; index += 1) {
+        bytes[index] = Math.floor(Math.random() * 256);
+      }
+    }
+
+    const randomPart = Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("").toUpperCase();
+    return `RE-${Date.now().toString(36).toUpperCase()}-${randomPart}`;
+  }
+
+  function assignSupportSubjects() {
+    for (const link of supportLinks) {
+      const subject = link.getAttribute("data-support-subject") || "RosterEase Support";
+      const trackedSubject = `${subject} [${supportToken()}]`;
+      link.href = `mailto:${supportMailbox}?subject=${encodeURIComponent(trackedSubject)}`;
+    }
+  }
+
+  assignSupportSubjects();
+</script>

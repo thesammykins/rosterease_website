@@ -3,7 +3,7 @@ import "../styles/rosterease.css";
 import appIcon from "../assets/rosterease/rosterease-app-icon.svg";
 // 1200x630 landscape OG composite (scaled from app-store-today.png + brand-tinted padding via sips).
 import ogImageAsset from "../assets/rosterease/og-image.png";
-import { SUPPORT_EMAIL, TESTFLIGHT_URL } from "../lib/rosterease";
+import { TESTFLIGHT_URL } from "../lib/rosterease";
 
 export interface Props {
   title: string;
@@ -15,7 +15,6 @@ const {
   description = "RosterEase is an iPhone and iPad app for shift workers and field workers who want roster, route, import, privacy, widget, and calendar tools in one planner.",
 } = Astro.props;
 
-const supportEmail = SUPPORT_EMAIL;
 const fullTitle = title === "RosterEase" ? title : `${title} | RosterEase`;
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 // Normalize canonical against the (trailing-slash-stripped) current path so canonical
@@ -86,25 +85,29 @@ const isContact = currentPath === "/contact";
           <a href="/contact" aria-current={isContact ? "page" : undefined}>Contact</a>
         </nav>
 
-        <a class="re-header-cta" href={TESTFLIGHT_URL} target="_blank" rel="noopener" data-testflight-url>
-          Join TestFlight
-        </a>
+        <details class="re-theme-menu" data-theme-menu>
+          <summary class="re-theme-menu__button" aria-label="Choose colour theme">
+            <svg class="re-theme-menu__icon" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
+              <path fill="currentColor" d="M12 18.25A6.25 6.25 0 1 1 12 5.75a6.25 6.25 0 0 1 0 12.5Zm0-2A4.25 4.25 0 1 0 12 7.75a4.25 4.25 0 0 0 0 8.5ZM12 3.5a1 1 0 0 1-1-1V1.25a1 1 0 1 1 2 0V2.5a1 1 0 0 1-1 1Zm0 20.25a1 1 0 0 1-1-1V21.5a1 1 0 1 1 2 0v1.25a1 1 0 0 1-1 1ZM3.5 13H2.25a1 1 0 1 1 0-2H3.5a1 1 0 1 1 0 2Zm18.25 0H20.5a1 1 0 1 1 0-2h1.25a1 1 0 1 1 0 2ZM5.64 6.64a1 1 0 0 1-.7-.29l-.9-.89a1 1 0 0 1 1.42-1.42l.89.9a1 1 0 0 1-.71 1.7Zm13.61 13.61a1 1 0 0 1-.71-.29l-.89-.9a1 1 0 0 1 1.41-1.41l.9.89a1 1 0 0 1-.71 1.71ZM4.75 20.25a1 1 0 0 1-.71-1.71l.9-.89a1 1 0 0 1 1.41 1.41l-.89.9a1 1 0 0 1-.71.29ZM18.36 6.64a1 1 0 0 1-.71-1.7l.89-.9a1 1 0 1 1 1.42 1.42l-.9.89a1 1 0 0 1-.7.29Z" />
+            </svg>
+          </summary>
 
-        <fieldset class="re-theme-switch" aria-label="Colour theme">
-          <legend>Theme</legend>
-          <label for="re-theme-light">
-            <input id="re-theme-light" type="radio" name="re-theme" value="light" aria-label="Use light theme" />
-            <span>Light</span>
-          </label>
-          <label for="re-theme-dark">
-            <input id="re-theme-dark" type="radio" name="re-theme" value="dark" aria-label="Use dark theme" />
-            <span>Dark</span>
-          </label>
-          <label for="re-theme-system">
-            <input id="re-theme-system" type="radio" name="re-theme" value="system" checked aria-label="Use system theme" />
-            <span>System</span>
-          </label>
-        </fieldset>
+          <fieldset class="re-theme-switch" aria-label="Colour theme">
+            <legend>Theme</legend>
+            <label for="re-theme-light">
+              <input id="re-theme-light" type="radio" name="re-theme" value="light" aria-label="Use light theme" />
+              <span>Light</span>
+            </label>
+            <label for="re-theme-dark">
+              <input id="re-theme-dark" type="radio" name="re-theme" value="dark" aria-label="Use dark theme" />
+              <span>Dark</span>
+            </label>
+            <label for="re-theme-system">
+              <input id="re-theme-system" type="radio" name="re-theme" value="system" checked aria-label="Use system theme" />
+              <span>System</span>
+            </label>
+          </fieldset>
+        </details>
       </div>
     </header>
 
@@ -123,7 +126,7 @@ const isContact = currentPath === "/contact";
           </a>
 
           <p>
-            An iPhone and iPad app for shift workers and field workers preparing for a 1.0 launch through TestFlight feedback.
+            An iPhone and iPad app for shift workers and field workers preparing for a 1.0 launch through TestFlight.
           </p>
         </div>
 
@@ -136,10 +139,13 @@ const isContact = currentPath === "/contact";
           </div>
 
           <div class="re-footer__actions">
-            <a href="https://samanthamyers.au">Main site</a>
-            <a class="re-footer__email" href={`mailto:${supportEmail}`}>
-              {supportEmail}
+            <a class="re-button re-button--primary" href={TESTFLIGHT_URL} target="_blank" rel="noopener">Join TestFlight</a>
+            <a class="re-badge re-badge--appstore" href="#" data-coming-soon aria-label="RosterEase is coming to the App Store">
+              <svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22"><path fill="currentColor" d="M17.05 12.04c-.03-2.07 1.69-3.06 1.77-3.12-.97-1.41-2.48-1.6-3.01-1.62-1.28-.13-2.5.76-3.15.76-.65 0-1.65-.74-2.71-.72-1.4.02-2.69.81-3.41 2.06-1.46 2.53-.37 6.27 1.04 8.32.69 1.01 1.51 2.13 2.58 2.09 1.04-.04 1.43-.67 2.69-.67 1.25 0 1.61.67 2.71.65 1.12-.02 1.83-1.02 2.51-2.03.79-1.17 1.12-2.31 1.13-2.37-.02-.01-2.17-.83-2.19-3.3zM15.2 6.04c.57-.69.96-1.66.85-2.62-.83.03-1.83.55-2.42 1.24-.53.61-.99 1.59-.87 2.53.92.07 1.87-.47 2.44-1.15z"/></svg>
+              <span class="re-badge__label"><small>Coming to the</small>App Store</span>
             </a>
+            <a href="https://samanthamyers.au">Main site</a>
+            <a href="/contact">Support</a>
           </div>
         </div>
       </div>
@@ -148,6 +154,7 @@ const isContact = currentPath === "/contact";
       const THEME_STORAGE_KEY = "rosterease-theme";
       const themeChoices = new Set(["light", "dark", "system"]);
       const themeInputs = Array.from(document.querySelectorAll('input[name="re-theme"]'));
+      const themeMenu = document.querySelector("[data-theme-menu]");
 
       function storedTheme() {
         const value = localStorage.getItem(THEME_STORAGE_KEY);
@@ -169,6 +176,7 @@ const isContact = currentPath === "/contact";
           if (!input.checked) return;
           localStorage.setItem(THEME_STORAGE_KEY, input.value);
           applyTheme(input.value);
+          themeMenu?.removeAttribute("open");
         });
       }
     </script>

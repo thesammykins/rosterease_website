@@ -1,6 +1,5 @@
 ---
 import RosterEaseLayout from "../layouts/RosterEaseLayout.astro";
-import { SUPPORT_EMAIL, SUPPORT_MAILTO, TESTFLIGHT_EMAIL, TESTFLIGHT_MAILTO } from "../lib/rosterease";
 
 const quickFacts = [
   {
@@ -13,12 +12,12 @@ const quickFacts = [
   },
   {
     label: "Support",
-    value: SUPPORT_EMAIL,
-    href: SUPPORT_MAILTO,
+    value: "Use the contact page",
+    href: "/contact",
   },
   {
     label: "Effective date",
-    value: "23 June 2026",
+    value: "25 June 2026",
   },
 ];
 
@@ -27,14 +26,24 @@ const sections = [
     title: "Overview",
     paragraphs: [
       "This Privacy Policy explains how RosterEase handles information when you use the RosterEase website or mobile app.",
-      "It is written as a plain, general policy for the current version of the product.",
+      "It is written as a plain policy for the current version of the product and should be read alongside Apple's TestFlight and App Store privacy information where those services are involved.",
     ],
   },
   {
     title: "Information you provide",
     paragraphs: [
       "If you contact RosterEase, you may provide information such as your name, email address, and anything else you include in the message.",
-      "If you use the app, you may also choose to add or import schedule information, shift types, workplaces, clients, visit stops, addresses, notes, travel preferences, and app settings.",
+      "If you use the app, you may choose to add or import schedule information, shift types, workplaces, clients, visit stops, addresses, notes, travel preferences, calendar choices, backup choices, and app settings.",
+      "RosterEase does not require you to send roster content to support. If you choose to send examples, use redacted examples wherever possible.",
+    ],
+  },
+  {
+    title: "Roster examples, imports, and redaction",
+    paragraphs: [
+      "Do not send sensitive roster, import, client, patient, employee, medical, support, payroll, or workplace-confidential information to RosterEase.",
+      "Before sending screenshots, PDFs, pasted roster text, client lists, route examples, or failed-import examples, redact names, addresses, phone numbers, employee IDs, client identifiers, private notes, medical or support notes, and any other sensitive details.",
+      "You are responsible for deciding what you are allowed to import into the app and what you are allowed to share with RosterEase for support. RosterEase cannot control what an end user chooses to import, paste, upload, screenshot, or send.",
+      "RosterEase does not want or intentionally store sensitive roster/import examples. If sensitive information is submitted accidentally, RosterEase will use it only to understand the support request and will promptly delete it where feasible, unless retention is required for legal, security, or abuse-prevention reasons.",
     ],
   },
   {
@@ -43,6 +52,14 @@ const sections = [
       "RosterEase is designed so schedule data can remain on your device where practical.",
       "If you choose to use optional permissions such as calendar access, photo access, file access, or clipboard import, that access is used only for the feature you asked the app to perform.",
       "For example, calendar access may be used to write shifts to a calendar you choose, and photo or file access may be used to import roster or client information into the app. Calendar event notes use generic RosterEase copy by default; private shift notes are included only if you turn that setting on.",
+      "You can manage optional permissions through iOS or iPadOS Settings. Turning off a permission may limit the related feature but does not stop you from using the rest of the app.",
+    ],
+  },
+  {
+    title: "Backup and restore",
+    paragraphs: [
+      "RosterEase does not currently operate its own cloud account system for roster data.",
+      "If you use Apple device backup, iCloud, or another system backup or restore feature, Apple or your chosen backup provider handles that data under their own terms and settings.",
     ],
   },
   {
@@ -50,7 +67,7 @@ const sections = [
     paragraphs: [
       "When you visit the website, standard technical information may be received, such as browser type, device information, IP address, and normal request or diagnostic data.",
       "The website uses system fonts and local static assets; it does not intentionally load third-party font files from Google Fonts or another font CDN.",
-      "This information may be used to operate, secure, and improve the website.",
+      "This information may be used to operate, secure, troubleshoot, and improve the website.",
     ],
   },
   {
@@ -63,8 +80,11 @@ const sections = [
   {
     title: "Sharing",
     paragraphs: [
-      "RosterEase does not sell your personal information.",
-      "Information may be shared with service providers or technical partners when reasonably necessary to operate the website or app, comply with legal obligations, enforce terms, or protect rights, safety, and security.",
+      "RosterEase does not sell personal information or use it for third-party advertising.",
+      "Information may be processed by providers used to operate the website, email support, Apple platform distribution, TestFlight, crash or diagnostic reporting, and optional Apple Maps estimates.",
+      "These providers are used only as reasonably necessary to operate, secure, support, or improve RosterEase, comply with law, enforce terms, or protect rights, safety, and security.",
+      "Apple may process information when you download, install, test, review, or submit feedback through TestFlight or the App Store. That Apple-controlled processing is covered by Apple's privacy terms.",
+      "Some providers may process information outside Australia, including in countries where Apple, website hosting, and email providers operate.",
     ],
   },
   {
@@ -72,6 +92,8 @@ const sections = [
     paragraphs: [
       "Information is retained for as long as reasonably necessary to provide the website or app, fulfill legal obligations, resolve disputes, and enforce agreements.",
       "Information stored in the app may remain on your device until you delete it, remove the app, or replace it with new imported or restored data.",
+      "Redacted support examples may be retained only as long as reasonably needed to respond or improve import handling. Accidental sensitive submissions will be deleted promptly where feasible.",
+      "You can ask RosterEase to delete support correspondence or redacted examples you have sent, subject to legal, security, abuse-prevention, and backup-retention limits.",
     ],
   },
   {
@@ -82,10 +104,20 @@ const sections = [
     ],
   },
   {
+    title: "Access, correction, deletion, and complaints",
+    paragraphs: [
+      'You can ask RosterEase to access, correct, or delete personal information held by RosterEase by using the <a href="/contact">contact page</a>.',
+      "This mainly covers support messages, feedback, crash or diagnostic information available to the developer, and any examples you choose to send.",
+      "RosterEase cannot directly delete information stored only on your device. You can delete that in the app where available, remove imported data, revoke permissions in iOS or iPadOS Settings, or uninstall the app.",
+      "Privacy complaints can be sent through the contact page and will be reviewed and responded to within a reasonable time.",
+    ],
+  },
+  {
     title: "Your choices",
     paragraphs: [
       "You can choose whether to contact RosterEase and what information to include.",
       "You can choose whether to grant optional app permissions such as calendar, photos, files, or clipboard access. You can also choose whether to enable Apple Maps estimates and whether private shift notes are copied into Calendar events.",
+      "You can delete app data from inside the app where available, by removing the app, or by changing the relevant iOS or iPadOS permission settings.",
       "You can stop using the app or website at any time.",
     ],
   },
@@ -94,14 +126,15 @@ const sections = [
     paragraphs: [
       "RosterEase is currently distributed for testing through Apple's TestFlight programme. If you join the beta, Apple may collect information such as your TestFlight account details, device and OS version, app installs, crash logs, and any feedback you submit through TestFlight.",
       'That information is handled by Apple under their TestFlight privacy terms: <a href="https://www.apple.com/legal/privacy/data/en/test-flight/" target="_blank" rel="noopener">apple.com/legal/privacy/data/en/test-flight</a>.',
+      "Apple may make crash logs, screenshots, feedback text, diagnostics, tester contact or account metadata, and related TestFlight information available to the developer.",
       "Crash and feedback data shared with the developer through TestFlight is used only to diagnose issues and improve the app before it ships to the App Store.",
-      `You can also send beta feedback directly to <a href="${TESTFLIGHT_MAILTO}">${TESTFLIGHT_EMAIL}</a>. RosterEase is still learning how people receive shifts and rosters; if an import fails and you can share an example, remove names, addresses, phone numbers, employee IDs, client identifiers, and private support or medical notes unless those details are essential and you have consent.`,
+      "Public support and privacy questions should use the contact page on this site.",
     ],
   },
   {
     title: "Contact",
     paragraphs: [
-      `If you have questions about this Privacy Policy, use the contact page on this site or email ${SUPPORT_EMAIL}.`,
+      'If you have questions about this Privacy Policy, use the <a href="/contact">contact page</a> on this site.',
     ],
   },
 ];
