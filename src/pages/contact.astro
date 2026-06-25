@@ -59,7 +59,7 @@ const whatHelps = [
         <h1 class="re-page-title">We’ll help you get RosterEase working.</h1>
         <p class="re-lede re-subpage-hero__lede">
           Choose the closest option and your mail app will open with a prepared subject line.
-          A short tracking code is added automatically so follow-up messages are easier to connect.
+          A short support reference is added automatically so follow-up messages are easier to connect.
         </p>
       </div>
 
@@ -110,7 +110,7 @@ const whatHelps = [
 <script define:vars={{ supportMailbox: SUPPORT_EMAIL }}>
   const supportLinks = Array.from(document.querySelectorAll("[data-support-mailto]"));
 
-  function supportToken() {
+  function supportReference() {
     const bytes = new Uint8Array(4);
     if (globalThis.crypto?.getRandomValues) {
       globalThis.crypto.getRandomValues(bytes);
@@ -120,15 +120,17 @@ const whatHelps = [
       }
     }
 
-    const randomPart = Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("").toUpperCase();
-    return `RE-${Date.now().toString(36).toUpperCase()}-${randomPart}`;
+    const datePart = new Date().toISOString().slice(0, 10).replaceAll("-", "");
+    const alphabet = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
+    const randomPart = Array.from(bytes, (byte) => alphabet[byte % alphabet.length]).join("");
+    return `${datePart}-${randomPart}`;
   }
 
   function assignSupportSubjects() {
     for (const link of supportLinks) {
       const subject = link.getAttribute("data-support-subject") || "RosterEase Support";
-      const trackedSubject = `${subject} [${supportToken()}]`;
-      link.href = `mailto:${supportMailbox}?subject=${encodeURIComponent(trackedSubject)}`;
+      const subjectWithReference = `${subject} - Request ${supportReference()}`;
+      link.href = `mailto:${supportMailbox}?subject=${encodeURIComponent(subjectWithReference)}`;
     }
   }
 

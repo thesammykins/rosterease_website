@@ -982,6 +982,7 @@ button, input, textarea, select {
 .re-action-panel {
 
   display: grid;
+  grid-column: span 4;
   gap: 16px;
   align-content: start;
 
@@ -990,7 +991,7 @@ button, input, textarea, select {
 
 .re-action-panel--note {
 
-  grid-column: span 7;
+  grid-column: 1 / -1;
 
 }
 
@@ -2459,6 +2460,10 @@ body.re-body {
 
   .re-contact-grid {
     grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .re-action-panel {
+    grid-column: 1 / -1;
   }
 
   .re-action-panel--note {
