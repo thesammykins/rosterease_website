@@ -1,7 +1,7 @@
 ---
 import "../styles/rosterease.css";
 import appIcon from "../assets/rosterease/rosterease-app-icon.svg";
-// 1200x630 landscape OG composite (scaled from app-store-today.png + brand-tinted padding via sips).
+// 1200x630 landscape OG composite with staggered product screenshots and brand lockup.
 import ogImageAsset from "../assets/rosterease/og-image.png";
 import { TESTFLIGHT_URL } from "../lib/rosterease";
 
@@ -21,7 +21,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 // stays stable regardless of how the URL was requested (with/without trailing slash, query, hash).
 const canonicalUrl = new URL(currentPath, Astro.url).href;
 const ogImageUrl = new URL(ogImageAsset.src, Astro.url).href;
-const ogImageAlt = "RosterEase - two-mode roster and route planner";
+const ogImageAlt = "RosterEase - roster, route, and day planner";
 const isOverview = currentPath === "/";
 const isPrivacy = currentPath === "/privacy";
 const isContact = currentPath === "/contact";
