@@ -241,33 +241,12 @@ button, input, textarea, select {
 }
 
 
-.re-theme-menu {
-
-  position: relative;
-  flex: 0 0 auto;
-
-}
-
-
-.re-theme-menu summary {
-
-  list-style: none;
-
-}
-
-
-.re-theme-menu summary::-webkit-details-marker {
-
-  display: none;
-
-}
-
-
-.re-theme-menu__button {
+.re-theme-toggle {
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 auto;
   inline-size: 44px;
   block-size: 44px;
   border: 1px solid var(--re-line);
@@ -284,8 +263,8 @@ button, input, textarea, select {
 }
 
 
-.re-theme-menu__button:hover,
-.re-theme-menu__button:focus-visible {
+.re-theme-toggle:hover,
+.re-theme-toggle:focus-visible {
 
   border-color: var(--re-line-strong);
   background: var(--re-surface);
@@ -294,100 +273,19 @@ button, input, textarea, select {
 }
 
 
-.re-theme-menu__icon {
+.re-theme-toggle__icon {
 
+  display: none;
   inline-size: 20px;
   block-size: 20px;
 
 }
 
 
-.re-theme-switch {
+.re-theme-toggle[data-next-theme="light"] .re-theme-toggle__icon--sun,
+.re-theme-toggle[data-next-theme="dark"] .re-theme-toggle__icon--moon {
 
-  position: absolute;
-  top: calc(100% + 10px);
-  right: 0;
-  z-index: 60;
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: center;
-  gap: 6px;
-  min-width: 12rem;
-  margin: 0;
-  padding: 8px;
-  border: 1px solid var(--re-line);
-  border-radius: var(--re-radius-md);
-  background: var(--re-surface);
-  box-shadow: var(--re-shadow);
-
-}
-
-
-.re-theme-switch legend {
-
-  position: absolute;
-  inline-size: 1px;
-  block-size: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-
-}
-
-
-.re-theme-switch label {
-
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 36px;
-  width: 100%;
-  cursor: pointer;
-
-}
-
-
-.re-theme-switch input {
-
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  cursor: pointer;
-
-}
-
-
-.re-theme-switch span {
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 36px;
-  padding: 0 12px;
-  border-radius: var(--re-radius-sm);
-  color: var(--re-muted);
-  font-size: 0.86rem;
-  font-weight: 800;
-  letter-spacing: 0;
-
-}
-
-
-.re-theme-switch input:checked + span {
-
-  background: var(--re-text);
-  color: var(--re-bg);
-
-}
-
-
-.re-theme-switch input:focus-visible + span {
-
-  outline: 3px solid var(--re-focus-ring, var(--re-accent));
-  outline-offset: 3px;
-
+  display: block;
 }
 
 
@@ -435,7 +333,7 @@ button, input, textarea, select {
 }
 
 
-.re-nav a, .re-footer__links a, .re-footer__actions a, .re-policy-nav a {
+.re-nav a, .re-footer__links a, .re-footer__actions > a:not(.re-button):not(.re-badge), .re-policy-nav a {
 
   color: var(--re-muted);
   transition: color 180ms ease;
@@ -472,7 +370,7 @@ button, input, textarea, select {
 }
 
 
-.re-nav a:hover, .re-nav a:focus-visible, .re-nav a[aria-current="page"], .re-footer__links a:hover, .re-footer__links a:focus-visible, .re-footer__actions a:hover, .re-footer__actions a:focus-visible, .re-policy-nav a:hover, .re-policy-nav a:focus-visible {
+.re-nav a:hover, .re-nav a:focus-visible, .re-nav a[aria-current="page"], .re-footer__links a:hover, .re-footer__links a:focus-visible, .re-footer__actions > a:not(.re-button):not(.re-badge):hover, .re-footer__actions > a:not(.re-button):not(.re-badge):focus-visible, .re-policy-nav a:hover, .re-policy-nav a:focus-visible {
 
   color: var(--re-text);
 
@@ -580,6 +478,34 @@ button, input, textarea, select {
   align-items: center;
   gap: 14px;
   flex-wrap: wrap;
+
+}
+
+
+.re-hero-proof {
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+
+}
+
+
+.re-hero-proof span {
+
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--re-line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--re-surface) 84%, transparent);
+  color: var(--re-text);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  white-space: nowrap;
 
 }
 
@@ -2533,16 +2459,10 @@ body.re-body {
     scrollbar-width: none;
   }
 
-  .re-theme-menu {
+  .re-theme-toggle {
     grid-column: 2;
     grid-row: 1;
     justify-self: end;
-  }
-
-  .re-theme-switch span {
-    min-height: 38px;
-    padding: 0 12px;
-    font-size: 0.84rem;
   }
 
   .re-nav a {
@@ -2589,15 +2509,15 @@ body.re-body {
   }
 
   .re-launch-hero__media {
-    min-height: clamp(22rem, 92vw, 25rem);
-    margin-top: 0;
+    min-height: clamp(23.5rem, 102vw, 28rem);
+    margin-top: 0.25rem;
   }
 
   .re-device-shot--front {
     left: auto;
-    right: 10%;
-    bottom: 1rem;
-    width: min(48vw, 11.5rem);
+    right: 12%;
+    bottom: 1.25rem;
+    width: min(44vw, 10rem);
   }
 
   .re-device-shot--back {
@@ -2606,6 +2526,16 @@ body.re-body {
 
   .re-launch-hero__copy {
     gap: 18px;
+  }
+
+  .re-hero-proof {
+    gap: 8px;
+  }
+
+  .re-hero-proof span {
+    min-height: 32px;
+    padding: 0 10px;
+    font-size: 0.78rem;
   }
 
   .re-journey-stage {
@@ -2627,8 +2557,8 @@ body.re-body {
   }
 
   .re-launch-hero__copy .re-hero__title {
-    font-size: clamp(2.95rem, 13vw, 3.45rem);
-  line-height: 1;
+    font-size: clamp(2.72rem, 11.5vw, 3.12rem);
+    line-height: 1.04;
   }
 
   .re-button-row .re-button {
@@ -2647,7 +2577,7 @@ body.re-body {
     overflow-x: hidden;
   }
 
-  .re-launch-hero__grid, .re-launch-hero__copy, .re-lede, .re-body-copy {
+  .re-launch-hero__copy, .re-lede, .re-body-copy {
     width: auto;
     max-width: none;
     min-width: 0;
@@ -2836,11 +2766,11 @@ body.re-body {
     scroll-behavior: auto;
   }
 
-  .re-skip-link, .re-nav a, .re-nav a::after, .re-button, .re-showcase__mode {
+  .re-skip-link, .re-nav a, .re-nav a::after, .re-theme-toggle, .re-button, .re-showcase__mode {
     transition: none;
   }
 
-  .re-button:hover, .re-button:focus-visible, .re-button:active, .re-showcase__mode:hover, .re-showcase__mode:focus-visible, .re-showcase__mode:active {
+  .re-theme-toggle:hover, .re-theme-toggle:focus-visible, .re-button:hover, .re-button:focus-visible, .re-button:active, .re-showcase__mode:hover, .re-showcase__mode:focus-visible, .re-showcase__mode:active {
     transform: none;
   }
 

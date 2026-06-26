@@ -85,29 +85,14 @@ const isContact = currentPath === "/contact";
           <a href="/contact" aria-current={isContact ? "page" : undefined}>Contact</a>
         </nav>
 
-        <details class="re-theme-menu" data-theme-menu>
-          <summary class="re-theme-menu__button" aria-label="Choose colour theme">
-            <svg class="re-theme-menu__icon" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
-              <path fill="currentColor" d="M12 18.25A6.25 6.25 0 1 1 12 5.75a6.25 6.25 0 0 1 0 12.5Zm0-2A4.25 4.25 0 1 0 12 7.75a4.25 4.25 0 0 0 0 8.5ZM12 3.5a1 1 0 0 1-1-1V1.25a1 1 0 1 1 2 0V2.5a1 1 0 0 1-1 1Zm0 20.25a1 1 0 0 1-1-1V21.5a1 1 0 1 1 2 0v1.25a1 1 0 0 1-1 1ZM3.5 13H2.25a1 1 0 1 1 0-2H3.5a1 1 0 1 1 0 2Zm18.25 0H20.5a1 1 0 1 1 0-2h1.25a1 1 0 1 1 0 2ZM5.64 6.64a1 1 0 0 1-.7-.29l-.9-.89a1 1 0 0 1 1.42-1.42l.89.9a1 1 0 0 1-.71 1.7Zm13.61 13.61a1 1 0 0 1-.71-.29l-.89-.9a1 1 0 0 1 1.41-1.41l.9.89a1 1 0 0 1-.71 1.71ZM4.75 20.25a1 1 0 0 1-.71-1.71l.9-.89a1 1 0 0 1 1.41 1.41l-.89.9a1 1 0 0 1-.71.29ZM18.36 6.64a1 1 0 0 1-.71-1.7l.89-.9a1 1 0 1 1 1.42 1.42l-.9.89a1 1 0 0 1-.7.29Z" />
-            </svg>
-          </summary>
-
-          <fieldset class="re-theme-switch" aria-label="Colour theme">
-            <legend>Theme</legend>
-            <label for="re-theme-light">
-              <input id="re-theme-light" type="radio" name="re-theme" value="light" aria-label="Use light theme" />
-              <span>Light</span>
-            </label>
-            <label for="re-theme-dark">
-              <input id="re-theme-dark" type="radio" name="re-theme" value="dark" aria-label="Use dark theme" />
-              <span>Dark</span>
-            </label>
-            <label for="re-theme-system">
-              <input id="re-theme-system" type="radio" name="re-theme" value="system" checked aria-label="Use system theme" />
-              <span>System</span>
-            </label>
-          </fieldset>
-        </details>
+        <button class="re-theme-toggle" type="button" data-theme-toggle data-next-theme="dark" aria-label="Switch colour theme">
+          <svg class="re-theme-toggle__icon re-theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
+            <path fill="currentColor" d="M12 18.25A6.25 6.25 0 1 1 12 5.75a6.25 6.25 0 0 1 0 12.5Zm0-2A4.25 4.25 0 1 0 12 7.75a4.25 4.25 0 0 0 0 8.5ZM12 3.5a1 1 0 0 1-1-1V1.25a1 1 0 1 1 2 0V2.5a1 1 0 0 1-1 1Zm0 20.25a1 1 0 0 1-1-1V21.5a1 1 0 1 1 2 0v1.25a1 1 0 0 1-1 1ZM3.5 13H2.25a1 1 0 1 1 0-2H3.5a1 1 0 1 1 0 2Zm18.25 0H20.5a1 1 0 1 1 0-2h1.25a1 1 0 1 1 0 2ZM5.64 6.64a1 1 0 0 1-.7-.29l-.9-.89a1 1 0 0 1 1.42-1.42l.89.9a1 1 0 0 1-.71 1.7Zm13.61 13.61a1 1 0 0 1-.71-.29l-.89-.9a1 1 0 0 1 1.41-1.41l.9.89a1 1 0 0 1-.71 1.71ZM4.75 20.25a1 1 0 0 1-.71-1.71l.9-.89a1 1 0 0 1 1.41 1.41l-.89.9a1 1 0 0 1-.71.29ZM18.36 6.64a1 1 0 0 1-.71-1.7l.89-.9a1 1 0 1 1 1.42 1.42l-.9.89a1 1 0 0 1-.7.29Z" />
+          </svg>
+          <svg class="re-theme-toggle__icon re-theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
+            <path fill="currentColor" d="M20.4 14.62a1 1 0 0 1 1.17 1.25A9.75 9.75 0 1 1 8.13 2.43a1 1 0 0 1 1.25 1.17 8.2 8.2 0 0 0-.25 2.02 9.25 9.25 0 0 0 9.25 9.25 8.2 8.2 0 0 0 2.02-.25Zm-1.48 2.44h-.54A11.25 11.25 0 0 1 7.13 5.62v-.54a7.75 7.75 0 1 0 11.79 11.98Z" />
+          </svg>
+        </button>
       </div>
     </header>
 
@@ -153,32 +138,63 @@ const isContact = currentPath === "/contact";
     <script>
       const THEME_STORAGE_KEY = "rosterease-theme";
       const themeChoices = new Set(["light", "dark", "system"]);
-      const themeInputs = Array.from(document.querySelectorAll('input[name="re-theme"]'));
-      const themeMenu = document.querySelector("[data-theme-menu]");
+      const explicitThemeChoices = new Set(["light", "dark"]);
+      const themeToggle = document.querySelector("[data-theme-toggle]");
+      const systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
       function storedTheme() {
-        const value = localStorage.getItem(THEME_STORAGE_KEY);
-        return themeChoices.has(value) ? value : "system";
+        try {
+          const value = localStorage.getItem(THEME_STORAGE_KEY);
+          return themeChoices.has(value) ? value : "system";
+        } catch {
+          return "system";
+        }
+      }
+
+      function effectiveTheme(theme) {
+        if (theme === "light" || theme === "dark") return theme;
+        return systemThemeQuery.matches ? "dark" : "light";
       }
 
       function applyTheme(theme) {
         const nextTheme = themeChoices.has(theme) ? theme : "system";
+        const effective = effectiveTheme(nextTheme);
+        const nextExplicitTheme = effective === "dark" ? "light" : "dark";
+
         document.documentElement.dataset.theme = nextTheme;
-        for (const input of themeInputs) {
-          input.checked = input.value === nextTheme;
+
+        if (themeToggle) {
+          themeToggle.dataset.effectiveTheme = effective;
+          themeToggle.dataset.nextTheme = nextExplicitTheme;
+          themeToggle.setAttribute("aria-label", `Switch to ${nextExplicitTheme} mode`);
+          themeToggle.setAttribute("aria-pressed", effective === "dark" ? "true" : "false");
         }
       }
 
       applyTheme(storedTheme());
 
-      for (const input of themeInputs) {
-        input.addEventListener("change", () => {
-          if (!input.checked) return;
-          localStorage.setItem(THEME_STORAGE_KEY, input.value);
-          applyTheme(input.value);
-          themeMenu?.removeAttribute("open");
-        });
+      function switchToNextTheme() {
+        const nextTheme = themeToggle?.dataset.nextTheme;
+        if (!explicitThemeChoices.has(nextTheme)) return;
+        try {
+          localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+        } catch {
+          // Theme still updates for this page even when storage is unavailable.
+        }
+        applyTheme(nextTheme);
       }
+
+      themeToggle?.addEventListener("click", switchToNextTheme);
+
+      themeToggle?.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " " && event.key !== "Spacebar") return;
+        event.preventDefault();
+        switchToNextTheme();
+      });
+
+      systemThemeQuery.addEventListener("change", () => {
+        if (storedTheme() === "system") applyTheme("system");
+      });
     </script>
   </body>
 </html>
