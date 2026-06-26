@@ -144,10 +144,10 @@ const showcaseFlows = [
 
       <div class="re-launch-hero__media" aria-label="RosterEase Shift Worker and Field Worker screenshots">
         <figure class="re-device-shot re-device-shot--front">
-          <Image src={shiftTodayShot} alt="RosterEase Shift Worker Today screen showing the next shift and upcoming roster." widths={[520, 760, 980]} sizes="(max-width: 960px) 72vw, 24rem" format="avif" quality={92} loading="eager" fetchpriority="high" />
+          <Image src={shiftTodayShot} alt="RosterEase Shift Worker Today screen showing the next shift and upcoming roster." widths={[520, 760, 980]} sizes="(max-width: 720px) 42vw, (max-width: 960px) 72vw, 24rem" format="avif" quality={92} loading="eager" fetchpriority="high" />
         </figure>
         <figure class="re-device-shot re-device-shot--back">
-          <Image src={fieldTodayShot} alt="RosterEase Field Worker Today screen showing visit progress, route timing, and client stops." widths={[420, 620, 820]} sizes="(max-width: 960px) 48vw, 18rem" format="avif" quality={90} loading="eager" />
+          <Image src={fieldTodayShot} alt="RosterEase Field Worker Today screen showing visit progress, route timing, and client stops." widths={[420, 620, 820]} sizes="(max-width: 720px) 34vw, (max-width: 960px) 48vw, 18rem" format="avif" quality={90} loading="eager" />
         </figure>
       </div>
     </div>
@@ -571,7 +571,31 @@ const showcaseFlows = [
     for (const panel of panels) {
       updatePanel(panel, 0);
       const screensRoot = panel.querySelector("[data-showcase-screens]");
+      let swipeStart = null;
       let scrollFrame = 0;
+      screensRoot?.addEventListener("pointerdown", (event) => {
+        if (event.pointerType === "mouse" && event.button !== 0) return;
+        swipeStart = {
+          pointerId: event.pointerId,
+          x: event.clientX,
+          y: event.clientY,
+        };
+        screensRoot.setPointerCapture?.(event.pointerId);
+      });
+      screensRoot?.addEventListener("pointerup", (event) => {
+        if (!swipeStart || swipeStart.pointerId !== event.pointerId) return;
+        const deltaX = event.clientX - swipeStart.x;
+        const deltaY = event.clientY - swipeStart.y;
+        const threshold = Math.max(36, screensRoot.clientWidth * 0.12);
+        swipeStart = null;
+
+        if (Math.abs(deltaX) < threshold || Math.abs(deltaX) < Math.abs(deltaY) * 1.2) return;
+        event.preventDefault();
+        updatePanel(panel, Number(panel.dataset.activeIndex || 0) + (deltaX < 0 ? 1 : -1));
+      });
+      screensRoot?.addEventListener("pointercancel", () => {
+        swipeStart = null;
+      });
       screensRoot?.addEventListener("scroll", () => {
         if (screensRoot.scrollWidth <= screensRoot.clientWidth + 1) return;
         if (scrollFrame) window.cancelAnimationFrame(scrollFrame);

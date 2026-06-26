@@ -78,7 +78,7 @@ const isContact = currentPath === "/contact";
           <span class="re-brand__wordmark">RosterEase</span>
         </a>
 
-        <nav class="re-nav" aria-label="RosterEase navigation">
+        <nav class="re-nav" id="re-primary-nav" aria-label="RosterEase navigation">
           <a href="/" aria-current={isOverview ? "page" : undefined}>Overview</a>
           <a href="/#screens">Screens</a>
           <a href="/privacy" aria-current={isPrivacy ? "page" : undefined}>Privacy</a>
@@ -91,6 +91,12 @@ const isContact = currentPath === "/contact";
           </svg>
           <svg class="re-theme-toggle__icon re-theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
             <path fill="currentColor" d="M20.4 14.62a1 1 0 0 1 1.17 1.25A9.75 9.75 0 1 1 8.13 2.43a1 1 0 0 1 1.25 1.17 8.2 8.2 0 0 0-.25 2.02 9.25 9.25 0 0 0 9.25 9.25 8.2 8.2 0 0 0 2.02-.25Zm-1.48 2.44h-.54A11.25 11.25 0 0 1 7.13 5.62v-.54a7.75 7.75 0 1 0 11.79 11.98Z" />
+          </svg>
+        </button>
+
+        <button class="re-menu-toggle" type="button" data-menu-toggle aria-controls="re-primary-nav" aria-expanded="false" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22">
+            <path d="M4 7h16M4 12h16M4 17h16" />
           </svg>
         </button>
       </div>
@@ -194,6 +200,50 @@ const isContact = currentPath === "/contact";
 
       systemThemeQuery.addEventListener("change", () => {
         if (storedTheme() === "system") applyTheme("system");
+      });
+
+      const siteHeader = document.querySelector(".re-site-header");
+      const menuToggle = document.querySelector("[data-menu-toggle]");
+      const primaryNav = document.querySelector("#re-primary-nav");
+      const desktopNavigationQuery = window.matchMedia("(min-width: 721px)");
+
+      function setMenuOpen(isOpen) {
+        siteHeader?.classList.toggle("is-menu-open", isOpen);
+        menuToggle?.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        menuToggle?.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+      }
+
+      function toggleMenu() {
+        setMenuOpen(menuToggle.getAttribute("aria-expanded") !== "true");
+      }
+
+      menuToggle?.addEventListener("click", toggleMenu);
+
+      menuToggle?.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " " && event.key !== "Spacebar") return;
+        event.preventDefault();
+        toggleMenu();
+      });
+
+      primaryNav?.addEventListener("click", (event) => {
+        if (event.target?.closest?.("a")) setMenuOpen(false);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && menuToggle?.getAttribute("aria-expanded") === "true") {
+          setMenuOpen(false);
+          menuToggle.focus();
+        }
+      });
+
+      document.addEventListener("pointerdown", (event) => {
+        if (menuToggle?.getAttribute("aria-expanded") !== "true") return;
+        if (siteHeader?.contains(event.target)) return;
+        setMenuOpen(false);
+      });
+
+      desktopNavigationQuery.addEventListener("change", (event) => {
+        if (event.matches) setMenuOpen(false);
       });
     </script>
   </body>
