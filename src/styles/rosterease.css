@@ -2512,6 +2512,28 @@ body.re-body {
     grid-template-columns: 1fr;
   }
 
+  .re-launch-hero__grid {
+    gap: clamp(2rem, 4vw, 3.25rem);
+  }
+
+  .re-launch-hero__media {
+    width: min(100%, 44rem);
+    min-height: clamp(36rem, 68vw, 40rem);
+    margin-inline: auto;
+  }
+
+  .re-device-shot--front {
+    right: 12%;
+    bottom: 4%;
+    width: min(34vw, 17rem);
+  }
+
+  .re-device-shot--back {
+    left: 8%;
+    top: 7%;
+    width: min(26vw, 13rem);
+  }
+
   .re-product-copy {
     position: static;
   }
