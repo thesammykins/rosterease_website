@@ -1,0 +1,51 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  light: ImageMetadata;
+  dark: ImageMetadata;
+  alt: string;
+  widths: number[];
+  sizes: string;
+  quality?: number;
+  loading?: "eager" | "lazy";
+  fetchpriority?: "high" | "low" | "auto";
+}
+
+const {
+  light,
+  dark,
+  alt,
+  widths,
+  sizes,
+  quality = 88,
+  loading = "lazy",
+  fetchpriority,
+} = Astro.props;
+---
+
+<span class="re-themed-screenshot">
+  <Image
+    src={light}
+    alt={alt}
+    widths={widths}
+    sizes={sizes}
+    format="avif"
+    quality={quality}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    data-screenshot-variant="light"
+  />
+  <Image
+    src={dark}
+    alt=""
+    widths={widths}
+    sizes={sizes}
+    format="avif"
+    quality={quality}
+    loading={loading}
+    aria-hidden="true"
+    data-screenshot-variant="dark"
+  />
+</span>

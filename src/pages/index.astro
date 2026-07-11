@@ -1,627 +1,304 @@
 ---
-import { Image } from "astro:assets";
 import RosterEaseLayout from "../layouts/RosterEaseLayout.astro";
+import ScreenshotAppearanceToggle from "../components/ScreenshotAppearanceToggle.astro";
+import ThemedScreenshot from "../components/ThemedScreenshot.astro";
 import { TESTFLIGHT_URL } from "../lib/rosterease";
-import shiftTodayShot from "../assets/rosterease/screenshots/showcase-release/shift-today.png";
-import shiftCalendarShot from "../assets/rosterease/screenshots/showcase-release/shift-calendar.png";
-import shiftWorkplacesShot from "../assets/rosterease/screenshots/showcase-release/shift-workplaces.png";
-import shiftSettingsShot from "../assets/rosterease/screenshots/showcase-release/shift-settings.png";
-import fieldTodayShot from "../assets/rosterease/screenshots/showcase-release/field-today.png";
-import fieldCalendarShot from "../assets/rosterease/screenshots/showcase-release/field-calendar.png";
-import fieldClientsShot from "../assets/rosterease/screenshots/showcase-release/field-clients.png";
-import fieldSettingsShot from "../assets/rosterease/screenshots/showcase-release/field-settings.png";
+import appIcon from "../assets/rosterease/rosterease-app-icon.svg";
+import iphoneShiftCalendar from "../assets/rosterease/screenshots/launch/iphone-shift-calendar-night-off.png";
+import iphoneShiftCalendarDark from "../assets/rosterease/screenshots/launch/iphone-shift-calendar-dark.png";
+import iphoneFieldToday from "../assets/rosterease/screenshots/launch/iphone-field-route-today.png";
+import iphoneFieldTodayDark from "../assets/rosterease/screenshots/launch/iphone-field-route-today-dark.png";
+import ipadFieldToday from "../assets/rosterease/screenshots/launch/ipad-field-route-today.png";
+import ipadFieldTodayDark from "../assets/rosterease/screenshots/launch/ipad-field-route-today-dark.png";
+import ipadFieldClients from "../assets/rosterease/screenshots/launch/ipad-field-client-directory.png";
+import ipadFieldClientsDark from "../assets/rosterease/screenshots/launch/ipad-field-client-directory-dark.png";
+import ipadShiftCalendar from "../assets/rosterease/screenshots/launch/ipad-shift-calendar-off-cue.png";
+import ipadShiftCalendarDark from "../assets/rosterease/screenshots/launch/ipad-shift-calendar-dark.png";
 
-const capabilities = [
-  ["Import", "Start with the roster, screenshot, PDF, pasted text, or client list you already have."],
-  ["Make it usable", "Turn messy source material into Today, Calendar, route days, and iPad-friendly planning surfaces."],
-  ["Stay deliberate", "Keep private notes local by default; Maps estimates and Calendar shift notes stay explicit choices."],
-  ["Glance ahead", "Use widgets and privacy lock placeholders when you need the next shift or route without opening the app."],
+const productFacts = [
+  ["Two work modes", "Shift rosters and field visits"],
+  ["Import-first", "Text, images, PDFs, files and client lists"],
+  ["Local-first", "No RosterEase account required"],
+  ["Built for Apple", "Native on iPhone and iPad"],
 ];
 
-const motionItems = [
+const principles = [
   {
-    illustration: "import",
-    title: "Capture the messy source",
-    text: "Screenshots, PDFs, pasted rosters, and client lists become structured work details without rebuilding the whole week by hand.",
+    number: "01",
+    title: "Start with what you were given",
+    text: "Paste roster text, choose a PDF or image, or bring in a client list. Smart Import makes the source editable before anything reaches your calendar.",
   },
   {
-    illustration: "route",
-    title: "Shape it into today",
-    text: "The app separates shifts, visits, route order, leave-by timing, and calendar days into a plan you can actually follow.",
+    number: "02",
+    title: "See the day, not the spreadsheet",
+    text: "Today pulls the useful parts forward: the next shift, visit order, leave-by guidance, workplace, route progress and what comes next.",
   },
   {
-    illustration: "privacy",
-    title: "Keep private details deliberate",
-    text: "Notes stay local by default. Calendar note sharing, address-based Maps estimates, and privacy lock are choices you turn on.",
-  },
-];
-
-const showcaseFlows = [
-  {
-    id: "shift",
-    label: "Shift Worker",
-    accent: "shift",
-    title: "A roster becomes a day you can actually follow.",
-    text: "Shift Worker mode keeps repeating rosters, one-off changes, workplaces, calendar sync, and privacy controls in one readable flow.",
-    steps: [
-      {
-        label: "Today",
-        title: "Know what is on deck",
-        text: "Next shift, leave-by timing, workplace, distance, and the week ahead stay visible without digging through a roster PDF.",
-        image: shiftTodayShot,
-        alt: "RosterEase Shift Worker Today screen showing the next shift, workplace, leave-by guidance, and upcoming days.",
-      },
-      {
-        label: "Calendar",
-        title: "See the roster shape",
-        text: "Month and day views make rotations, off days, and manual changes easier to scan before the week gets busy.",
-        image: shiftCalendarShot,
-        alt: "RosterEase Shift Worker Calendar screen showing a monthly roster overview.",
-      },
-      {
-        label: "Workplaces",
-        title: "Keep locations organised",
-        text: "Workplaces, shift types, time zones, and route defaults stay attached to the schedule that needs them.",
-        image: shiftWorkplacesShot,
-        alt: "RosterEase Shift Worker Workplaces screen showing configured workplaces and shift setup.",
-      },
-      {
-        label: "Privacy",
-        title: "Sync only what you choose",
-        text: "Settings keep travel, Calendar sync, backup, privacy lock, and appearance choices explicit instead of hidden in setup.",
-        image: shiftSettingsShot,
-        alt: "RosterEase Shift Worker settings screen showing workplace, shift type, privacy, and sync controls.",
-      },
-    ],
-  },
-  {
-    id: "field",
-    label: "Field Worker",
-    accent: "field",
-    title: "A route day becomes ordered, private, and practical.",
-    text: "Field Worker mode is built for client visits, route progress, local travel buffers, work days, and address-aware choices that stay deliberate.",
-    steps: [
-      {
-        label: "Route",
-        title: "Start from the next visit",
-        text: "Today shows route progress, visit order, windows, local travel buffers, and when Maps estimates are still off.",
-        image: fieldTodayShot,
-        alt: "RosterEase Field Worker Today screen showing route progress, visit order, and local travel buffer guidance.",
-      },
-      {
-        label: "Calendar",
-        title: "Plan visits across the month",
-        text: "Calendar keeps route days and visit counts visible so the work pattern is readable before opening a specific day.",
-        image: fieldCalendarShot,
-        alt: "RosterEase Field Worker Calendar screen showing route days and scheduled visits.",
-      },
-      {
-        label: "Clients",
-        title: "Keep the stop list close",
-        text: "Client cards keep visit length, window, and map handoff available while avoiding account setup or a cloud CRM.",
-        image: fieldClientsShot,
-        alt: "RosterEase Field Worker Clients screen showing synthetic client stops and visit windows.",
-      },
-      {
-        label: "Defaults",
-        title: "Make route privacy explicit",
-        text: "Settings expose roster mode, travel defaults, work days, privacy lock, backup, restore, and local-first app details.",
-        image: fieldSettingsShot,
-        alt: "RosterEase Field Worker settings screen showing travel defaults, clients, work days, privacy, and data management controls.",
-      },
-    ],
+    number: "03",
+    title: "Share only when you choose",
+    text: "Your planning stays on your device by default. Calendar sync, backup and address-based Maps estimates are explicit choices.",
   },
 ];
 ---
 
 <RosterEaseLayout
   title="RosterEase"
-  description="RosterEase is a TestFlight iPhone and iPad app for shift workers and field workers who need roster, route, import, calendar, privacy, and widget tools in one local-first planner."
+  description="Turn roster screenshots, PDFs and client visits into a clear day plan. RosterEase is now testing on iPhone and iPad through TestFlight."
 >
-  <section class="re-hero re-hero--launch">
-    <div class="re-shell re-launch-hero__grid">
-      <div class="re-launch-hero__copy">
-        <p class="re-kicker">RosterEase for iPhone and iPad</p>
-        <h1 class="re-hero__title">Your roster, route, and day — finally one planner.</h1>
-        <p class="re-lede">
-          A workday planner for people whose schedules start in awkward places: roster screenshots,
-          PDF shifts, client visits, routes, calendar sync, widgets, and privacy choices.
+  <section class="re-hero">
+    <div class="re-shell re-hero__grid">
+      <div class="re-hero__copy">
+        <a class="re-status" href="#testflight">
+          <span aria-hidden="true"></span>
+          Now testing on TestFlight
+        </a>
+        <h1>The schedule you were given. <em>A day you can follow.</em></h1>
+        <p class="re-hero__lede">
+          RosterEase turns roster screenshots, PDFs and client visits into a clear plan for today—without an employer login, ads or another account.
         </p>
-        <div class="re-hero-proof" aria-label="RosterEase product focus">
-          <span>Shift Worker</span>
-          <span>Field Worker</span>
-          <span>Private by default</span>
+        <div class="re-actions">
+          <a class="re-button re-button--primary" href={TESTFLIGHT_URL} target="_blank" rel="noopener">Join the TestFlight beta</a>
+          <a class="re-text-link" href="#modes">Explore the two modes <span aria-hidden="true">↓</span></a>
         </div>
-        <div class="re-button-row">
-          <a class="re-button re-button--primary" href={TESTFLIGHT_URL} target="_blank" rel="noopener">Join TestFlight</a>
-          <a class="re-badge re-badge--appstore" href="#" data-coming-soon aria-label="RosterEase is coming to the App Store">
-            <svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22"><path fill="currentColor" d="M17.05 12.04c-.03-2.07 1.69-3.06 1.77-3.12-.97-1.41-2.48-1.6-3.01-1.62-1.28-.13-2.5.76-3.15.76-.65 0-1.65-.74-2.71-.72-1.4.02-2.69.81-3.41 2.06-1.46 2.53-.37 6.27 1.04 8.32.69 1.01 1.51 2.13 2.58 2.09 1.04-.04 1.43-.67 2.69-.67 1.25 0 1.61.67 2.71.65 1.12-.02 1.83-1.02 2.51-2.03.79-1.17 1.12-2.31 1.13-2.37-.02-.01-2.17-.83-2.19-3.3zM15.2 6.04c.57-.69.96-1.66.85-2.62-.83.03-1.83.55-2.42 1.24-.53.61-.99 1.59-.87 2.53.92.07 1.87-.47 2.44-1.15z"/></svg>
-            <span class="re-badge__label"><small>Coming to the</small>App Store</span>
-          </a>
-          <a class="re-button re-button--secondary" href="#journey-title">See how it works</a>
-        </div>
+        <p class="re-hero__note">Free beta · iPhone and iPad · App Store after testing</p>
       </div>
 
-      <div class="re-launch-hero__media" aria-label="RosterEase Shift Worker and Field Worker screenshots">
-        <figure class="re-device-shot re-device-shot--front">
-          <Image src={shiftTodayShot} alt="RosterEase Shift Worker Today screen showing the next shift and upcoming roster." widths={[520, 760, 980]} sizes="(max-width: 720px) 42vw, (max-width: 960px) 72vw, 24rem" format="avif" quality={92} loading="eager" fetchpriority="high" />
-        </figure>
-        <figure class="re-device-shot re-device-shot--back">
-          <Image src={fieldTodayShot} alt="RosterEase Field Worker Today screen showing visit progress, route timing, and client stops." widths={[420, 620, 820]} sizes="(max-width: 720px) 34vw, (max-width: 960px) 48vw, 18rem" format="avif" quality={90} loading="eager" />
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <section class="re-capability-strip" aria-label="Core capabilities">
-    <div class="re-shell re-capability-strip__grid">
-      {capabilities.map(([title, text]) => (
-        <article>
-          <h2>{title}</h2>
-          <p>{text}</p>
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <section class="re-journey-section" aria-labelledby="journey-title" data-motion-sequence>
-    <div class="re-shell re-journey-grid">
-      <div class="re-journey-copy">
-        <p class="re-kicker">Workday journey</p>
-        <h2 class="re-section-title" id="journey-title">From scattered roster source to a day you can follow.</h2>
-        <p class="re-body-copy">
-          RosterEase is designed to sit between the place your schedule currently lives and the day
-          you actually need to work: import the source, normalise the plan, choose what syncs, and
-          keep private details deliberate.
-        </p>
-        <div class="re-journey-steps" aria-label="RosterEase workday journey">
-          <span>Import</span>
-          <span>Plan</span>
-          <span>Route</span>
-          <span>Protect</span>
-        </div>
-      </div>
-
-      <div class="re-journey-stage re-journey-stage--split" aria-label="RosterEase before and after: schedule sources become a usable work day">
-        <div class="re-journey-before" aria-label="Before: schedule source examples">
-          <span class="re-journey-stage-label">Before</span>
-          <article class="re-source-fragment re-source-fragment--roster">
-            <span>Roster screenshot</span>
-            <b></b>
-            <b></b>
-            <b></b>
-          </article>
-          <article class="re-source-fragment re-source-fragment--pdf">
-            <span>PDF shifts</span>
-            <b></b>
-            <b></b>
-          </article>
-          <article class="re-source-fragment re-source-fragment--clients">
-            <span>Client list</span>
-            <b></b>
-            <b></b>
-          </article>
-        </div>
-
-        <div class="re-journey-connector" aria-hidden="true">
-          <span class="re-journey-connector__line"></span>
-          <span class="re-journey-connector__dot"></span>
-        </div>
-
-        <div class="re-journey-after" aria-label="After: RosterEase Today screen">
-          <span class="re-journey-stage-label">After</span>
-          <figure class="re-journey-phone re-journey-phone--result">
-            <Image src={shiftTodayShot} alt="RosterEase Today screen showing the next shift, leave-by guidance, workplace, distance, and upcoming roster." widths={[420, 620, 820]} sizes="(max-width: 720px) 64vw, 18rem" format="avif" quality={90} loading="lazy" />
+      <div class="re-hero__visual-group" data-screenshot-group>
+        <div class="re-hero__visual" aria-label="RosterEase running on iPad and iPhone">
+          <figure class="re-device re-device--ipad">
+            <ThemedScreenshot
+              light={ipadFieldToday}
+              dark={ipadFieldTodayDark}
+              alt="RosterEase Field Worker Today view on iPad, showing five ordered visits and route progress."
+              widths={[720, 1080, 1440, 1800]}
+              sizes="(max-width: 760px) 88vw, (max-width: 1100px) 72vw, 44rem"
+              quality={88}
+              loading="eager"
+              fetchpriority="high"
+            />
+            <video
+              class="re-hero-demo"
+              data-hero-video="ipad"
+              muted
+              loop
+              playsinline
+              preload="none"
+              aria-hidden="true"
+            >
+              <source data-src="/media/rosterease-ipad-demo.webm" type="video/webm" />
+              <source data-src="/media/rosterease-ipad-demo.mp4" type="video/mp4" />
+            </video>
           </figure>
-          <div class="re-journey-callouts" aria-label="What RosterEase keeps visible">
-            <p><span>Today</span>Next shift, leave-by time, workplace, distance, and upcoming days.</p>
-            <p><span>Control</span>Calendar notes and Maps estimates stay explicit choices.</p>
-          </div>
+
+          <figure class="re-device re-device--iphone">
+            <ThemedScreenshot
+              light={iphoneShiftCalendar}
+              dark={iphoneShiftCalendarDark}
+              alt="RosterEase Shift Worker Calendar on iPhone, showing a monthly roster and selected-day context."
+              widths={[320, 480, 660]}
+              sizes="(max-width: 760px) 34vw, 14rem"
+              quality={90}
+              loading="eager"
+            />
+            <video
+              class="re-hero-demo"
+              data-hero-video="iphone"
+              muted
+              loop
+              playsinline
+              preload="none"
+              aria-hidden="true"
+            >
+              <source data-src="/media/rosterease-iphone-demo.webm" type="video/webm" />
+              <source data-src="/media/rosterease-iphone-demo.mp4" type="video/mp4" />
+            </video>
+          </figure>
+
+          <div class="re-visual-label re-visual-label--mode"><strong>One app</strong><span>Shift + field work</span></div>
+          <div class="re-visual-label re-visual-label--native"><strong>Native</strong><span>iPhone + iPad</span></div>
         </div>
+        <div class="re-hero-demo__controls">
+          <ScreenshotAppearanceToggle />
+          <button class="re-demo-toggle" type="button" data-demo-toggle hidden>Pause app demo</button>
+        </div>
+        <p class="re-hero-demo__caption">Current iPad and iPhone flows through Today, Calendar, Clients, Workplaces and Settings. The still screenshots remain for data-saving, reduced-motion and lower-end devices.</p>
       </div>
     </div>
   </section>
 
-  <section class="re-motion-section" aria-label="How RosterEase works" data-motion-sequence>
-    <div class="re-shell re-motion-grid">
-      <div class="re-motion-copy">
-        <h2 class="re-section-title">See the app do the translation.</h2>
-        <p class="re-body-copy">
-          The motion here mirrors the product: source material comes in, the day is shaped, and
-          sensitive details stay behind explicit controls.
-        </p>
-      </div>
-      <div class="re-motion-rail">
-        {motionItems.map((item) => (
-          <article class="re-motion-card">
-            <div class={`re-illustration re-illustration--${item.illustration}`} aria-hidden="true">
-              {item.illustration === "import" && (
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                  <rect class="re-ill-import__page" x="18" y="10" width="28" height="44" rx="7" pathLength="1" />
-                  <path class="re-ill-import__line1" d="M24 24h16" pathLength="1" />
-                  <path class="re-ill-import__line2" d="M24 32h12" pathLength="1" />
-                  <path class="re-ill-import__arrow" d="M32 44l5-5M32 44l-5-5" pathLength="1" />
-                </svg>
-              )}
-              {item.illustration === "route" && (
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                  <path class="re-ill-route__path" d="M14 48c10-22 26 6 36-24" pathLength="1" />
-                  <circle class="re-ill-route__start" cx="14" cy="48" r="4" fill="currentColor" stroke="none" />
-                  <circle class="re-ill-route__end" cx="50" cy="24" r="4" fill="currentColor" stroke="none" />
-                  <path class="re-ill-route__tick" d="M30 22h8M34 18v8" pathLength="1" />
-                </svg>
-              )}
-              {item.illustration === "privacy" && (
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                  <path class="re-ill-privacy__shield" d="M32 8l18 8v15c0 12-7 20-18 25-11-5-18-13-18-25V16l18-8z" pathLength="1" />
-                  <path class="re-ill-privacy__check" d="M25 32l5 5 10-12" pathLength="1" />
-                </svg>
-              )}
-            </div>
-            <div>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
+  <section class="re-fact-band" aria-label="Product facts">
+    <dl class="re-shell re-fact-band__grid">
+      {productFacts.map(([title, detail]) => (
+        <div><dt>{title}</dt><dd>{detail}</dd></div>
+      ))}
+    </dl>
   </section>
 
-  <section class="re-showcase" id="screens" data-route-showcase>
+  <section class="re-intro">
+    <div class="re-shell re-intro__grid">
+      <div class="re-section-heading">
+        <p class="re-eyebrow">Work starts messy</p>
+        <h2>RosterEase makes the handoff from schedule to real life.</h2>
+      </div>
+      <p class="re-section-lede">
+        A roster rarely arrives in the right shape. It lives in a screenshot, a PDF, a message, a spreadsheet or someone else’s system. RosterEase is the calm layer between that source and the day you need to work.
+      </p>
+    </div>
+
+    <div class="re-shell re-process">
+      <div class="re-process__source" aria-label="Schedule source examples">
+        <span>Roster.pdf</span>
+        <span>Screenshot</span>
+        <span>Client list</span>
+        <span>Pasted text</span>
+      </div>
+      <p class="re-process__bridge">Becomes</p>
+      <div class="re-process__result">
+        <span class="re-process__icon" aria-hidden="true">✓</span>
+        <div><strong>Today is ready</strong><small>Shifts, visits and leave-by guidance in one place</small></div>
+      </div>
+    </div>
+
+    <ol class="re-shell re-principles">
+      {principles.map((item) => (
+        <li>
+          <span>{item.number}</span>
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="re-modes" id="modes">
     <div class="re-shell">
-      <div class="re-showcase__header">
-        <div>
-          <p class="re-kicker">Screens</p>
-          <h2 class="re-section-title">Choose your way of working.</h2>
-        </div>
-        <p class="re-body-copy">
-          Switch between the two RosterEase flows and follow how the app turns a schedule source into a practical day plan.
-        </p>
+      <div class="re-modes__heading">
+        <p class="re-eyebrow">One app, two ways to work</p>
+        <h2>Your schedule should speak your language.</h2>
+        <p>Choose the mode that matches the work. Both share the same local-first foundation without forcing shift rosters and field routes into one generic workflow.</p>
       </div>
 
-      <div class="re-showcase__switch" role="tablist" aria-label="Choose a RosterEase worker mode">
-        {showcaseFlows.map((flow, flowIndex) => (
-          <button
-            class="re-showcase__mode"
-            type="button"
-            role="tab"
-            id={`showcase-tab-${flow.id}`}
-            aria-controls={`showcase-panel-${flow.id}`}
-            aria-selected={flowIndex === 0 ? "true" : "false"}
-            tabindex={flowIndex === 0 ? "0" : "-1"}
-            data-showcase-mode={flow.id}
-          >
-            <span>{flow.label}</span>
-          </button>
-        ))}
-      </div>
-
-      <div class="re-showcase__panels">
-        {showcaseFlows.map((flow, flowIndex) => (
-          <article
-            class={`re-showcase__panel re-showcase__panel--${flow.accent}`}
-            id={`showcase-panel-${flow.id}`}
-            role="tabpanel"
-            aria-labelledby={`showcase-tab-${flow.id}`}
-            data-showcase-panel={flow.id}
-            data-active-index="0"
-            hidden={flowIndex === 0 ? undefined : true}
-          >
-            <div class="re-showcase__intro">
-              <h3>{flow.title}</h3>
-              <p>{flow.text}</p>
+      <div data-screenshot-group>
+        <div class="re-mode-grid">
+          <article class="re-mode re-mode--shift">
+            <div class="re-mode__copy">
+              <span class="re-mode__index">01 / Shift Worker</span>
+              <h3>Make a repeating roster readable.</h3>
+              <p>Build a rotation, import the schedule you already have, adjust one-off days and see the pattern across Today and Calendar.</p>
+              <ul>
+                <li>Repeating roster patterns and manual changes</li>
+                <li>Workplaces, shift types and leave-by guidance</li>
+                <li>Calendar sync, widgets and backups</li>
+              </ul>
             </div>
-
-            <div class="re-route-line" aria-label={`${flow.label} journey steps`}>
-              {flow.steps.map((step, stepIndex) => (
-                <button
-                  class="re-route-line__stop"
-                  type="button"
-                  data-showcase-step={stepIndex}
-                  aria-controls={`showcase-copy-${flow.id}`}
-                  aria-pressed={stepIndex === 0 ? "true" : "false"}
-                  aria-current={stepIndex === 0 ? "step" : undefined}
-                >
-                  <span class="re-route-line__dot" aria-hidden="true"></span>
-                  <span>{step.label}</span>
-                </button>
-              ))}
-            </div>
-
-            <div class="re-showcase__stage">
-              <button class="re-showcase__arrow" type="button" data-showcase-prev aria-label={`Show previous ${flow.label} screen`}>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
-              </button>
-
-              <div class="re-showcase__copy" id={`showcase-copy-${flow.id}`} data-showcase-copy aria-live="polite" aria-atomic="true">
-                <span>{flow.steps[0].label}</span>
-                <h4>{flow.steps[0].title}</h4>
-                <p>{flow.steps[0].text}</p>
-              </div>
-
-              <div class="re-showcase__screens" data-showcase-screens aria-roledescription="carousel" aria-label={`${flow.label} screenshots`}>
-                {flow.steps.map((step, stepIndex) => (
-                  <figure
-                    class="re-showcase__screen"
-                    id={`showcase-screen-${flow.id}-${stepIndex}`}
-                    data-showcase-screen={stepIndex}
-                    aria-hidden={stepIndex === 0 ? "false" : "true"}
-                    aria-label={`${step.label}: ${step.title}`}
-                    aria-roledescription="slide"
-                  >
-                    <Image src={step.image} alt={step.alt} widths={[360, 520, 720, 960]} sizes="(max-width: 720px) 70vw, 22rem" format="avif" quality={90} loading="lazy" />
-                  </figure>
-                ))}
-              </div>
-
-              <button class="re-showcase__arrow" type="button" data-showcase-next aria-label={`Show next ${flow.label} screen`}>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
-              </button>
-            </div>
-
-            <div class="re-showcase__dots" aria-label={`${flow.label} screenshot controls`}>
-              {flow.steps.map((step, stepIndex) => (
-                <button
-                  type="button"
-                  data-showcase-dot={stepIndex}
-                  aria-label={`Show ${step.label} screen`}
-                  aria-controls={`showcase-screen-${flow.id}-${stepIndex}`}
-                  aria-pressed={stepIndex === 0 ? "true" : "false"}
-                  aria-current={stepIndex === 0 ? "true" : undefined}
-                ></button>
-              ))}
-            </div>
-
-            <script type="application/json" data-showcase-data={flow.id} set:html={JSON.stringify(flow.steps.map(({ label, title, text }) => ({ label, title, text })))} />
+            <figure class="re-mode__phone">
+              <ThemedScreenshot light={iphoneShiftCalendar} dark={iphoneShiftCalendarDark} alt="Shift Worker Calendar showing a monthly roster and selected day on iPhone." widths={[360, 520, 720]} sizes="(max-width: 760px) 72vw, 20rem" />
+            </figure>
           </article>
-        ))}
+
+          <article class="re-mode re-mode--field">
+            <div class="re-mode__copy">
+              <span class="re-mode__index">02 / Field Worker</span>
+              <h3>Keep every visit in the right order.</h3>
+              <p>See the next stop, appointment windows, route progress and local travel buffers without turning your day into a team CRM.</p>
+              <ul>
+                <li>Client directory and ordered route days</li>
+                <li>Visit progress and Maps handoff</li>
+                <li>Private notes kept out of directions</li>
+              </ul>
+            </div>
+            <figure class="re-mode__phone">
+              <ThemedScreenshot light={iphoneFieldToday} dark={iphoneFieldTodayDark} alt="Field Worker Today showing route progress and the next visit on iPhone." widths={[360, 520, 720]} sizes="(max-width: 760px) 72vw, 20rem" />
+            </figure>
+          </article>
+        </div>
+        <ScreenshotAppearanceToggle />
       </div>
     </div>
   </section>
 
-  <section class="re-beta" id="beta">
-    <div class="re-shell">
-      <div class="re-beta__card re-beta__card--launch">
-        <div class="re-beta__copy">
-          <span class="re-beta__chip">Tester launch</span>
-          <h2 class="re-beta__title">RosterEase is not on the App Store yet. We are inviting a small TestFlight group first.</h2>
-          <p class="re-beta__body">
-            Testers help validate fresh installs, import examples, route days, privacy settings, widgets,
-            accessibility, and iPad layouts before the 1.0 release.
-          </p>
-          <ul class="re-beta__list">
-            <li>New testers are onboarded gradually as builds settle.</li>
-            <li>You will need Apple’s TestFlight app and an accepted invitation or public-link slot.</li>
-            <li>Redact names, addresses, employee IDs, client identifiers, private notes, and medical or support details before sharing examples.</li>
-          </ul>
+  <section class="re-ipad" id="ipad">
+    <div class="re-shell re-ipad__heading">
+      <div>
+        <p class="re-eyebrow">Designed for iPad</p>
+        <h2>More room. More context. No stretched phone layout.</h2>
+      </div>
+      <p>RosterEase uses the iPad canvas for split views, side-by-side route context and a client directory that stays visible while you review the details.</p>
+    </div>
+
+    <div class="re-ipad__visual-group" data-screenshot-group>
+      <div class="re-ipad__stage">
+        <div class="re-ipad__halo" aria-hidden="true"></div>
+        <figure class="re-device re-device--ipad-large">
+          <ThemedScreenshot light={ipadFieldClients} dark={ipadFieldClientsDark} alt="RosterEase client directory and selected client details shown side by side on iPad." widths={[900, 1280, 1680, 2064]} sizes="(max-width: 760px) 94vw, 80rem" quality={90} />
+        </figure>
+      </div>
+      <ScreenshotAppearanceToggle />
+    </div>
+
+    <ol class="re-shell re-ipad__details">
+      <li><span>01</span><strong>Split view where it helps</strong><p>Keep the list in sight while reviewing a client or workplace.</p></li>
+      <li><span>02</span><strong>Full calendar context</strong><p>See the month and selected day together instead of drilling through screens.</p></li>
+      <li><span>03</span><strong>Same clear controls</strong><p>The iPad build keeps the same privacy and sync choices as iPhone.</p></li>
+    </ol>
+  </section>
+
+  <section class="re-screen-pair" aria-label="More RosterEase screens">
+    <div class="re-shell" data-screenshot-group>
+      <div class="re-screen-pair__grid">
+        <div class="re-screen-pair__copy">
+          <p class="re-eyebrow">Built for the real details</p>
+          <h2>Clear enough for a glance. Deep enough for the whole day.</h2>
+          <p>See the immediate next step, then open the details when you need them. RosterEase keeps addresses, visit windows, shift changes and privacy choices close without crowding every screen.</p>
+          <a class="re-text-link" href={TESTFLIGHT_URL} target="_blank" rel="noopener">Try the current beta <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="re-beta__cta">
-          <a class="re-button re-button--primary" href={TESTFLIGHT_URL} target="_blank" rel="noopener" data-testflight-url>
-            Join TestFlight
-          </a>
-          <div class="re-beta__fineprint">
-            <p>Requires Apple TestFlight.</p>
-            <p>New tester slots are opened gradually as builds settle.</p>
-            <p>Public support and privacy questions go through the <a href="/contact">contact page</a>. <a href="/privacy">Read privacy details</a>.</p>
-          </div>
-        </div>
+        <figure class="re-screen-card re-screen-card--phone">
+          <ThemedScreenshot light={iphoneFieldToday} dark={iphoneFieldTodayDark} alt="Field Worker Today showing the next visit and route actions on iPhone." widths={[360, 520, 720]} sizes="(max-width: 760px) 70vw, 19rem" />
+        </figure>
+        <figure class="re-screen-card re-screen-card--ipad">
+          <ThemedScreenshot light={ipadShiftCalendar} dark={ipadShiftCalendarDark} alt="Shift Worker Calendar and selected day shown side by side on iPad." widths={[720, 1080, 1440]} sizes="(max-width: 760px) 88vw, 36rem" />
+        </figure>
+      </div>
+      <ScreenshotAppearanceToggle />
+    </div>
+  </section>
+
+  <section class="re-privacy-callout">
+    <div class="re-shell re-privacy-callout__grid">
+      <div class="re-privacy-mark" aria-hidden="true"><img src={appIcon.src} alt="" width="72" height="72" /></div>
+      <div>
+        <p class="re-eyebrow">Private by default</p>
+        <h2>Your work plan belongs to you.</h2>
+      </div>
+      <div class="re-privacy-callout__copy">
+        <p>RosterEase does not require an account and does not sell your information. Schedule data can stay on your device, with Calendar sync, backup and Maps estimates available only when you choose them.</p>
+        <a class="re-text-link" href="/privacy">Read the plain-language privacy policy <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
 
-  <section class="re-frontpage-panel">
-    <div class="re-shell re-frontpage-panel__grid">
-      <div class="re-frontpage-panel__copy">
-        <p class="re-kicker">Support</p>
-        <h2 class="re-section-title">Need support or want to send feedback?</h2>
-        <p class="re-body-copy">
-          Use the support page for setup help, workflow feedback, accessibility notes, and bug reports.
-          If you are using the TestFlight build, include the build number if you can find it.
-          Before attaching rosters, screenshots, PDFs, client lists, or route examples,
-          redact sensitive details first.
-        </p>
-        <div class="re-button-row">
-          <a class="re-button re-button--primary" href="/contact">Contact support</a>
-          <a class="re-button re-button--secondary" href="/privacy">Read privacy policy</a>
+  <section class="re-testflight" id="testflight">
+    <div class="re-shell re-testflight__card">
+      <div class="re-testflight__copy">
+        <p class="re-eyebrow">TestFlight first</p>
+        <h2>Help make 1.0 ready for real workdays.</h2>
+        <p>The beta is open for launch testing on iPhone and iPad. Features will change throughout development and may break before release, so try your roster or route—but do not depend on the beta for a workday.</p>
+        <div class="re-actions">
+          <a class="re-button re-button--light" href={TESTFLIGHT_URL} target="_blank" rel="noopener">Join the TestFlight beta</a>
+          <a class="re-text-link re-text-link--light" href="/contact">Send feedback</a>
         </div>
       </div>
-      <aside class="re-support-panel re-support-panel--frontpage">
-        <p class="re-support-panel__label">Tester focus</p>
-        <h3 class="re-support-panel__title">Shift mode, field mode, import, privacy, widgets, and iPad.</h3>
-        <p class="re-body-copy">Those are the launch-readiness paths being tightened before the full App Store release.</p>
+      <ol class="re-testflight__meta">
+        <li><span>01</span><p>Install Apple’s TestFlight app.</p></li>
+        <li><span>02</span><p>Open the RosterEase invitation.</p></li>
+        <li><span>03</span><p>Test with redacted or synthetic work data.</p></li>
+      </ol>
+      <aside class="re-beta-warning" aria-labelledby="beta-warning-title">
+        <p class="re-beta-warning__label">Important beta notice</p>
+        <h3 id="beta-warning-title">Test it. Do not rely on it for work.</h3>
+        <p>RosterEase is pre-release software. Features may change, stop working or lose data without notice. Keep your employer’s roster and instructions as the source of truth, and confirm every shift, visit and work detail there.</p>
+        <p>Do not use the beta as your only record for attendance, pay, client visits or employment decisions. To the maximum extent permitted by law, RosterEase is provided “as is”; the developer is not responsible for missed shifts, lost pay, disciplinary action or other workplace impacts caused by relying on the beta. Nothing in this notice excludes rights that cannot be excluded under applicable law.</p>
       </aside>
     </div>
   </section>
 </RosterEaseLayout>
-
-
-<script>
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // Toggle .is-in-view on motion sections to drive single-play CSS/SVG animations.
-  const motionSections = Array.from(document.querySelectorAll("[data-motion-sequence]"));
-  if (motionSections.length && !prefersReducedMotion) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          entry.target.classList.add("is-in-view");
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.28 },
-    );
-    for (const section of motionSections) observer.observe(section);
-  } else {
-    for (const section of motionSections) section.classList.add("is-in-view");
-  }
-
-  for (const root of document.querySelectorAll("[data-route-showcase]")) {
-    const tabs = Array.from(root.querySelectorAll("[data-showcase-mode]"));
-    const panels = Array.from(root.querySelectorAll("[data-showcase-panel]"));
-
-    function updatePanel(panel, nextIndex, options = {}) {
-      const dataNode = panel.querySelector("[data-showcase-data]");
-      if (!dataNode?.textContent) return;
-      const steps = JSON.parse(dataNode.textContent);
-      const index = (nextIndex + steps.length) % steps.length;
-      const copy = panel.querySelector("[data-showcase-copy]");
-      const screens = Array.from(panel.querySelectorAll("[data-showcase-screen]"));
-      const screensRoot = panel.querySelector("[data-showcase-screens]");
-      const stops = Array.from(panel.querySelectorAll("[data-showcase-step]"));
-      const dots = Array.from(panel.querySelectorAll("[data-showcase-dot]"));
-      const activeStep = steps[index];
-
-      panel.dataset.activeIndex = String(index);
-      if (copy && activeStep) {
-        copy.querySelector("span").textContent = activeStep.label;
-        copy.querySelector("h4").textContent = activeStep.title;
-        copy.querySelector("p").textContent = activeStep.text;
-      }
-
-      for (const [screenIndex, screen] of screens.entries()) {
-        screen.classList.toggle("is-active", screenIndex === index);
-        screen.setAttribute("aria-hidden", screenIndex === index ? "false" : "true");
-      }
-
-      for (const [stopIndex, stop] of stops.entries()) {
-        if (stopIndex === index) {
-          stop.setAttribute("aria-current", "step");
-          stop.setAttribute("aria-pressed", "true");
-        } else {
-          stop.removeAttribute("aria-current");
-          stop.setAttribute("aria-pressed", "false");
-        }
-      }
-
-      for (const [dotIndex, dot] of dots.entries()) {
-        if (dotIndex === index) {
-          dot.setAttribute("aria-current", "true");
-          dot.setAttribute("aria-pressed", "true");
-        } else {
-          dot.removeAttribute("aria-current");
-          dot.setAttribute("aria-pressed", "false");
-        }
-      }
-
-      if (options.scroll && screensRoot && screensRoot.scrollWidth > screensRoot.clientWidth + 1) {
-        screens[index]?.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", inline: "center", block: "nearest" });
-      }
-    }
-
-    function activateMode(mode, focusTab = false) {
-      for (const tab of tabs) {
-        const isActive = tab.getAttribute("data-showcase-mode") === mode;
-        tab.setAttribute("aria-selected", isActive ? "true" : "false");
-        tab.setAttribute("tabindex", isActive ? "0" : "-1");
-        if (isActive && focusTab) tab.focus();
-      }
-      for (const panel of panels) {
-        const isActive = panel.getAttribute("data-showcase-panel") === mode;
-        panel.hidden = !isActive;
-        if (isActive) updatePanel(panel, Number(panel.dataset.activeIndex || 0));
-      }
-    }
-
-    function activateTabAt(index, focusTab = true) {
-      const nextTab = tabs[(index + tabs.length) % tabs.length];
-      const mode = nextTab?.getAttribute("data-showcase-mode");
-      if (mode) activateMode(mode, focusTab);
-    }
-
-    for (const [tabIndex, tab] of tabs.entries()) {
-      tab.addEventListener("click", () => activateMode(tab.getAttribute("data-showcase-mode")));
-      tab.addEventListener("keydown", (event) => {
-        if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
-        event.preventDefault();
-        if (event.key === "Home") return activateTabAt(0);
-        if (event.key === "End") return activateTabAt(tabs.length - 1);
-        activateTabAt(tabIndex + (event.key === "ArrowRight" ? 1 : -1));
-      });
-    }
-
-    let pointerHandledControl = false;
-    function handleShowcaseControl(event) {
-      const control = event.target?.closest?.("[data-showcase-prev], [data-showcase-next], [data-showcase-step], [data-showcase-dot]");
-      if (!control || !root.contains(control)) return;
-      const panel = control.closest("[data-showcase-panel]");
-      if (!panel || panel.hidden) return;
-
-      if (event.type === "click" && pointerHandledControl) {
-        pointerHandledControl = false;
-        return;
-      }
-
-      if (event.type === "pointerup") {
-        pointerHandledControl = true;
-      }
-
-      event.preventDefault();
-      const currentIndex = Number(panel.dataset.activeIndex || 0);
-      if (control.hasAttribute("data-showcase-prev")) return updatePanel(panel, currentIndex - 1);
-      if (control.hasAttribute("data-showcase-next")) return updatePanel(panel, currentIndex + 1);
-      const step = control.getAttribute("data-showcase-step") ?? control.getAttribute("data-showcase-dot");
-      updatePanel(panel, Number(step || 0));
-    }
-
-    root.addEventListener("pointerup", handleShowcaseControl);
-    root.addEventListener("click", handleShowcaseControl);
-
-    for (const panel of panels) {
-      updatePanel(panel, 0);
-      const screensRoot = panel.querySelector("[data-showcase-screens]");
-      let swipeStart = null;
-      let scrollFrame = 0;
-      screensRoot?.addEventListener("pointerdown", (event) => {
-        if (event.pointerType === "mouse" && event.button !== 0) return;
-        swipeStart = {
-          pointerId: event.pointerId,
-          x: event.clientX,
-          y: event.clientY,
-        };
-        screensRoot.setPointerCapture?.(event.pointerId);
-      });
-      screensRoot?.addEventListener("pointerup", (event) => {
-        if (!swipeStart || swipeStart.pointerId !== event.pointerId) return;
-        const deltaX = event.clientX - swipeStart.x;
-        const deltaY = event.clientY - swipeStart.y;
-        const threshold = Math.max(36, screensRoot.clientWidth * 0.12);
-        swipeStart = null;
-
-        if (Math.abs(deltaX) < threshold || Math.abs(deltaX) < Math.abs(deltaY) * 1.2) return;
-        event.preventDefault();
-        updatePanel(panel, Number(panel.dataset.activeIndex || 0) + (deltaX < 0 ? 1 : -1));
-      });
-      screensRoot?.addEventListener("pointercancel", () => {
-        swipeStart = null;
-      });
-      screensRoot?.addEventListener("scroll", () => {
-        if (screensRoot.scrollWidth <= screensRoot.clientWidth + 1) return;
-        if (scrollFrame) window.cancelAnimationFrame(scrollFrame);
-        scrollFrame = window.requestAnimationFrame(() => {
-          const screens = Array.from(panel.querySelectorAll("[data-showcase-screen]"));
-          if (!screens.length || !screensRoot) return;
-          const rootRect = screensRoot.getBoundingClientRect();
-          const rootCenter = rootRect.left + rootRect.width / 2;
-          let closestIndex = Number(panel.dataset.activeIndex || 0);
-          let closestDistance = Number.POSITIVE_INFINITY;
-          for (const [screenIndex, screen] of screens.entries()) {
-            const rect = screen.getBoundingClientRect();
-            const distance = Math.abs(rect.left + rect.width / 2 - rootCenter);
-            if (distance < closestDistance) {
-              closestDistance = distance;
-              closestIndex = screenIndex;
-            }
-          }
-          if (closestIndex !== Number(panel.dataset.activeIndex || 0)) updatePanel(panel, closestIndex);
-        });
-      }, { passive: true });
-      panel.addEventListener("keydown", (event) => {
-        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
-        event.preventDefault();
-        updatePanel(panel, Number(panel.dataset.activeIndex || 0) + (event.key === "ArrowRight" ? 1 : -1));
-      });
-    }
-  }
-</script>

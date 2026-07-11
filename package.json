@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "check:a11y": "npm run build && node scripts/check-accessibility.mjs",
     "preview": "astro preview"
   },
   "engines": {

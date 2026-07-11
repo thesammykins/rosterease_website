@@ -1,7 +1,6 @@
 ---
 import "../styles/rosterease.css";
 import appIcon from "../assets/rosterease/rosterease-app-icon.svg";
-// 1200x630 landscape OG composite with staggered product screenshots and brand lockup.
 import ogImageAsset from "../assets/rosterease/og-image.png";
 import { TESTFLIGHT_URL } from "../lib/rosterease";
 
@@ -12,38 +11,34 @@ export interface Props {
 
 const {
   title,
-  description = "RosterEase is an iPhone and iPad app for shift workers and field workers who want roster, route, import, privacy, widget, and calendar tools in one planner.",
+  description = "RosterEase turns rosters and client visits into a clear day plan for shift workers and field workers on iPhone and iPad.",
 } = Astro.props;
 
 const fullTitle = title === "RosterEase" ? title : `${title} | RosterEase`;
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
-// Normalize canonical against the (trailing-slash-stripped) current path so canonical
-// stays stable regardless of how the URL was requested (with/without trailing slash, query, hash).
 const canonicalUrl = new URL(currentPath, Astro.url).href;
 const ogImageUrl = new URL(ogImageAsset.src, Astro.url).href;
-const ogImageAlt = "RosterEase - roster, route, and day planner";
 const isOverview = currentPath === "/";
 const isPrivacy = currentPath === "/privacy";
 const isContact = currentPath === "/contact";
 ---
 
 <!doctype html>
-<html lang="en" data-theme="system">
+<html lang="en-AU">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f6f8f5" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#101612" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f3f6fb" data-theme-color />
     <script is:inline>
       (() => {
         try {
-          const theme = localStorage.getItem("rosterease-theme");
-          if (theme === "light" || theme === "dark" || theme === "system") {
-            document.documentElement.dataset.theme = theme;
+          const savedTheme = localStorage.getItem("rosterease-theme");
+          if (savedTheme === "light" || savedTheme === "dark") {
+            document.documentElement.dataset.theme = savedTheme;
           }
         } catch {
-          document.documentElement.dataset.theme = "system";
+          // System theme remains the safe default when storage is unavailable.
         }
       })();
     </script>
@@ -59,191 +54,246 @@ const isContact = currentPath === "/contact";
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content={String(ogImageAsset.width)} />
     <meta property="og:image:height" content={String(ogImageAsset.height)} />
-    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta property="og:image:alt" content="RosterEase on iPhone and iPad" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
-    <meta name="twitter:image:alt" content={ogImageAlt} />
   </head>
   <body class="re-body">
     <a class="re-skip-link" href="#content">Skip to content</a>
 
     <header class="re-site-header">
       <div class="re-shell re-site-header__inner">
-        <a href="/" class="re-brand" aria-label="Go to the RosterEase overview page">
-          <span class="re-brand__icon">
-            <img src={appIcon.src} alt="" width="36" height="36" aria-hidden="true" />
-          </span>
-          <span class="re-brand__wordmark">RosterEase</span>
+        <a href="/" class="re-brand" aria-label="RosterEase home">
+          <img src={appIcon.src} alt="" width="38" height="38" aria-hidden="true" />
+          <span>RosterEase</span>
         </a>
 
-        <nav class="re-nav" id="re-primary-nav" aria-label="RosterEase navigation">
+        <nav class="re-nav" aria-label="Main navigation">
           <a href="/" aria-current={isOverview ? "page" : undefined}>Overview</a>
-          <a href="/#screens">Screens</a>
+          <a href="/#modes">Two modes</a>
+          <a href="/#ipad">iPad</a>
           <a href="/privacy" aria-current={isPrivacy ? "page" : undefined}>Privacy</a>
-          <a href="/contact" aria-current={isContact ? "page" : undefined}>Contact</a>
+          <a href="/contact" aria-current={isContact ? "page" : undefined}>Support</a>
         </nav>
 
-        <button class="re-theme-toggle" type="button" data-theme-toggle data-next-theme="dark" aria-label="Switch colour theme">
-          <svg class="re-theme-toggle__icon re-theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
-            <path fill="currentColor" d="M12 18.25A6.25 6.25 0 1 1 12 5.75a6.25 6.25 0 0 1 0 12.5Zm0-2A4.25 4.25 0 1 0 12 7.75a4.25 4.25 0 0 0 0 8.5ZM12 3.5a1 1 0 0 1-1-1V1.25a1 1 0 1 1 2 0V2.5a1 1 0 0 1-1 1Zm0 20.25a1 1 0 0 1-1-1V21.5a1 1 0 1 1 2 0v1.25a1 1 0 0 1-1 1ZM3.5 13H2.25a1 1 0 1 1 0-2H3.5a1 1 0 1 1 0 2Zm18.25 0H20.5a1 1 0 1 1 0-2h1.25a1 1 0 1 1 0 2ZM5.64 6.64a1 1 0 0 1-.7-.29l-.9-.89a1 1 0 0 1 1.42-1.42l.89.9a1 1 0 0 1-.71 1.7Zm13.61 13.61a1 1 0 0 1-.71-.29l-.89-.9a1 1 0 0 1 1.41-1.41l.9.89a1 1 0 0 1-.71 1.71ZM4.75 20.25a1 1 0 0 1-.71-1.71l.9-.89a1 1 0 0 1 1.41 1.41l-.89.9a1 1 0 0 1-.71.29ZM18.36 6.64a1 1 0 0 1-.71-1.7l.89-.9a1 1 0 1 1 1.42 1.42l-.9.89a1 1 0 0 1-.7.29Z" />
-          </svg>
-          <svg class="re-theme-toggle__icon re-theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
-            <path fill="currentColor" d="M20.4 14.62a1 1 0 0 1 1.17 1.25A9.75 9.75 0 1 1 8.13 2.43a1 1 0 0 1 1.25 1.17 8.2 8.2 0 0 0-.25 2.02 9.25 9.25 0 0 0 9.25 9.25 8.2 8.2 0 0 0 2.02-.25Zm-1.48 2.44h-.54A11.25 11.25 0 0 1 7.13 5.62v-.54a7.75 7.75 0 1 0 11.79 11.98Z" />
-          </svg>
-        </button>
+        <div class="re-header-actions">
+          <button
+            class="re-theme-toggle"
+            type="button"
+            data-theme-toggle
+            aria-pressed="false"
+            aria-label="Switch to dark mode"
+          >
+            <span data-theme-toggle-label>Dark mode</span>
+          </button>
 
-        <button class="re-menu-toggle" type="button" data-menu-toggle aria-controls="re-primary-nav" aria-expanded="false" aria-label="Open menu">
-          <svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22">
-            <path d="M4 7h16M4 12h16M4 17h16" />
-          </svg>
-        </button>
+          <a class="re-header-cta" href={TESTFLIGHT_URL} target="_blank" rel="noopener">Join beta</a>
+
+          <details class="re-mobile-menu">
+            <summary>Menu</summary>
+            <nav aria-label="Mobile navigation">
+              <a href="/" aria-current={isOverview ? "page" : undefined}>Overview</a>
+              <a href="/#modes">Two modes</a>
+              <a href="/#ipad">iPad</a>
+              <a href="/privacy" aria-current={isPrivacy ? "page" : undefined}>Privacy</a>
+              <a href="/contact" aria-current={isContact ? "page" : undefined}>Support</a>
+              <a href={TESTFLIGHT_URL} target="_blank" rel="noopener">Join TestFlight</a>
+            </nav>
+          </details>
+        </div>
       </div>
     </header>
 
-    <main id="content" class="re-site-main" tabindex="-1">
-      <slot />
-    </main>
+    <main id="content" tabindex="-1"><slot /></main>
 
     <footer class="re-site-footer">
       <div class="re-shell re-footer">
         <div class="re-footer__brand">
-          <a href="/" class="re-brand re-brand--footer" aria-label="Go to the RosterEase overview page">
-            <span class="re-brand__icon">
-              <img src={appIcon.src} alt="" width="36" height="36" aria-hidden="true" />
-            </span>
-            <span class="re-brand__wordmark">RosterEase</span>
+          <a href="/" class="re-brand" aria-label="RosterEase home">
+            <img src={appIcon.src} alt="" width="38" height="38" aria-hidden="true" />
+            <span>RosterEase</span>
           </a>
-
-          <p>
-            An iPhone and iPad app for shift workers and field workers preparing for a 1.0 launch through TestFlight.
-          </p>
+          <p>Your roster and route planner for iPhone and iPad.</p>
         </div>
 
-        <div class="re-footer__meta">
-          <div class="re-footer__links">
-            <a href="/">Overview</a>
-            <a href="/#screens">Screens</a>
-            <a href="/privacy">Privacy</a>
-            <a href="/contact">Contact</a>
-          </div>
-
-          <div class="re-footer__actions">
-            <a class="re-button re-button--primary" href={TESTFLIGHT_URL} target="_blank" rel="noopener">Join TestFlight</a>
-            <a class="re-badge re-badge--appstore" href="#" data-coming-soon aria-label="RosterEase is coming to the App Store">
-              <svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22"><path fill="currentColor" d="M17.05 12.04c-.03-2.07 1.69-3.06 1.77-3.12-.97-1.41-2.48-1.6-3.01-1.62-1.28-.13-2.5.76-3.15.76-.65 0-1.65-.74-2.71-.72-1.4.02-2.69.81-3.41 2.06-1.46 2.53-.37 6.27 1.04 8.32.69 1.01 1.51 2.13 2.58 2.09 1.04-.04 1.43-.67 2.69-.67 1.25 0 1.61.67 2.71.65 1.12-.02 1.83-1.02 2.51-2.03.79-1.17 1.12-2.31 1.13-2.37-.02-.01-2.17-.83-2.19-3.3zM15.2 6.04c.57-.69.96-1.66.85-2.62-.83.03-1.83.55-2.42 1.24-.53.61-.99 1.59-.87 2.53.92.07 1.87-.47 2.44-1.15z"/></svg>
-              <span class="re-badge__label"><small>Coming to the</small>App Store</span>
-            </a>
-            <a href="https://samanthamyers.au">Main site</a>
-            <a href="/contact">Support</a>
-          </div>
+        <div class="re-footer__links" aria-label="Footer navigation">
+          <a href="/#modes">Product</a>
+          <a href={TESTFLIGHT_URL} target="_blank" rel="noopener">TestFlight</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/contact">Support</a>
+          <a href="https://samanthamyers.au">Developer</a>
         </div>
+
+        <p class="re-footer__note">Testing now on TestFlight. App Store release follows beta validation.</p>
       </div>
     </footer>
     <script>
-      const THEME_STORAGE_KEY = "rosterease-theme";
-      const themeChoices = new Set(["light", "dark", "system"]);
-      const explicitThemeChoices = new Set(["light", "dark"]);
       const themeToggle = document.querySelector("[data-theme-toggle]");
-      const systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      const themeColour = document.querySelector("[data-theme-color]");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
 
       function storedTheme() {
         try {
-          const value = localStorage.getItem(THEME_STORAGE_KEY);
-          return themeChoices.has(value) ? value : "system";
+          const value = localStorage.getItem("rosterease-theme");
+          return value === "light" || value === "dark" ? value : null;
         } catch {
-          return "system";
+          return null;
         }
       }
 
-      function effectiveTheme(theme) {
-        if (theme === "light" || theme === "dark") return theme;
-        return systemThemeQuery.matches ? "dark" : "light";
+      function updateScreenshotGroup(group, theme) {
+        group.dataset.screenshotTheme = theme;
+        const toggle = group.querySelector("[data-screenshot-toggle]");
+        if (!(toggle instanceof HTMLButtonElement)) return;
+        const isDark = theme === "dark";
+        toggle.setAttribute("aria-pressed", String(isDark));
+        toggle.textContent = isDark ? "Show light screenshots" : "Show dark screenshots";
+      }
+
+      function updateScreenshotGroups(theme) {
+        document.querySelectorAll("[data-screenshot-group]").forEach((group) => {
+          updateScreenshotGroup(group, theme);
+        });
       }
 
       function applyTheme(theme) {
-        const nextTheme = themeChoices.has(theme) ? theme : "system";
-        const effective = effectiveTheme(nextTheme);
-        const nextExplicitTheme = effective === "dark" ? "light" : "dark";
-
-        document.documentElement.dataset.theme = nextTheme;
-
-        if (themeToggle) {
-          themeToggle.dataset.effectiveTheme = effective;
-          themeToggle.dataset.nextTheme = nextExplicitTheme;
-          themeToggle.setAttribute("aria-label", `Switch to ${nextExplicitTheme} mode`);
-          themeToggle.setAttribute("aria-pressed", effective === "dark" ? "true" : "false");
+        if (theme === "light" || theme === "dark") {
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
         }
+
+        const effectiveTheme = theme ?? (systemTheme.matches ? "dark" : "light");
+        if (themeColour) themeColour.setAttribute("content", effectiveTheme === "dark" ? "#0b1019" : "#f3f6fb");
+        if (themeToggle instanceof HTMLButtonElement) {
+          const isDark = effectiveTheme === "dark";
+          themeToggle.setAttribute("aria-pressed", String(isDark));
+          themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+          const label = themeToggle.querySelector("[data-theme-toggle-label]");
+          if (label) label.textContent = isDark ? "Light mode" : "Dark mode";
+        }
+        updateScreenshotGroups(effectiveTheme);
+      }
+
+      function showStaticDemo(group) {
+        if (!(group instanceof HTMLElement)) return;
+        const videos = [...group.querySelectorAll("[data-hero-video]")].filter((video) => video instanceof HTMLVideoElement);
+        const toggle = group.querySelector("[data-demo-toggle]");
+        if (videos.length === 0) return;
+        videos.forEach((video) => {
+          video.pause();
+          delete video.dataset.playing;
+        });
+        group.dataset.demoState = "static";
+        if (toggle instanceof HTMLButtonElement && videos.some((video) => video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA)) {
+          toggle.hidden = false;
+          toggle.textContent = "Play app demo";
+          toggle.setAttribute("aria-label", "Play the RosterEase app demo");
+        }
+      }
+
+      function showVideoDemo(group) {
+        if (!(group instanceof HTMLElement)) return;
+        const videos = [...group.querySelectorAll("[data-hero-video]")].filter((video) => video instanceof HTMLVideoElement && video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA);
+        const toggle = group.querySelector("[data-demo-toggle]");
+        if (videos.length === 0) return;
+        Promise.allSettled(videos.map((video) => video.play())).then((results) => {
+          let isPlaying = false;
+          results.forEach((result, index) => {
+            if (result.status !== "fulfilled") return;
+            videos[index].dataset.playing = "true";
+            isPlaying = true;
+          });
+          if (!isPlaying) return showStaticDemo(group);
+          group.dataset.demoState = "video";
+          if (toggle instanceof HTMLButtonElement) {
+            toggle.hidden = false;
+            toggle.textContent = "Pause app demo";
+            toggle.setAttribute("aria-label", "Pause the RosterEase app demo");
+          }
+        });
       }
 
       applyTheme(storedTheme());
 
-      function switchToNextTheme() {
-        const nextTheme = themeToggle?.dataset.nextTheme;
-        if (!explicitThemeChoices.has(nextTheme)) return;
+      themeToggle?.addEventListener("click", () => {
+        const currentTheme = document.documentElement.dataset.theme ?? (systemTheme.matches ? "dark" : "light");
+        const theme = currentTheme === "dark" ? "light" : "dark";
         try {
-          localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+          localStorage.setItem("rosterease-theme", theme);
         } catch {
-          // Theme still updates for this page even when storage is unavailable.
+          // The selected theme still applies for this page.
         }
-        applyTheme(nextTheme);
-      }
-
-      themeToggle?.addEventListener("click", switchToNextTheme);
-
-      themeToggle?.addEventListener("keydown", (event) => {
-        if (event.key !== "Enter" && event.key !== " " && event.key !== "Spacebar") return;
-        event.preventDefault();
-        switchToNextTheme();
+        applyTheme(theme);
+        document.querySelectorAll("[data-hero-video]").forEach((video) => {
+          showStaticDemo(video.closest("[data-screenshot-group]"));
+        });
       });
 
-      systemThemeQuery.addEventListener("change", () => {
-        if (storedTheme() === "system") applyTheme("system");
+      systemTheme.addEventListener("change", () => {
+        if (storedTheme() === null) applyTheme(null);
       });
 
-      const siteHeader = document.querySelector(".re-site-header");
-      const menuToggle = document.querySelector("[data-menu-toggle]");
-      const primaryNav = document.querySelector("#re-primary-nav");
-      const desktopNavigationQuery = window.matchMedia("(min-width: 721px)");
-
-      function setMenuOpen(isOpen) {
-        siteHeader?.classList.toggle("is-menu-open", isOpen);
-        menuToggle?.setAttribute("aria-expanded", isOpen ? "true" : "false");
-        menuToggle?.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
-      }
-
-      function toggleMenu() {
-        setMenuOpen(menuToggle.getAttribute("aria-expanded") !== "true");
-      }
-
-      menuToggle?.addEventListener("click", toggleMenu);
-
-      menuToggle?.addEventListener("keydown", (event) => {
-        if (event.key !== "Enter" && event.key !== " " && event.key !== "Spacebar") return;
-        event.preventDefault();
-        toggleMenu();
+      document.querySelectorAll("[data-screenshot-toggle]").forEach((toggle) => {
+        toggle.addEventListener("click", () => {
+          const group = toggle.closest("[data-screenshot-group]");
+          if (!(group instanceof HTMLElement)) return;
+          const nextTheme = group.dataset.screenshotTheme === "dark" ? "light" : "dark";
+          updateScreenshotGroup(group, nextTheme);
+          showStaticDemo(group);
+        });
       });
 
-      primaryNav?.addEventListener("click", (event) => {
-        if (event.target?.closest?.("a")) setMenuOpen(false);
-      });
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const connection = navigator.connection ?? navigator.mozConnection ?? navigator.webkitConnection;
+      const limitedNetwork = connection?.saveData || ["slow-2g", "2g"].includes(connection?.effectiveType);
+      const lowMemory = typeof navigator.deviceMemory === "number" && navigator.deviceMemory <= 2;
 
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && menuToggle?.getAttribute("aria-expanded") === "true") {
-          setMenuOpen(false);
-          menuToggle.focus();
+      document.querySelectorAll("[data-hero-video]").forEach((video) => {
+        if (!(video instanceof HTMLVideoElement)) return;
+        const group = video.closest("[data-screenshot-group]");
+        if (!(group instanceof HTMLElement)) return;
+        group.dataset.demoState = "static";
+
+        if (reducedMotion.matches || limitedNetwork || lowMemory) return;
+
+        const loadVideo = () => {
+          video.querySelectorAll("source[data-src]").forEach((source) => {
+            if (source instanceof HTMLSourceElement && source.dataset.src) source.src = source.dataset.src;
+          });
+          video.load();
+          video.addEventListener("canplay", () => showVideoDemo(group), { once: true });
+          video.addEventListener("error", () => {
+            delete video.dataset.playing;
+            if (!group.querySelector('[data-hero-video][data-playing="true"]')) showStaticDemo(group);
+          }, { once: true });
+        };
+
+        if ("IntersectionObserver" in window) {
+          const observer = new IntersectionObserver((entries) => {
+            if (!entries.some((entry) => entry.isIntersecting)) return;
+            observer.disconnect();
+            loadVideo();
+          }, { rootMargin: "200px" });
+          observer.observe(video);
+        } else {
+          loadVideo();
         }
       });
 
-      document.addEventListener("pointerdown", (event) => {
-        if (menuToggle?.getAttribute("aria-expanded") !== "true") return;
-        if (siteHeader?.contains(event.target)) return;
-        setMenuOpen(false);
+      document.querySelectorAll("[data-demo-toggle]").forEach((toggle) => {
+        toggle.addEventListener("click", () => {
+          const group = toggle.closest("[data-screenshot-group]");
+          if (!(group instanceof HTMLElement)) return;
+          if (group.dataset.demoState === "video") showStaticDemo(group);
+          else showVideoDemo(group);
+        });
       });
 
-      desktopNavigationQuery.addEventListener("change", (event) => {
-        if (event.matches) setMenuOpen(false);
+      document.querySelector(".re-mobile-menu nav")?.addEventListener("click", () => {
+        document.querySelector(".re-mobile-menu")?.removeAttribute("open");
       });
     </script>
   </body>
