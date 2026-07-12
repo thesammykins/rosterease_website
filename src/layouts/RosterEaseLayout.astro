@@ -21,6 +21,17 @@ const ogImageUrl = new URL(ogImageAsset.src, Astro.url).href;
 const isOverview = currentPath === "/";
 const isPrivacy = currentPath === "/privacy";
 const isContact = currentPath === "/contact";
+const structuredData = isOverview
+  ? JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: "RosterEase",
+      url: "https://rosterease.app/",
+      description,
+      applicationCategory: "ProductivityApplication",
+      operatingSystem: "iOS, iPadOS",
+    })
+  : null;
 ---
 
 <!doctype html>
@@ -59,6 +70,7 @@ const isContact = currentPath === "/contact";
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
+    {structuredData && <script type="application/ld+json" set:html={structuredData} />}
   </head>
   <body class="re-body">
     <a class="re-skip-link" href="#content">Skip to content</a>
