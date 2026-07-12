@@ -177,8 +177,9 @@ const isContact = currentPath === "/contact";
         updateScreenshotGroups(effectiveTheme);
       }
 
-      function showStaticDemo(group) {
+      function showStaticDemo(group, userRequested = false) {
         if (!(group instanceof HTMLElement)) return;
+        if (userRequested) group.dataset.demoPreference = "static";
         const videos = [...group.querySelectorAll("[data-hero-video]")].filter((video) => video instanceof HTMLVideoElement);
         const toggle = group.querySelector("[data-demo-toggle]");
         if (videos.length === 0) return;
@@ -194,12 +195,15 @@ const isContact = currentPath === "/contact";
         }
       }
 
-      function showVideoDemo(group) {
+      function showVideoDemo(group, userRequested = false) {
         if (!(group instanceof HTMLElement)) return;
+        if (group.dataset.demoPreference === "static" && !userRequested) return;
+        if (userRequested) delete group.dataset.demoPreference;
         const videos = [...group.querySelectorAll("[data-hero-video]")].filter((video) => video instanceof HTMLVideoElement && video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA);
         const toggle = group.querySelector("[data-demo-toggle]");
         if (videos.length === 0) return;
         Promise.allSettled(videos.map((video) => video.play())).then((results) => {
+          if (group.dataset.demoPreference === "static") return showStaticDemo(group);
           let isPlaying = false;
           results.forEach((result, index) => {
             if (result.status !== "fulfilled") return;
@@ -228,7 +232,7 @@ const isContact = currentPath === "/contact";
         }
         applyTheme(theme);
         document.querySelectorAll("[data-hero-video]").forEach((video) => {
-          showStaticDemo(video.closest("[data-screenshot-group]"));
+          showStaticDemo(video.closest("[data-screenshot-group]"), true);
         });
       });
 
@@ -242,7 +246,7 @@ const isContact = currentPath === "/contact";
           if (!(group instanceof HTMLElement)) return;
           const nextTheme = group.dataset.screenshotTheme === "dark" ? "light" : "dark";
           updateScreenshotGroup(group, nextTheme);
-          showStaticDemo(group);
+          showStaticDemo(group, true);
         });
       });
 
@@ -287,8 +291,8 @@ const isContact = currentPath === "/contact";
         toggle.addEventListener("click", () => {
           const group = toggle.closest("[data-screenshot-group]");
           if (!(group instanceof HTMLElement)) return;
-          if (group.dataset.demoState === "video") showStaticDemo(group);
-          else showVideoDemo(group);
+          if (group.dataset.demoState === "video") showStaticDemo(group, true);
+          else showVideoDemo(group, true);
         });
       });
 

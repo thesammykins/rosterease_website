@@ -69,10 +69,13 @@ check(count(home, /<video\b[^>]*\bpreload="none"/g) === 2, "Homepage: hero demos
 check(count(home, /<source\b[^>]*\bdata-src="\/media\/rosterease-(?:ipad|iphone)-demo\.(?:webm|mp4)"/g) === 4, "Homepage: expected deferred WebM and MP4 sources for both demos");
 check(/data-demo-toggle/.test(home), "Homepage: moving demo needs a pause control");
 check(/prefers-reduced-motion: reduce/.test(layout) && /saveData/.test(layout) && /effectiveType/.test(layout), "Homepage: demo must preserve reduced-motion and constrained-network fallbacks");
+check(/<details class="re-roadmap">/.test(home) && /<summary>What we’re exploring next<\/summary>/.test(home), "Homepage: future directions need a native disclosure control");
+check(/demoPreference === "static"/.test(layout) && /showStaticDemo\(group, true\)/.test(layout), "Homepage: screenshot choices must override pending demo playback");
 check(/Nothing in this notice excludes rights that cannot be excluded/.test(home), "Homepage: beta notice must preserve non-excludable rights");
 check(!/re-toggle-track/.test(home), "Homepage: appearance controls should be plain buttons");
 
 const css = await readFile(cssPath, "utf8");
+check(block(css, ".re-ipad__halo").includes("pointer-events: none"), "Homepage: decorative iPad halo must not block screenshot controls");
 for (const feature of [":focus-visible", "prefers-reduced-motion: reduce", "prefers-color-scheme: dark", "prefers-contrast: more", "forced-colors: active"]) {
   check(css.includes(feature), `${cssPath}: missing ${feature}`);
 }

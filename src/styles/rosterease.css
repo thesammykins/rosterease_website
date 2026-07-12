@@ -1066,6 +1066,7 @@ main:focus {
   border-radius: 50%;
   background: radial-gradient(circle, rgba(80, 151, 255, 0.24), rgba(82, 197, 155, 0.1) 42%, transparent 70%);
   filter: blur(22px);
+  pointer-events: none;
 }
 
 .re-device--ipad-large {
@@ -1225,6 +1226,73 @@ main:focus {
   max-width: 42rem;
   margin-top: 1.5rem;
   color: rgba(255, 255, 255, 0.88);
+}
+
+.re-roadmap {
+  max-width: 42rem;
+  margin-top: 1rem;
+}
+
+.re-roadmap summary {
+  width: max-content;
+  max-width: 100%;
+  min-height: 2.5rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.re-roadmap summary:hover,
+.re-roadmap[open] summary {
+  background: rgba(255, 255, 255, 0.17);
+}
+
+.re-roadmap summary:focus-visible {
+  outline-color: #ffbf47;
+}
+
+.re-roadmap__content {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1.25rem;
+  background: rgba(3, 28, 73, 0.26);
+}
+
+.re-roadmap h3,
+.re-roadmap p,
+.re-roadmap ul {
+  margin: 0;
+}
+
+.re-roadmap h3 {
+  margin-bottom: 0.4rem;
+  color: #dbe8ff;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.re-roadmap ul {
+  padding-left: 1.2rem;
+}
+
+.re-roadmap li,
+.re-roadmap p {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.re-roadmap li + li {
+  margin-top: 0.2rem;
 }
 
 .re-testflight__meta {
@@ -1949,6 +2017,7 @@ main:focus {
   .re-screenshot-toggle,
   .re-demo-toggle,
   .re-mobile-menu summary,
+  .re-roadmap summary,
   .re-mobile-menu nav,
   .re-action-panel,
   .re-address-panel,
