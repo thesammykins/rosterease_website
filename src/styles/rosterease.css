@@ -1199,6 +1199,91 @@ main:focus {
   margin-top: 1.5rem;
 }
 
+.re-plus {
+  padding: clamp(4.75rem, 7.5vw, 7rem) 0;
+  background: var(--surface-soft);
+}
+
+.re-plus__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(2rem, 8vw, 8rem);
+}
+
+.re-plus__copy {
+  max-width: 38rem;
+}
+
+.re-plus__copy h2 {
+  margin: 0;
+  font-size: clamp(2.45rem, 4.4vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.058em;
+  text-wrap: balance;
+}
+
+.re-plus__copy > p:last-child {
+  max-width: 36rem;
+  margin: 1.5rem 0 0;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.re-plus__panel {
+  padding: clamp(1.4rem, 3vw, 2rem);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow);
+}
+
+.re-plus__plans {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.re-plus__plan {
+  display: grid;
+  gap: 0.6rem;
+  padding-right: 1.5rem;
+}
+
+.re-plus__plan + .re-plus__plan {
+  padding-right: 0;
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--line);
+}
+
+.re-plus__plan span {
+  color: var(--blue);
+  font-size: 0.76rem;
+  font-weight: 760;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.re-plus__plan strong {
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.re-plus__plan p,
+.re-plus__note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.re-plus__note {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
 .re-testflight {
   padding-top: 0;
   background: var(--surface);
@@ -1705,6 +1790,7 @@ main:focus {
 
   .re-intro__grid,
   .re-ipad__heading,
+  .re-plus__grid,
   .re-subpage-hero__grid,
   .re-testflight__card {
     grid-template-columns: 1fr;
@@ -1933,6 +2019,23 @@ main:focus {
 
   .re-privacy-callout__grid {
     grid-template-columns: 1fr;
+  }
+
+  .re-plus__plans {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .re-plus__plan,
+  .re-plus__plan + .re-plus__plan {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .re-plus__plan + .re-plus__plan {
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    border-left: 0;
   }
 
   .re-privacy-mark {

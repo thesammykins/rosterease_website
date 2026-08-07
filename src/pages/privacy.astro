@@ -17,7 +17,7 @@ const quickFacts = [
   },
   {
     label: "Effective date",
-    value: "25 June 2026",
+    value: "7 August 2026",
   },
 ];
 
@@ -49,7 +49,8 @@ const sections = [
   {
     title: "App data and optional permissions",
     paragraphs: [
-      "RosterEase is designed so schedule data can remain on your device where practical.",
+      "RosterEase is designed so roster, workplace, client, visit, and preference data can remain on your device. The app does not require a RosterEase account for this local planning data.",
+      "Supported imports from files, images, PDFs, pasted text, and the clipboard are processed on-device. When OCR is needed for an image or scanned PDF, RosterEase uses on-device text recognition; results can be imperfect and should be reviewed before you apply them.",
       "If you choose to use optional permissions such as calendar access, photo access, file access, or clipboard import, that access is used only for the feature you asked the app to perform.",
       "For example, calendar access may be used to write shifts to a calendar you choose, and photo or file access may be used to import roster or client information into the app. Calendar event notes use generic RosterEase copy by default; private shift notes are included only if you turn that setting on.",
       "You can manage optional permissions through iOS or iPadOS Settings. Turning off a permission may limit the related feature but does not stop you from using the rest of the app.",
@@ -58,7 +59,11 @@ const sections = [
   {
     title: "Backup and restore",
     paragraphs: [
-      "RosterEase does not currently operate its own cloud account system for roster data.",
+      "A backup export can include your roster, workplace, client, visit, and preference data only when you initiate the export in the app. RosterEase does not export this data automatically or in the background.",
+      "Current backup exports are encrypted and protected by the passphrase you choose. You choose where to save or share the exported file through Apple's file picker and other Apple system surfaces.",
+      "RosterEase does not upload or retain exported backup files on its own backend. If you save or share the file through iCloud Drive, Files, a messaging app, or another destination/provider, that provider's handling, retention, and deletion rules apply.",
+      "Anyone with the exported file and its passphrase may be able to restore its contents. Store and share them carefully. Encryption and passphrase protection reduce risk but do not guarantee absolute security.",
+      "Restore is also user-initiated: you select the file, enter its passphrase when required, and confirm replacing the current RosterEase data on your device.",
       "If you use Apple device backup, iCloud, or another system backup or restore feature, Apple or your chosen backup provider handles that data under their own terms and settings.",
     ],
   },
@@ -67,6 +72,7 @@ const sections = [
     paragraphs: [
       "When you visit the website, standard technical information may be received, such as browser type, device information, IP address, and normal request or diagnostic data.",
       "The website uses system fonts and local static assets; it does not intentionally load third-party font files from Google Fonts or another font CDN.",
+      "RosterEase does not use ads, analytics, or tracking, and does not operate a custom backend that collects app data. The website host may still receive the normal technical request information described above.",
       "This information may be used to operate, secure, troubleshoot, and improve the website.",
     ],
   },
