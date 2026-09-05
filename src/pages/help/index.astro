@@ -1,0 +1,38 @@
+---
+import RosterEaseLayout from "../../layouts/RosterEaseLayout.astro";
+import { guides } from "../../lib/guides";
+---
+
+<RosterEaseLayout
+  title="Help guides"
+  description="Practical RosterEase guides for setup, Smart Import, Calendar, privacy and encrypted backup and restore."
+>
+  <div class="re-shell">
+    <section class="re-page-intro">
+      <p class="re-kicker">Help guides</p><h1>
+        Set up and use<br />RosterEase.
+      </h1><p>
+        Get your first plan in place, understand an import, or check a setting
+        before you change it.
+      </p>
+    </section><div class="re-guide-list">
+      {
+        guides.map((guide) => (
+          <a class="re-guide-link" href={`/help/${guide.slug}`}>
+            <>
+              <h2>{guide.title}</h2>
+              <p>{guide.description}</p>
+              <span>Read the guide →</span>
+            </>
+          </a>
+        ))
+      }
+    </div><section class="re-closing">
+      <div>
+        <h2>Still need a hand?</h2><p>
+          Tell us what you were trying to do and where it stopped working.
+        </p><a class="re-text-link" href="/contact">Contact support →</a>
+      </div>
+    </section>
+  </div>
+</RosterEaseLayout>

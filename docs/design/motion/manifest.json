@@ -1,0 +1,376 @@
+[
+  {
+    "name": "iphone-spin",
+    "files": [
+      {
+        "file": "iphone-spin-00.jpg",
+        "ms": 75
+      },
+      {
+        "file": "iphone-spin-01.jpg",
+        "ms": 235
+      },
+      {
+        "file": "iphone-spin-02.jpg",
+        "ms": 275
+      },
+      {
+        "file": "iphone-spin-03.jpg",
+        "ms": 324
+      },
+      {
+        "file": "iphone-spin-04.jpg",
+        "ms": 379
+      },
+      {
+        "file": "iphone-spin-05.jpg",
+        "ms": 421
+      },
+      {
+        "file": "iphone-spin-06.jpg",
+        "ms": 483
+      },
+      {
+        "file": "iphone-spin-07.jpg",
+        "ms": 553
+      },
+      {
+        "file": "iphone-spin-08.jpg",
+        "ms": 600
+      },
+      {
+        "file": "iphone-spin-09.jpg",
+        "ms": 630
+      },
+      {
+        "file": "iphone-spin-10.jpg",
+        "ms": 670
+      },
+      {
+        "file": "iphone-spin-11.jpg",
+        "ms": 713
+      },
+      {
+        "file": "iphone-spin-12.jpg",
+        "ms": 739
+      },
+      {
+        "file": "iphone-spin-13.jpg",
+        "ms": 782
+      },
+      {
+        "file": "iphone-spin-14.jpg",
+        "ms": 831
+      },
+      {
+        "file": "iphone-spin-15.jpg",
+        "ms": 881
+      },
+      {
+        "file": "iphone-spin-16.jpg",
+        "ms": 921
+      },
+      {
+        "file": "iphone-spin-17.jpg",
+        "ms": 983
+      },
+      {
+        "file": "iphone-spin-18.jpg",
+        "ms": 1024
+      },
+      {
+        "file": "iphone-spin-19.jpg",
+        "ms": 1085
+      },
+      {
+        "file": "iphone-spin-20.jpg",
+        "ms": 1134
+      },
+      {
+        "file": "iphone-spin-21.jpg",
+        "ms": 1185
+      },
+      {
+        "file": "iphone-spin-22.jpg",
+        "ms": 1241
+      },
+      {
+        "file": "iphone-spin-23.jpg",
+        "ms": 1285
+      },
+      {
+        "file": "iphone-spin-24.jpg",
+        "ms": 1321
+      }
+    ]
+  },
+  {
+    "name": "worker-crossfade",
+    "files": [
+      {
+        "file": "worker-crossfade-00.jpg",
+        "ms": 193
+      },
+      {
+        "file": "worker-crossfade-01.jpg",
+        "ms": 397
+      },
+      {
+        "file": "worker-crossfade-02.jpg",
+        "ms": 454
+      },
+      {
+        "file": "worker-crossfade-03.jpg",
+        "ms": 527
+      },
+      {
+        "file": "worker-crossfade-04.jpg",
+        "ms": 585
+      },
+      {
+        "file": "worker-crossfade-05.jpg",
+        "ms": 640
+      },
+      {
+        "file": "worker-crossfade-06.jpg",
+        "ms": 716
+      },
+      {
+        "file": "worker-crossfade-07.jpg",
+        "ms": 817
+      },
+      {
+        "file": "worker-crossfade-08.jpg",
+        "ms": 845
+      },
+      {
+        "file": "worker-crossfade-09.jpg",
+        "ms": 919
+      },
+      {
+        "file": "worker-crossfade-10.jpg",
+        "ms": 942
+      }
+    ]
+  },
+  {
+    "name": "screenshot-open",
+    "files": [
+      {
+        "file": "screenshot-open-00.jpg",
+        "ms": 78
+      },
+      {
+        "file": "screenshot-open-01.jpg",
+        "ms": 164
+      },
+      {
+        "file": "screenshot-open-02.jpg",
+        "ms": 211
+      },
+      {
+        "file": "screenshot-open-03.jpg",
+        "ms": 233
+      },
+      {
+        "file": "screenshot-open-04.jpg",
+        "ms": 282
+      },
+      {
+        "file": "screenshot-open-05.jpg",
+        "ms": 331
+      },
+      {
+        "file": "screenshot-open-06.jpg",
+        "ms": 398
+      },
+      {
+        "file": "screenshot-open-07.jpg",
+        "ms": 439
+      },
+      {
+        "file": "screenshot-open-08.jpg",
+        "ms": 481
+      },
+      {
+        "file": "screenshot-open-09.jpg",
+        "ms": 580
+      },
+      {
+        "file": "screenshot-open-10.jpg",
+        "ms": 681
+      },
+      {
+        "file": "screenshot-open-11.jpg",
+        "ms": 782
+      },
+      {
+        "file": "screenshot-open-12.jpg",
+        "ms": 882
+      }
+    ]
+  },
+  {
+    "name": "screenshot-close",
+    "files": [
+      {
+        "file": "screenshot-close-00.jpg",
+        "ms": 101
+      },
+      {
+        "file": "screenshot-close-01.jpg",
+        "ms": 173
+      },
+      {
+        "file": "screenshot-close-02.jpg",
+        "ms": 305
+      },
+      {
+        "file": "screenshot-close-03.jpg",
+        "ms": 374
+      },
+      {
+        "file": "screenshot-close-04.jpg",
+        "ms": 505
+      },
+      {
+        "file": "screenshot-close-05.jpg",
+        "ms": 534
+      },
+      {
+        "file": "screenshot-close-06.jpg",
+        "ms": 613
+      },
+      {
+        "file": "screenshot-close-07.jpg",
+        "ms": 657
+      },
+      {
+        "file": "screenshot-close-08.jpg",
+        "ms": 705
+      },
+      {
+        "file": "screenshot-close-09.jpg",
+        "ms": 805
+      },
+      {
+        "file": "screenshot-close-10.jpg",
+        "ms": 844
+      }
+    ]
+  },
+  {
+    "name": "page-navigation",
+    "files": [
+      {
+        "file": "page-navigation-00.jpg",
+        "ms": 231
+      },
+      {
+        "file": "page-navigation-01.jpg",
+        "ms": 912
+      },
+      {
+        "file": "page-navigation-02.jpg",
+        "ms": 1010
+      },
+      {
+        "file": "page-navigation-03.jpg",
+        "ms": 1081
+      },
+      {
+        "file": "page-navigation-04.jpg",
+        "ms": 1127
+      },
+      {
+        "file": "page-navigation-05.jpg",
+        "ms": 1205
+      },
+      {
+        "file": "page-navigation-06.jpg",
+        "ms": 1251
+      },
+      {
+        "file": "page-navigation-07.jpg",
+        "ms": 1311
+      },
+      {
+        "file": "page-navigation-08.jpg",
+        "ms": 1406
+      },
+      {
+        "file": "page-navigation-09.jpg",
+        "ms": 1551
+      },
+      {
+        "file": "page-navigation-10.jpg",
+        "ms": 1728
+      },
+      {
+        "file": "page-navigation-11.jpg",
+        "ms": 1851
+      },
+      {
+        "file": "page-navigation-12.jpg",
+        "ms": 2035
+      }
+    ]
+  },
+  {
+    "name": "worker-crossfade-fixed",
+    "files": [
+      {
+        "file": "worker-crossfade-fixed-00.jpg",
+        "ms": 111
+      },
+      {
+        "file": "worker-crossfade-fixed-01.jpg",
+        "ms": 226
+      },
+      {
+        "file": "worker-crossfade-fixed-02.jpg",
+        "ms": 267
+      },
+      {
+        "file": "worker-crossfade-fixed-03.jpg",
+        "ms": 295
+      },
+      {
+        "file": "worker-crossfade-fixed-04.jpg",
+        "ms": 325
+      },
+      {
+        "file": "worker-crossfade-fixed-05.jpg",
+        "ms": 364
+      },
+      {
+        "file": "worker-crossfade-fixed-06.jpg",
+        "ms": 402
+      },
+      {
+        "file": "worker-crossfade-fixed-07.jpg",
+        "ms": 433
+      },
+      {
+        "file": "worker-crossfade-fixed-08.jpg",
+        "ms": 502
+      },
+      {
+        "file": "worker-crossfade-fixed-09.jpg",
+        "ms": 530
+      },
+      {
+        "file": "worker-crossfade-fixed-10.jpg",
+        "ms": 601
+      },
+      {
+        "file": "worker-crossfade-fixed-11.jpg",
+        "ms": 648
+      },
+      {
+        "file": "worker-crossfade-fixed-12.jpg",
+        "ms": 701
+      }
+    ]
+  }
+]

@@ -1,0 +1,57 @@
+---
+import RosterEaseLayout from "../../layouts/RosterEaseLayout.astro";
+import { guides, type Guide } from "../../lib/guides";
+export function getStaticPaths() {
+  return guides.map((guide) => ({
+    params: { slug: guide.slug },
+    props: { guide },
+  }));
+}
+interface Props {
+  guide: Guide;
+}
+const { guide } = Astro.props;
+---
+
+<RosterEaseLayout title={guide.title} description={guide.description}>
+  <div class="re-shell">
+    <section class="re-page-intro">
+      <a class="re-breadcrumb" href="/help">← All help guides</a><h1>
+        {guide.title}
+      </h1><p>{guide.description}</p><nav
+        class="re-subnav"
+        aria-label="Guide contents"
+      >
+        {
+          guide.sections.map((section) => (
+            <a href={`#${section.id}`}>{section.title}</a>
+          ))
+        }
+      </nav>
+    </section><article class="re-prose">
+      {
+        guide.sections.map((section) => (
+          <section id={section.id}>
+            <h2>{section.title}</h2>
+            {section.paragraphs.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+            {section.steps && (
+              <ol>
+                {section.steps.map((step) => (
+                  <li>{step}</li>
+                ))}
+              </ol>
+            )}
+          </section>
+        ))
+      }<section>
+        <h2>Need more help?</h2><p>
+          <a href="/contact">Contact support</a> with your build number and the step
+          you reached. Please redact personal or workplace-confidential details from
+          any examples.
+        </p><p><a href="/privacy">Read the Privacy Policy</a></p>
+      </section>
+    </article>
+  </div>
+</RosterEaseLayout>

@@ -1,357 +1,224 @@
 ---
 import RosterEaseLayout from "../layouts/RosterEaseLayout.astro";
-import ScreenshotAppearanceToggle from "../components/ScreenshotAppearanceToggle.astro";
-import ThemedScreenshot from "../components/ThemedScreenshot.astro";
+import DeviceBody from "../components/DeviceBody.astro";
+import { screens } from "../lib/screenshots";
 import { TESTFLIGHT_URL } from "../lib/rosterease";
-import appIcon from "../assets/rosterease/rosterease-app-icon.svg";
-import iphoneShiftCalendar from "../assets/rosterease/screenshots/launch/iphone-shift-calendar-night-off.png";
-import iphoneShiftCalendarDark from "../assets/rosterease/screenshots/launch/iphone-shift-calendar-dark.png";
-import iphoneFieldToday from "../assets/rosterease/screenshots/launch/iphone-field-route-today.png";
-import iphoneFieldTodayDark from "../assets/rosterease/screenshots/launch/iphone-field-route-today-dark.png";
-import ipadFieldToday from "../assets/rosterease/screenshots/launch/ipad-field-route-today.png";
-import ipadFieldTodayDark from "../assets/rosterease/screenshots/launch/ipad-field-route-today-dark.png";
-import ipadFieldClients from "../assets/rosterease/screenshots/launch/ipad-field-client-directory.png";
-import ipadFieldClientsDark from "../assets/rosterease/screenshots/launch/ipad-field-client-directory-dark.png";
-import ipadShiftCalendar from "../assets/rosterease/screenshots/launch/ipad-shift-calendar-off-cue.png";
-import ipadShiftCalendarDark from "../assets/rosterease/screenshots/launch/ipad-shift-calendar-dark.png";
-
-const productFacts = [
-  ["Two work modes", "Shift rosters and field visits"],
-  ["Import-first", "Text, images, PDFs, files and client lists"],
-  ["Local-first", "No RosterEase account required"],
-  ["Built for Apple", "Native on iPhone and iPad"],
-];
-
-const principles = [
+const story = [
   {
-    number: "01",
-    title: "Start with what you were given",
-    text: "Paste roster text, choose a PDF or image, or bring in a client list. Smart Import makes the source editable before anything reaches your calendar.",
+    title: "Import your roster",
+    text: "Import a screenshot, PDF or pasted text. Check the extracted shifts or clients before adding them to your plan.",
+    images: { shift: screens.shiftImport, field: screens.fieldImport },
+    shift: "Build a repeating shift pattern from your source.",
+    field: "Bring in your client list and review visit details.",
+    href: "/help/smart-import",
+    link: "How importing works",
   },
   {
-    number: "02",
-    title: "See the day, not the spreadsheet",
-    text: "Today pulls the useful parts forward: the next shift, visit order, leave-by guidance, workplace, route progress and what comes next.",
+    title: "Check your calendar",
+    text: "See your repeating shifts or planned visits by week or month, and check the days ahead.",
+    images: { shift: screens.shiftCalendar, field: screens.fieldCalendar },
+    shift: "Repeating rotations, overnight shifts and one-off changes.",
+    field: "Visit times, travel buffers and the order you choose.",
+    href: "/app",
+    link: "Explore shifts and visits",
   },
   {
-    number: "03",
-    title: "Share only when you choose",
-    text: "Your planning stays on your device by default. Calendar sync, backup and address-based Maps estimates are explicit choices.",
+    title: "See what's next",
+    text: "Open Today to check your next shift or visit, when to leave and what you have completed.",
+    images: { shift: screens.shiftToday, field: screens.fieldToday },
+    shift: "Your next shift, workplace and leave plan.",
+    field: "Your next visit, directions and completion progress.",
+    href: "/app#everyday",
+    link: "More about Today",
   },
 ];
 ---
 
 <RosterEaseLayout
   title="RosterEase"
-  description="Turn roster screenshots, PDFs and client visits into a clear day plan. RosterEase is now testing on iPhone and iPad through TestFlight."
+  description="Plan repeating shifts and client visits on your iPhone or iPad. Import your roster on-device, check your calendar and see what is next."
 >
-  <section class="re-hero">
-    <div class="re-shell re-hero__grid">
-      <div class="re-hero__copy">
-        <a class="re-status" href="#testflight">
-          <span aria-hidden="true"></span>
-          Now testing on TestFlight
-        </a>
-        <h1>The schedule you were given.<br /> <em>A day you can follow.</em></h1>
-        <p class="re-hero__lede">
-          RosterEase turns roster screenshots, PDFs and client visits into a clear plan for today—without an employer login, ads or another account.
-        </p>
-        <div class="re-actions">
-          <a class="re-button re-button--primary" href={TESTFLIGHT_URL} target="_blank" rel="noopener">Join the TestFlight beta</a>
-          <a class="re-text-link" href="#modes">Explore the two modes <span aria-hidden="true">↓</span></a>
-        </div>
-        <p class="re-hero__note">Free beta · iPhone and iPad · App Store after testing</p>
-      </div>
-
-      <div class="re-hero__visual-group" data-screenshot-group>
-        <div class="re-hero__visual" aria-label="RosterEase running on iPad and iPhone">
-          <figure class="re-device re-device--ipad">
-            <ThemedScreenshot
-              light={ipadFieldToday}
-              dark={ipadFieldTodayDark}
-              alt="RosterEase Field Worker Today view on iPad, showing five ordered visits and route progress."
-              widths={[720, 1080, 1440, 1800]}
-              sizes="(max-width: 760px) 88vw, (max-width: 1100px) 72vw, 44rem"
-              quality={88}
-              loading="eager"
-              fetchpriority="high"
-            />
-            <video
-              class="re-hero-demo"
-              data-hero-video="ipad"
-              muted
-              loop
-              playsinline
-              preload="none"
-              aria-hidden="true"
-            >
-              <source data-src="/media/rosterease-ipad-demo.webm" type="video/webm" />
-              <source data-src="/media/rosterease-ipad-demo.mp4" type="video/mp4" />
-            </video>
-          </figure>
-
-          <figure class="re-device re-device--iphone">
-            <ThemedScreenshot
-              light={iphoneShiftCalendar}
-              dark={iphoneShiftCalendarDark}
-              alt="RosterEase Shift Worker Calendar on iPhone, showing a monthly roster and selected-day context."
-              widths={[320, 480, 660]}
-              sizes="(max-width: 760px) 34vw, 14rem"
-              quality={90}
-              loading="eager"
-            />
-            <video
-              class="re-hero-demo"
-              data-hero-video="iphone"
-              muted
-              loop
-              playsinline
-              preload="none"
-              aria-hidden="true"
-            >
-              <source data-src="/media/rosterease-iphone-demo.webm" type="video/webm" />
-              <source data-src="/media/rosterease-iphone-demo.mp4" type="video/mp4" />
-            </video>
-          </figure>
-
-          <div class="re-visual-label re-visual-label--mode"><strong>One app</strong><span>Shift + field work</span></div>
-          <div class="re-visual-label re-visual-label--native"><strong>Native</strong><span>iPhone + iPad</span></div>
-        </div>
-        <div class="re-hero-demo__controls">
-          <ScreenshotAppearanceToggle />
-          <button class="re-demo-toggle" type="button" data-demo-toggle hidden>Pause app demo</button>
-        </div>
-        <p class="re-hero-demo__caption">Current iPad and iPhone flows through Today, Calendar, Clients, Workplaces and Settings. The still screenshots remain for data-saving, reduced-motion and lower-end devices.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="re-fact-band" aria-label="Product facts">
-    <dl class="re-shell re-fact-band__grid">
-      {productFacts.map(([title, detail]) => (
-        <div><dt>{title}</dt><dd>{detail}</dd></div>
-      ))}
-    </dl>
-  </section>
-
-  <section class="re-intro">
-    <div class="re-shell re-intro__grid">
-      <div class="re-section-heading">
-        <p class="re-eyebrow">Work starts messy</p>
-        <h2>RosterEase makes the handoff from schedule to real life.</h2>
-      </div>
-      <p class="re-section-lede">
-        A roster rarely arrives in the right shape. It lives in a screenshot, a PDF, a message, a spreadsheet or someone else’s system. RosterEase is the calm layer between that source and the day you need to work.
+  <section class="re-shell re-hero" data-motion-sequence>
+    <div class="re-hero-copy">
+      <h1 class="re-hero-title">
+        Plan your shifts.<br />Organise your visits.
+      </h1>
+      <span class="re-rule" aria-hidden="true"></span>
+      <p>
+        Import your roster, check your calendar and see your next shift or
+        visit. RosterEase keeps your workday plan on your iPhone or iPad.
       </p>
+      <a
+        class="re-button re-button--primary"
+        href={TESTFLIGHT_URL}
+        target="_blank"
+        rel="noopener">Join TestFlight <span aria-hidden="true">↗</span></a
+      >
+      <p class="re-availability">App Store release coming soon</p>
     </div>
-
-    <div class="re-shell re-process">
-      <div class="re-process__source" aria-label="Schedule source examples">
-        <span>Roster.pdf</span>
-        <span>Screenshot</span>
-        <span>Client list</span>
-        <span>Pasted text</span>
+    <div
+      class="re-hero-stage"
+      aria-label="RosterEase Shift Worker and Field Worker Today screens"
+    >
+      <div class="re-hero-screens">
+        <div class="re-hero-screen re-hero-shift">
+          <DeviceBody screen={screens.shiftToday} eager draggable={false} />
+        </div>
+        <div class="re-hero-screen re-hero-field">
+          <DeviceBody screen={screens.fieldToday} eager draggable={false} />
+        </div>
       </div>
-      <p class="re-process__bridge">Becomes</p>
-      <div class="re-process__result">
-        <span class="re-process__icon" aria-hidden="true">✓</span>
-        <div><strong>Today is ready</strong><small>Shifts, visits and leave-by guidance in one place</small></div>
+      <div class="re-stage-caption">
+        <span>Shift work</span><span>Field work</span>
       </div>
     </div>
-
-    <ol class="re-shell re-principles">
-      {principles.map((item) => (
-        <li>
-          <span>{item.number}</span>
-          <h3>{item.title}</h3>
-          <p>{item.text}</p>
-        </li>
-      ))}
-    </ol>
   </section>
-
-  <section class="re-modes" id="modes">
-    <div class="re-shell">
-      <div class="re-modes__heading">
-        <p class="re-eyebrow">One app, two ways to work</p>
-        <h2>Your schedule should speak your language.</h2>
-        <p>Choose the mode that matches the work. Both share the same local-first foundation without forcing shift rosters and field routes into one generic workflow.</p>
-      </div>
-
-      <div data-screenshot-group>
-        <div class="re-mode-grid">
-          <article class="re-mode re-mode--shift">
-            <div class="re-mode__copy">
-              <span class="re-mode__index">01 / Shift Worker</span>
-              <h3>Make a repeating roster readable.</h3>
-              <p>Build a rotation, import the schedule you already have, adjust one-off days and see the pattern across Today and Calendar.</p>
-              <ul>
-                <li>Repeating roster patterns and manual changes</li>
-                <li>Workplaces, shift types and leave-by guidance</li>
-                <li>Calendar sync, widgets and backups</li>
-              </ul>
+  <section
+    class="re-shell re-story"
+    id="screens"
+    aria-label="From your roster to your day"
+  >
+    <div class="re-story-heading">
+      <h2>How RosterEase works</h2>
+      <fieldset class="re-worker-switch">
+        <legend class="re-visually-hidden">Choose worker type</legend>
+        {
+          (["shift", "field"] as const).map((worker) => (
+            <label>
+              <>
+                <input
+                  type="radio"
+                  name="worker"
+                  value={worker}
+                  checked={worker === "shift"}
+                />
+                <span>{worker === "shift" ? "Shift work" : "Field work"}</span>
+              </>
+            </label>
+          ))
+        }
+      </fieldset>
+    </div>
+    <div class="re-story-grid">
+      {
+        story.map((step, index) => (
+          <article class="re-story-row" data-motion-sequence>
+            <div class="re-story-copy">
+              <span class="re-step-number" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </>
+              <a class="re-text-link" href={step.href}>
+                {step.link} <span aria-hidden="true">→</span>
+              </a>
             </div>
-            <figure class="re-mode__phone">
-              <ThemedScreenshot light={iphoneShiftCalendar} dark={iphoneShiftCalendarDark} alt="Shift Worker Calendar showing a monthly roster and selected day on iPhone." widths={[360, 520, 720]} sizes="(max-width: 760px) 72vw, 20rem" />
-            </figure>
-          </article>
-
-          <article class="re-mode re-mode--field">
-            <div class="re-mode__copy">
-              <span class="re-mode__index">02 / Field Worker</span>
-              <h3>Keep every visit in the right order.</h3>
-              <p>See the next stop, appointment windows, route progress and local travel buffers without turning your day into a team CRM.</p>
-              <ul>
-                <li>Client directory and ordered route days</li>
-                <li>Visit progress and Maps handoff</li>
-                <li>Private notes kept out of directions</li>
-              </ul>
+            <div class="re-story-visual">
+              <div class="re-worker-screens">
+                {(["shift", "field"] as const).map((worker) => (
+                  <div data-worker-panel={worker}>
+                    <p class="re-worker-caption">{step[worker]}</p>
+                    <a
+                      class="re-screen-detail"
+                      href={step.images[worker].dark.src}
+                      data-screenshot
+                      aria-label={`Enlarge ${worker} screenshot: ${step.title}`}
+                    >
+                      <DeviceBody screen={step.images[worker]} />
+                    </a>
+                  </div>
+                ))}
+              </div>
             </div>
-            <figure class="re-mode__phone">
-              <ThemedScreenshot light={iphoneFieldToday} dark={iphoneFieldTodayDark} alt="Field Worker Today showing route progress and the next visit on iPhone." widths={[360, 520, 720]} sizes="(max-width: 760px) 72vw, 20rem" />
-            </figure>
           </article>
-        </div>
-        <ScreenshotAppearanceToggle />
-      </div>
+        ))
+      }
     </div>
   </section>
-
-  <section class="re-ipad" id="ipad">
-    <div class="re-shell re-ipad__heading">
-      <div>
-        <p class="re-eyebrow">Designed for iPad</p>
-        <h2>More room. More context. No stretched phone layout.</h2>
-      </div>
-      <p>RosterEase uses the iPad canvas for split views, side-by-side route context and a client directory that stays visible while you review the details.</p>
+  <section class="re-shell re-closing re-closing--privacy" data-motion-sequence>
+    <span class="re-privacy-symbol" aria-hidden="true"
+      ><svg
+        width="32"
+        height="32"
+        viewBox="0 0 32 32"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        ><rect x="7" y="14" width="18" height="14" rx="3"></rect><path
+          d="M11 14V9a5 5 0 0 1 10 0v5"></path></svg
+      ></span
+    >
+    <div>
+      <h2>Your roster is processed on-device.</h2><p>
+        Imports are processed on your device, without sending their contents to
+        a cloud AI service. You can plan without an account or ads, and choose
+        what to share.
+      </p><a class="re-text-link" href="/on-device"
+        >What stays on your device <span aria-hidden="true">→</span></a
+      >
     </div>
-
-    <div class="re-ipad__visual-group" data-screenshot-group>
-      <div class="re-ipad__stage">
-        <div class="re-ipad__halo" aria-hidden="true"></div>
-        <figure class="re-device re-device--ipad-large">
-          <ThemedScreenshot light={ipadFieldClients} dark={ipadFieldClientsDark} alt="RosterEase client directory and selected client details shown side by side on iPad." widths={[900, 1280, 1680, 2064]} sizes="(max-width: 760px) 94vw, 80rem" quality={90} />
-        </figure>
-      </div>
-      <ScreenshotAppearanceToggle />
-    </div>
-
-    <ol class="re-shell re-ipad__details">
-      <li><span>01</span><strong>Split view where it helps</strong><p>Keep the list in sight while reviewing a client or workplace.</p></li>
-      <li><span>02</span><strong>Full calendar context</strong><p>See the month and selected day together instead of drilling through screens.</p></li>
-      <li><span>03</span><strong>Same clear controls</strong><p>The iPad build keeps the same privacy and sync choices as iPhone.</p></li>
-    </ol>
-  </section>
-
-  <section class="re-screen-pair" aria-label="More RosterEase screens">
-    <div class="re-shell" data-screenshot-group>
-      <div class="re-screen-pair__grid">
-        <div class="re-screen-pair__copy">
-          <p class="re-eyebrow">Built for the real details</p>
-          <h2>Clear enough for a glance. Deep enough for the whole day.</h2>
-          <p>See the immediate next step, then open the details when you need them. RosterEase keeps addresses, visit windows, shift changes and privacy choices close without crowding every screen.</p>
-          <a class="re-text-link" href={TESTFLIGHT_URL} target="_blank" rel="noopener">Try the current beta <span aria-hidden="true">↗</span></a>
-        </div>
-        <figure class="re-screen-card re-screen-card--phone">
-          <ThemedScreenshot light={iphoneFieldToday} dark={iphoneFieldTodayDark} alt="Field Worker Today showing the next visit and route actions on iPhone." widths={[360, 520, 720]} sizes="(max-width: 760px) 70vw, 19rem" />
-        </figure>
-        <figure class="re-screen-card re-screen-card--ipad">
-          <ThemedScreenshot light={ipadShiftCalendar} dark={ipadShiftCalendarDark} alt="Shift Worker Calendar and selected day shown side by side on iPad." widths={[720, 1080, 1440]} sizes="(max-width: 760px) 88vw, 36rem" />
-        </figure>
-      </div>
-      <ScreenshotAppearanceToggle />
-    </div>
-  </section>
-
-  <section class="re-privacy-callout">
-    <div class="re-shell re-privacy-callout__grid">
-      <div class="re-privacy-mark" aria-hidden="true"><img src={appIcon.src} alt="" width="72" height="72" /></div>
-      <div>
-        <p class="re-eyebrow">Private by default</p>
-        <h2>Your work plan belongs to you.</h2>
-      </div>
-      <div class="re-privacy-callout__copy">
-        <p>RosterEase does not require an account and does not sell your information. Schedule data can stay on your device, with Calendar sync, backup and Maps estimates available only when you choose them.</p>
-        <a class="re-text-link" href="/privacy">Read the plain-language privacy policy <span aria-hidden="true">→</span></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="re-plus" id="plus">
-    <div class="re-shell re-plus__grid">
-      <div class="re-plus__copy">
-        <p class="re-eyebrow">RosterEase Plus</p>
-        <h2>When one workplace is not enough.</h2>
-        <p>
-          Free includes one full Shift Worker workplace. Plus unlocks multiple Shift Worker workplaces
-          while keeping the same roster, calendar, widget, backup, and privacy tools.
-        </p>
-      </div>
-      <div class="re-plus__panel" aria-label="RosterEase Plus billing options">
-        <div class="re-plus__plans">
-          <div class="re-plus__plan">
-            <span>Monthly</span>
-            <strong>Multiple Shift Worker workplaces</strong>
-            <p>Same Plus access, billed monthly.</p>
-          </div>
-          <div class="re-plus__plan">
-            <span>Annual</span>
-            <strong>Multiple Shift Worker workplaces</strong>
-            <p>Same Plus access, billed annually.</p>
-          </div>
-        </div>
-        <p class="re-plus__note">Monthly and Annual provide the same current feature entitlement. The billing period is the difference.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="re-testflight" id="testflight">
-    <div class="re-shell re-testflight__card">
-      <div class="re-testflight__copy">
-        <p class="re-eyebrow">TestFlight first</p>
-        <h2>Help make 1.0 ready for real workdays.</h2>
-        <p>The beta is open for launch testing on iPhone and iPad. Features will change throughout development and may break before release, so try your roster or route—but do not depend on the beta for a workday.</p>
-        <div class="re-actions">
-          <a class="re-button re-button--light" href={TESTFLIGHT_URL} target="_blank" rel="noopener">Join the TestFlight beta</a>
-          <a class="re-text-link re-text-link--light" href="/contact">Send feedback</a>
-        </div>
-        <details class="re-roadmap">
-          <summary>What we’re exploring next</summary>
-          <div class="re-roadmap__content">
-            <section>
-              <h3>Likely directions</h3>
-              <ul>
-                <li>More ways to tailor Calendar and widgets.</li>
-                <li>Reusable setup for recurring rosters and routes.</li>
-                <li>Better Calendar support for field visits.</li>
-                <li>More useful Siri and Shortcuts actions.</li>
-              </ul>
-            </section>
-            <section>
-              <h3>Exploring</h3>
-              <ul>
-                <li>Personal schedule summaries.</li>
-                <li>Smarter on-device import assistance where device support and privacy allow.</li>
-              </ul>
-            </section>
-            <section>
-              <h3>Promise guard</h3>
-              <p>These are directions, not release commitments. TestFlight feedback helps decide what ships.</p>
-            </section>
-          </div>
-        </details>
-      </div>
-      <ol class="re-testflight__meta">
-        <li><span>01</span><p>Install Apple’s TestFlight app.</p></li>
-        <li><span>02</span><p>Open the RosterEase invitation.</p></li>
-        <li><span>03</span><p>Test with redacted or synthetic work data.</p></li>
-      </ol>
-      <aside class="re-beta-warning" aria-labelledby="beta-warning-title">
-        <p class="re-beta-warning__label">Important beta notice</p>
-        <h3 id="beta-warning-title">Test it. Do not rely on it for work.</h3>
-        <p>RosterEase is pre-release software. Features may change, stop working or lose data without notice. Keep your employer’s roster and instructions as the source of truth, and confirm every shift, visit and work detail there.</p>
-        <p>Do not use the beta as your only record for attendance, pay, client visits or employment decisions. To the maximum extent permitted by law, RosterEase is provided “as is”; the developer is not responsible for missed shifts, lost pay, disciplinary action or other workplace impacts caused by relying on the beta. Nothing in this notice excludes rights that cannot be excluded under applicable law.</p>
-      </aside>
+    <div class="re-closing-help">
+      <p>Getting set up?</p><a class="re-text-link" href="/help"
+        >Help with setup and settings <span aria-hidden="true">→</span></a
+      >
     </div>
   </section>
 </RosterEaseLayout>
+
+<script>
+  const host = document.querySelector<HTMLElement>(".re-hero-stage");
+  const desktop = matchMedia("(min-width: 1121px)");
+  let generation = 0;
+  let cleanup: (() => void)[] = [];
+  async function enhance() {
+    const current = ++generation;
+    cleanup.forEach((dispose) => dispose());
+    cleanup = [];
+    if (!host || !desktop.matches) return;
+    try {
+      const { mountHeroScene } = await import("../scripts/hero-scene");
+      if (current !== generation) return;
+      const dispose = await mountHeroScene(host);
+      if (current !== generation) {
+        dispose?.();
+        return;
+      }
+      if (dispose) cleanup.push(dispose);
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(async ({ target, isIntersecting }) => {
+            if (!isIntersecting) return;
+            observer.unobserve(target);
+            try {
+              const disposePreview = await mountHeroScene(
+                target as HTMLElement,
+                "preview",
+              );
+              if (current !== generation) disposePreview?.();
+              else if (disposePreview) cleanup.push(disposePreview);
+            } catch (error) {
+              console.info(
+                "3D preview unavailable; retaining screenshot.",
+                error,
+              );
+            }
+          });
+        },
+        { rootMargin: "160px" },
+      );
+      document
+        .querySelectorAll(".re-story-visual")
+        .forEach((element) => observer.observe(element));
+      cleanup.push(() => observer.disconnect());
+    } catch (error) {
+      console.info("3D hero unavailable; retaining static screenshots.", error);
+    }
+  }
+  host?.addEventListener("dragstart", (event) => event.preventDefault());
+  desktop.addEventListener("change", enhance);
+  if ("requestIdleCallback" in window)
+    window.requestIdleCallback(enhance, { timeout: 1500 });
+  else setTimeout(enhance, 200);
+</script>

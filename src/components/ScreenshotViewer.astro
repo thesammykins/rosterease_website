@@ -1,0 +1,141 @@
+<dialog class="re-screenshot-dialog" aria-label="App screenshot">
+  <button
+    class="re-dialog-close"
+    type="button"
+    aria-label="Close screenshot"
+    autofocus
+  >
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg
+    >
+  </button>
+  <div class="re-dialog-image"></div>
+</dialog>
+<script>
+  import { animate } from "motion/mini";
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+  const dialog = document.querySelector<HTMLDialogElement>(
+    ".re-screenshot-dialog",
+  );
+  const imageContainer = dialog?.querySelector(".re-dialog-image");
+  if (dialog && imageContainer) {
+    let trigger: HTMLAnchorElement | undefined;
+    let closing = false;
+    let settledBounds: DOMRect;
+    let transition: ReturnType<typeof animate> | undefined;
+
+    function sourceTransform() {
+      const source = trigger?.querySelector("img")?.getBoundingClientRect();
+      const target = settledBounds;
+      if (!source || source.bottom < 0 || source.top > innerHeight)
+        return "scale(.96)";
+      const x =
+        source.left + source.width / 2 - (target.left + target.width / 2);
+      const y =
+        source.top + source.height / 2 - (target.top + target.height / 2);
+      const scale = Math.min(
+        source.width / target.width,
+        source.height / target.height,
+        1,
+      );
+      return "translate(" + x + "px, " + y + "px) scale(" + scale + ")";
+    }
+
+    document
+      .querySelectorAll<HTMLAnchorElement>("[data-screenshot]")
+      .forEach((link) => {
+        link.addEventListener("click", async (event) => {
+          const picture = link.querySelector("picture");
+          if (
+            !picture ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey
+          )
+            return;
+          event.preventDefault();
+          if (dialog.open || closing) return;
+          trigger = link;
+          const fullPicture = picture.cloneNode(true) as HTMLPictureElement;
+          const image = fullPicture.querySelector("img");
+          const source = fullPicture.querySelector("source");
+          imageContainer.replaceChildren(fullPicture);
+          image?.setAttribute("loading", "eager");
+          dialog.showModal();
+          settledBounds = dialog.getBoundingClientRect();
+          if (!reduced.matches) {
+            transition = animate(
+              dialog,
+              {
+                transform: [sourceTransform(), "translate(0px, 0px) scale(1)"],
+                opacity: [0.25, 1],
+                "--re-backdrop-opacity": [0, 1],
+              },
+              { duration: 0.44, ease: [0.22, 1, 0.36, 1] },
+            );
+          }
+          const dark = source && matchMedia(source.media).matches;
+          const fullURL = dark
+            ? picture.dataset.fullDark
+            : picture.dataset.fullLight;
+          if (image && fullURL) {
+            const preload = new Image();
+            preload.src = fullURL;
+            try {
+              await preload.decode();
+              if (dialog.open && imageContainer.contains(fullPicture)) {
+                if (source && picture.dataset.fullDark)
+                  source.srcset = picture.dataset.fullDark;
+                image.src = picture.dataset.fullLight ?? fullURL;
+              }
+            } catch (error) {
+              console.info(
+                "Full screenshot unavailable; retaining preview.",
+                error,
+              );
+            }
+          }
+        });
+      });
+
+    async function closeScreenshot() {
+      if (!dialog || !dialog.open || closing) return;
+      closing = true;
+      // Reuse layout bounds so interrupting an opening keeps its current visual position.
+      if (!reduced.matches) {
+        transition = animate(
+          dialog,
+          {
+            transform: sourceTransform(),
+            opacity: 0,
+            "--re-backdrop-opacity": 0,
+          },
+          { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
+        );
+        await transition;
+      }
+      dialog.close();
+      for (const property of ["opacity", "transform", "--re-backdrop-opacity"])
+        dialog.style.removeProperty(property);
+      closing = false;
+    }
+    reduced.addEventListener("change", () => {
+      if (reduced.matches) transition?.complete();
+    });
+    dialog.querySelector("button")?.addEventListener("click", closeScreenshot);
+    dialog.addEventListener("cancel", (event) => {
+      event.preventDefault();
+      closeScreenshot();
+    });
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) closeScreenshot();
+    });
+  }
+</script>

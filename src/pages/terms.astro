@@ -1,0 +1,57 @@
+---
+import RosterEaseLayout from "../layouts/RosterEaseLayout.astro";
+import { EULA_URL } from "../lib/rosterease";
+---
+
+<RosterEaseLayout
+  title="Terms of Use"
+  description="RosterEase uses Apple's standard licence agreement. Find subscription information, beta guidance and privacy links."
+>
+  <div class="re-shell">
+    <section class="re-page-intro">
+      <p class="re-kicker">Terms of Use</p><h1>
+        Clear terms.<br />In one place.
+      </h1><p>
+        RosterEase uses Apple’s standard End User Licence Agreement for its App
+        Store app.
+      </p><a class="re-text-link" href={EULA_URL}
+        >Read Apple’s standard EULA ↗</a>
+    </section><article class="re-prose">
+      <section>
+        <h2>RosterEase Plus</h2><p>
+          Free includes one full Shift Worker workplace. Plus unlocks creating,
+          importing and restoring multiple Shift Worker workplaces. Monthly and
+          Annual offer the same entitlement with different billing periods.
+        </p><p>
+          App Store purchases are handled by Apple. Review the in-app purchase
+          sheet for your local price, billing period and any trial eligibility.
+          Subscriptions renew automatically unless cancelled through your Apple
+          account. Use Apple’s subscription settings to manage or cancel a
+          subscription, and the app’s restore option to recover eligible
+          purchases.
+        </p><p>
+          <a href="https://support.apple.com/118428"
+            >How to cancel an Apple subscription ↗</a>
+        </p>
+      </section>
+      <section>
+        <h2>During TestFlight testing</h2><p>
+          Beta builds can change and may contain errors. Features, access and
+          appearance can differ from the final App Store release. Keep backups
+          and verify important schedule details against their source.
+        </p><p>
+          Testing is also subject to Apple’s TestFlight terms. Nothing in this
+          notice excludes rights that cannot be excluded under applicable law.
+        </p>
+      </section>
+      <section>
+        <h2>Your information and support</h2><p>
+          The <a href="/privacy">Privacy Policy</a> explains local data, optional
+          sharing, backups and support information. If something is unclear, <a
+            href="/contact">contact RosterEase support</a
+          >.
+        </p>
+      </section>
+    </article>
+  </div>
+</RosterEaseLayout>

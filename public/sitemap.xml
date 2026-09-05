@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://rosterease.app/</loc>
-  </url>
-  <url>
-    <loc>https://rosterease.app/privacy</loc>
-  </url>
-  <url>
-    <loc>https://rosterease.app/contact</loc>
-  </url>
+  <url><loc>https://rosterease.app/</loc></url>
+  <url><loc>https://rosterease.app/app</loc></url>
+  <url><loc>https://rosterease.app/contact</loc></url>
+  <url><loc>https://rosterease.app/privacy</loc></url>
+  <url><loc>https://rosterease.app/on-device</loc></url>
+  <url><loc>https://rosterease.app/terms</loc></url>
+  <url><loc>https://rosterease.app/help</loc></url>
+  <url><loc>https://rosterease.app/help/getting-started</loc></url>
+  <url><loc>https://rosterease.app/help/smart-import</loc></url>
+  <url><loc>https://rosterease.app/help/calendar-and-privacy</loc></url>
+  <url><loc>https://rosterease.app/help/backup-and-restore</loc></url>
+  <url><loc>https://rosterease.app/credits</loc></url>
 </urlset>

@@ -1,138 +1,79 @@
 ---
 import RosterEaseLayout from "../layouts/RosterEaseLayout.astro";
 import { SUPPORT_EMAIL } from "../lib/rosterease";
-
-const fallbackSupportMailto = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent("RosterEase Support")}`;
-const fallbackBugMailto = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent("RosterEase Bug Report")}`;
-const fallbackFeedbackMailto = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent("RosterEase Feedback")}`;
-
 const actions = [
   {
-    panelClass: "re-action-panel re-action-panel--support",
-    label: "General support",
-    title: "Need help with setup, import, route planning, or calendar sync?",
-    text: "Tell us what you were trying to do and where it stopped making sense. This is the best place for setup help, imports, routes, Calendar, backup, restore, reset, or other app questions.",
-    href: fallbackSupportMailto,
+    title: "Setup and settings",
+    text: "Tell us what you were trying to do and where you got stuck. We can help with setup, imports, Calendar, routes and backups.",
     subject: "RosterEase Support",
-    buttonLabel: "Get support",
-    buttonClass: "re-button re-button--primary",
+    label: "Ask for help",
   },
   {
-    panelClass: "re-action-panel re-action-panel--bug",
-    label: "Bug report",
-    title: "Something not behaving the way it should?",
-    text: "If the app crashes, imports the wrong shift or client, mishandles a route day, writes an unexpected Calendar event, or does something odd, send enough detail for it to be reproduced.",
-    href: fallbackBugMailto,
+    title: "Report a problem",
+    text: "Include the step that failed, what you expected and what happened instead. For a crash or import problem, the build number helps.",
     subject: "RosterEase Bug Report",
-    buttonLabel: "Report a bug",
-    buttonClass: "re-button re-button--secondary",
+    label: "Report a problem",
   },
   {
-    panelClass: "re-action-panel re-action-panel--feedback",
-    label: "Feedback",
-    title: "Have an idea that would make the app easier to use?",
-    text: "Send product feedback, workflow suggestions, accessibility notes, or examples of shift and field-work problems you want RosterEase to handle better. If you include a roster, import source, route, client list, screenshot, or PDF, redact sensitive details first.",
-    href: fallbackFeedbackMailto,
+    title: "Suggest a change",
+    text: "Tell us about your workflow or an accessibility improvement that would make RosterEase more useful to you.",
     subject: "RosterEase Feedback",
-    buttonLabel: "Send feedback",
-    buttonClass: "re-button re-button--secondary",
+    label: "Share feedback",
   },
-];
-
-const whatHelps = [
-  "A short description of what happened.",
-  "The iPhone model and iOS version you are using.",
-  "A screenshot, redacted sample roster, redacted route/client example, or the step that triggered the issue if you can share it.",
-  "Remove names, addresses, phone numbers, employee IDs, client identifiers, private support notes, medical notes, and any workplace-confidential details before attaching anything.",
-  "If you are using the TestFlight build, include the build number shown in TestFlight or in the app if you can find it.",
 ];
 ---
 
 <RosterEaseLayout
-  title="Contact"
-  description="Get RosterEase support for setup, import, routes, calendar sync, privacy settings, bug reports, and product feedback."
+  title="Support"
+  description="Contact RosterEase support for setup, Smart Import, Calendar, privacy, backup and restore questions."
 >
   <section class="re-subpage-hero">
     <div class="re-shell re-subpage-hero__grid">
-      <div class="re-subpage-hero__copy">
-        <p class="re-kicker">Contact</p>
-        <h1 class="re-page-title">We’ll help you get RosterEase working.</h1>
-        <p class="re-lede re-subpage-hero__lede">
-          Choose the closest option and your mail app will open with a prepared subject line.
-          A short support reference is added automatically so follow-up messages are easier to connect.
-        </p>
-      </div>
-
-      <aside class="re-address-panel">
-        <span class="re-address-panel__label">Support starts here</span>
-        <a
-          class="re-button re-button--primary"
-          href={fallbackSupportMailto}
-          data-support-mailto
-          data-support-subject="RosterEase Support"
+      <div>
+        <p class="re-kicker">Support</p><h1 class="re-page-title">
+          Get help with<br />RosterEase.
+        </h1><p class="re-lede">
+          Get help with setup, report a problem or suggest a change.
+        </p><a class="re-text-link" href="/help">Start with the help guides →</a
         >
-          Get support
-        </a>
-        <p>
-          For setup help, imports, routes, Calendar questions, privacy settings, bug reports, or product feedback.
-          Please redact roster, client, patient, employee, workplace, payroll, and health details before sending examples.
+      </div><aside class="re-address-panel">
+        <span class="re-address-panel__label">Email RosterEase</span><a
+          href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a
+        ><p>
+          The links below open your email app. If that doesn't work, copy this
+          address into your usual email service.
+        </p><p>
+          Please remove personal and workplace-confidential information before
+          sending examples.
         </p>
       </aside>
     </div>
   </section>
-
-  <section class="re-contact-section">
-    <div class="re-shell re-contact-grid">
-      {
-        actions.map((action) => (
-          <article class={action.panelClass}>
-            <span class="re-action-panel__label">{action.label}</span>
+  <section class="re-shell re-contact-grid">
+    {
+      actions.map((action) => (
+        <article class="re-action-panel">
+          <>
             <h2>{action.title}</h2>
             <p>{action.text}</p>
-            <a class={action.buttonClass} href={action.href} data-support-mailto data-support-subject={action.subject}>
-              {action.buttonLabel}
+            <a
+              class="re-text-link"
+              href={`mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(action.subject)}`}
+            >
+              {action.label}
             </a>
-          </article>
-        ))
-      }
-
-      <article class="re-action-panel re-action-panel--note">
-        <span class="re-action-panel__label">What helps</span>
-        <h2>Include enough detail to reproduce the problem.</h2>
-        <ul class="re-detail-list re-detail-list--compact">
-          {whatHelps.map((item) => <li>{item}</li>)}
-        </ul>
-      </article>
-    </div>
+          </>
+        </article>
+      ))
+    }<article class="re-action-panel">
+      <h2>A few useful details.</h2><ul class="re-detail-list">
+        <li>Your iPhone or iPad model and OS version.</li><li>
+          The RosterEase version and build number.
+        </li><li>The steps to reproduce the problem and any error text.</li><li>
+          A redacted screenshot, only if it helps. Remove names, addresses,
+          phone numbers, identifiers, medical information and private notes.
+        </li>
+      </ul>
+    </article>
   </section>
 </RosterEaseLayout>
-
-<script define:vars={{ supportMailbox: SUPPORT_EMAIL }}>
-  const supportLinks = Array.from(document.querySelectorAll("[data-support-mailto]"));
-
-  function supportReference() {
-    const bytes = new Uint8Array(4);
-    if (globalThis.crypto?.getRandomValues) {
-      globalThis.crypto.getRandomValues(bytes);
-    } else {
-      for (let index = 0; index < bytes.length; index += 1) {
-        bytes[index] = Math.floor(Math.random() * 256);
-      }
-    }
-
-    const datePart = new Date().toISOString().slice(0, 10).replaceAll("-", "");
-    const alphabet = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
-    const randomPart = Array.from(bytes, (byte) => alphabet[byte % alphabet.length]).join("");
-    return `${datePart}-${randomPart}`;
-  }
-
-  function assignSupportSubjects() {
-    for (const link of supportLinks) {
-      const subject = link.getAttribute("data-support-subject") || "RosterEase Support";
-      const subjectWithReference = `${subject} - Request ${supportReference()}`;
-      link.href = `mailto:${supportMailbox}?subject=${encodeURIComponent(subjectWithReference)}`;
-    }
-  }
-
-  assignSupportSubjects();
-</script>

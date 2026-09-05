@@ -1,0 +1,182 @@
+---
+import RosterEaseLayout from "../layouts/RosterEaseLayout.astro";
+import AppScreenshot from "../components/AppScreenshot.astro";
+import PhoneScreenshot from "../components/PhoneScreenshot.astro";
+import { screens } from "../lib/screenshots";
+import { TESTFLIGHT_URL } from "../lib/rosterease";
+---
+
+<RosterEaseLayout
+  title="The app"
+  description="Explore repeating shift patterns, client visits, on-device Smart Import and the privacy choices that make RosterEase a personal workday planner."
+>
+  <div class="re-shell">
+    <section class="re-page-intro">
+      <p class="re-kicker">A closer look</p><h1>
+        Repeating shifts.<br />Planned client visits.
+      </h1><p>
+        Use Shift Worker for a repeating roster or Field Worker for ordered
+        client visits. Both include a calendar and a Today view.
+      </p><nav class="re-subnav" aria-label="On this page">
+        <a href="#shift">Shift work</a><a href="#field">Field work</a><a
+          href="#everyday">Everyday details</a
+        ><a href="#privacy">Privacy</a><a href="#plus">Free & Plus</a>
+      </nav>
+    </section>
+    <section class="re-feature" id="shift">
+      <div>
+        <p class="re-kicker">Shift Worker</p><h2>
+          Set a rotation.<br />Adjust individual days.
+        </h2><p>
+          Set up your workplace, shift types and repeating pattern. See how they
+          fall across the week, fortnight or month, then adjust individual days
+          when plans change.
+        </p><ul>
+          <li>Day, night and overnight shifts in a repeating rotation.</li><li>
+            One-off edits without rebuilding the whole pattern.
+          </li><li>
+            Upcoming shifts, leave guidance and attendance in Today.
+          </li><li>Optional Apple Calendar sync to a calendar you choose.</li>
+        </ul><a class="re-text-link" href="/help/getting-started"
+          >Set up your first workplace →</a
+        >
+      </div><div class="re-feature-visual">
+        <PhoneScreenshot screen={screens.shiftCalendar} eager />
+      </div>
+    </section>
+    <section class="re-feature" id="field">
+      <div>
+        <p class="re-kicker">Field Worker</p><h2>
+          Plan the order<br />of your visits.
+        </h2><p>
+          Keep your clients, visit durations and appointment windows together.
+          Follow your planned visit order and mark each stop complete as you go.
+        </p><ul>
+          <li>A client directory with visit details and private notes.</li><li>
+            Travel buffers between visits, with optional Maps estimates.
+          </li><li>
+            Today's next stop, directions and completion progress.
+          </li><li>A calendar for looking ahead at your route days.</li>
+        </ul><p class="re-note">
+          You control the visit order. RosterEase does not automatically
+          optimise routes or replace a clinical record or employer scheduling
+          system.
+        </p><a class="re-text-link" href="/help/getting-started#field"
+          >Set up your visits →</a
+        >
+      </div><div class="re-ipad-previews">
+        {
+          [
+            { screen: screens.ipadFieldToday, label: "Today on iPad" },
+            { screen: screens.ipadFieldCalendar, label: "Calendar on iPad" },
+          ].map(({ screen, label }) => (
+            <figure>
+              <>
+                <a
+                  href={screen.light.src}
+                  data-screenshot
+                  aria-label={`Enlarge ${label} screenshot`}
+                >
+                  <AppScreenshot screen={screen} />
+                </a>
+                <figcaption>{label}</figcaption>
+              </>
+            </figure>
+          ))
+        }
+      </div>
+    </section>
+    <section class="re-feature-pair" id="everyday">
+      <div>
+        <p class="re-kicker">Less retyping</p><h2>
+          Import a roster<br />or client list.
+        </h2><p>
+          Smart Import reads supported text, images and PDFs on your device.
+          Review the extracted shifts or clients, correct issues and decide what
+          to apply.
+        </p><p>
+          Shift imports build repeating patterns. Dated source material needs
+          review and explicit conversion; split shifts and multiple workplaces
+          in one import are not supported.
+        </p><a class="re-text-link" href="/help/smart-import"
+          >Understand Smart Import →</a
+        >
+      </div><div>
+        <p class="re-kicker">Around your day</p><h2>
+          Check your next shift or visit.
+        </h2><p>
+          Check Today on your phone, look further ahead on iPad, or use a widget
+          for a quick view. Leave guidance helps you plan around travel and
+          buffers.
+        </p><p>
+          Guidance is a planning aid. Check your source roster, appointment
+          details and current travel conditions when timing matters.
+        </p><a class="re-text-link" href="/help/calendar-and-privacy"
+          >Calendar, Maps and privacy choices →</a
+        >
+      </div>
+    </section>
+    <section class="re-feature-pair" id="privacy">
+      <div>
+        <p class="re-kicker">On-device processing</p><h2>
+          Import without<br />a cloud AI service.
+        </h2><p>
+          No RosterEase account is required. Import extraction and parsing run
+          on your device, without uploading roster or client contents to a cloud
+          AI service. The app does not use advertising or analytics.
+        </p><p>
+          Shift Worker Calendar sync is optional. Private shift notes are
+          excluded from Calendar events unless you enable them. Maps receives
+          address or location text, not client names or private notes.
+        </p><a class="re-text-link" href="/on-device"
+          >See what stays local and what is shared →</a
+        >
+      </div><div>
+        <p class="re-kicker">Keep a copy</p><h2>A backup you control.</h2><p>
+          Create a passphrase-protected, encrypted backup when you choose. Save
+          the file through Apple's system picker and choose when to restore it.
+        </p><p>
+          There is no automatic RosterEase cloud sync. A storage provider you
+          select, such as iCloud Drive, handles your exported file under its own
+          terms.
+        </p><a class="re-text-link" href="/help/backup-and-restore"
+          >Back up and restore safely →</a
+        >
+      </div>
+    </section>
+    <section class="re-feature-pair" id="plus">
+      <div>
+        <p class="re-kicker">Free & RosterEase Plus</p><h2>
+          One workplace, included.<br />More when you need them.
+        </h2><p>
+          Free includes one full Shift Worker workplace, with its roster,
+          Calendar, widget and backup features. Plus adds the ability to create,
+          import or restore multiple Shift Worker workplaces.
+        </p><p>
+          Monthly and Annual unlock the same Plus features and differ by billing
+          period. Check the in-app offer for your local price and any
+          eligibility conditions. This capacity limit applies to Shift Worker
+          workplaces.
+        </p><a class="re-text-link" href="/terms"
+          >Subscriptions and Terms of Use →</a
+        >
+      </div><div id="beta">
+        <p class="re-kicker">Try the beta</p><h2>
+          Test RosterEase<br />with your schedule.
+        </h2><p>
+          RosterEase is available for testing through TestFlight, ahead of its
+          App Store release. Beta features and access can differ from the final
+          release.
+        </p><p>
+          These screenshots show development builds with fictional data. Your
+          TestFlight build may look or behave differently as testing progresses.
+        </p><a
+          class="re-button"
+          href={TESTFLIGHT_URL}
+          target="_blank"
+          rel="noopener">Join TestFlight ↗</a
+        >
+      </div>
+    </section>
+  </div>
+</RosterEaseLayout>

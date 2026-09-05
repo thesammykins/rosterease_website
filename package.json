@@ -6,12 +6,18 @@
     "dev": "astro dev",
     "build": "astro build",
     "check:a11y": "npm run build && node scripts/check-accessibility.mjs",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "check:motion": "node --experimental-strip-types --test scripts/hero-rotation.test.mjs"
   },
   "engines": {
     "node": ">=22.12.0"
   },
   "dependencies": {
-    "astro": "^6.2.2"
+    "astro": "^6.2.2",
+    "motion": "13.2.0",
+    "three": "0.185.1"
+  },
+  "devDependencies": {
+    "@types/three": "0.185.0"
   }
 }

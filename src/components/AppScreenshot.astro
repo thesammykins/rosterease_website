@@ -1,0 +1,56 @@
+---
+import { getImage } from "astro:assets";
+import type { AppScreen } from "../lib/screenshots";
+interface Props {
+  screen: AppScreen;
+  eager?: boolean;
+  draggable?: boolean;
+}
+const { screen, eager = false, draggable = true } = Astro.props;
+const light = await getImage({
+  src: screen.light ?? screen.dark,
+  width: 640,
+  format: "webp",
+  quality: 85,
+});
+const dark = await getImage({
+  src: screen.dark,
+  width: 640,
+  format: "webp",
+  quality: 85,
+});
+const fullLight = await getImage({
+  src: screen.light ?? screen.dark,
+  width: 1206,
+  format: "webp",
+  quality: 90,
+});
+const fullDark = await getImage({
+  src: screen.dark,
+  width: 1206,
+  format: "webp",
+  quality: 90,
+});
+---
+
+<picture
+  data-app-screen
+  data-full-light={fullLight.src}
+  data-full-dark={fullDark.src}
+>
+  <source
+    media="(prefers-color-scheme: dark)"
+    srcset={dark.src}
+    data-dark-source
+  />
+  <img
+    draggable={draggable}
+    src={light.src}
+    alt={screen.alt}
+    width={light.attributes.width}
+    height={light.attributes.height}
+    loading={eager ? "eager" : "lazy"}
+    decoding="async"
+    fetchpriority={eager ? "high" : "auto"}
+  />
+</picture>

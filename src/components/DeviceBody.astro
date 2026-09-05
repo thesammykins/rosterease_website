@@ -1,0 +1,26 @@
+---
+import AppScreenshot from "./AppScreenshot.astro";
+import type { AppScreen } from "../lib/screenshots";
+interface Props {
+  screen: AppScreen;
+  eager?: boolean;
+  draggable?: boolean;
+}
+const { screen, eager = false, draggable = true } = Astro.props;
+---
+
+<span class="re-device-body">
+  <!-- Cross-sections give the generic enclosure depth as it turns. -->
+  {
+    Array.from({ length: 16 }, (_, index) => (
+      <span
+        class="re-device-layer"
+        style={"--device-depth: " + -index * 2 + "px"}
+        aria-hidden="true"
+      />
+    ))
+  }
+  <span class="re-device-face"
+    ><AppScreenshot screen={screen} eager={eager} draggable={draggable} /></span
+  >
+</span>

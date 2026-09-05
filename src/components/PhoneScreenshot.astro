@@ -1,0 +1,27 @@
+---
+import { Image } from "astro:assets";
+import AppScreenshot from "./AppScreenshot.astro";
+import type { AppScreen } from "../lib/screenshots";
+import frame from "../assets/rosterease/devices/iphone-17-black.png";
+interface Props {
+  screen: AppScreen;
+  eager?: boolean;
+  class?: string;
+}
+const { screen, eager = false, class: className } = Astro.props;
+---
+
+<div class:list={["re-phone", className]}>
+  <AppScreenshot screen={screen} eager={eager} />
+  <Image
+    class="re-phone-frame"
+    src={frame}
+    alt=""
+    aria-hidden="true"
+    widths={[300, 600]}
+    sizes="(max-width: 720px) 42vw, 280px"
+    format="webp"
+    quality={90}
+    loading={eager ? "eager" : "lazy"}
+  />
+</div>

@@ -1,318 +1,258 @@
 ---
 import "../styles/rosterease.css";
+import ScreenshotViewer from "../components/ScreenshotViewer.astro";
 import appIcon from "../assets/rosterease/rosterease-app-icon.svg";
-import ogImageAsset from "../assets/rosterease/og-image.png";
+import ogImage from "../assets/rosterease/og-image.png";
 import { TESTFLIGHT_URL } from "../lib/rosterease";
-
-export interface Props {
+interface Props {
   title: string;
   description?: string;
 }
-
 const {
   title,
-  description = "RosterEase turns rosters and client visits into a clear day plan for shift workers and field workers on iPhone and iPad.",
+  description = "A personal planner for repeating shifts and client visits. Made for iPhone and iPad.",
 } = Astro.props;
-
 const fullTitle = title === "RosterEase" ? title : `${title} | RosterEase`;
-const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
-const canonicalUrl = new URL(currentPath, Astro.url).href;
-const ogImageUrl = new URL(ogImageAsset.src, Astro.url).href;
-const isOverview = currentPath === "/";
-const isPrivacy = currentPath === "/privacy";
-const isContact = currentPath === "/contact";
-const structuredData = isOverview
-  ? JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      name: "RosterEase",
-      url: "https://rosterease.app/",
-      description,
-      applicationCategory: "ProductivityApplication",
-      operatingSystem: "iOS, iPadOS",
-    })
-  : null;
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const canonical = new URL(path, Astro.site ?? "https://rosterease.app").href;
+const imageUrl = new URL(ogImage.src, Astro.site ?? "https://rosterease.app")
+  .href;
+const navigation = [
+  { href: "/app", label: "The app" },
+  { href: "/contact", label: "Support" },
+  { href: "/privacy", label: "Privacy" },
+];
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "RosterEase",
+  url: "https://rosterease.app/",
+  description,
+  applicationCategory: "ProductivityApplication",
+  operatingSystem: "iOS, iPadOS",
+});
 ---
 
 <!doctype html>
-<html lang="en-AU">
+<html lang="en-AU" data-theme="system">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f3f6fb" data-theme-color />
+    <meta name="theme-color" content="#faf9f6" />
     <script is:inline>
-      (() => {
-        try {
-          const savedTheme = localStorage.getItem("rosterease-theme");
-          if (savedTheme === "light" || savedTheme === "dark") {
-            document.documentElement.dataset.theme = savedTheme;
-          }
-        } catch {
-          // System theme remains the safe default when storage is unavailable.
-        }
-      })();
+      try {
+        const theme = localStorage.getItem("rosterease-theme");
+        if (["light", "dark", "system"].includes(theme))
+          document.documentElement.dataset.theme = theme;
+      } catch (error) {
+        console.info("Theme preference unavailable; using system appearance.");
+      }
     </script>
     <link rel="icon" type="image/svg+xml" href={appIcon.src} />
-    <link rel="canonical" href={canonicalUrl} />
+    <link rel="canonical" href={canonical} />
     <title>{fullTitle}</title>
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="RosterEase" />
     <meta property="og:locale" content="en_AU" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content={ogImageUrl} />
-    <meta property="og:image:width" content={String(ogImageAsset.width)} />
-    <meta property="og:image:height" content={String(ogImageAsset.height)} />
-    <meta property="og:image:alt" content="RosterEase on iPhone and iPad" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content={ogImage.width} />
+    <meta property="og:image:height" content={ogImage.height} />
+    <meta property="og:image:alt" content="RosterEase workday planner" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImageUrl} />
-    {structuredData && <script type="application/ld+json" set:html={structuredData} />}
+    <meta name="twitter:image" content={imageUrl} />
+    {
+      path === "/" && (
+        <script type="application/ld+json" set:html={structuredData} />
+      )
+    }
   </head>
-  <body class="re-body">
+  <body>
     <a class="re-skip-link" href="#content">Skip to content</a>
-
     <header class="re-site-header">
-      <div class="re-shell re-site-header__inner">
-        <a href="/" class="re-brand" aria-label="RosterEase home">
-          <img src={appIcon.src} alt="" width="38" height="38" aria-hidden="true" />
-          <span>RosterEase</span>
-        </a>
-
+      <div class="re-shell re-header-inner">
+        <a class="re-brand" href="/" aria-label="RosterEase home"
+          ><img src={appIcon.src} alt="" width="36" height="36" /><span
+            >RosterEase</span
+          ></a
+        >
         <nav class="re-nav" aria-label="Main navigation">
-          <a href="/" aria-current={isOverview ? "page" : undefined}>Overview</a>
-          <a href="/#modes">Two modes</a>
-          <a href="/#ipad">iPad</a>
-          <a href="/#plus">Plus</a>
-          <a href="/privacy" aria-current={isPrivacy ? "page" : undefined}>Privacy</a>
-          <a href="/contact" aria-current={isContact ? "page" : undefined}>Support</a>
+          {
+            navigation.map((item) => (
+              <a
+                href={item.href}
+                aria-current={path === item.href ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+            ))
+          }
         </nav>
-
-        <div class="re-header-actions">
-          <button
-            class="re-theme-toggle"
-            type="button"
-            data-theme-toggle
-            aria-pressed="false"
-            aria-label="Switch to dark mode"
-          >
-            <span data-theme-toggle-label>Dark mode</span>
-          </button>
-
-          <a class="re-header-cta" href={TESTFLIGHT_URL} target="_blank" rel="noopener">Join beta</a>
-
-          <details class="re-mobile-menu">
-            <summary>Menu</summary>
-            <nav aria-label="Mobile navigation">
-              <a href="/" aria-current={isOverview ? "page" : undefined}>Overview</a>
-              <a href="/#modes">Two modes</a>
-              <a href="/#ipad">iPad</a>
-              <a href="/#plus">Plus</a>
-              <a href="/privacy" aria-current={isPrivacy ? "page" : undefined}>Privacy</a>
-              <a href="/contact" aria-current={isContact ? "page" : undefined}>Support</a>
-              <a href={TESTFLIGHT_URL} target="_blank" rel="noopener">Join TestFlight</a>
-            </nav>
+        <a
+          class="re-button re-header-cta"
+          href={TESTFLIGHT_URL}
+          target="_blank"
+          rel="noopener">Join TestFlight <span aria-hidden="true">↗</span></a
+        >
+        <details class="re-mobile-menu">
+          <summary>Menu</summary>
+          <nav aria-label="Mobile navigation">
+            {
+              navigation.map((item) => (
+                <a
+                  href={item.href}
+                  aria-current={path === item.href ? "page" : undefined}
+                >
+                  {item.label}
+                </a>
+              ))
+            }
+            <a href="/help">Help guides</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="content" tabindex="-1"><slot /></main>
+    <ScreenshotViewer />
+    <footer class="re-site-footer">
+      <div class="re-shell">
+        <div class="re-footer-top">
+          <div>
+            <a class="re-brand" href="/" aria-label="RosterEase home"
+              ><img src={appIcon.src} alt="" width="36" height="36" /><span
+                >RosterEase</span
+              ></a
+            ><p>A personal workday planner.<br />Made for iPhone and iPad.</p>
+          </div>
+          <nav class="re-footer-links" aria-label="Footer navigation">
+            <a href="/app">The app</a><a href="/help">Help guides</a><a
+              href="/contact">Support</a
+            ><a href="/privacy">Privacy Policy</a><a href="/terms"
+              >Terms of Use</a
+            ><a href="/credits">Credits</a>
+          </nav>
+          <div class="re-footer-cta">
+            <a
+              class="re-button"
+              href={TESTFLIGHT_URL}
+              target="_blank"
+              rel="noopener"
+              >Join TestFlight <span aria-hidden="true">↗</span></a
+            ><p>App Store release coming soon</p>
+          </div>
+        </div>
+        <div class="re-footer-bottom">
+          <p>
+            © {new Date().getFullYear()} RosterEase · <a
+              href="https://samanthamyers.au">Samantha Myers</a
+            >
+          </p>
+          <details class="re-appearance">
+            <summary aria-label="Choose appearance" title="Choose appearance">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                aria-hidden="true"
+                ><circle cx="12" cy="12" r="8"></circle><path
+                  d="M12 4a8 8 0 0 1 0 16Z"
+                  fill="currentColor"
+                  stroke="none"></path></svg
+              >
+            </summary>
+            <fieldset class="re-theme-switch">
+              <legend>Appearance</legend>{
+                ["light", "dark", "system"].map((theme) => (
+                  <label>
+                    <>
+                      <input
+                        type="radio"
+                        name="theme"
+                        value={theme}
+                        checked={theme === "system"}
+                      />
+                      <span>{theme[0].toUpperCase() + theme.slice(1)}</span>
+                    </>
+                  </label>
+                ))
+              }
+            </fieldset>
           </details>
         </div>
       </div>
-    </header>
-
-    <main id="content" tabindex="-1"><slot /></main>
-
-    <footer class="re-site-footer">
-      <div class="re-shell re-footer">
-        <div class="re-footer__brand">
-          <a href="/" class="re-brand" aria-label="RosterEase home">
-            <img src={appIcon.src} alt="" width="38" height="38" aria-hidden="true" />
-            <span>RosterEase</span>
-          </a>
-          <p>Your roster and route planner for iPhone and iPad.</p>
-        </div>
-
-        <div class="re-footer__links" aria-label="Footer navigation">
-          <a href="/#modes">Product</a>
-          <a href="/#plus">Plus</a>
-          <a href={TESTFLIGHT_URL} target="_blank" rel="noopener">TestFlight</a>
-          <a href="/privacy">Privacy</a>
-          <a href="/contact">Support</a>
-          <a href="https://samanthamyers.au">Developer</a>
-        </div>
-
-        <p class="re-footer__note">Testing now on TestFlight. App Store release follows beta validation.</p>
-      </div>
     </footer>
     <script>
-      const themeToggle = document.querySelector("[data-theme-toggle]");
-      const themeColour = document.querySelector("[data-theme-color]");
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
-
-      function storedTheme() {
-        try {
-          const value = localStorage.getItem("rosterease-theme");
-          return value === "light" || value === "dark" ? value : null;
-        } catch {
-          return null;
-        }
-      }
-
-      function updateScreenshotGroup(group, theme) {
-        group.dataset.screenshotTheme = theme;
-        const toggle = group.querySelector("[data-screenshot-toggle]");
-        if (!(toggle instanceof HTMLButtonElement)) return;
-        const isDark = theme === "dark";
-        toggle.setAttribute("aria-pressed", String(isDark));
-        toggle.textContent = isDark ? "Show light screenshots" : "Show dark screenshots";
-      }
-
-      function updateScreenshotGroups(theme) {
-        document.querySelectorAll("[data-screenshot-group]").forEach((group) => {
-          updateScreenshotGroup(group, theme);
-        });
-      }
-
-      function applyTheme(theme) {
-        if (theme === "light" || theme === "dark") {
-          document.documentElement.dataset.theme = theme;
-        } else {
-          delete document.documentElement.dataset.theme;
-        }
-
-        const effectiveTheme = theme ?? (systemTheme.matches ? "dark" : "light");
-        if (themeColour) themeColour.setAttribute("content", effectiveTheme === "dark" ? "#0b1019" : "#f3f6fb");
-        if (themeToggle instanceof HTMLButtonElement) {
-          const isDark = effectiveTheme === "dark";
-          themeToggle.setAttribute("aria-pressed", String(isDark));
-          themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
-          const label = themeToggle.querySelector("[data-theme-toggle-label]");
-          if (label) label.textContent = isDark ? "Light mode" : "Dark mode";
-        }
-        updateScreenshotGroups(effectiveTheme);
-      }
-
-      function showStaticDemo(group, userRequested = false) {
-        if (!(group instanceof HTMLElement)) return;
-        if (userRequested) group.dataset.demoPreference = "static";
-        const videos = [...group.querySelectorAll("[data-hero-video]")].filter((video) => video instanceof HTMLVideoElement);
-        const toggle = group.querySelector("[data-demo-toggle]");
-        if (videos.length === 0) return;
-        videos.forEach((video) => {
-          video.pause();
-          delete video.dataset.playing;
-        });
-        group.dataset.demoState = "static";
-        if (toggle instanceof HTMLButtonElement && videos.some((video) => video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA)) {
-          toggle.hidden = false;
-          toggle.textContent = "Play app demo";
-          toggle.setAttribute("aria-label", "Play the RosterEase app demo");
-        }
-      }
-
-      function showVideoDemo(group, userRequested = false) {
-        if (!(group instanceof HTMLElement)) return;
-        if (group.dataset.demoPreference === "static" && !userRequested) return;
-        if (userRequested) delete group.dataset.demoPreference;
-        const videos = [...group.querySelectorAll("[data-hero-video]")].filter((video) => video instanceof HTMLVideoElement && video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA);
-        const toggle = group.querySelector("[data-demo-toggle]");
-        if (videos.length === 0) return;
-        Promise.allSettled(videos.map((video) => video.play())).then((results) => {
-          if (group.dataset.demoPreference === "static") return showStaticDemo(group);
-          let isPlaying = false;
-          results.forEach((result, index) => {
-            if (result.status !== "fulfilled") return;
-            videos[index].dataset.playing = "true";
-            isPlaying = true;
+      import { initSiteMotion } from "../scripts/site-motion";
+      const choices = document.querySelectorAll<HTMLInputElement>(
+        'input[name="theme"]',
+      );
+      const appearance =
+        document.querySelector<HTMLDetailsElement>(".re-appearance");
+      const appearanceTrigger = appearance?.querySelector("summary");
+      const selected = document.documentElement.dataset.theme ?? "system";
+      const describeAppearance = (theme: string) => {
+        const label = `Appearance: ${theme}. Choose appearance`;
+        appearanceTrigger?.setAttribute("aria-label", label);
+        appearanceTrigger?.setAttribute("title", label);
+      };
+      const updateScreens = (theme: string) => {
+        document
+          .querySelectorAll<HTMLSourceElement>("[data-dark-source]")
+          .forEach((source) => {
+            source.media =
+              theme === "system"
+                ? "(prefers-color-scheme: dark)"
+                : theme === "dark"
+                  ? "all"
+                  : "not all";
           });
-          if (!isPlaying) return showStaticDemo(group);
-          group.dataset.demoState = "video";
-          if (toggle instanceof HTMLButtonElement) {
-            toggle.hidden = false;
-            toggle.textContent = "Pause app demo";
-            toggle.setAttribute("aria-label", "Pause the RosterEase app demo");
+      };
+      updateScreens(selected);
+      describeAppearance(selected);
+      choices.forEach((input) => {
+        input.checked = input.value === selected;
+        input.addEventListener("change", () => {
+          document.documentElement.dataset.theme = input.value;
+          describeAppearance(input.value);
+          updateScreens(input.value);
+          try {
+            localStorage.setItem("rosterease-theme", input.value);
+          } catch {
+            console.info(
+              "Theme preference could not be saved; appearance applies to this page.",
+            );
           }
         });
-      }
-
-      applyTheme(storedTheme());
-
-      themeToggle?.addEventListener("click", () => {
-        const currentTheme = document.documentElement.dataset.theme ?? (systemTheme.matches ? "dark" : "light");
-        const theme = currentTheme === "dark" ? "light" : "dark";
-        try {
-          localStorage.setItem("rosterease-theme", theme);
-        } catch {
-          // The selected theme still applies for this page.
-        }
-        applyTheme(theme);
-        document.querySelectorAll("[data-hero-video]").forEach((video) => {
-          showStaticDemo(video.closest("[data-screenshot-group]"), true);
-        });
       });
-
-      systemTheme.addEventListener("change", () => {
-        if (storedTheme() === null) applyTheme(null);
-      });
-
-      document.querySelectorAll("[data-screenshot-toggle]").forEach((toggle) => {
-        toggle.addEventListener("click", () => {
-          const group = toggle.closest("[data-screenshot-group]");
-          if (!(group instanceof HTMLElement)) return;
-          const nextTheme = group.dataset.screenshotTheme === "dark" ? "light" : "dark";
-          updateScreenshotGroup(group, nextTheme);
-          showStaticDemo(group, true);
-        });
-      });
-
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-      const connection = navigator.connection ?? navigator.mozConnection ?? navigator.webkitConnection;
-      const limitedNetwork = connection?.saveData || ["slow-2g", "2g"].includes(connection?.effectiveType);
-      const lowMemory = typeof navigator.deviceMemory === "number" && navigator.deviceMemory <= 2;
-
-      document.querySelectorAll("[data-hero-video]").forEach((video) => {
-        if (!(video instanceof HTMLVideoElement)) return;
-        const group = video.closest("[data-screenshot-group]");
-        if (!(group instanceof HTMLElement)) return;
-        group.dataset.demoState = "static";
-
-        if (reducedMotion.matches || limitedNetwork || lowMemory) return;
-
-        const loadVideo = () => {
-          video.querySelectorAll("source[data-src]").forEach((source) => {
-            if (source instanceof HTMLSourceElement && source.dataset.src) source.src = source.dataset.src;
-          });
-          video.load();
-          video.addEventListener("canplay", () => showVideoDemo(group), { once: true });
-          video.addEventListener("error", () => {
-            delete video.dataset.playing;
-            if (!group.querySelector('[data-hero-video][data-playing="true"]')) showStaticDemo(group);
-          }, { once: true });
-        };
-
-        if ("IntersectionObserver" in window) {
-          const observer = new IntersectionObserver((entries) => {
-            if (!entries.some((entry) => entry.isIntersecting)) return;
-            observer.disconnect();
-            loadVideo();
-          }, { rootMargin: "200px" });
-          observer.observe(video);
-        } else {
-          loadVideo();
+      initSiteMotion();
+      const menu =
+        document.querySelector<HTMLDetailsElement>(".re-mobile-menu");
+      document.addEventListener("click", (event) => {
+        if (
+          appearance?.open &&
+          event.target instanceof Node &&
+          !appearance.contains(event.target)
+        ) {
+          appearance.open = false;
         }
       });
-
-      document.querySelectorAll("[data-demo-toggle]").forEach((toggle) => {
-        toggle.addEventListener("click", () => {
-          const group = toggle.closest("[data-screenshot-group]");
-          if (!(group instanceof HTMLElement)) return;
-          if (group.dataset.demoState === "video") showStaticDemo(group, true);
-          else showVideoDemo(group, true);
-        });
-      });
-
-      document.querySelector(".re-mobile-menu nav")?.addEventListener("click", () => {
-        document.querySelector(".re-mobile-menu")?.removeAttribute("open");
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && appearance?.open) {
+          appearance.open = false;
+          appearanceTrigger?.focus();
+        }
+        if (event.key === "Escape" && menu?.open) {
+          menu.open = false;
+          menu.querySelector("summary")?.focus();
+        }
       });
     </script>
   </body>
