@@ -12,7 +12,7 @@ const { screen, eager = false, class: className } = Astro.props;
 ---
 
 <div class:list={["re-phone", className]}>
-  <AppScreenshot screen={screen} eager={eager} />
+  <AppScreenshot screen={screen} eager={eager} sizes="224px" />
   <Image
     class="re-phone-frame"
     src={frame}

@@ -16,7 +16,7 @@ const { guide } = Astro.props;
 <RosterEaseLayout title={guide.title} description={guide.description}>
   <div class="re-shell">
     <section class="re-page-intro">
-      <a class="re-breadcrumb" href="/help">← All help guides</a><h1>
+      <a class="re-breadcrumb" href="/help/">← All help guides</a><h1>
         {guide.title}
       </h1><p>{guide.description}</p><nav
         class="re-subnav"
@@ -47,10 +47,10 @@ const { guide } = Astro.props;
         ))
       }<section>
         <h2>Need more help?</h2><p>
-          <a href="/contact">Contact support</a> with your build number and the step
+          <a href="/contact/">Contact support</a> with your build number and the step
           you reached. Please redact personal or workplace-confidential details from
           any examples.
-        </p><p><a href="/privacy">Read the Privacy Policy</a></p>
+        </p><p><a href="/privacy/">Read the Privacy Policy</a></p>
       </section>
     </article>
   </div>

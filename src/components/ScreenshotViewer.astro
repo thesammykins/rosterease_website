@@ -12,8 +12,10 @@
       fill="none"
       stroke="currentColor"
       stroke-width="1.5"
-      aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg
+      aria-hidden="true"
     >
+      <path d="m6 6 12 12M18 6 6 18"></path>
+    </svg>
   </button>
   <div class="re-dialog-image"></div>
 </dialog>
@@ -68,6 +70,14 @@
           const source = fullPicture.querySelector("source");
           imageContainer.replaceChildren(fullPicture);
           image?.setAttribute("loading", "eager");
+          // The enlarged image must not keep selecting a small responsive preview.
+          image?.removeAttribute("srcset");
+          image?.removeAttribute("sizes");
+          source?.removeAttribute("sizes");
+          if (image) {
+            image.src = link.querySelector("img")?.currentSrc || image.src;
+            if (source) source.srcset = image.src;
+          }
           dialog.showModal();
           settledBounds = dialog.getBoundingClientRect();
           if (!reduced.matches) {

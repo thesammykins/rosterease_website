@@ -1,0 +1,23 @@
+[
+  {
+    "path": "/app",
+    "status": 301,
+    "location": "https://rosterease.app/app/",
+    "cache": "max-age=600",
+    "ms": 345.92116699999997
+  },
+  {
+    "path": "/contact",
+    "status": 301,
+    "location": "https://rosterease.app/contact/",
+    "cache": "max-age=600",
+    "ms": 302.632084
+  },
+  {
+    "path": "/help/smart-import",
+    "status": 301,
+    "location": "https://rosterease.app/help/smart-import/",
+    "cache": "max-age=600",
+    "ms": 299.87899999999996
+  }
+]

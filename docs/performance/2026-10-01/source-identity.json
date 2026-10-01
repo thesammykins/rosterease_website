@@ -1,0 +1,16 @@
+{
+  "base": "4b965c263e788c0ab46f10b17413e1145857e2a6",
+  "branch": "codex/performance-layout-pass",
+  "diffSha256": "096dfca73ffeca10037b07374525b7e41972e6569a353f075c4ccf93d5bf466e",
+  "homeSha256": "2303b1b4c40e90b3968855c69ab1ceb90b724a577c32593d5c84294d868dc7ca",
+  "builtAt": "2026-10-01T02:51:53.665303+00:00",
+  "runtimeAssets": {
+    "ScreenshotViewer.astro_astro_type_script_index_0_lang.B0FP7zhP.js": "f3c1b227823c22f566c0c8d55c7ef74b396dcaa1e724a2bb1294abf24c2b81b8",
+    "page.vzY--OHv.js": "e5f251ba4031d7718867e6c57d252b934cab829195ee869411eb6e6bc82b579f",
+    "RosterEaseLayout.astro_astro_type_script_index_0_lang.CEBNzZ7Y.js": "bae73520132bcafb139874d9edd20723d120e55369b7d4cadb815de62016c89c",
+    "RosterEaseLayout.Thk9Hr0i.css": "0500c6673a4983c254597f2dca513e2b9a6e61b27b631df41f72c2da762ee4e7",
+    "hero-scene.7qOYbUmS.js": "7aeea59363158a72015d2af044fb3d736cda65d3d8a2946bd5419785b40040fe",
+    "index.astro_astro_type_script_index_0_lang.BDwPUtOv.js": "25280a1b51829f6edb6722ae9a87647204c63f3ad3d549ab52c1a7f2d5b47bac",
+    "animate-style.REiZ4jDc.js": "235f3383bf3fe07e923524ef2d02fad45afb94631e78d2cda70bd39dc35d303a"
+  }
+}

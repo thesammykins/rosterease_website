@@ -1,0 +1,110 @@
+[
+  {
+    "height": 768,
+    "hero": [
+      {
+        "width": 328,
+        "x": 16,
+        "y": 104
+      },
+      {
+        "width": 328,
+        "x": 16,
+        "y": 563.921875
+      }
+    ],
+    "scrollWidth": 360,
+    "storyWidth": 328,
+    "width": 360
+  },
+  {
+    "height": 768,
+    "hero": [
+      {
+        "width": 680,
+        "x": 20,
+        "y": 104
+      },
+      {
+        "width": 680,
+        "x": 20,
+        "y": 531.75
+      }
+    ],
+    "scrollWidth": 720,
+    "storyWidth": 680,
+    "width": 720
+  },
+  {
+    "height": 768,
+    "hero": [
+      {
+        "width": 657,
+        "x": 32,
+        "y": 100
+      },
+      {
+        "width": 657,
+        "x": 32,
+        "y": 552.703125
+      }
+    ],
+    "scrollWidth": 721,
+    "storyWidth": 657,
+    "width": 721
+  },
+  {
+    "height": 768,
+    "hero": [
+      {
+        "width": 468,
+        "x": 32,
+        "y": 168.296875
+      },
+      {
+        "width": 468,
+        "x": 524,
+        "y": 100
+      }
+    ],
+    "scrollWidth": 1024,
+    "storyWidth": 960,
+    "width": 1024
+  },
+  {
+    "height": 768,
+    "hero": [
+      {
+        "width": 516,
+        "x": 32,
+        "y": 188.953125
+      },
+      {
+        "width": 516,
+        "x": 572,
+        "y": 100
+      }
+    ],
+    "scrollWidth": 1120,
+    "storyWidth": 1056,
+    "width": 1120
+  },
+  {
+    "height": 768,
+    "hero": [
+      {
+        "width": 436.046875,
+        "x": 48,
+        "y": 150.375
+      },
+      {
+        "width": 532.953125,
+        "x": 540.046875,
+        "y": 100
+      }
+    ],
+    "scrollWidth": 1121,
+    "storyWidth": 325.65625,
+    "width": 1121
+  }
+]
