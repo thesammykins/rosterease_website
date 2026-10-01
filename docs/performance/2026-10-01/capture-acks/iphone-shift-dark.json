@@ -1,0 +1,52 @@
+{
+  "ackPath": "/tmp/rosterease-website-control/control-plane/7b1f7f13-6ef6-4e09-b961-800f6af6e8ae/ack.json",
+  "acknowledgement": {
+    "action": "seed",
+    "commandID": "7b1f7f13-6ef6-4e09-b961-800f6af6e8ae",
+    "completedAt": "2026-10-01T04:15:19Z",
+    "fixture": "shift-normal-week",
+    "message": "Applied fixture shift-normal-week.",
+    "route": "today",
+    "snapshot": {
+      "appearance": "dark",
+      "calendarSync": {
+        "connectedWorkplaceCount": 0,
+        "enabledWorkplaceCount": 0,
+        "pendingWorkplaceCount": 0
+      },
+      "clientCount": 0,
+      "completedVisitCount": 0,
+      "dayScheduleCount": 0,
+      "entitlementOverride": "qa",
+      "importState": {
+        "state": "clear"
+      },
+      "lastCommand": {
+        "action": "seed",
+        "commandID": "7b1f7f13-6ef6-4e09-b961-800f6af6e8ae",
+        "fixture": "shift-normal-week",
+        "route": "today"
+      },
+      "privacy": {
+        "enabled": false,
+        "locksOnBackground": true
+      },
+      "rosterMode": "shiftWorker",
+      "shiftCount": 21,
+      "visitCount": 0,
+      "workplaceCount": 1
+    },
+    "status": "success"
+  },
+  "commandID": "7b1f7f13-6ef6-4e09-b961-800f6af6e8ae",
+  "commandPath": "/tmp/rosterease-website-control/control-plane/7b1f7f13-6ef6-4e09-b961-800f6af6e8ae/command.json",
+  "queuedPayload": {
+    "action": "seed",
+    "appearance": "dark",
+    "commandID": "7b1f7f13-6ef6-4e09-b961-800f6af6e8ae",
+    "fixture": "shift-normal-week",
+    "referenceDate": "2026-10-01T09:41:00+10:00",
+    "route": "today",
+    "timeZone": "Australia/Melbourne"
+  }
+}

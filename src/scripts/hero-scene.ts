@@ -26,6 +26,11 @@ import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.j
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 
 export async function mountHeroScene(host: HTMLElement) {
+  // Let the landing page paint between GPU setup phases instead of combining them in one task.
+  const yieldForPaint = () =>
+    new Promise<void>((resolve) =>
+      requestAnimationFrame(() => setTimeout(resolve, 0)),
+    );
   const images = [
     ...host.querySelectorAll<HTMLImageElement>(".re-hero-screen img"),
   ];
@@ -52,6 +57,7 @@ export async function mountHeroScene(host: HTMLElement) {
   const camera = new OrthographicCamera(-1.7, 1.7, 3.5, -0.2, 0.1, 30);
   camera.position.set(2.2, 3.0, 9);
   camera.lookAt(0, 1.5, 0);
+  await yieldForPaint();
 
   const environment = new RoomEnvironment();
   const generator = new PMREMGenerator(renderer);
@@ -60,6 +66,7 @@ export async function mountHeroScene(host: HTMLElement) {
   scene.environmentIntensity = 0.5;
   environment.dispose();
   generator.dispose();
+  await yieldForPaint();
   scene.add(new AmbientLight(0xffffff, 0.5));
   const key = new DirectionalLight(0xffffff, 2);
   key.position.set(-3, 7, 5);
@@ -98,7 +105,7 @@ export async function mountHeroScene(host: HTMLElement) {
   const textures = loaded.flatMap((result) =>
     result.status === "fulfilled" ? [result.value] : [],
   );
-  textures.forEach((texture, index) => {
+  for (const [index, texture] of textures.entries()) {
     texture.colorSpace = SRGBColorSpace;
     texture.anisotropy = Math.min(renderer.capabilities.getMaxAnisotropy(), 4);
     const phone = new Group();
@@ -171,7 +178,8 @@ export async function mountHeroScene(host: HTMLElement) {
     shelf.receiveShadow = true;
     shelf.castShadow = true;
     scene.add(shelf);
-  });
+    await yieldForPaint();
+  }
   const floor = new Mesh(
     new PlaneGeometry(12, 12),
     new ShadowMaterial({ opacity: 0.09 }),

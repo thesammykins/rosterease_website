@@ -1,0 +1,12 @@
+{
+  "source": "docs/design/social-preview.html",
+  "previewServer": "scripts/preview-social-artwork.mjs",
+  "export": "src/assets/rosterease/og-image.png",
+  "dimensions": [
+    1200,
+    630
+  ],
+  "method": "Browser screenshot at 1200x630; brand-authored HTML using existing website fonts and tokens, genuine native app captures",
+  "sha256": "4b550f1f5cd344feed2af77b9fd913449a5b1db7ad33504531236b662bf5b7e2",
+  "iconSource": "RosterEase branding/rosterease-app-icon.svg at app source commit 7324c12fc52830981cddc1419d67cab660bddfba"
+}

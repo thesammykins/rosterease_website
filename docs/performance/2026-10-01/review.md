@@ -1,6 +1,6 @@
 # RosterEase performance and UX pass — 1 October 2026
 
-Implemented on `codex/performance-layout-pass`, based on `4b965c2`. Changes are local and uncommitted. The public GitHub Pages site has not been deployed. The font and token layer is byte-for-byte unchanged.
+Implemented on `codex/performance-layout-pass`, based on `4b965c2`. The performance pass was verified locally before publication; publication results are recorded in the release pull request. The font and token layer is byte-for-byte unchanged.
 
 The largest observed problem was initialization of three WebGL walkthrough scenes during the first scroll. Those scenes added work without helping people read the screenshots. The walkthrough now uses upright screenshots; the desktop hero retains its interactive phones.
 
@@ -73,17 +73,17 @@ TestFlight remains the primary action until the app is live, as requested. The p
 
 Three narrow follow-up changes are implemented:
 
-1. **Broken URL recovery — improved.** The hosted site currently returns GitHub's generic error page. `src/pages/404.astro` now builds a branded `dist/404.html`, reusing the shared shell and styles, with Home, Help and Support links. It has `noindex`, no canonical URL, and no sitemap entry. The static checker still validates its links and assets. Local preview serves it with HTTP 404; all five linked shell assets return 200. Home and Help navigation were exercised. See [HTTP evidence](launch-recovery-http.json), [mobile dark view](launch-404-mobile.png) and [desktop light view](launch-404-desktop.png). GitHub Pages uses a root `404.html` for missing pages: [hosting documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-custom-404-page-for-your-github-pages-site). Hosted behavior still needs a check after deployment.
+1. **Broken URL recovery — improved.** Before this change, the hosted site returned GitHub's generic error page. `src/pages/404.astro` now builds a branded `dist/404.html`, reusing the shared shell and styles, with Home, Help and Support links. It has `noindex`, no canonical URL, and no sitemap entry. The static checker still validates its links and assets. Local preview serves it with HTTP 404; all five linked shell assets return 200. Home and Help navigation were exercised. See [HTTP evidence](launch-recovery-http.json), [mobile dark view](launch-404-mobile.png) and [desktop light view](launch-404-desktop.png). GitHub Pages uses a root `404.html` for missing pages: [hosting documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-custom-404-page-for-your-github-pages-site). Hosted behavior still needs a check after deployment.
 
 2. **Mobile navigation dismissal — improved.** An outside tap on the homepage paragraph previously left the menu open. The same tap now closes it without moving focus to the trigger. Escape still closes it and returns focus to Menu. The appearance disclosure retains its outside-click behavior and Light selection works. See [before](launch-menu-before.png), [after](launch-menu-after.png) and [interaction results](launch-recovery-ui.json). These checks used mouse input at mobile viewport widths, not physical touch input.
 
-3. **Deployment checks — added.** The Pages build now runs the existing `check:a11y` and `check:motion` before uploading the artifact. YAML parsing and job dependency/order checks pass. These commands pass locally; the updated workflow has not run on GitHub yet.
+3. **Deployment checks — added.** The Pages build now runs the existing `check:a11y` and `check:motion` before uploading the artifact. YAML parsing and job dependency/order checks pass. These commands pass locally; remote execution is recorded in the release pull request.
 
 Final checks pass for all 13 HTML pages, all three rotation tests, TypeScript no-emit, and whitespace. Removing `noindex` or breaking a recovery link in disposable built HTML made the checker fail as expected; the original HTML was restored and passed. The new page has no horizontal overflow at 320, 390, 768 or 1280px; recovery links are 44px tall. Font and token definitions still match HEAD exactly. No dependencies changed.
 
 The earlier performance table describes the artifact in `source-identity.json`. The addendum changes only error-page metadata/content, disclosure dismissal and the workflow; CSS and the hero bundle are unchanged. Core JavaScript is now 10,225 bytes gzip, up 17 bytes; deferred 3D remains 157,877 bytes. [Addendum build identity](launch-source-identity.json) records this revision separately. No new frame-time measurements were taken for these narrow changes.
 
-The remaining launch improvements are fresh candidate screenshots (especially Today without its tutorial overlay), a social preview using the current app icon and candidate screens, and physical iPhone/iPad Safari checks. The current social image was inspected and shows an older blue icon and June screen content. Support email delivery and the actual TestFlight install remain external checks. See [release readiness](../../website-release-readiness.md). All changes remain local; no commit, push or deployment was performed.
+The screenshot and social-preview follow-up below resolves the local asset recommendations. Physical iPhone/iPad Safari, support-email delivery and the actual TestFlight install remain external checks for the user after deployment. See [release readiness](../../website-release-readiness.md).
 
 ## Files touched
 
@@ -101,3 +101,19 @@ Hunk diffs were inspected for the performance pass and the launch follow-up. The
 | `scripts/check-accessibility.mjs`, `.github/workflows/gh-pages.yml` | URL/error-page regression guards and deployment checks |
 | `README.md`, `docs/website-release-readiness.md` | Current behavior, validation and remaining launch work |
 | `docs/performance/2026-10-01/` (new) | Review, reproducible local probe, raw measurements, screenshots, motion captures and artifact identity |
+
+## Launch assets and publication follow-up
+
+Nine native screenshots were captured on 1 October from app source `7324c12`, using dedicated iPhone 17 Pro and iPad Pro 13-inch simulators with synthetic records. Today is free of tutorial UI; Calendar shows October; Clients shows the populated directory. iPad Today/Calendar retain their native portrait layout with light/dark pairs. Setup acknowledgements sometimes preceded the rendered navigation; incorrect/blank captures were rejected and every retained image was visually checked. The PNG pixels were not edited. Two genuine September import-review examples remain in use. [Capture manifest](../../../src/assets/rosterease/screenshots/capture-2026-10-01/capture-manifest.json) records hashes and the build boundary.
+
+The social preview now uses current app-icon artwork and October Today captures, rendered from `docs/design/social-preview.html` with existing website fonts and tokens. The current app icon remains blue; its source artwork differs from the former website asset. No generated product imagery is used. [Export provenance](../../design/social-preview-provenance.json) records the 1200×630 PNG and inputs.
+
+The earlier performance table and videos remain evidence for their recorded artifact; changing screenshots changes image payloads. Publication checks and updated payload measurements are recorded separately rather than relabelling those samples. TestFlight remains the primary CTA and the App Store badge stays coming soon. The user will perform physical-device checks once live.
+
+Additional files touched: `src/lib/screenshots.ts`, `src/assets/rosterease/rosterease-app-icon.svg`, `src/assets/rosterease/og-image.png`, nine PNGs and their manifest under `screenshots/capture-2026-10-01/`, artwork/provenance under `docs/design/`, `scripts/preview-social-artwork.mjs`, capture acknowledgements and publication evidence. Hunk is used for the final diff review. Temporary simulators, capture/build scratch files, preview servers and generated website build output are removed after hosted verification.
+
+Final local publication checks pass: 13-page build/accessibility/link/contrast guard, three motion tests, TypeScript and unchanged font/token definitions. The refreshed 320px hero WebPs total 41,548 bytes at DPR 1; the social image is 59,934 bytes (previously 386,199). No new dependencies. Tablet iPad dark/light sources, 1206px dialog enlargement and Escape focus return were exercised; 320px reflow has no horizontal overflow.
+
+A new desktop startup sample exposed a 183.2ms RAF gap and a 188ms task during GPU setup. The retained hero now yields for a browser paint between renderer, environment and phone construction phases. Subsequent samples had maximum gaps of 58.3ms and 91.7ms, with largest tasks of 61ms and 85ms. GPU/browser caches were not reset, so this is not a controlled cold-GPU comparison or a guarantee of a 16.7ms frame budget. The first refreshed mobile sample had a 91.8ms gap/80ms task; its repeat had a 9.4ms maximum gap and no long tasks. All samples had zero CLS and no captured errors; mobile had zero draws, desktop settled to one idle canvas. Raw results: `publication-*-initial-load.json`. [Publication build hashes](publication-build-identity.json) identify the final compiled assets. Core/deferred JavaScript are 10,223/157,927 bytes gzip.
+
+The simulator capture devices and their data directories were removed and the temporary app-derived build/control files deleted. Final preview-server and generated-site cleanup follows hosted verification.

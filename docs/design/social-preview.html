@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en-AU" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RosterEase social preview artwork</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        position: relative;
+      }
+      .brand {
+        position: absolute;
+        top: 56px;
+        left: 60px;
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        font: 36px var(--re-serif);
+        letter-spacing: -0.04em;
+      }
+      .brand img { width: 56px; height: 56px; border-radius: var(--re-radius-sm); }
+      .copy {
+        position: absolute;
+        top: 202px;
+        left: 60px;
+        width: 660px;
+      }
+      h1 { font-size: 66px; line-height: 1.06; text-wrap: nowrap; }
+      .copy p {
+        margin-top: 28px;
+        font-size: 24px;
+        color: var(--re-muted);
+      }
+      .address {
+        position: absolute;
+        left: 60px;
+        bottom: 52px;
+        font-size: 20px;
+        color: var(--re-accent);
+      }
+      .screens {
+        position: absolute;
+        inset: 0 0 0 720px;
+        background: var(--re-stage-light);
+      }
+      .screen {
+        position: absolute;
+        width: 196px;
+        padding: 7px;
+        background: var(--re-device-body);
+        border: 1px solid var(--re-device-edge);
+        border-radius: var(--re-radius-xl);
+        box-shadow: var(--re-shadow);
+      }
+      .screen img { border-radius: var(--re-radius-lg); width: 100%; }
+      .shift { left: 20px; top: 140px; }
+      .field { left: 244px; top: 78px; }
+    </style>
+  </head>
+  <body>
+    <div class="brand"><img src="/icon.svg" alt="" /><span>RosterEase</span></div>
+    <div class="copy">
+      <h1>Plan your shifts.<br />Organise your visits.</h1>
+      <p>A personal workday planner.<br />Made for iPhone and iPad.</p>
+    </div>
+    <p class="address">rosterease.app</p>
+    <div class="screens" aria-label="RosterEase app screens">
+      <div class="screen shift"><img src="/screens/shift-today-dark.png" alt="Shift Worker Today" /></div>
+      <div class="screen field"><img src="/screens/field-today-dark.png" alt="Field Worker Today" /></div>
+    </div>
+  </body>
+</html>

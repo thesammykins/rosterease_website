@@ -1,0 +1,58 @@
+{
+  "ackPath": "/tmp/rosterease-website-control/control-plane/91974ab4-2b20-4203-804f-80e5d2300a85/ack.json",
+  "acknowledgement": {
+    "action": "seed",
+    "commandID": "91974ab4-2b20-4203-804f-80e5d2300a85",
+    "completedAt": "2026-10-01T04:30:21Z",
+    "fixture": "field-route-started",
+    "message": "Applied fixture field-route-started.",
+    "route": "calendar",
+    "snapshot": {
+      "appearance": "dark",
+      "calendarSync": {
+        "connectedWorkplaceCount": 0,
+        "enabledWorkplaceCount": 0,
+        "pendingWorkplaceCount": 0
+      },
+      "clientCount": 6,
+      "completedVisitCount": 0,
+      "dayScheduleCount": 32,
+      "entitlementOverride": "qa",
+      "importState": {
+        "state": "clear"
+      },
+      "lastCommand": {
+        "action": "seed",
+        "commandID": "91974ab4-2b20-4203-804f-80e5d2300a85",
+        "fixture": "field-route-started",
+        "route": "calendar"
+      },
+      "privacy": {
+        "enabled": false,
+        "locksOnBackground": true
+      },
+      "rosterMode": "fieldWorker",
+      "routeProgress": {
+        "completedVisitCount": 0,
+        "currentStopName": "Melbourne CBD Check-in",
+        "date": "2026-10-01",
+        "visitCount": 6
+      },
+      "shiftCount": 0,
+      "visitCount": 192,
+      "workplaceCount": 1
+    },
+    "status": "success"
+  },
+  "commandID": "91974ab4-2b20-4203-804f-80e5d2300a85",
+  "commandPath": "/tmp/rosterease-website-control/control-plane/91974ab4-2b20-4203-804f-80e5d2300a85/command.json",
+  "queuedPayload": {
+    "action": "seed",
+    "appearance": "dark",
+    "commandID": "91974ab4-2b20-4203-804f-80e5d2300a85",
+    "fixture": "field-route-started",
+    "referenceDate": "2026-10-01T09:41:00+10:00",
+    "route": "calendar",
+    "timeZone": "Australia/Melbourne"
+  }
+}

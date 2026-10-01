@@ -1,6 +1,6 @@
 # Website and App Store review readiness
 
-The performance and UX pass is local and uncommitted on `codex/performance-layout-pass`, based on `4b965c2`. TestFlight remains the primary action until the app is live. Website checks do not establish App Store approval or candidate-build readiness.
+The performance, UX and launch-asset pass is prepared on `codex/performance-layout-pass`, based on `4b965c2`. The release pull request records the published commit, Pages workflow and hosted checks. TestFlight remains the primary action until the app is live. Website checks do not establish App Store approval or candidate-build readiness.
 
 ## Public destinations
 
@@ -18,8 +18,8 @@ The app-review task confirmed on 5 September that the **public** privacy page al
 
 ## Before publication/submission
 
-- Review screenshot provenance against the build being promoted. Current website images show the 5 September development review, not proof of the publicly linked binary. Replace the Shift Today capture when a clean no-tutorial capture is available; do not edit away application UI.
-- Re-export the social preview with the current app icon and candidate screenshots. `og-image.png` still shows an older blue icon and June screen content; the site header uses the current purple icon.
+- Compare the website captures with the TestFlight build during device testing. Today, Calendar, Clients and iPad light/dark pairs now show the 1 October development build with synthetic data; the two import-review examples remain from 5 September. Shift Today has no tutorial overlay. Provenance is in `src/assets/rosterease/screenshots/capture-2026-10-01/capture-manifest.json`.
+- Social artwork is refreshed with current app-icon artwork, website fonts/tokens and genuine October Today captures. Its HTML source and export provenance are in `docs/design/social-preview*`. Social services may retain their cached previous preview.
 - Refresh the TestFlight public-link availability and build. On 1 October the public invitation rendered a “View in TestFlight” link. This does not verify an install or the linked build. The app-review task previously reported Website Testers build 83 and latest internal build 92; those are dated observations, not fresh website validation.
 - Confirm final subscription merchandising, eligibility and storefront prices in the app. The site avoids hardcoded price/trial claims and deferred Lifetime offers.
 - Verify deployed support/privacy URLs return usable pages without authentication; verify email ownership/delivery separately. The local preview does not prove live email delivery.
@@ -32,8 +32,8 @@ Sources: [Apple App Review](https://developer.apple.com/app-store/review/), [Rev
 
 ## Validation
 
-`npm run check:a11y` builds all 13 HTML pages and checks language, one H1, skip link, image alternatives, internal page/anchor/asset destinations, sitemap/canonical coverage, theme contrast and motion guards. The error page must remain excluded from indexing and the sitemap. The Pages workflow runs this command and `npm run check:motion` before uploading its artifact. Both pass locally; remote CI execution remains pending the push.
+`npm run check:a11y` builds all 13 HTML pages and checks language, one H1, skip link, image alternatives, internal page/anchor/asset destinations, sitemap/canonical coverage, theme contrast and motion guards. The error page must remain excluded from indexing and the sitemap. The Pages workflow runs this command and `npm run check:motion` before uploading its artifact. Both pass locally; the release pull request records remote CI and hosted checks.
 
 The local recovery page returns HTTP 404 and loads its assets successfully. Its layout reflows at 320, 390, 768 and 1280px. Outside taps now dismiss the mobile menu; Escape still closes it and returns focus. Font and colour-token definitions remain unchanged. Current browser evidence, measurements and remaining limitations are recorded in [the 1 October review](performance/2026-10-01/review.md); earlier design evidence remains in `docs/design/verification.md`.
 
-No deployment, push, commit, App Store mutation or claim of healthcare certification is implied by a passing website check.
+A passing website check does not establish App Store readiness or healthcare certification. No App Store changes are part of this website task.
