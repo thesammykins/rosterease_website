@@ -1,0 +1,109 @@
+{
+  "capturedOn": "2026-10-01",
+  "appSourceCommit": "7324c12fc52830981cddc1419d67cab660bddfba",
+  "build": "RosterEase Debug, iOS Simulator; no app source changes",
+  "runtime": "iOS 27.0 (24A5423a)",
+  "fixtureDate": "2026-10-01T09:41:00+10:00",
+  "timeZone": "Australia/Melbourne",
+  "statusBar": "9:41, full Wi-Fi and battery via simctl status_bar; app clock remains actual capture time",
+  "captureMethod": "simctl io screenshot --type=png; native pixels, unaltered",
+  "data": "Synthetic shift-normal-week and field-route-started fixtures in two dedicated task-created simulators",
+  "verification": "Every retained image inspected for correct route, appearance, readable content and absence of tutorial overlay; setup acknowledgements alone were insufficient",
+  "limitations": [
+    "Debug source captures do not attest to the publicly linked TestFlight binary.",
+    "Import-review screenshots remain genuine 5 September captures; no import UI was edited away."
+  ],
+  "screens": [
+    {
+      "file": "field-calendar-dark.png",
+      "width": 1206,
+      "height": 2622,
+      "sha256": "5b43cb4a60792de05079599c55fcf6729189127dd867d6a454b8d97ac85641b6",
+      "device": "iPhone 17 Pro",
+      "appearance": "dark",
+      "fixture": "field-route-started"
+    },
+    {
+      "file": "field-clients-dark.png",
+      "width": 1206,
+      "height": 2622,
+      "sha256": "4994e3faadcf3b309fa6fd2822d38c04ffb5b32d48424d0c703dd48c9b4db4b0",
+      "device": "iPhone 17 Pro",
+      "appearance": "dark",
+      "fixture": "field-route-started"
+    },
+    {
+      "file": "field-today-dark.png",
+      "width": 1206,
+      "height": 2622,
+      "sha256": "bb3278041ef242c6fc17fe9f78603777890028253cb26ceec1855dfc4aa3171d",
+      "device": "iPhone 17 Pro",
+      "appearance": "dark",
+      "fixture": "field-route-started"
+    },
+    {
+      "file": "ipad-field-calendar-dark.png",
+      "width": 2064,
+      "height": 2752,
+      "sha256": "d76ee1365974ea3cac4b2bfd7703ed37a11be433a1da5ffbd63e147dc8dd6cb7",
+      "device": "iPad Pro 13-inch (M4)",
+      "appearance": "dark",
+      "fixture": "field-route-started"
+    },
+    {
+      "file": "ipad-field-calendar-light.png",
+      "width": 2064,
+      "height": 2752,
+      "sha256": "7fe9b9fb0d05f37882e7a2bf5354e66d1280ed20496251546c2a4207df8fd1df",
+      "device": "iPad Pro 13-inch (M4)",
+      "appearance": "light",
+      "fixture": "field-route-started"
+    },
+    {
+      "file": "ipad-field-today-dark.png",
+      "width": 2064,
+      "height": 2752,
+      "sha256": "416c027434d2b70e22442ba576e882a32670c74a40a9ee6a3426ec27ab02e624",
+      "device": "iPad Pro 13-inch (M4)",
+      "appearance": "dark",
+      "fixture": "field-route-started"
+    },
+    {
+      "file": "ipad-field-today-light.png",
+      "width": 2064,
+      "height": 2752,
+      "sha256": "6df977436f5781af2ef9e4dd76d46d33002de34338baa3752f010574226fe170",
+      "device": "iPad Pro 13-inch (M4)",
+      "appearance": "light",
+      "fixture": "field-route-started"
+    },
+    {
+      "file": "shift-calendar-dark.png",
+      "width": 1206,
+      "height": 2622,
+      "sha256": "67fe51dd6927aad6daaa2eaafc0c23d11cb0d891bb3721ad0f6d7948a1784245",
+      "device": "iPhone 17 Pro",
+      "appearance": "dark",
+      "fixture": "shift-normal-week"
+    },
+    {
+      "file": "shift-today-dark.png",
+      "width": 1206,
+      "height": 2622,
+      "sha256": "6676139c9ec4e6fad6fead95e6a049cbf9b2f358455dbcfa9abe5ebdcc5643f5",
+      "device": "iPhone 17 Pro",
+      "appearance": "dark",
+      "fixture": "shift-normal-week"
+    }
+  ],
+  "retainedImportExamples": [
+    {
+      "file": "../review-2026-09-05/import-review.jpg",
+      "sha256": "951a57f47c4c0416a36a1f76f9e3daa809bbaab6d6823b5bc216a0cf13f136db"
+    },
+    {
+      "file": "../review-2026-09-05/field-import-review.jpg",
+      "sha256": "dffd423c141dcac834ce53c8c5065c6a3b51a8fd281ddbaf74af6531a172bc37"
+    }
+  ]
+}

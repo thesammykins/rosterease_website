@@ -5,17 +5,27 @@ interface Props {
   screen: AppScreen;
   eager?: boolean;
   draggable?: boolean;
+  sizes?: string;
+  widths?: number[];
 }
-const { screen, eager = false, draggable = true } = Astro.props;
+const {
+  screen,
+  eager = false,
+  draggable = true,
+  sizes = "280px",
+  widths = [320, 480, 640],
+} = Astro.props;
 const light = await getImage({
   src: screen.light ?? screen.dark,
   width: 640,
+  widths,
   format: "webp",
   quality: 85,
 });
 const dark = await getImage({
   src: screen.dark,
   width: 640,
+  widths,
   format: "webp",
   quality: 85,
 });
@@ -40,12 +50,15 @@ const fullDark = await getImage({
 >
   <source
     media="(prefers-color-scheme: dark)"
-    srcset={dark.src}
+    srcset={dark.srcSet.attribute}
+    sizes={sizes}
     data-dark-source
   />
   <img
     draggable={draggable}
     src={light.src}
+    srcset={light.srcSet.attribute}
+    sizes={sizes}
     alt={screen.alt}
     width={light.attributes.width}
     height={light.attributes.height}

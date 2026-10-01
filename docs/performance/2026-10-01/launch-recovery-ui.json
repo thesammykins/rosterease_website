@@ -1,0 +1,79 @@
+{
+  "checkedAt": "2026-10-01T03:27:47.213Z",
+  "viewportChecks": [
+    {
+      "links": [
+        {
+          "height": 44,
+          "href": "/"
+        },
+        {
+          "height": 44,
+          "href": "/help/"
+        },
+        {
+          "height": 44,
+          "href": "/contact/"
+        }
+      ],
+      "scrollWidth": 320,
+      "width": 320
+    },
+    {
+      "links": [
+        {
+          "height": 44,
+          "href": "/"
+        },
+        {
+          "height": 44,
+          "href": "/help/"
+        },
+        {
+          "height": 44,
+          "href": "/contact/"
+        }
+      ],
+      "scrollWidth": 768,
+      "width": 768
+    },
+    {
+      "links": [
+        {
+          "height": 44,
+          "href": "/"
+        },
+        {
+          "height": 44,
+          "href": "/help/"
+        },
+        {
+          "height": 44,
+          "href": "/contact/"
+        }
+      ],
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  ],
+  "menu": {
+    "outsideTapBefore": true,
+    "outsideTapAfter": false,
+    "escapeCloses": true,
+    "escapeReturnsFocus": true
+  },
+  "appearance": {
+    "lightSelectable": true,
+    "outsideTapCloses": true
+  },
+  "recovery": {
+    "homeNavigation": true,
+    "helpNavigation": true
+  },
+  "testflight": {
+    "url": "https://testflight.apple.com/join/PZdK93CP",
+    "publicInvitationRendered": true,
+    "viewInTestFlightLinkPresent": true,
+    "installVerified": false
+  }
+}

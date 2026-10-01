@@ -10,7 +10,7 @@ const story = [
     images: { shift: screens.shiftImport, field: screens.fieldImport },
     shift: "Build a repeating shift pattern from your source.",
     field: "Bring in your client list and review visit details.",
-    href: "/help/smart-import",
+    href: "/help/smart-import/",
     link: "How importing works",
   },
   {
@@ -19,7 +19,7 @@ const story = [
     images: { shift: screens.shiftCalendar, field: screens.fieldCalendar },
     shift: "Repeating rotations, overnight shifts and one-off changes.",
     field: "Visit times, travel buffers and the order you choose.",
-    href: "/app",
+    href: "/app/",
     link: "Explore shifts and visits",
   },
   {
@@ -28,7 +28,7 @@ const story = [
     images: { shift: screens.shiftToday, field: screens.fieldToday },
     shift: "Your next shift, workplace and leave plan.",
     field: "Your next visit, directions and completion progress.",
-    href: "/app#everyday",
+    href: "/app/#everyday",
     link: "More about Today",
   },
 ];
@@ -62,10 +62,22 @@ const story = [
     >
       <div class="re-hero-screens">
         <div class="re-hero-screen re-hero-shift">
-          <DeviceBody screen={screens.shiftToday} eager draggable={false} />
+          <DeviceBody
+            screen={screens.shiftToday}
+            eager
+            draggable={false}
+            depth
+            sizes="(max-width: 720px) min(229px, calc((100vw - 102px) / 2)), (max-width: 1120px) 240px, 300px"
+          />
         </div>
         <div class="re-hero-screen re-hero-field">
-          <DeviceBody screen={screens.fieldToday} eager draggable={false} />
+          <DeviceBody
+            screen={screens.fieldToday}
+            eager
+            draggable={false}
+            depth
+            sizes="(max-width: 720px) min(229px, calc((100vw - 102px) / 2)), (max-width: 1120px) 240px, 300px"
+          />
         </div>
       </div>
       <div class="re-stage-caption">
@@ -111,7 +123,7 @@ const story = [
                 <h3>{step.title}</h3>
                 <p>{step.text}</p>
               </>
-              <a class="re-text-link" href={step.href}>
+              <a class="re-text-link" href={step.href} data-astro-prefetch>
                 {step.link} <span aria-hidden="true">→</span>
               </a>
             </div>
@@ -155,12 +167,12 @@ const story = [
         Imports are processed on your device, without sending their contents to
         a cloud AI service. You can plan without an account or ads, and choose
         what to share.
-      </p><a class="re-text-link" href="/on-device"
+      </p><a class="re-text-link" href="/on-device/"
         >What stays on your device <span aria-hidden="true">→</span></a
       >
     </div>
     <div class="re-closing-help">
-      <p>Getting set up?</p><a class="re-text-link" href="/help"
+      <p>Getting set up?</p><a class="re-text-link" href="/help/"
         >Help with setup and settings <span aria-hidden="true">→</span></a
       >
     </div>
@@ -169,56 +181,57 @@ const story = [
 
 <script>
   const host = document.querySelector<HTMLElement>(".re-hero-stage");
-  const desktop = matchMedia("(min-width: 1121px)");
+  const desktop = matchMedia(
+    "(min-width: 1121px) and (hover: hover) and (pointer: fine)",
+  );
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+  // A desktop viewport alone does not justify a model download on a metered connection.
+  const connection = (
+    navigator as Navigator & {
+      connection?: { saveData?: boolean; effectiveType?: string };
+    }
+  ).connection;
   let generation = 0;
-  let cleanup: (() => void)[] = [];
+  let cleanup: (() => void) | undefined;
   async function enhance() {
     const current = ++generation;
-    cleanup.forEach((dispose) => dispose());
-    cleanup = [];
-    if (!host || !desktop.matches) return;
+    cleanup?.();
+    cleanup = undefined;
+    if (
+      !host ||
+      !desktop.matches ||
+      reduced.matches ||
+      connection?.saveData ||
+      ["slow-2g", "2g", "3g"].includes(connection?.effectiveType ?? "")
+    )
+      return;
     try {
+      // Keep initial image requests ahead of the optional Three.js download.
+      await Promise.all(
+        [...host.querySelectorAll<HTMLImageElement>("img")].map((image) =>
+          image.decode(),
+        ),
+      );
+      if (current !== generation || document.hidden) return;
+      const bounds = host.getBoundingClientRect();
+      if (bounds.bottom <= 0 || bounds.top >= innerHeight) return;
       const { mountHeroScene } = await import("../scripts/hero-scene");
       if (current !== generation) return;
       const dispose = await mountHeroScene(host);
-      if (current !== generation) {
-        dispose?.();
-        return;
-      }
-      if (dispose) cleanup.push(dispose);
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(async ({ target, isIntersecting }) => {
-            if (!isIntersecting) return;
-            observer.unobserve(target);
-            try {
-              const disposePreview = await mountHeroScene(
-                target as HTMLElement,
-                "preview",
-              );
-              if (current !== generation) disposePreview?.();
-              else if (disposePreview) cleanup.push(disposePreview);
-            } catch (error) {
-              console.info(
-                "3D preview unavailable; retaining screenshot.",
-                error,
-              );
-            }
-          });
-        },
-        { rootMargin: "160px" },
-      );
-      document
-        .querySelectorAll(".re-story-visual")
-        .forEach((element) => observer.observe(element));
-      cleanup.push(() => observer.disconnect());
+      if (current !== generation) dispose?.();
+      else cleanup = dispose;
     } catch (error) {
       console.info("3D hero unavailable; retaining static screenshots.", error);
     }
   }
+  function scheduleEnhancement() {
+    if ("requestIdleCallback" in window)
+      window.requestIdleCallback(enhance, { timeout: 1500 });
+    else setTimeout(enhance, 200);
+  }
   host?.addEventListener("dragstart", (event) => event.preventDefault());
   desktop.addEventListener("change", enhance);
-  if ("requestIdleCallback" in window)
-    window.requestIdleCallback(enhance, { timeout: 1500 });
-  else setTimeout(enhance, 200);
+  reduced.addEventListener("change", enhance);
+  if (document.readyState === "complete") scheduleEnhancement();
+  else window.addEventListener("load", scheduleEnhancement, { once: true });
 </script>

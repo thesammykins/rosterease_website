@@ -134,21 +134,40 @@ for (const page of pages) {
   routes.set(route, await readFile(page, "utf8"));
 }
 const sitemap = await readFile("public/sitemap.xml", "utf8");
+check(routes.has("/404.html"), "Missing GitHub Pages error page: dist/404.html");
 for (const [route, html] of routes) {
-  check(
-    sitemap.includes(`https://rosterease.app${route}</loc>`),
-    `Sitemap missing ${route}`,
-  );
-  check(
-    html.includes(`rel="canonical" href="https://rosterease.app${route}"`),
-    `Wrong canonical for ${route}`,
-  );
+  const isNotFound = route === "/404.html";
+  const publicPath = route === "/" || isNotFound ? route : route + "/";
+  if (isNotFound) {
+    check(
+      /<meta name="robots" content="noindex"/.test(html),
+      "Error page must not be indexed",
+    );
+    check(
+      !/rel="canonical"/.test(html),
+      "Error page must not advertise a canonical URL",
+    );
+    check(!sitemap.includes("/404"), "Error page must stay out of the sitemap");
+  } else {
+    check(
+      sitemap.includes(`https://rosterease.app${publicPath}</loc>`),
+      `Sitemap missing ${route}`,
+    );
+    check(
+      html.includes(`rel="canonical" href="https://rosterease.app${publicPath}"`),
+      `Wrong canonical for ${route}`,
+    );
+  }
   for (const match of html.matchAll(/(?:href|src)="([^" ]+)"/g)) {
     const value = match[1].replaceAll("&amp;", "&");
     if (!value.startsWith("/") && !value.startsWith("#")) continue;
-    const url = new URL(value, `https://rosterease.app${route}`);
+    const url = new URL(value, `https://rosterease.app${publicPath}`);
     const targetRoute = url.pathname.replace(/\/$/, "") || "/";
     if (routes.has(targetRoute)) {
+      check(
+        targetRoute === "/404.html" || url.pathname.endsWith("/"),
+        `${route}: page link redirects on GitHub Pages: ${value}`,
+      );
       if (url.hash)
         check(
           routes

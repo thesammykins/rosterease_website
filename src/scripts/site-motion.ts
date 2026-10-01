@@ -91,8 +91,13 @@ export function initSiteMotion() {
           document
             .querySelectorAll<HTMLElement>(".re-worker-screens")
             .forEach((container) => {
-              container.querySelector(".re-worker-ghost")?.remove();
-              if (container.closest('[data-scene="ready"]')) return;
+              const oldGhost = container.querySelector(".re-worker-ghost");
+              if (oldGhost) {
+                animations.get(oldGhost)?.stop();
+                animations.delete(oldGhost);
+                touched.delete(oldGhost);
+                oldGhost.remove();
+              }
               const previous = container.querySelector<HTMLElement>(
                 '[data-worker-panel="' + selectedWorker + '"]',
               );
@@ -110,7 +115,10 @@ export function initSiteMotion() {
                 ghost,
                 { opacity: [1, 0] },
                 { duration: 0.32, ease: "easeInOut" },
-              ).then(() => ghost.remove());
+              ).then(() => {
+                ghost.remove();
+                touched.delete(ghost);
+              });
               play(
                 next,
                 { opacity: [0, 1] },

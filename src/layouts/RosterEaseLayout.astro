@@ -7,20 +7,22 @@ import { TESTFLIGHT_URL } from "../lib/rosterease";
 interface Props {
   title: string;
   description?: string;
+  noindex?: boolean;
 }
 const {
   title,
   description = "A personal planner for repeating shifts and client visits. Made for iPhone and iPad.",
+  noindex = false,
 } = Astro.props;
 const fullTitle = title === "RosterEase" ? title : `${title} | RosterEase`;
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
-const canonical = new URL(path, Astro.site ?? "https://rosterease.app").href;
+const canonical = new URL(path === "/" ? path : `${path}/`, Astro.site ?? "https://rosterease.app").href;
 const imageUrl = new URL(ogImage.src, Astro.site ?? "https://rosterease.app")
   .href;
 const navigation = [
-  { href: "/app", label: "The app" },
-  { href: "/contact", label: "Support" },
-  { href: "/privacy", label: "Privacy" },
+  { href: "/app/", label: "The app" },
+  { href: "/contact/", label: "Support" },
+  { href: "/privacy/", label: "Privacy" },
 ];
 const structuredData = JSON.stringify({
   "@context": "https://schema.org",
@@ -50,14 +52,20 @@ const structuredData = JSON.stringify({
       }
     </script>
     <link rel="icon" type="image/svg+xml" href={appIcon.src} />
-    <link rel="canonical" href={canonical} />
+    {
+      noindex ? (
+        <meta name="robots" content="noindex" />
+      ) : (
+        <link rel="canonical" href={canonical} />
+      )
+    }
     <title>{fullTitle}</title>
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="RosterEase" />
     <meta property="og:locale" content="en_AU" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    {!noindex && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={imageUrl} />
     <meta property="og:image:width" content={ogImage.width} />
     <meta property="og:image:height" content={ogImage.height} />
@@ -86,7 +94,8 @@ const structuredData = JSON.stringify({
             navigation.map((item) => (
               <a
                 href={item.href}
-                aria-current={path === item.href ? "page" : undefined}
+                data-astro-prefetch
+                aria-current={path === item.href.replace(/\/$/, "") ? "page" : undefined}
               >
                 {item.label}
               </a>
@@ -106,13 +115,14 @@ const structuredData = JSON.stringify({
               navigation.map((item) => (
                 <a
                   href={item.href}
-                  aria-current={path === item.href ? "page" : undefined}
+                  data-astro-prefetch
+                  aria-current={path === item.href.replace(/\/$/, "") ? "page" : undefined}
                 >
                   {item.label}
                 </a>
               ))
             }
-            <a href="/help">Help guides</a>
+            <a href="/help/">Help guides</a>
           </nav>
         </details>
       </div>
@@ -130,11 +140,11 @@ const structuredData = JSON.stringify({
             ><p>A personal workday planner.<br />Made for iPhone and iPad.</p>
           </div>
           <nav class="re-footer-links" aria-label="Footer navigation">
-            <a href="/app">The app</a><a href="/help">Help guides</a><a
-              href="/contact">Support</a
-            ><a href="/privacy">Privacy Policy</a><a href="/terms"
+            <a href="/app/">The app</a><a href="/help/">Help guides</a><a
+              href="/contact/">Support</a
+            ><a href="/privacy/">Privacy Policy</a><a href="/terms/"
               >Terms of Use</a
-            ><a href="/credits">Credits</a>
+            ><a href="/credits/">Credits</a>
           </nav>
           <div class="re-footer-cta">
             <a
@@ -236,12 +246,14 @@ const structuredData = JSON.stringify({
       const menu =
         document.querySelector<HTMLDetailsElement>(".re-mobile-menu");
       document.addEventListener("click", (event) => {
-        if (
-          appearance?.open &&
-          event.target instanceof Node &&
-          !appearance.contains(event.target)
-        ) {
-          appearance.open = false;
+        for (const disclosure of [appearance, menu]) {
+          if (
+            disclosure?.open &&
+            event.target instanceof Node &&
+            !disclosure.contains(event.target)
+          ) {
+            disclosure.open = false;
+          }
         }
       });
       document.addEventListener("keydown", (event) => {

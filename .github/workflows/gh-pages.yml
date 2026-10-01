@@ -34,8 +34,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Astro site
-        run: npm run build
+      - name: Build and check site accessibility, links and assets
+        run: npm run check:a11y
+
+      - name: Check hero motion
+        run: npm run check:motion
 
       - name: Copy CNAME to build output
         run: cp CNAME dist/CNAME

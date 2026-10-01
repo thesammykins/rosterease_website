@@ -1,0 +1,635 @@
+{
+  "assets": [
+    {
+      "name": "ipad-field-calendar-light.a0QdqCbt.png",
+      "bytes": 1675738,
+      "gzip": 1644797
+    },
+    {
+      "name": "ipad-field-today-light.BsSImXLk.png",
+      "bytes": 1414548,
+      "gzip": 1388578
+    },
+    {
+      "name": "hero-scene.BafO9Jxd.js",
+      "bytes": 649474,
+      "gzip": 167837
+    },
+    {
+      "name": "og-image.fxPN7dA4.png",
+      "bytes": 386199,
+      "gzip": 386213
+    },
+    {
+      "name": "import-review.crNw0B71.jpg",
+      "bytes": 264832,
+      "gzip": 201873
+    },
+    {
+      "name": "field-import-review.C3fUOYyX.jpg",
+      "bytes": 264419,
+      "gzip": 200374
+    },
+    {
+      "name": "shift-today.RSQ4iuAa.jpg",
+      "bytes": 244254,
+      "gzip": 215294
+    },
+    {
+      "name": "field-today.DpTOfH_P.jpg",
+      "bytes": 241228,
+      "gzip": 191014
+    },
+    {
+      "name": "field-calendar.D3qPdZY_.jpg",
+      "bytes": 240770,
+      "gzip": 189313
+    },
+    {
+      "name": "field-clients.BCgdIQwA.jpg",
+      "bytes": 212394,
+      "gzip": 167746
+    },
+    {
+      "name": "shift-calendar.b5BYt2kV.jpg",
+      "bytes": 184764,
+      "gzip": 132697
+    },
+    {
+      "name": "import-review.crNw0B71_ZVLdel.webp",
+      "bytes": 145612,
+      "gzip": 142255
+    },
+    {
+      "name": "field-import-review.C3fUOYyX_ho2rX.webp",
+      "bytes": 143246,
+      "gzip": 140314
+    },
+    {
+      "name": "shift-today.RSQ4iuAa_Z21MqUd.webp",
+      "bytes": 139100,
+      "gzip": 139126
+    },
+    {
+      "name": "field-today.DpTOfH_P_ZaVDDb.webp",
+      "bytes": 128504,
+      "gzip": 127719
+    },
+    {
+      "name": "field-calendar.D3qPdZY__Z2ncCY8.webp",
+      "bytes": 125184,
+      "gzip": 124199
+    },
+    {
+      "name": "shift-calendar.b5BYt2kV_2iVHf9.webp",
+      "bytes": 90272,
+      "gzip": 87753
+    },
+    {
+      "name": "ipad-field-today-dark.CL3ruEV9_10l7ws.webp",
+      "bytes": 76276,
+      "gzip": 75136
+    },
+    {
+      "name": "ipad-field-today-light.BsSImXLk_3LTWU.webp",
+      "bytes": 75574,
+      "gzip": 74696
+    },
+    {
+      "name": "ipad-field-calendar-dark.CWAFqNyT_2e06CC.webp",
+      "bytes": 73156,
+      "gzip": 71785
+    },
+    {
+      "name": "ipad-field-calendar-light.a0QdqCbt_Sxg00.webp",
+      "bytes": 71636,
+      "gzip": 70801
+    },
+    {
+      "name": "iphone-17-black.BmAYV4Tl_Z1lCCB8.webp",
+      "bytes": 63156,
+      "gzip": 57703
+    },
+    {
+      "name": "import-review.crNw0B71_Z2rMma8.webp",
+      "bytes": 53986,
+      "gzip": 53748
+    },
+    {
+      "name": "field-import-review.C3fUOYyX_Z11TT4W.webp",
+      "bytes": 53050,
+      "gzip": 52844
+    },
+    {
+      "name": "shift-today.RSQ4iuAa_2nHaOl.webp",
+      "bytes": 50006,
+      "gzip": 50044
+    },
+    {
+      "name": "field-calendar.D3qPdZY__uDUSn.webp",
+      "bytes": 47100,
+      "gzip": 47092
+    },
+    {
+      "name": "field-today.DpTOfH_P_18i6as.webp",
+      "bytes": 46274,
+      "gzip": 46283
+    },
+    {
+      "name": "shift-calendar.b5BYt2kV_2hVUtC.webp",
+      "bytes": 34376,
+      "gzip": 34113
+    },
+    {
+      "name": "ipad-field-today-dark.CL3ruEV9_ZwSyj0.webp",
+      "bytes": 27626,
+      "gzip": 27503
+    },
+    {
+      "name": "ipad-field-today-light.BsSImXLk_1UYBDA.webp",
+      "bytes": 27440,
+      "gzip": 27359
+    },
+    {
+      "name": "ipad-field-calendar-dark.CWAFqNyT_Z2k7YsR.webp",
+      "bytes": 26544,
+      "gzip": 26451
+    },
+    {
+      "name": "ipad-field-calendar-light.a0QdqCbt_M43Q.webp",
+      "bytes": 26126,
+      "gzip": 26018
+    },
+    {
+      "name": "RosterEaseLayout.CYwKDNB0.css",
+      "bytes": 23141,
+      "gzip": 5535
+    },
+    {
+      "name": "iphone-17-black.BmAYV4Tl_ZTx6mF.webp",
+      "bytes": 18774,
+      "gzip": 18028
+    },
+    {
+      "name": "RosterEaseLayout.astro_astro_type_script_index_0_lang.CpGGjpsX.js",
+      "bytes": 9374,
+      "gzip": 3922
+    },
+    {
+      "name": "iphone-17-black.BmAYV4Tl_p86Un.webp",
+      "bytes": 7738,
+      "gzip": 7761
+    },
+    {
+      "name": "animate-style.REiZ4jDc.js",
+      "bytes": 7717,
+      "gzip": 3013
+    },
+    {
+      "name": "rosterease-app-icon.Bx-QOlNN.svg",
+      "bytes": 3115,
+      "gzip": 926
+    },
+    {
+      "name": "index.astro_astro_type_script_index_0_lang.CBwvU9cf.js",
+      "bytes": 2246,
+      "gzip": 1173
+    },
+    {
+      "name": "ScreenshotViewer.astro_astro_type_script_index_0_lang.D8dalGJu.js",
+      "bytes": 1881,
+      "gzip": 950
+    }
+  ],
+  "pages": [
+    {
+      "page": "/app/index.html",
+      "htmlBytes": 13282,
+      "gzip": 4357,
+      "assets": [
+        {
+          "name": "rosterease-app-icon.Bx-QOlNN.svg",
+          "bytes": 3115,
+          "gzip": 926
+        },
+        {
+          "name": "RosterEaseLayout.CYwKDNB0.css",
+          "bytes": 23141,
+          "gzip": 5535
+        },
+        {
+          "name": "shift-calendar.b5BYt2kV_2hVUtC.webp",
+          "bytes": 34376,
+          "gzip": 34113
+        },
+        {
+          "name": "iphone-17-black.BmAYV4Tl_Z1lCCB8.webp",
+          "bytes": 63156,
+          "gzip": 57703
+        },
+        {
+          "name": "ipad-field-today-light.BsSImXLk.png",
+          "bytes": 1414548,
+          "gzip": 1388578
+        },
+        {
+          "name": "ipad-field-today-dark.CL3ruEV9_ZwSyj0.webp",
+          "bytes": 27626,
+          "gzip": 27503
+        },
+        {
+          "name": "ipad-field-today-light.BsSImXLk_1UYBDA.webp",
+          "bytes": 27440,
+          "gzip": 27359
+        },
+        {
+          "name": "ipad-field-calendar-light.a0QdqCbt.png",
+          "bytes": 1675738,
+          "gzip": 1644797
+        },
+        {
+          "name": "ipad-field-calendar-dark.CWAFqNyT_Z2k7YsR.webp",
+          "bytes": 26544,
+          "gzip": 26451
+        },
+        {
+          "name": "ipad-field-calendar-light.a0QdqCbt_M43Q.webp",
+          "bytes": 26126,
+          "gzip": 26018
+        },
+        {
+          "name": "ScreenshotViewer.astro_astro_type_script_index_0_lang.D8dalGJu.js",
+          "bytes": 1881,
+          "gzip": 950
+        },
+        {
+          "name": "RosterEaseLayout.astro_astro_type_script_index_0_lang.CpGGjpsX.js",
+          "bytes": 9374,
+          "gzip": 3922
+        }
+      ]
+    },
+    {
+      "page": "/contact/index.html",
+      "htmlBytes": 7321,
+      "gzip": 2490,
+      "assets": [
+        {
+          "name": "rosterease-app-icon.Bx-QOlNN.svg",
+          "bytes": 3115,
+          "gzip": 926
+        },
+        {
+          "name": "RosterEaseLayout.CYwKDNB0.css",
+          "bytes": 23141,
+          "gzip": 5535
+        },
+        {
+          "name": "ScreenshotViewer.astro_astro_type_script_index_0_lang.D8dalGJu.js",
+          "bytes": 1881,
+          "gzip": 950
+        },
+        {
+          "name": "RosterEaseLayout.astro_astro_type_script_index_0_lang.CpGGjpsX.js",
+          "bytes": 9374,
+          "gzip": 3922
+        }
+      ]
+    },
+    {
+      "page": "/credits/index.html",
+      "htmlBytes": 6013,
+      "gzip": 2136,
+      "assets": [
+        {
+          "name": "rosterease-app-icon.Bx-QOlNN.svg",
+          "bytes": 3115,
+          "gzip": 926
+        },
+        {
+          "name": "RosterEaseLayout.CYwKDNB0.css",
+          "bytes": 23141,
+          "gzip": 5535
+        },
+        {
+          "name": "ScreenshotViewer.astro_astro_type_script_index_0_lang.D8dalGJu.js",
+          "bytes": 1881,
+          "gzip": 950
+        },
+        {
+          "name": "RosterEaseLayout.astro_astro_type_script_index_0_lang.CpGGjpsX.js",
+          "bytes": 9374,
+          "gzip": 3922
+        }
+      ]
+    },
+    {
+      "page": "/help/backup-and-restore/index.html",
+      "htmlBytes": 8220,
+      "gzip": 2894,
+      "assets": [
+        {
+          "name": "rosterease-app-icon.Bx-QOlNN.svg",
+          "bytes": 3115,
+          "gzip": 926
+        },
+        {
+          "name": "RosterEaseLayout.CYwKDNB0.css",
+          "bytes": 23141,
+          "gzip": 5535
+        },
+        {
+          "name": "ScreenshotViewer.astro_astro_type_script_index_0_lang.D8dalGJu.js",
+          "bytes": 1881,
+          "gzip": 950
+        },
+        {
+          "name": "RosterEaseLayout.astro_astro_type_script_index_0_lang.CpGGjpsX.js",
+          "bytes": 9374,
+          "gzip": 3922
+        }
+      ]
+    },
+    {
+      "page": "/help/calendar-and-privacy/index.html",
+      "htmlBytes": 7971,
+      "gzip": 2805,
+      "assets": [
+        {
+          "name": "rosterease-app-icon.Bx-QOlNN.svg",
+          "bytes": 3115,
+          "gzip": 926
+        },
+        {
+          "name": "RosterEaseLayout.CYwKDNB0.css",
+          "bytes": 23141,
+          "gzip": 5535
+        },
+        {
+          "name": "ScreenshotViewer.astro_astro_type_script_index_0_lang.D8dalGJu.js",
+          "bytes": 1881,
+          "gzip": 950
+        },
+        {
+          "name": "RosterEaseLayout.astro_astro_type_script_index_0_lang.CpGGjpsX.js",
+          "bytes": 9374,
+          "gzip": 3922
+        }
+      ]
+    },
+    {
+      "page": "/help/getting-started/index.html",
+      "htmlBytes": 7930,
+      "gzip": 2794,
+      "assets": [
+        {
+          "name": "rosterease-app-icon.Bx-QOlNN.svg",
+          "bytes": 3115,
+          "gzip": 926
+        },
+        {
+          "name": "RosterEaseLayout.CYwKDNB0.css",
+          "bytes": 23141,
+          "gzip": 5535
+        },
+        {
+          "name": "ScreenshotViewer.astro_astro_type_script_index_0_lang.D8dalGJu.js",
+          "bytes": 1881,
+          "gzip": 950
+        },
+        {
+          "name": "RosterEaseLayout.astro_astro_type_script_index_0_lang.CpGGjpsX.js",
+          "bytes": 9374,
+          "gzip": 3922
+        }
+      ]
+    },
+    {
+      "page": "/help/index.html",
+      "htmlBytes": 6468,
+      "gzip": 2175,
+      "assets": [
+        {
+          "name": "rosterease-app-icon.Bx-QOlNN.svg",
+          "bytes": 3115,
+          "gzip": 926
+        },
+        {
+          "name": "RosterEaseLayout.CYwKDNB0.css",
+          "bytes": 23141,
+          "gzip": 5535
+        },
+        {
+          "name": "ScreenshotViewer.astro_astro_type_script_index_0_lang.D8dalGJu.js",
+          "bytes": 1881,
+          "gzip": 950
+        },
+        {
+          "name": "RosterEaseLayout.astro_astro_type_script_index_0_lang.CpGGjpsX.js",
+          "bytes": 9374,
+          "gzip": 3922
+        }
+      ]
+    },
+    {
+      "page": "/help/smart-import/index.html",
+      "htmlBytes": 8162,
+      "gzip": 2895,
+      "assets": [
+        {
+          "name": "rosterease-app-icon.Bx-QOlNN.svg",
+          "bytes": 3115,
+          "gzip": 926
+        },
+        {
+          "name": "RosterEaseLayout.CYwKDNB0.css",
+          "bytes": 23141,
+          "gzip": 5535
+        },
+        {
+          "name": "ScreenshotViewer.astro_astro_type_script_index_0_lang.D8dalGJu.js",
+          "bytes": 1881,
+          "gzip": 950
+        },
+        {
+          "name": "RosterEaseLayout.astro_astro_type_script_index_0_lang.CpGGjpsX.js",
+          "bytes": 9374,
+          "gzip": 3922
+        }
+      ]
+    },
+    {
+      "page": "/index.html",
+      "htmlBytes": 27058,
+      "gzip": 3865,
+      "assets": [
+        {
+          "name": "rosterease-app-icon.Bx-QOlNN.svg",
+          "bytes": 3115,
+          "gzip": 926
+        },
+        {
+          "name": "RosterEaseLayout.CYwKDNB0.css",
+          "bytes": 23141,
+          "gzip": 5535
+        },
+        {
+          "name": "shift-today.RSQ4iuAa_2nHaOl.webp",
+          "bytes": 50006,
+          "gzip": 50044
+        },
+        {
+          "name": "field-today.DpTOfH_P_18i6as.webp",
+          "bytes": 46274,
+          "gzip": 46283
+        },
+        {
+          "name": "import-review.crNw0B71.jpg",
+          "bytes": 264832,
+          "gzip": 201873
+        },
+        {
+          "name": "import-review.crNw0B71_Z2rMma8.webp",
+          "bytes": 53986,
+          "gzip": 53748
+        },
+        {
+          "name": "field-import-review.C3fUOYyX.jpg",
+          "bytes": 264419,
+          "gzip": 200374
+        },
+        {
+          "name": "field-import-review.C3fUOYyX_Z11TT4W.webp",
+          "bytes": 53050,
+          "gzip": 52844
+        },
+        {
+          "name": "shift-calendar.b5BYt2kV.jpg",
+          "bytes": 184764,
+          "gzip": 132697
+        },
+        {
+          "name": "shift-calendar.b5BYt2kV_2hVUtC.webp",
+          "bytes": 34376,
+          "gzip": 34113
+        },
+        {
+          "name": "field-calendar.D3qPdZY_.jpg",
+          "bytes": 240770,
+          "gzip": 189313
+        },
+        {
+          "name": "field-calendar.D3qPdZY__uDUSn.webp",
+          "bytes": 47100,
+          "gzip": 47092
+        },
+        {
+          "name": "shift-today.RSQ4iuAa.jpg",
+          "bytes": 244254,
+          "gzip": 215294
+        },
+        {
+          "name": "field-today.DpTOfH_P.jpg",
+          "bytes": 241228,
+          "gzip": 191014
+        },
+        {
+          "name": "ScreenshotViewer.astro_astro_type_script_index_0_lang.D8dalGJu.js",
+          "bytes": 1881,
+          "gzip": 950
+        },
+        {
+          "name": "RosterEaseLayout.astro_astro_type_script_index_0_lang.CpGGjpsX.js",
+          "bytes": 9374,
+          "gzip": 3922
+        },
+        {
+          "name": "index.astro_astro_type_script_index_0_lang.CBwvU9cf.js",
+          "bytes": 2246,
+          "gzip": 1173
+        }
+      ]
+    },
+    {
+      "page": "/on-device/index.html",
+      "htmlBytes": 8658,
+      "gzip": 3031,
+      "assets": [
+        {
+          "name": "rosterease-app-icon.Bx-QOlNN.svg",
+          "bytes": 3115,
+          "gzip": 926
+        },
+        {
+          "name": "RosterEaseLayout.CYwKDNB0.css",
+          "bytes": 23141,
+          "gzip": 5535
+        },
+        {
+          "name": "ScreenshotViewer.astro_astro_type_script_index_0_lang.D8dalGJu.js",
+          "bytes": 1881,
+          "gzip": 950
+        },
+        {
+          "name": "RosterEaseLayout.astro_astro_type_script_index_0_lang.CpGGjpsX.js",
+          "bytes": 9374,
+          "gzip": 3922
+        }
+      ]
+    },
+    {
+      "page": "/privacy/index.html",
+      "htmlBytes": 19392,
+      "gzip": 5676,
+      "assets": [
+        {
+          "name": "rosterease-app-icon.Bx-QOlNN.svg",
+          "bytes": 3115,
+          "gzip": 926
+        },
+        {
+          "name": "RosterEaseLayout.CYwKDNB0.css",
+          "bytes": 23141,
+          "gzip": 5535
+        },
+        {
+          "name": "ScreenshotViewer.astro_astro_type_script_index_0_lang.D8dalGJu.js",
+          "bytes": 1881,
+          "gzip": 950
+        },
+        {
+          "name": "RosterEaseLayout.astro_astro_type_script_index_0_lang.CpGGjpsX.js",
+          "bytes": 9374,
+          "gzip": 3922
+        }
+      ]
+    },
+    {
+      "page": "/terms/index.html",
+      "htmlBytes": 7073,
+      "gzip": 2468,
+      "assets": [
+        {
+          "name": "rosterease-app-icon.Bx-QOlNN.svg",
+          "bytes": 3115,
+          "gzip": 926
+        },
+        {
+          "name": "RosterEaseLayout.CYwKDNB0.css",
+          "bytes": 23141,
+          "gzip": 5535
+        },
+        {
+          "name": "ScreenshotViewer.astro_astro_type_script_index_0_lang.D8dalGJu.js",
+          "bytes": 1881,
+          "gzip": 950
+        },
+        {
+          "name": "RosterEaseLayout.astro_astro_type_script_index_0_lang.CpGGjpsX.js",
+          "bytes": 9374,
+          "gzip": 3922
+        }
+      ]
+    }
+  ]
+}

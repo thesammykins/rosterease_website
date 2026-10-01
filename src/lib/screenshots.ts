@@ -1,21 +1,22 @@
-import ipadFieldTodayLight from "../assets/rosterease/screenshots/review-2026-09-05/ipad-field-today-light.png";
-import ipadFieldTodayDark from "../assets/rosterease/screenshots/review-2026-09-05/ipad-field-today-dark.png";
-import ipadFieldCalendarLight from "../assets/rosterease/screenshots/review-2026-09-05/ipad-field-calendar-light.png";
-import ipadFieldCalendarDark from "../assets/rosterease/screenshots/review-2026-09-05/ipad-field-calendar-dark.png";
-import shiftToday from "../assets/rosterease/screenshots/review-2026-09-05/shift-today.jpg";
-import fieldToday from "../assets/rosterease/screenshots/review-2026-09-05/field-today.jpg";
+import ipadFieldTodayLight from "../assets/rosterease/screenshots/capture-2026-10-01/ipad-field-today-light.png";
+import ipadFieldTodayDark from "../assets/rosterease/screenshots/capture-2026-10-01/ipad-field-today-dark.png";
+import ipadFieldCalendarLight from "../assets/rosterease/screenshots/capture-2026-10-01/ipad-field-calendar-light.png";
+import ipadFieldCalendarDark from "../assets/rosterease/screenshots/capture-2026-10-01/ipad-field-calendar-dark.png";
+import shiftToday from "../assets/rosterease/screenshots/capture-2026-10-01/shift-today-dark.png";
+import fieldToday from "../assets/rosterease/screenshots/capture-2026-10-01/field-today-dark.png";
 import shiftImport from "../assets/rosterease/screenshots/review-2026-09-05/import-review.jpg";
 import fieldImport from "../assets/rosterease/screenshots/review-2026-09-05/field-import-review.jpg";
-import shiftCalendar from "../assets/rosterease/screenshots/review-2026-09-05/shift-calendar.jpg";
-import fieldCalendar from "../assets/rosterease/screenshots/review-2026-09-05/field-calendar.jpg";
-import fieldClients from "../assets/rosterease/screenshots/review-2026-09-05/field-clients.jpg";
+import shiftCalendar from "../assets/rosterease/screenshots/capture-2026-10-01/shift-calendar-dark.png";
+import fieldCalendar from "../assets/rosterease/screenshots/capture-2026-10-01/field-calendar-dark.png";
+import fieldClients from "../assets/rosterease/screenshots/capture-2026-10-01/field-clients-dark.png";
 import type { ImageMetadata } from "astro";
 export interface AppScreen {
   dark: ImageMetadata;
   light?: ImageMetadata;
   alt: string;
 }
-// iPad pairs: review build, 5 September 2026, synthetic six-stop route; not TestFlight 92.
+// Native 1 October simulator captures use synthetic records; provenance is in capture-manifest.json.
+// Import-review examples remain the genuine 5 September captures.
 export const screens = {
   ipadFieldToday: {
     light: ipadFieldTodayLight,
@@ -25,11 +26,11 @@ export const screens = {
   ipadFieldCalendar: {
     light: ipadFieldCalendarLight,
     dark: ipadFieldCalendarDark,
-    alt: "Field Worker Calendar on iPad with April visits and selected-day details.",
+    alt: "Field Worker Calendar on iPad with October visits and selected-day details.",
   },
   shiftToday: {
     dark: shiftToday,
-    alt: "Shift Worker Today with the next shift and leave time.",
+    alt: "Shift Worker Today with the current shift, workplace and leave plan.",
   },
   fieldToday: {
     dark: fieldToday,
