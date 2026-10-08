@@ -97,8 +97,8 @@ check(
   "Homepage should not download a video or WebGL runtime",
 );
 check(
-  !/Download on the App Store/.test(home),
-  "Do not advertise App Store availability before launch",
+  /alt="Download on the App Store"/.test(home),
+  "Homepage needs the official App Store download badge",
 );
 check(
   /Plan your shifts/.test(home) && /Organise your visits/.test(home),
@@ -121,6 +121,31 @@ check(!/re-screen-detail__hint/.test(home), "Remove the screenshot banner");
 check(
   !/<a[^>]*class="re-hero-screen/.test(home),
   "Hero phones must stay in place, not open the screenshot viewer",
+);
+
+const appStoreUrl = "https://apps.apple.com/us/app/rosterease/id6762237930";
+for (const page of pages) {
+  const html = await readFile(page, "utf8");
+  check(html.includes(`href="${appStoreUrl}"`), `${page}: missing App Store link`);
+  check(
+    count(html, /alt="Download on the App Store"/g) === 1,
+    `${page}: expected one App Store badge`,
+  );
+  check(
+    !/App Store release coming soon|ahead of its\s+App Store release/.test(html),
+    `${page}: stale pre-launch copy`,
+  );
+  check(html.includes('href="/beta/"'), `${page}: missing beta navigation`);
+  if (page !== "dist/beta/index.html")
+    check(
+      !html.includes('href="https://testflight.apple.com/join/'),
+      `${page}: TestFlight signup belongs on the beta page`,
+    );
+}
+const beta = await readFile("dist/beta/index.html", "utf8");
+check(
+  beta.includes('href="https://testflight.apple.com/join/PZdK93CP"'),
+  "Missing beta invitation",
 );
 
 const routes = new Map();

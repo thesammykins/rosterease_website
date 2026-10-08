@@ -1,0 +1,23 @@
+---
+import badge from "../assets/rosterease/app-store-badge.svg";
+import { APP_STORE_URL } from "../lib/rosterease";
+---
+
+<a class="re-app-store-badge" href={APP_STORE_URL}>
+  <img src={badge.src} alt="Download on the App Store" width="144" height="48" />
+</a>
+
+<style>
+  /* Apple's minimum clear space is one quarter of the badge height. */
+  .re-app-store-badge {
+    display: inline-block;
+    padding: 12px;
+    margin-inline: -12px;
+    vertical-align: middle;
+  }
+  .re-app-store-badge img {
+    display: block;
+    width: auto;
+    height: 48px;
+  }
+</style>

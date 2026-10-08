@@ -3,11 +3,12 @@ import RosterEaseLayout from "../layouts/RosterEaseLayout.astro";
 import AppScreenshot from "../components/AppScreenshot.astro";
 import PhoneScreenshot from "../components/PhoneScreenshot.astro";
 import { screens } from "../lib/screenshots";
-import { TESTFLIGHT_URL } from "../lib/rosterease";
+import AppStoreBadge from "../components/AppStoreBadge.astro";
 ---
 
 <RosterEaseLayout
   title="The app"
+  storeBadgeInFooter={false}
   description="Explore repeating shift patterns, client visits, on-device Smart Import and the privacy choices that make RosterEase a personal workday planner."
 >
   <div class="re-shell">
@@ -165,21 +166,15 @@ import { TESTFLIGHT_URL } from "../lib/rosterease";
           >Subscriptions and Terms of Use →</a
         >
       </div><div id="beta">
-        <p class="re-kicker">Try the beta</p><h2>
-          Test RosterEase<br />with your schedule.
+        <p class="re-kicker">Available now</p><h2>
+          Make your next<br />workday easier.
         </h2><p>
-          RosterEase is available for testing through TestFlight, ahead of its
-          App Store release. Beta features and access can differ from the final
-          release.
-        </p><p>
-          These screenshots show development builds with fictional data. Your
-          TestFlight build may look or behave differently as testing progresses.
-        </p><a
-          class="re-button"
-          href={TESTFLIGHT_URL}
-          target="_blank"
-          rel="noopener">Join TestFlight ↗</a
-        >
+          Download RosterEase from the App Store for iPhone and iPad.
+          These screenshots use fictional data; appearance can vary by
+          device and app version.
+        </p><AppStoreBadge /><p>
+          Want to help test upcoming features? <a href="/beta/">Explore beta access</a>.
+        </p>
       </div>
     </section>
   </div>

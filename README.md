@@ -20,7 +20,8 @@ The build outputs to `dist/`. `.github/workflows/gh-pages.yml` runs `check:a11y`
 ## Pages
 
 - `/`: concise introduction, three-step story and on-device positioning.
-- `/app`: Shift/Field workflows, boundaries, Free/Plus and beta status.
+- `/app`: Shift/Field workflows, boundaries, Free/Plus and App Store download.
+- `/beta`: optional TestFlight signup and feedback guidance.
 - `/on-device`: local processing and optional data-sharing destinations.
 - `/help`: setup, Smart Import, Calendar/privacy and backup/restore guides.
 - `/contact`, `/privacy`, `/terms`: support, policy and Apple standard EULA information.
@@ -38,6 +39,8 @@ Today, Calendar and Clients use unaltered native captures from the current app s
 The hero uses a layered enclosure in `DeviceBody.astro` before its desktop 3D enhancement loads. Walkthrough screenshots use upright, flat frames for readability. `PhoneScreenshot.astro` on the product page places real screenshots under the official iPhone 17 bezel. The measured screen aperture is 1206 × 2622 at (72, 69) in a 1350 × 2760 frame. Do not stretch screenshots from another device into this geometry. The artwork's licence is retained in `docs/design/`.
 
 Earlier screenshot sets and recordings remain available as historical assets. The current pages do not load the recordings. Do not reintroduce them without checking their build provenance and motion controls.
+
+The shared App Store link lives in `src/lib/rosterease.ts`. Apple's unmodified black download badge is served locally; [badge provenance and display rules](docs/design/app-store-badge.md) document its source. TestFlight signup lives only on `/beta/`.
 
 ## Motion and themes
 

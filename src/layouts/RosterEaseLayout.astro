@@ -3,16 +3,19 @@ import "../styles/rosterease.css";
 import ScreenshotViewer from "../components/ScreenshotViewer.astro";
 import appIcon from "../assets/rosterease/rosterease-app-icon.svg";
 import ogImage from "../assets/rosterease/og-image.png";
-import { TESTFLIGHT_URL } from "../lib/rosterease";
+import AppStoreBadge from "../components/AppStoreBadge.astro";
+import { APP_STORE_ID, APP_STORE_URL } from "../lib/rosterease";
 interface Props {
   title: string;
   description?: string;
   noindex?: boolean;
+  storeBadgeInFooter?: boolean;
 }
 const {
   title,
   description = "A personal planner for repeating shifts and client visits. Made for iPhone and iPad.",
   noindex = false,
+  storeBadgeInFooter = true,
 } = Astro.props;
 const fullTitle = title === "RosterEase" ? title : `${title} | RosterEase`;
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
@@ -32,6 +35,8 @@ const structuredData = JSON.stringify({
   description,
   applicationCategory: "ProductivityApplication",
   operatingSystem: "iOS, iPadOS",
+  downloadUrl: APP_STORE_URL,
+  installUrl: APP_STORE_URL,
 });
 ---
 
@@ -42,6 +47,7 @@ const structuredData = JSON.stringify({
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#faf9f6" />
+    {!noindex && <meta name="apple-itunes-app" content={`app-id=${APP_STORE_ID}`} />}
     <script is:inline>
       try {
         const theme = localStorage.getItem("rosterease-theme");
@@ -104,9 +110,9 @@ const structuredData = JSON.stringify({
         </nav>
         <a
           class="re-button re-header-cta"
-          href={TESTFLIGHT_URL}
+          href={APP_STORE_URL}
           target="_blank"
-          rel="noopener">Join TestFlight <span aria-hidden="true">↗</span></a
+          rel="noopener">Get the app <span aria-hidden="true">↗</span></a
         >
         <details class="re-mobile-menu">
           <summary>Menu</summary>
@@ -123,6 +129,8 @@ const structuredData = JSON.stringify({
               ))
             }
             <a href="/help/">Help guides</a>
+            <a href="/beta/">Beta access</a>
+            <a href={APP_STORE_URL}>Download on the App Store ↗</a>
           </nav>
         </details>
       </div>
@@ -144,16 +152,15 @@ const structuredData = JSON.stringify({
               href="/contact/">Support</a
             ><a href="/privacy/">Privacy Policy</a><a href="/terms/"
               >Terms of Use</a
-            ><a href="/credits/">Credits</a>
+            ><a href="/credits/">Credits</a><a href="/beta/">Beta access</a>
           </nav>
           <div class="re-footer-cta">
-            <a
-              class="re-button"
-              href={TESTFLIGHT_URL}
-              target="_blank"
-              rel="noopener"
-              >Join TestFlight <span aria-hidden="true">↗</span></a
-            ><p>App Store release coming soon</p>
+            {storeBadgeInFooter ? (
+              <AppStoreBadge />
+            ) : (
+              <a class="re-text-link" href={APP_STORE_URL}>Get RosterEase on the App Store ↗</a>
+            )}
+            <p>Available for iPhone and iPad</p>
           </div>
         </div>
         <div class="re-footer-bottom">

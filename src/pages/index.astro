@@ -2,7 +2,7 @@
 import RosterEaseLayout from "../layouts/RosterEaseLayout.astro";
 import DeviceBody from "../components/DeviceBody.astro";
 import { screens } from "../lib/screenshots";
-import { TESTFLIGHT_URL } from "../lib/rosterease";
+import AppStoreBadge from "../components/AppStoreBadge.astro";
 const story = [
   {
     title: "Import your roster",
@@ -36,6 +36,7 @@ const story = [
 
 <RosterEaseLayout
   title="RosterEase"
+  storeBadgeInFooter={false}
   description="Plan repeating shifts and client visits on your iPhone or iPad. Import your roster on-device, check your calendar and see what is next."
 >
   <section class="re-shell re-hero" data-motion-sequence>
@@ -48,13 +49,8 @@ const story = [
         Import your roster, check your calendar and see your next shift or
         visit. RosterEase keeps your workday plan on your iPhone or iPad.
       </p>
-      <a
-        class="re-button re-button--primary"
-        href={TESTFLIGHT_URL}
-        target="_blank"
-        rel="noopener">Join TestFlight <span aria-hidden="true">↗</span></a
-      >
-      <p class="re-availability">App Store release coming soon</p>
+      <AppStoreBadge />
+      <p class="re-availability">Available now for iPhone and iPad</p>
     </div>
     <div
       class="re-hero-stage"

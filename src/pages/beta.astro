@@ -1,0 +1,62 @@
+---
+import RosterEaseLayout from "../layouts/RosterEaseLayout.astro";
+import { TESTFLIGHT_URL, APP_STORE_URL } from "../lib/rosterease";
+---
+
+<RosterEaseLayout
+  title="Beta access"
+  description="Join the RosterEase TestFlight programme to help test upcoming features, report problems and share feedback."
+>
+  <div class="re-shell">
+    <section class="re-page-intro">
+      <p class="re-kicker">Beta access</p>
+      <h1>Help test what's next.</h1>
+      <p>
+        Join RosterEase on TestFlight to try new features as they become
+        available, report problems and help improve the app.
+      </p>
+      <a class="re-button" href={TESTFLIGHT_URL} target="_blank" rel="noopener">
+        Join TestFlight <span aria-hidden="true">↗</span>
+      </a>
+    </section>
+    <article class="re-prose">
+      <section>
+        <h2>Join the testing programme</h2>
+        <ol>
+          <li>Open the invitation above on your iPhone or iPad.</li>
+          <li>Install Apple's TestFlight app if prompted, then accept the invitation.</li>
+          <li>Install RosterEase and use TestFlight to check for beta updates.</li>
+        </ol>
+        <p>
+          Access depends on available tester places and an active build.
+          If the invitation is full or unavailable, you can still
+          <a href={APP_STORE_URL}>download the App Store version</a>.
+        </p>
+      </section>
+      <section>
+        <h2>Before trying a beta update</h2>
+        <p>
+          Future beta builds may contain unfinished features or errors and can
+          differ from the App Store version. <a href="/help/backup-and-restore/">Keep
+          an encrypted backup</a> before updating and check important shifts or
+          visits against your original schedule. TestFlight builds expire;
+          check TestFlight for updates and availability.
+        </p>
+      </section>
+      <section>
+        <h2>Share useful feedback</h2>
+        <p>
+          Send feedback through TestFlight or <a href="/contact/">contact support</a>.
+          Include your device, app version and build number, what you expected
+          and the steps that caused the problem. Remove names, addresses,
+          medical information and other private details from screenshots.
+        </p>
+        <p>
+          Read the <a href="/privacy/">Privacy Policy</a> for how Apple and the
+          developer handle TestFlight feedback, and the <a href="/terms/">Terms
+          of Use</a> for beta guidance.
+        </p>
+      </section>
+    </article>
+  </div>
+</RosterEaseLayout>
