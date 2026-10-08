@@ -1,39 +1,46 @@
-# Website and App Store review readiness
+# Website release readiness
 
-The performance, UX and launch-asset pass is prepared on `codex/performance-layout-pass`, based on `4b965c2`. The release pull request records the published commit, Pages workflow and hosted checks. TestFlight remains the primary action until the app is live. Website checks do not establish App Store approval or candidate-build readiness.
+Updated 9 October 2026 (Australia/Melbourne). RosterEase is available on the App Store at the URL supplied by the owner. The App Store is the primary download destination. Optional TestFlight signup lives on `/beta/`.
 
 ## Public destinations
 
-| Purpose | URL | Local state |
+| Purpose | URL | Prepared behavior |
 | --- | --- | --- |
-| Marketing | `https://rosterease.app/` | TestFlight landing page; responsive image and motion improvements |
-| Support URL | `https://rosterease.app/contact/` | Direct email, useful reporting details, help links |
-| Privacy Policy URL | `https://rosterease.app/privacy/` | Existing approved policy retained, redesigned layout |
-| EULA explanation | `https://rosterease.app/terms/` | Links Apple standard EULA and subscription management |
-| Product details | `https://rosterease.app/app/` | Role workflows, Free/Plus, limits and beta status |
-| Data handling | `https://rosterease.app/on-device/` | On-device processing and explicit sharing boundaries |
-| Help | `https://rosterease.app/help/` | Four complete guides |
+| Marketing | `https://rosterease.app/` | App Store download badge, Shift/Field walkthrough |
+| Download | `https://apps.apple.com/us/app/rosterease/id6762237930` | Shared destination for all App Store links |
+| Beta access | `https://rosterease.app/beta/` | TestFlight invitation, backup and feedback guidance |
+| Support | `https://rosterease.app/contact/` | Email, reporting details, help links |
+| Privacy | `https://rosterease.app/privacy/` | App Store and optional TestFlight distribution wording |
+| Terms | `https://rosterease.app/terms/` | Apple standard EULA and subscription management |
+| Product | `https://rosterease.app/app/` | Workflows, Free/Plus, download and beta-page link |
+| Data handling | `https://rosterease.app/on-device/` | On-device processing and optional sharing |
+| Help | `https://rosterease.app/help/` | Four guides; setup now starts with the App Store |
 
-The app-review task confirmed on 5 September that the **public** privacy page already contains the required encrypted-export/provider/restore wording. Do not carry the former missing-backup-copy blocker forward. Publication of App Privacy inside App Store Connect is a separate gate.
+## Launch pass
 
-## Before publication/submission
+- All download links use the supplied App Store URL. Apple artwork is unmodified, served locally, proportionate, stationary and surrounded by clear space. Each page has one badge. See [asset provenance](design/app-store-badge.md).
+- Removed pre-launch availability copy from the homepage, footer, product, setup guide and privacy/terms distribution wording. Beta participation remains optional.
+- Beta access is linked from every footer and the mobile menu, plus the product page. The small-screen menu retains an App Store download link when the header CTA is hidden.
+- `/beta/` is included in the sitemap and has production canonical, Open Graph and social metadata. Homepage application structured data includes the App Store installation destination; indexed pages also advertise the app ID to Safari's native Smart App Banner.
+- Existing support, privacy, EULA, subscription management, encrypted-backup guidance and branded noindex 404 recovery remain available.
+- `npm run check:a11y` checks 14 generated HTML pages, internal routes/anchors/assets, sitemap/canonicals, language, H1, skip links, image alternatives, theme contrast, download destinations and beta-link isolation. It now checks released availability instead of prohibiting the App Store badge.
+- `npm run check:motion` checks the existing hero rotation behavior. The deferred 3D bundle remains within its existing budget; Vite's bundle-size advisory is unchanged.
 
-- Compare the website captures with the TestFlight build during device testing. Today, Calendar, Clients and iPad light/dark pairs now show the 1 October development build with synthetic data; the two import-review examples remain from 5 September. Shift Today has no tutorial overlay. Provenance is in `src/assets/rosterease/screenshots/capture-2026-10-01/capture-manifest.json`.
-- Social artwork is refreshed with current app-icon artwork, website fonts/tokens and genuine October Today captures. Its HTML source and export provenance are in `docs/design/social-preview*`. Social services may retain their cached previous preview.
-- Refresh the TestFlight public-link availability and build. On 1 October the public invitation rendered a “View in TestFlight” link. This does not verify an install or the linked build. The app-review task previously reported Website Testers build 83 and latest internal build 92; those are dated observations, not fresh website validation.
-- Confirm final subscription merchandising, eligibility and storefront prices in the app. The site avoids hardcoded price/trial claims and deferred Lifetime offers.
-- Verify deployed support/privacy URLs return usable pages without authentication; verify email ownership/delivery separately. The local preview does not prove live email delivery.
-- Ensure the app and App Store metadata link the public privacy page and chosen EULA as required. The site cannot update the binary or App Store Connect linkage.
-- Complete App Store Connect App Privacy publication, account agreements and candidate-build linkage. The app-review task reported an expired attached build; no ASC actions are part of this website work.
-- Exercise the deployed page on physical iPhone and iPad Safari, including touch scrolling, worker selection, enlarged screenshots, appearance, and reduced motion. Local Chromium screenshots and timing samples do not prove those paths.
-- After deployment, recheck canonical metadata, all sitemap URLs, the primary CTA, both themes and a nonexistent URL on the actual domain. The custom recovery page should retain HTTP 404 with usable Home, Help and Support links.
+## Local browser verification
 
-Sources: [Apple App Review](https://developer.apple.com/app-store/review/), [Review Guidelines](https://developer.apple.com/app-store/review/guidelines/), [Apple standard EULA](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/).
+Browser plugin not available; regular Playwright used the installed Chromium against `http://localhost:4321/`. The tested flow is homepage → App Store download destination, and mobile Menu → Beta access → TestFlight invitation destination.
 
-## Validation
+Public routes were checked at widths 320, 390, 768 and 1280px for page identity, meaningful content, loaded badge artwork, horizontal overflow, framework overlays, runtime/console errors and failed local asset responses. Additional checks cover Shift/Field selection, screenshot dialog open/Escape close, Light/Dark switching, beta invitation links and HTTP 404 recovery. Screenshots are kept outside source in `/tmp/rosterease-launch-*.png` and `/tmp/rosterease-beta-*.png`.
 
-`npm run check:a11y` builds all 13 HTML pages and checks language, one H1, skip link, image alternatives, internal page/anchor/asset destinations, sitemap/canonical coverage, theme contrast and motion guards. The error page must remain excluded from indexing and the sitemap. The Pages workflow runs this command and `npm run check:motion` before uploading its artifact. Both pass locally; the release pull request records remote CI and hosted checks.
+## Deployment and remaining verification
 
-The local recovery page returns HTTP 404 and loads its assets successfully. Its layout reflows at 320, 390, 768 and 1280px. Outside taps now dismiss the mobile menu; Escape still closes it and returns focus. Font and colour-token definitions remain unchanged. Current browser evidence, measurements and remaining limitations are recorded in [the 1 October review](performance/2026-10-01/review.md); earlier design evidence remains in `docs/design/verification.md`.
+The Pages workflow builds and checks the site before publishing on a push to `main`. This work is prepared for review in a separate branch; no production deployment is performed as part of this pass.
 
-A passing website check does not establish App Store readiness or healthcare certification. No App Store changes are part of this website task.
+After deployment:
+
+- Open the App Store and TestFlight invitation on physical iPhone/iPad, confirming install availability and the linked build. Automated web retrieval could not load either Apple destination in this session; local checks prove the configured URLs, not installation availability.
+- Check Safari touch scrolling, screenshot previews, worker selection, theme persistence and reduced motion.
+- Confirm support email delivery separately. A working `mailto:` link does not prove delivery.
+- Recheck live sitemap/canonical URLs, support/privacy/terms and the nonexistent-path recovery page on the production domain.
+
+Screenshot provenance remains in `src/assets/rosterease/screenshots/capture-2026-10-01/capture-manifest.json`. October development captures and September import captures use fictional data; this website pass does not compare every capture with the installed App Store binary. App Store Connect metadata and subscription prices are outside the website change. Earlier performance and browser samples remain in [the 1 October review](performance/2026-10-01/review.md).

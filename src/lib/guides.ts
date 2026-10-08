@@ -20,8 +20,8 @@ export const guides: Guide[] = [
         id: "before-you-start",
         title: "Start with your own schedule",
         paragraphs: [
-          "Install the available RosterEase build through TestFlight and open the app. Choose the worker mode that matches the plan you want to manage. You do not need a RosterEase account.",
-          "The beta is evolving. Screen labels and available features can vary by build; include your build number when asking for help.",
+          "Install RosterEase from the App Store and open the app. Choose the worker mode that matches the plan you want to manage. You do not need a RosterEase account.",
+          "Screen labels and available features can vary by app version; include your version and build number when asking for help.",
         ],
       },
       {
