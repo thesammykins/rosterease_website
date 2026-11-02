@@ -8,7 +8,7 @@ const quickFacts = [
   },
   {
     label: "Optional permissions",
-    value: "Calendar, camera and photos, files, clipboard, location, microphone and speech recognition, Face ID, and Apple Maps estimates",
+    value: "Calendar, camera, photos, location, microphone and others, each only when you choose",
   },
   {
     label: "Support",
@@ -62,9 +62,10 @@ const sections = [
     title: "Local performance reports",
     paragraphs: [
       "RosterEase can keep optional performance and crash summaries from Apple's MetricKit on your device. This is off unless you turn it on during setup or in Settings > About > Local performance reports. Declining changes no other feature.",
-      "When it is on, RosterEase keeps only numeric summaries: report intervals, CPU time, peak memory and logical disk writes, counts of crashes, hangs, CPU exceptions and disk-write exceptions, and the app version, build and iOS version when each report arrived. It does not keep raw reports or stack traces, names, roster or client records, notes, locations, file paths, account IDs, keys, or device or installation identifiers.",
-      "Only reports covering time after you turned the option on are accepted. Reports stay on your device, are excluded from app backups, and are limited to 7 days, 20 reports and 10 MiB, with the oldest removed first. Expired reports are removed when the app next runs.",
-      "Turning the option off stops collection and deletes the stored reports. It cannot remove Apple's own device diagnostics or copies you have already shared.",
+      "Kept, as numbers only: report intervals; CPU time, peak memory and disk writes; counts of crashes, hangs and resource exceptions; and the app and iOS version.",
+      "Not kept: raw reports or stack traces, names, roster or client records, notes, locations, file paths, account IDs, keys, or device identifiers.",
+      "Only reports covering time after you turned the option on are accepted. Reports stay on your device, are excluded from app backups, and are limited to 7 days, 20 reports and 10 MiB, with the oldest removed first. Expired reports are removed the next time the app runs, not while it is closed.",
+      "Turning the option off stops collection and deletes the stored reports. If deletion fails, the app tells you and lets you retry. It cannot remove Apple's own device diagnostics or copies you have already shared.",
       "Nothing is sent automatically. To share reports, you authenticate with Face ID, Touch ID or your passcode, review the exact file, and choose where to send it through the share sheet. RosterEase cannot delete copies you have shared. Apple's own analytics and sharing settings are separate from this choice.",
     ],
   },

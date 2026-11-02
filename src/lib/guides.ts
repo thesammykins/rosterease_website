@@ -105,7 +105,7 @@ export const guides: Guide[] = [
         id: "trial",
         title: "The setup trial",
         paragraphs: [
-          "Finishing setup starts a free week of full Plus. Nothing is charged and nothing renews. The trial is given once; resetting or reinstalling the app doesn’t start another.",
+          "Finishing setup starts a free week of full Plus. Nothing is charged and nothing renews. The trial is given once. Resetting app data doesn’t start another, and reinstalling usually doesn’t either.",
           "Settings > RosterEase Plus shows when your trial ends, with See Plus Plans and Restore purchases.",
         ],
       },
@@ -158,7 +158,8 @@ export const guides: Guide[] = [
         id: "limits",
         title: "Dated shifts or a rotation",
         paragraphs: [
-          "A dated roster can be imported as dated shifts or as a repeating rotation. As dated shifts, each row becomes a shift on its date, and two rows on one date make a split or double shift. Dates before today are not added. As a rotation, the rows become a cycle that repeats after the last date.",
+          "A dated roster can be imported as dated shifts or as a repeating rotation.",
+          "As dated shifts, each row becomes a shift on its date, and two rows on one date make a split or double shift. Dates before today are not added. As a rotation, the rows become a cycle that repeats after the last date.",
           "One import covers one workplace. Import does not guarantee that every roster layout, handwriting style or PDF can be understood.",
           "Client imports keep the order of the source. RosterEase does not optimise a route.",
         ],
@@ -363,7 +364,8 @@ export const guides: Guide[] = [
         id: "built",
         title: "Where routes come from",
         paragraphs: [
-          "In Visits, RosterEase plans the next two weeks from your active clients, your work days and each client’s visit days. Visits follow the order in Clients from 8:00, with your travel buffer between them and each appointment window respected. Clients at the same saved location stay together where their windows allow.",
+          "In Visits, RosterEase plans the next two weeks from your active clients, your work days and each client’s visit days.",
+          "Visits follow the order in Clients from 8:00, with your travel buffer between them and each appointment window respected. Clients at the same saved location stay together where their windows allow.",
           "RosterEase does not optimise the order. Imports keep the order of the source.",
         ],
       },
@@ -679,8 +681,8 @@ export const guides: Guide[] = [
         id: "limits",
         title: "Limits and deleting",
         paragraphs: [
-          "Up to 7 days, 20 reports and 10 MiB are kept, oldest removed first. Expired reports are removed when the app next runs. Reports are excluded from backups.",
-          "Turning the option off stops collection and deletes the reports. It can’t remove Apple’s own diagnostics or copies you’ve shared.",
+          "Up to 7 days, 20 reports and 10 MiB are kept, oldest removed first. Expired reports are removed the next time the app runs, not while it is closed. Reports are excluded from backups.",
+          "Turning the option off stops collection and deletes the reports. If deletion fails, the app tells you and lets you retry. It can’t remove Apple’s own diagnostics or copies you’ve shared.",
         ],
       },
       {
