@@ -23,7 +23,7 @@ The build outputs to `dist/`. `.github/workflows/gh-pages.yml` runs `check:a11y`
 - `/app`: Shift/Field workflows, boundaries, Free/Plus and App Store download.
 - `/beta`: optional TestFlight signup and feedback guidance.
 - `/on-device`: local processing and optional data-sharing destinations.
-- `/help`: setup, Smart Import, Calendar/privacy and backup/restore guides.
+- `/help`: one guide per `HelpArticle` slug in the app (`Sources/Shared/HelpArticleLink.swift`), from `src/lib/guides.ts`. The app links to these by slug, so keep every slug.
 - `/contact`, `/privacy`, `/terms`: support, policy and Apple standard EULA information.
 
 Keep `public/sitemap.xml` in sync with public routes. Page links, canonical metadata, and sitemap entries use trailing slashes to avoid GitHub Pages redirects. Canonical metadata always uses the configured production origin, including in local previews. The branded `404.html` recovery page is excluded from indexing and the sitemap. Main navigation and walkthrough links prefetch on hover or touch through Astro.
