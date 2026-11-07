@@ -1,3 +1,5 @@
+import type { HelpRecordingName, HelpScreen } from "./screenshots";
+
 export interface Guide {
   slug: string;
   title: string;
@@ -7,6 +9,8 @@ export interface Guide {
     title: string;
     paragraphs: string[];
     steps?: string[];
+    screens?: HelpScreen[];
+    recording?: HelpRecordingName;
   }[];
 }
 
@@ -20,6 +24,7 @@ export const guides: Guide[] = [
     sections: [
       {
         id: "before-you-start",
+        screens: ["getting-started"],
         title: "Start with your own schedule",
         paragraphs: [
           "Install RosterEase from the App Store and open the app. You do not need a RosterEase account.",
@@ -29,6 +34,7 @@ export const guides: Guide[] = [
       },
       {
         id: "shift",
+        screens: ["getting-started-preview"],
         title: "For shift work",
         paragraphs: [
           "In Shifts, enter your roster yourself or use Smart Import and review the result.",
@@ -94,6 +100,7 @@ export const guides: Guide[] = [
       },
       {
         id: "plus",
+        screens: ["plus-plans-sheet"],
         title: "What Plus adds",
         paragraphs: [
           "Shift Plus adds more workplaces, worked times suggested from location, pinned workplace notes, Siri roster answers and actions, and more AI import assists.",
@@ -103,6 +110,7 @@ export const guides: Guide[] = [
       },
       {
         id: "trial",
+        screens: ["plus-plans"],
         title: "The setup trial",
         paragraphs: [
           "Finishing setup starts a free week of full Plus. Nothing is charged and nothing renews. The trial is given once. Resetting app data doesn’t start another, and reinstalling usually doesn’t either.",
@@ -143,6 +151,8 @@ export const guides: Guide[] = [
       },
       {
         id: "review",
+        screens: ["shiftImport", "fieldImport"],
+        recording: "import-review",
         title: "Review before applying",
         paragraphs: [
           "Extracted text can contain mistakes. The review step is where you check the proposed changes, warnings and source rows before applying them.",
@@ -181,6 +191,8 @@ export const guides: Guide[] = [
     sections: [
       {
         id: "one-day",
+        screens: ["shift-changes"],
+        recording: "change-one-day",
         title: "Change one day",
         paragraphs: [
           "Use Calendar to change a single date. A one-off change affects only that day and leaves your rotation intact. Remove change returns the day to the pattern.",
@@ -189,6 +201,7 @@ export const guides: Guide[] = [
       },
       {
         id: "extra",
+        screens: ["shiftCalendar"],
         title: "Split or double shifts",
         paragraphs: [
           "Add shift puts a dated shift on a day without removing what is already there, so two shifts make a split or double shift.",
@@ -203,6 +216,7 @@ export const guides: Guide[] = [
       },
       {
         id: "changed",
+        screens: ["shift-changes-today"],
         title: "What changed since you last looked",
         paragraphs: [
           "Today compares your roster with what it last showed you and lists days that changed, such as “Changed since Mon: Sat now Night 7:00 pm”. Changes from Calendar, an import or a rotation edit all count. Dismissing the note accepts the roster as it is now.",
@@ -217,6 +231,8 @@ export const guides: Guide[] = [
     sections: [
       {
         id: "record",
+        screens: ["recording-an-absence"],
+        recording: "record-an-absence",
         title: "Record it from Today",
         paragraphs: [
           "In Shifts, swipe left on today’s shift card, choose an absence type and save. A shift that ended without a record asks you to record it as worked or not working.",
@@ -248,6 +264,7 @@ export const guides: Guide[] = [
     sections: [
       {
         id: "notes",
+        screens: ["notes-and-check-ins"],
         title: "Notes",
         paragraphs: [
           "In Shifts, a note is saved with its workplace and the date of the shift. In Visits, check in to a visit from Today to add notes for that client. The first line of a note becomes its title.",
@@ -264,6 +281,7 @@ export const guides: Guide[] = [
       },
       {
         id: "check-ins",
+        screens: ["notes-and-check-ins-check-in"],
         title: "Shift check-ins",
         paragraphs: [
           "Turn on Shift check-ins in Settings > Notes & Templates. Today then offers Check in and Check out from an hour before a timed shift until 30 minutes after it ends. Each records the device time in that shift’s notes, without a location.",
@@ -279,6 +297,7 @@ export const guides: Guide[] = [
     sections: [
       {
         id: "kept",
+        screens: ["how-your-records-work"],
         title: "What a note can keep",
         paragraphs: [
           "Records stay on your phone unless you turn on a feature that shares them.",
@@ -322,6 +341,7 @@ export const guides: Guide[] = [
     sections: [
       {
         id: "what",
+        screens: ["location-review"],
         title: "What it does",
         paragraphs: [
           "In Shifts, location review notices when you arrive at and leave a workplace whose pin you’ve confirmed, then suggests those times for you to confirm. It never records a shift on its own.",
@@ -362,6 +382,7 @@ export const guides: Guide[] = [
     sections: [
       {
         id: "built",
+        screens: ["visit-routes", "visit-routes-shared-location"],
         title: "Where routes come from",
         paragraphs: [
           "In Visits, RosterEase plans the next two weeks from your active clients, your work days and each client’s visit days.",
@@ -401,6 +422,7 @@ export const guides: Guide[] = [
     sections: [
       {
         id: "leave-by",
+        screens: ["shiftToday"],
         title: "How leave-by is worked out",
         paragraphs: [
           "Leave-by is your start time minus the travel time RosterEase allows. Without an Apple Maps estimate, that is your travel buffer. With one, it is the estimated drive plus your buffer.",
@@ -409,6 +431,7 @@ export const guides: Guide[] = [
       },
       {
         id: "buffer",
+        screens: ["travel-time-settings"],
         title: "Your buffer and start location",
         paragraphs: [
           "In Settings > Travel, set Travel Buffer between 5 and 120 minutes (15 by default) and Start Location to where you usually leave from.",
@@ -432,6 +455,7 @@ export const guides: Guide[] = [
     sections: [
       {
         id: "calendar",
+        screens: ["calendar-and-privacy"],
         title: "Calendar is an explicit choice",
         paragraphs: [
           "In Shifts, open Settings > Calendar Sync and choose a workplace. Turn on Sync workplace shifts and choose where events go: the app default, a dedicated workplace calendar or a specific iOS calendar. Visits does not have Calendar Sync.",
@@ -564,6 +588,7 @@ export const guides: Guide[] = [
     sections: [
       {
         id: "lock",
+        screens: ["privacy-lock", "privacy-lock-screen"],
         title: "Require unlock",
         paragraphs: [
           "Turn on Require Unlock in Settings > Privacy, and Face ID, Touch ID or your passcode opens RosterEase. Ask Again sets how long you can be away first, from Immediately to 1 Hour.",
@@ -608,6 +633,8 @@ export const guides: Guide[] = [
     sections: [
       {
         id: "export",
+        screens: ["backup-and-restore"],
+        recording: "save-a-backup",
         title: "Save a backup",
         paragraphs: [
           "In Settings > Data Management, tap Save backup… and choose where to save it. A backup holds your records, note history and preferences, encrypted.",
@@ -639,6 +666,7 @@ export const guides: Guide[] = [
       },
       {
         id: "earlier-version",
+        screens: ["backup-and-restore-recovery"],
         title: "Data from version 1.0",
         paragraphs: [
           "This version stores your roster in a new layout and can’t open data from the earlier version. If you see Start fresh with this version, tap Save a copy to keep the old data in Files first.",
@@ -663,6 +691,7 @@ export const guides: Guide[] = [
     sections: [
       {
         id: "off",
+        screens: ["performance-reports"],
         title: "Off unless you choose it",
         paragraphs: [
           "RosterEase can keep a small summary from Apple’s MetricKit to help investigate crashes, hangs and resource use. It is off unless you turn it on during setup or in Settings > About > Local performance reports. Declining changes nothing else, and nothing is uploaded automatically.",

@@ -1,0 +1,22 @@
+# Website capture alt text
+
+- `getting-started`: First setup screen: choose Shifts or Visits, or restore a backup.
+- `getting-started-preview`: Setup, pattern step: the live roster preview filling in.
+- `plus-plans`: Settings > RosterEase Plus during the free week of Plus that finishing setup starts.
+- `plus-plans-sheet`: The Shift Plus plan sheet, annual and monthly.
+- `shift-changes`: Change Just This Day: the one-day editor for today's day shift.
+- `shift-changes-today`: Today noting a roster change since Monday evening: a casual Northgate morning added on Sunday.
+- `recording-an-absence`: Recording Not working today from Today's card.
+- `notes-and-check-ins`: Shift in progress with the pinned door-code note, the handover note and a check-in.
+- `notes-and-check-ins-check-in`: Checked in from Today as the day shift starts.
+- `how-your-records-work`: A visit note from the Visit check template: a ticked checklist, a photo field and a signature.
+- `location-review`: After the shift: suggested 6:48 am to 7:52 pm from workplace arrival and departure, not yet confirmed.
+- `visit-routes`: Field Today with two visits done and Priya S. under Visiting now.
+- `visit-routes-shared-location`: Visits Today with Priya S. under Visiting now and Tom W. next at the same location, with no travel between.
+- `travel-time-settings`: Settings > Travel: the start location and buffer behind Today's leave-by time.
+- `calendar-and-privacy`: Settings > Calendar Sync.
+- `privacy-lock`: Privacy settings: app lock and on-device data.
+- `privacy-lock-screen`: RosterEase locked on return, with Require Unlock on.
+- `backup-and-restore`: Settings > Data Management: save and restore backups.
+- `backup-and-restore-recovery`: The screen 1.1 shows for data saved by 1.0: save a copy, then start fresh.
+- `performance-reports`: Settings > About > Local performance reports.

@@ -1,6 +1,9 @@
 ---
 import RosterEaseLayout from "../../layouts/RosterEaseLayout.astro";
+import { getImage } from "astro:assets";
+import PhoneScreenshot from "../../components/PhoneScreenshot.astro";
 import { guides, type Guide } from "../../lib/guides";
+import { helpRecordings, helpScreens } from "../../lib/screenshots";
 export function getStaticPaths() {
   return guides.map((guide) => ({
     params: { slug: guide.slug },
@@ -11,6 +14,21 @@ interface Props {
   guide: Guide;
 }
 const { guide } = Astro.props;
+const posters = Object.fromEntries(
+  await Promise.all(
+    guide.sections
+      .flatMap((section) => (section.recording ? [section.recording] : []))
+      .map(async (name) => [
+        name,
+        await getImage({
+          src: helpRecordings[name].poster,
+          width: 720,
+          format: "webp",
+          quality: 85,
+        }),
+      ]),
+  ),
+);
 ---
 
 <RosterEaseLayout title={guide.title} description={guide.description}>
@@ -42,6 +60,40 @@ const { guide } = Astro.props;
                   <li>{step}</li>
                 ))}
               </ol>
+            )}
+            {section.screens && (
+              <div class="re-help-screens">
+                {section.screens.map((name) => (
+                  <PhoneScreenshot screen={helpScreens[name]} />
+                ))}
+              </div>
+            )}
+            {section.recording && (
+              <figure class="re-help-recording">
+                <video
+                  controls
+                  muted
+                  playsinline
+                  preload="none"
+                  poster={posters[section.recording].src}
+                  width="720"
+                  height={Math.round(
+                    (720 * helpRecordings[section.recording].poster.height) /
+                      helpRecordings[section.recording].poster.width,
+                  )}
+                  aria-label={helpRecordings[section.recording].label}
+                >
+                  <source
+                    src={`/media/help/${section.recording}.webm`}
+                    type="video/webm"
+                  />
+                  <source
+                    src={`/media/help/${section.recording}.mp4`}
+                    type="video/mp4"
+                  />
+                </video>
+                <figcaption>{helpRecordings[section.recording].label}</figcaption>
+              </figure>
             )}
           </section>
         ))

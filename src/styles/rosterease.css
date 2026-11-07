@@ -881,6 +881,37 @@ html:has(.re-screenshot-dialog[open]) {
   width: 100%;
   display: block;
 }
+.re-duo-previews {
+  grid-template-columns: 1fr 2.06fr;
+  align-items: end;
+}
+.re-help-screens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 28px;
+}
+.re-help-screens .re-phone {
+  flex: none;
+  width: min(220px, calc(50% - 12px));
+}
+.re-help-recording {
+  margin: 28px 0 0;
+  max-width: 260px;
+}
+.re-help-recording video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--re-line-strong);
+  border-radius: var(--re-radius-sm);
+  background: var(--re-bg-soft);
+}
+.re-help-recording figcaption {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--re-muted);
+}
 .re-ipad-previews figcaption {
   margin-top: 12px;
   font-size: 13px;

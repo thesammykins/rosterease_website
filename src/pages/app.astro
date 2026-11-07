@@ -91,6 +91,40 @@ import AppStoreBadge from "../components/AppStoreBadge.astro";
         }
       </div>
     </section>
+    <section class="re-feature" id="duo">
+      <div>
+        <p class="re-kicker">iPhone Duo</p><h2>
+          Folded or open.
+        </h2><p>
+          Today fits the outer display when it's folded. Open it and your coming
+          shifts sit beside the next one.
+        </p>
+      </div><div class="re-ipad-previews re-duo-previews">
+        {
+          [
+            { screen: screens.duoOuterShiftToday, label: "Folded" },
+            { screen: screens.duoInnerShiftToday, label: "Open" },
+          ].map(({ screen, label }) => (
+            <figure>
+              <>
+                <a
+                  href={screen.light.src}
+                  data-screenshot
+                  aria-label={`Enlarge ${label} iPhone Duo screenshot`}
+                >
+                  <AppScreenshot
+                    screen={screen}
+                    widths={[320, 480, 640, 960, 1206]}
+                    sizes="(max-width: 720px) calc(100vw - 40px), 360px"
+                  />
+                </a>
+                <figcaption>{label}</figcaption>
+              </>
+            </figure>
+          ))
+        }
+      </div>
+    </section>
     <section class="re-feature-pair" id="everyday">
       <div>
         <p class="re-kicker">Less retyping</p><h2>
