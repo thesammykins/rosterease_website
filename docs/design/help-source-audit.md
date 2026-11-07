@@ -14,3 +14,17 @@ Checked on 5 September 2026 against the app worktree at base `63697d3` plus its 
 Public guides preserve exact feature names, the encryption/passphrase limitation, local-data recovery precautions and optional-sharing boundaries. The approved Privacy Policy and Terms of Use were not rewritten as part of editorial cleanup.
 
 Before a release, compare these routes to the candidate build. A source audit cannot verify system permission prompts, purchases, file-provider behaviour or every live navigation path on a device.
+
+## Step labels, 7 November 2026
+
+Checked against the app at `a64effc8` (TestFlight 1.1 build 41) and its help recordings. Bold labels in guide steps match these strings.
+
+| Guide steps | Labels | App source |
+| --- | --- | --- |
+| Change one day, add a split or double shift | Change Just This Day, Save change, Remove change, Add Another Shift, Add a Shift, Add shift | `Sources/Features/Calendar/CalendarScreenView.swift`, `Sources/Shared/ShiftExceptionEditor.swift`, `change-one-day` recording |
+| Record an absence | Not working today, Sick day, Save, Undo; the card also swipes | `Sources/Features/Today/TodayView.swift`, `record-an-absence` recording |
+| Start an import | Import roster, Import clients, Paste text, File or PDF, Photo, Scan document, Analyze roster, Analyze visits | `Sources/Features/Import/SmartImportView.swift`, `Sources/Features/Workplaces/ClientsView.swift`, `import-review` recording |
+| Save and restore a backup | Data Management, Save backup…, Backup Saved, Restore backup | `Sources/Features/Settings/BackupManagementCard.swift`, `save-a-backup` recording |
+| Check in and out | Notes & Templates, Shift check-ins | `Sources/Features/Notes/NoteCaptureSettingsCard.swift`, `Sources/Features/Settings/SettingsView.swift` |
+| Travel, Calendar Sync, privacy lock | Travel Buffer, Start Location, Sync workplace shifts, Require Unlock, Ask Again | `SettingsTravelPage.swift`, `SettingsCalendarSyncPage.swift`, `SettingsPrivacyPage.swift` |
+| Live Activities, Siri, Plus, performance reports | Show Live Activities, Open iOS Settings, Allow Siri roster answers, See Plus Plans, Restore purchases, Local performance reports, Keep local performance reports | `LiveActivitiesSetupView.swift`, `SiriSetupView.swift`, `SettingsPlusPage.swift`, `SettingsAboutPage.swift`, `LocalMetricDiagnosticsView.swift` |

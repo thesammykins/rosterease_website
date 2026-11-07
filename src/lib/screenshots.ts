@@ -61,10 +61,10 @@ import help_backupAndRestoreRecoveryLight from "../assets/rosterease/screenshots
 import help_backupAndRestoreRecoveryDark from "../assets/rosterease/screenshots/help-2026-11-07/backup-and-restore-recovery-dark.png";
 import help_performanceReportsLight from "../assets/rosterease/screenshots/help-2026-11-07/performance-reports-light.png";
 import help_performanceReportsDark from "../assets/rosterease/screenshots/help-2026-11-07/performance-reports-dark.png";
-import changeOneDayPoster from "../assets/rosterease/screenshots/help-2026-11-07/recordings/change-one-day-poster.png";
-import importReviewPoster from "../assets/rosterease/screenshots/help-2026-11-07/recordings/import-review-poster.png";
-import recordAnAbsencePoster from "../assets/rosterease/screenshots/help-2026-11-07/recordings/record-an-absence-poster.png";
-import saveABackupPoster from "../assets/rosterease/screenshots/help-2026-11-07/recordings/save-a-backup-poster.png";
+import changeOneDayStart from "../assets/rosterease/screenshots/help-2026-11-07/recordings/change-one-day-start.png";
+import importReviewStart from "../assets/rosterease/screenshots/help-2026-11-07/recordings/import-review-start.png";
+import recordAnAbsenceStart from "../assets/rosterease/screenshots/help-2026-11-07/recordings/record-an-absence-start.png";
+import saveABackupStart from "../assets/rosterease/screenshots/help-2026-11-07/recordings/save-a-backup-start.png";
 
 export interface AppScreen {
   dark: ImageMetadata;
@@ -240,25 +240,27 @@ export const helpScreens = {
 export type HelpScreen = keyof typeof helpScreens;
 
 export interface HelpRecording {
-  poster: ImageMetadata;
+  // First frame, shown until the loop starts.
+  start: ImageMetadata;
   label: string;
 }
-// Silent light-mode recordings; files are public/media/help/<name>.mp4 and .webm.
+// Silent light-mode loops: public/media/help/<name>.mp4 and .webm, plus
+// <name>-mobile.* at 480 px wide for phones.
 export const helpRecordings = {
   "change-one-day": {
-    poster: changeOneDayPoster,
+    start: changeOneDayStart,
     label: "Changing one day from the calendar",
   },
   "import-review": {
-    poster: importReviewPoster,
+    start: importReviewStart,
     label: "Reviewing a Smart Import before adding it",
   },
   "record-an-absence": {
-    poster: recordAnAbsencePoster,
+    start: recordAnAbsenceStart,
     label: "Recording an absence from Today",
   },
   "save-a-backup": {
-    poster: saveABackupPoster,
+    start: saveABackupStart,
     label: "Saving a backup to Files",
   },
 } satisfies Record<string, HelpRecording>;

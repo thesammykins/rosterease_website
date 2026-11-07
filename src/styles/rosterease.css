@@ -846,6 +846,38 @@ html:has(.re-screenshot-dialog[open]) {
 .re-help-media .re-device {
   width: 280px;
 }
+.re-help-section--media .re-help-media {
+  position: sticky;
+  top: 96px;
+}
+.re-help-steps {
+  color: var(--re-text);
+  margin-top: 24px;
+}
+.re-help-steps li {
+  margin-block: 14px;
+  padding-left: 8px;
+}
+.re-help-steps li::marker {
+  color: var(--re-accent);
+  font-weight: 600;
+}
+.re-prose strong {
+  color: var(--re-text);
+  font-weight: 600;
+}
+.re-recording-toggle {
+  position: absolute;
+  left: var(--screen-left);
+  top: var(--screen-top);
+  width: var(--screen-width);
+  height: var(--screen-height);
+  padding: 0;
+  border: 0;
+  border-radius: var(--re-device-radius);
+  background: transparent;
+  cursor: pointer;
+}
 .re-note {
   padding: 22px 26px;
   background: var(--re-bg-soft);
@@ -1140,6 +1172,9 @@ html:has(.re-screenshot-dialog[open]) {
   }
   .re-help-media {
     justify-content: center;
+  }
+  .re-help-section--media .re-help-media {
+    position: static;
   }
   .re-closing--privacy {
     grid-template-columns: 72px 1fr;

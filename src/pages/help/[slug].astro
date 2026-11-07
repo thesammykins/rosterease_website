@@ -2,6 +2,7 @@
 import RosterEaseLayout from "../../layouts/RosterEaseLayout.astro";
 import { getImage } from "astro:assets";
 import DeviceFrame from "../../components/DeviceFrame.astro";
+import HelpText from "../../components/HelpText.astro";
 import { guides, type Guide } from "../../lib/guides";
 import { helpRecordings, helpScreens } from "../../lib/screenshots";
 export function getStaticPaths() {
@@ -21,7 +22,7 @@ const posters = Object.fromEntries(
       .map(async (name) => [
         name,
         await getImage({
-          src: helpRecordings[name].poster,
+          src: helpRecordings[name].start,
           width: 720,
           format: "webp",
           quality: 85,
@@ -58,28 +59,47 @@ const posters = Object.fromEntries(
               <div>
                 <h2>{section.title}</h2>
                 {section.paragraphs.map((paragraph) => (
-                  <p>{paragraph}</p>
+                  <p><HelpText text={paragraph} /></p>
                 ))}
                 {section.steps && (
-                  <ol>
+                  <ol class="re-help-steps">
                     {section.steps.map((step) => (
-                      <li>{step}</li>
+                      <li><HelpText text={step} /></li>
                     ))}
                   </ol>
                 )}
+                {section.after?.map((paragraph) => (
+                  <p><HelpText text={paragraph} /></p>
+                ))}
               </div>
               {hasMedia && (
                 <div class="re-help-media">
                   {section.recording && (
-                    <DeviceFrame device="iphone17" sizes="(max-width: 720px) 80vw, 280px">
+                    <DeviceFrame
+                      device="iphone17"
+                      sizes="(max-width: 720px) 80vw, 280px"
+                    >
                       <video
-                        controls
+                        autoplay
                         muted
+                        loop
                         playsinline
-                        preload="none"
+                        disablepictureinpicture
+                        disableremoteplayback
                         poster={posters[section.recording].src}
                         aria-label={helpRecordings[section.recording].label}
+                        data-help-recording
                       >
+                        <source
+                          media="(max-width: 720px)"
+                          src={`/media/help/${section.recording}-mobile.webm`}
+                          type="video/webm"
+                        />
+                        <source
+                          media="(max-width: 720px)"
+                          src={`/media/help/${section.recording}-mobile.mp4`}
+                          type="video/mp4"
+                        />
                         <source
                           src={`/media/help/${section.recording}.webm`}
                           type="video/webm"
@@ -89,6 +109,11 @@ const posters = Object.fromEntries(
                           type="video/mp4"
                         />
                       </video>
+                      <button
+                        class="re-recording-toggle"
+                        type="button"
+                        aria-label="Pause recording"
+                      />
                     </DeviceFrame>
                   )}
                   {section.screens?.map((name) => (
@@ -113,3 +138,34 @@ const posters = Object.fromEntries(
     </article>
   </div>
 </RosterEaseLayout>
+<script>
+  // Recordings loop silently while on screen. Tapping one pauses or resumes it;
+  // with Reduce Motion on they wait on their first frame until tapped.
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document
+    .querySelectorAll<HTMLVideoElement>("video[data-help-recording]")
+    .forEach((video) => {
+      const toggle = video.parentElement?.querySelector<HTMLButtonElement>(
+        ".re-recording-toggle",
+      );
+      let held = reduceMotion;
+      if (held) video.pause();
+      const label = () =>
+        toggle?.setAttribute(
+          "aria-label",
+          video.paused ? "Play recording" : "Pause recording",
+        );
+      video.addEventListener("play", label);
+      video.addEventListener("pause", label);
+      label();
+      toggle?.addEventListener("click", () => {
+        held = !video.paused;
+        if (held) video.pause();
+        else void video.play().catch(() => {});
+      });
+      new IntersectionObserver(([entry]) => {
+        if (!entry.isIntersecting) video.pause();
+        else if (!held) void video.play().catch(() => {});
+      }).observe(video);
+    });
+</script>

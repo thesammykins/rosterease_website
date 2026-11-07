@@ -1,23 +1,7 @@
 {
   "capturedOn": "2026-11-07",
-  "note": "Help recordings: MP4 and WebM in public/media/help/, posters here. Entries copied from the app repo capture-manifest.json; shift-check-in is left out because the wall clock showed 11:48 pm.",
+  "note": "Desktop MP4 and WebM in public/media/help/ are the app repo captures, byte-identical (entries below). Derived here: <name>-start.png is each recording's first frame, used as the poster so the loop starts without a jump; public/media/help/<name>-mobile.* are 480 px wide re-encodes for phones (H.264 CRF 30, VP9 CRF 42, silent). shift-check-in is left out because the wall clock showed 11:48 pm.",
   "recordings": [
-    {
-      "file": "change-one-day-poster.png",
-      "sha256": "28fc817ca14150de7faabe13f39322f8a269471c67ff071af1cedb7b3bd80b56",
-      "scene": "calendar-change-day",
-      "fixture": "marketing-week",
-      "appClock": "2026-10-20T10:40:00+11:00",
-      "appearance": "light",
-      "deviceClass": "iphone17",
-      "kind": "recording",
-      "simulator": "RosterEase QA iPhone 17",
-      "runtime": "27.0",
-      "appRevision": "a5014a3b",
-      "flow": "record-change-day.yaml",
-      "capturedAt": "2026-11-07T23:50:14+11:00",
-      "method": "simctl io recordVideo while the Maestro flow ran; idle start and end trimmed, scaled to 720 wide, silent. Poster is the final frame."
-    },
     {
       "file": "change-one-day.mp4",
       "sha256": "f8bab89cbb9921ddd319dbd3a9a6716fe9ed256cd38b0c3a1793a28eb90ba0ee",
@@ -48,22 +32,6 @@
       "appRevision": "a5014a3b",
       "flow": "record-change-day.yaml",
       "capturedAt": "2026-11-07T23:50:14+11:00",
-      "method": "simctl io recordVideo while the Maestro flow ran; idle start and end trimmed, scaled to 720 wide, silent. Poster is the final frame."
-    },
-    {
-      "file": "import-review-poster.png",
-      "sha256": "adb8c2fee3dc0daaef9c156d0ed6a9792dbfb006ecc51540d1b569b97eff1ff5",
-      "scene": "shift-import",
-      "fixture": "marketing-week",
-      "appClock": "2026-10-20T10:40:00+11:00",
-      "appearance": "light",
-      "deviceClass": "iphone17",
-      "kind": "recording",
-      "simulator": "RosterEase QA iPhone 17",
-      "runtime": "27.0",
-      "appRevision": "a5014a3b",
-      "flow": "shift-import.yaml",
-      "capturedAt": "2026-11-07T23:51:02+11:00",
       "method": "simctl io recordVideo while the Maestro flow ran; idle start and end trimmed, scaled to 720 wide, silent. Poster is the final frame."
     },
     {
@@ -99,22 +67,6 @@
       "method": "simctl io recordVideo while the Maestro flow ran; idle start and end trimmed, scaled to 720 wide, silent. Poster is the final frame."
     },
     {
-      "file": "record-an-absence-poster.png",
-      "sha256": "3d9b7ef34929edc3507aeb243b387a6bbf5be2b20bea68ec70d960aa8da11bd8",
-      "scene": "today-absence",
-      "fixture": "marketing-week",
-      "appClock": "2026-10-20T05:55:00+11:00",
-      "appearance": "light",
-      "deviceClass": "iphone17",
-      "kind": "recording",
-      "simulator": "RosterEase QA iPhone 17",
-      "runtime": "27.0",
-      "appRevision": "a5014a3b",
-      "flow": "record-absence.yaml",
-      "capturedAt": "2026-11-07T23:45:29+11:00",
-      "method": "simctl io recordVideo while the Maestro flow ran; idle start and end trimmed, scaled to 720 wide, silent. Poster is the final frame."
-    },
-    {
       "file": "record-an-absence.mp4",
       "sha256": "97452fe3d0cf02e2e9d9062f50b0827d0c73f48d207db52409e15fa34d623327",
       "scene": "today-absence",
@@ -144,22 +96,6 @@
       "appRevision": "a5014a3b",
       "flow": "record-absence.yaml",
       "capturedAt": "2026-11-07T23:45:29+11:00",
-      "method": "simctl io recordVideo while the Maestro flow ran; idle start and end trimmed, scaled to 720 wide, silent. Poster is the final frame."
-    },
-    {
-      "file": "save-a-backup-poster.png",
-      "sha256": "42f21cc0a893a77a79220d7c12e6820ae132e87173fa1caf25b8ce2c0e3f6bcf",
-      "scene": "settings-backup",
-      "fixture": "marketing-week",
-      "appClock": "2026-10-20T10:40:00+11:00",
-      "appearance": "light",
-      "deviceClass": "iphone17",
-      "kind": "recording",
-      "simulator": "RosterEase QA iPhone 17",
-      "runtime": "27.0",
-      "appRevision": "a5014a3b",
-      "flow": "record-save-backup.yaml",
-      "capturedAt": "2026-11-07T23:52:31+11:00",
       "method": "simctl io recordVideo while the Maestro flow ran; idle start and end trimmed, scaled to 720 wide, silent. Poster is the final frame."
     },
     {
@@ -193,6 +129,56 @@
       "flow": "record-save-backup.yaml",
       "capturedAt": "2026-11-07T23:52:31+11:00",
       "method": "simctl io recordVideo while the Maestro flow ran; idle start and end trimmed, scaled to 720 wide, silent. Poster is the final frame."
+    }
+  ],
+  "derived": [
+    {
+      "file": "public/media/help/change-one-day-mobile.mp4",
+      "sha256": "0b20adc12fce582cbb889c8b6542216b78e1b89dfc7f65d4c68bf0d0ddc6e38a"
+    },
+    {
+      "file": "public/media/help/change-one-day-mobile.webm",
+      "sha256": "b957c0183ebb05dc6668603c012533fbda75d57af3d9b91d4c91ed3f48f61cd7"
+    },
+    {
+      "file": "public/media/help/import-review-mobile.mp4",
+      "sha256": "4220dbc249e0aabb1042536d255aef27afd3c5901af51c2eef0467dd1345f351"
+    },
+    {
+      "file": "public/media/help/import-review-mobile.webm",
+      "sha256": "ddd03f4698652bbde649cbfb58f70cbdb8f72eada58dd63c897093e405f13605"
+    },
+    {
+      "file": "public/media/help/record-an-absence-mobile.mp4",
+      "sha256": "512d9b690a4ec28d532ba8c29f6726b309976df8d84a52af3c52ab069c3cc525"
+    },
+    {
+      "file": "public/media/help/record-an-absence-mobile.webm",
+      "sha256": "1f93113c2e31d892165c1aae61fda495c0845fe2617a180b5369b621dc83faf4"
+    },
+    {
+      "file": "public/media/help/save-a-backup-mobile.mp4",
+      "sha256": "86eb18c4e467e7b2f4f737367e6262e5ccd22f9e442fd0e66d8adb901596d333"
+    },
+    {
+      "file": "public/media/help/save-a-backup-mobile.webm",
+      "sha256": "033bda639a0a3f75058c3f4cb9df8453c843723e5c9c9bd09c1ffb686937da5f"
+    },
+    {
+      "file": "change-one-day-start.png",
+      "sha256": "83bd1d359e2fc9efc6139e6f40b9a0199de1bb613327de58d34a418c7023695c"
+    },
+    {
+      "file": "import-review-start.png",
+      "sha256": "e225a1cbbcfa9939d8216969e56488a46755b44eed9126f1eb6b11fa8ac67f68"
+    },
+    {
+      "file": "record-an-absence-start.png",
+      "sha256": "6a29129a9be76da48e9d37629c01b24fdd76ff1fe432aa0d5ced213be70b463e"
+    },
+    {
+      "file": "save-a-backup-start.png",
+      "sha256": "532903d56e2b937b02a70ffa841c25eb1dc40a1a599d0587487759f573e6a30b"
     }
   ]
 }

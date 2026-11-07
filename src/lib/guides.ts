@@ -9,6 +9,8 @@ export interface Guide {
     title: string;
     paragraphs: string[];
     steps?: string[];
+    // Notes that read after the steps, such as follow-ups and cautions.
+    after?: string[];
     screens?: HelpScreen[];
     recording?: HelpRecordingName;
   }[];
@@ -111,10 +113,14 @@ export const guides: Guide[] = [
       {
         id: "trial",
         screens: ["plus-plans"],
-        title: "The setup trial",
+        title: "Your trial and subscribing",
         paragraphs: [
           "Finishing setup starts a free week of full Plus. Nothing is charged and nothing renews. The trial is given once. Resetting app data doesn’t start another, and reinstalling usually doesn’t either.",
-          "Settings > RosterEase Plus shows when your trial ends, with See Plus Plans and Restore purchases.",
+        ],
+        steps: [
+          "Open **Settings > RosterEase Plus** to see when your trial ends.",
+          "To keep Plus, tap **See Plus Plans**, choose annual or monthly, and tap **Subscribe**.",
+          "Tap **Restore purchases** to bring back a subscription you already have.",
         ],
       },
       {
@@ -132,6 +138,20 @@ export const guides: Guide[] = [
     description:
       "What Smart Import supports, what to check, and how to handle a result that needs work.",
     sections: [
+      {
+        id: "start",
+        title: "Start an import",
+        recording: "import-review",
+        paragraphs: [
+          "Smart Import turns a roster or client list into a plan you check before anything is added.",
+        ],
+        steps: [
+          "In Shifts, open **Workplaces**, tap the **…** menu, then **Import roster**. In Visits, use **Import clients** in **Clients**.",
+          "Tap **Paste text**, **File or PDF**, **Photo** or **Scan document** and add your roster.",
+          "Tap **Analyze roster**, or **Analyze visits** for clients.",
+          "Check the review below, then tap **Import roster** or **Import clients**.",
+        ],
+      },
       {
         id: "source",
         title: "Choose a readable source",
@@ -151,8 +171,7 @@ export const guides: Guide[] = [
       },
       {
         id: "review",
-        screens: ["fieldImport"],
-        recording: "import-review",
+        screens: ["shiftImport", "fieldImport"],
         title: "Review before applying",
         paragraphs: [
           "Extracted text can contain mistakes. The review step is where you check the proposed changes, warnings and source rows before applying them.",
@@ -194,16 +213,26 @@ export const guides: Guide[] = [
         recording: "change-one-day",
         title: "Change one day",
         paragraphs: [
-          "Use Calendar to change a single date. A one-off change affects only that day and leaves your rotation intact. Remove change returns the day to the pattern.",
-          "To change future weeks, edit the rotation in the Workplace tab instead.",
+          "A one-off change affects only that day and leaves your rotation intact. To change future weeks, edit the rotation in the Workplace tab instead.",
+        ],
+        steps: [
+          "Open **Calendar** and tap the date.",
+          "Tap **Change Just This Day**.",
+          "Change the shift type, times or shift info. Choose **Off** to take the day off.",
+          "Tap **Save change**. To return the day to the pattern later, open it again and tap **Remove change**.",
         ],
       },
       {
         id: "extra",
         screens: ["shiftCalendar"],
-        title: "Split or double shifts",
+        title: "Add a split or double shift",
         paragraphs: [
-          "Add shift puts a dated shift on a day without removing what is already there, so two shifts make a split or double shift.",
+          "Two shifts on one day make a split or double shift. Adding one doesn’t remove what’s already there.",
+        ],
+        steps: [
+          "Open **Calendar** and tap the date.",
+          "Tap **Add Another Shift**, or **Add a Shift** on a day off.",
+          "Choose the workplace, shift type and times, then tap **Add shift**.",
         ],
       },
       {
@@ -233,8 +262,14 @@ export const guides: Guide[] = [
         recording: "record-an-absence",
         title: "Record it from Today",
         paragraphs: [
-          "In Shifts, swipe left on today’s shift card, choose an absence type and save. A shift that ended without a record asks you to record it as worked or not working.",
-          "Not working today records an absence without health detail. Sick day is for when illness kept you from working.",
+        ],
+        steps: [
+          "On **Today**, tap **Not working today** on your shift card, or swipe the card left.",
+          "Choose an absence type, such as **Not working today** or **Sick day**.",
+          "Tap **Save**. Today marks the day as not working and offers **Undo**.",
+        ],
+        after: [
+          "Not working today records an absence without health detail. Sick day is for when illness kept you from working. A shift that ended without a record asks you to record it as worked or not working.",
         ],
       },
       {
@@ -280,10 +315,17 @@ export const guides: Guide[] = [
       {
         id: "check-ins",
         screens: ["notes-and-check-ins-check-in"],
-        title: "Shift check-ins",
+        title: "Check in and out",
         paragraphs: [
-          "Turn on Shift check-ins in Settings > Notes & Templates. Today then offers Check in and Check out from an hour before a timed shift until 30 minutes after it ends. Each records the device time in that shift’s notes, without a location.",
-          "For reminders, turn on Reminders Before Work and Remind Me to Check In and Out in Settings > Notifications. You’re reminded ten minutes after an unchecked shift starts and when a checked-in shift ends.",
+          "Each check-in records the device time in that shift’s notes, without a location.",
+        ],
+        steps: [
+          "Open **Settings > Notes & Templates** and turn on **Shift check-ins**.",
+          "From an hour before a timed shift, tap **Check in** on Today.",
+          "Tap **Check out** when you finish, up to 30 minutes after the shift ends.",
+        ],
+        after: [
+          "For reminders, turn on **Reminders Before Work** and **Remind Me to Check In and Out** in Settings > Notifications. You’re reminded ten minutes after an unchecked shift starts and when a checked-in shift ends.",
         ],
       },
     ],
@@ -430,9 +472,14 @@ export const guides: Guide[] = [
       {
         id: "buffer",
         screens: ["travel-time-settings"],
-        title: "Your buffer and start location",
+        title: "Set your buffer and start location",
         paragraphs: [
-          "In Settings > Travel, set Travel Buffer between 5 and 120 minutes (15 by default) and Start Location to where you usually leave from.",
+          "Leave-by uses the buffer whenever there’s no Apple Maps estimate.",
+        ],
+        steps: [
+          "Open **Settings > Travel**.",
+          "Set **Travel Buffer** between 5 and 120 minutes. It starts at 15.",
+          "Set **Start Location** to where you usually leave from.",
         ],
       },
       {
@@ -454,9 +501,16 @@ export const guides: Guide[] = [
       {
         id: "calendar",
         screens: ["calendar-and-privacy"],
-        title: "Calendar is an explicit choice",
+        title: "Turn on Calendar Sync",
         paragraphs: [
-          "In Shifts, open Settings > Calendar Sync and choose a workplace. Turn on Sync workplace shifts and choose where events go: the app default, a dedicated workplace calendar or a specific iOS calendar. Visits does not have Calendar Sync.",
+          "Visits does not have Calendar Sync.",
+        ],
+        steps: [
+          "In Shifts, open **Settings > Calendar Sync** and choose a workplace.",
+          "Turn on **Sync workplace shifts**.",
+          "Choose where events go: the app default, a dedicated workplace calendar or a specific iOS calendar.",
+        ],
+        after: [
           "Each event shows the shift and workplace with the note “Synced from RosterEase”. Include Shift Info also adds each day’s Shift info, the optional text you add when changing a day in Calendar. Private notes stay in RosterEase. Anyone with access to the destination calendar may see what is written there.",
           "Do not delete an entire calendar to troubleshoot duplicate events.",
         ],
@@ -503,8 +557,11 @@ export const guides: Guide[] = [
         id: "turn-on",
         title: "Turn it on",
         paragraphs: [
-          "Live Activities are optional and free. In Settings > Notifications, turn on Show Live Activities. If iOS has them turned off for RosterEase, use Open iOS Settings.",
-          "This is a setting for this device. It stays off on other devices, including after you restore a backup.",
+          "Live Activities are optional and free. This is a setting for this device. It stays off on other devices, including after you restore a backup.",
+        ],
+        steps: [
+          "Open **Settings > Notifications** and turn on **Show Live Activities**.",
+          "If iOS has them turned off for RosterEase, tap **Open iOS Settings** and allow them.",
         ],
       },
       {
@@ -545,10 +602,15 @@ export const guides: Guide[] = [
       },
       {
         id: "answers",
-        title: "Roster answers",
+        title: "Ask Siri about your roster",
         paragraphs: [
-          "Roster answers need Shift Plus or Visits Plus. Turn on Allow Siri roster answers in Settings > Siri & Shortcuts.",
-          "Ask about today, tomorrow or a day this week, your next shift or visit, when you finish, or the next seven days. For example, “When’s my next shift in RosterEase?” In Shortcuts, Read Roster Day accepts any date.",
+          "Roster answers need Shift Plus or Visits Plus. Ask about today, tomorrow or a day this week, your next shift or visit, when you finish, or the next seven days. In Shortcuts, Read Roster Day accepts any date.",
+        ],
+        steps: [
+          "Open **Settings > Siri & Shortcuts** and turn on **Allow Siri roster answers**.",
+          "Ask Siri, for example “When’s my next shift in RosterEase?”",
+        ],
+        after: [
           "Answers come from what is saved in RosterEase, not changes your employer hasn’t added to the app.",
         ],
       },
@@ -587,10 +649,13 @@ export const guides: Guide[] = [
       {
         id: "lock",
         screens: ["privacy-lock", "privacy-lock-screen"],
-        title: "Require unlock",
+        title: "Turn on the privacy lock",
         paragraphs: [
-          "Turn on Require Unlock in Settings > Privacy, and Face ID, Touch ID or your passcode opens RosterEase. Ask Again sets how long you can be away first, from Immediately to 1 Hour.",
           "Turning the lock off needs authentication. These settings stay on this device and aren’t in backups.",
+        ],
+        steps: [
+          "Open **Settings > Privacy** and turn on **Require Unlock**. Face ID, Touch ID or your passcode now opens RosterEase.",
+          "Choose **Ask Again** to set how long you can be away first, from Immediately to 1 Hour.",
         ],
       },
       {
@@ -634,8 +699,14 @@ export const guides: Guide[] = [
         recording: "save-a-backup",
         title: "Save a backup",
         paragraphs: [
-          "In Settings > Data Management, tap Save backup… and choose where to save it. A backup holds your records, note history and preferences, encrypted.",
-          "Weekly Automatic Backup saves to a folder you choose each week and keeps the newest four. Back up now saves one straight away.",
+        ],
+        steps: [
+          "On **Today**, tap the settings button, then **Data Management**.",
+          "Tap **Save backup…**.",
+          "Choose where to save it in Files. RosterEase confirms with **Backup Saved**.",
+        ],
+        after: [
+          "A backup holds your records, note history and preferences, encrypted. **Weekly Automatic Backup** saves to a folder you choose each week and keeps the newest four.",
         ],
       },
       {
@@ -655,10 +726,15 @@ export const guides: Guide[] = [
       },
       {
         id: "restore",
-        title: "Check before restoring",
+        screens: ["backup-and-restore"],
+        title: "Restore a backup",
         paragraphs: [
-          "Tap Restore backup in Data Management and choose the file. If the key isn’t in iCloud Keychain, enter the backup key used to save it. Review what the backup contains before you confirm.",
           "Restoring replaces all RosterEase data and preferences on this device and updates Calendar Sync events. Save a backup of the current data first if you need it.",
+        ],
+        steps: [
+          "In **Settings > Data Management**, tap **Restore backup** and choose the file.",
+          "If the key isn’t in iCloud Keychain, enter the backup key used to save it.",
+          "Review what the backup contains, then confirm.",
         ],
       },
       {
@@ -689,9 +765,13 @@ export const guides: Guide[] = [
       {
         id: "off",
         screens: ["performance-reports"],
-        title: "Off unless you choose it",
+        title: "Turn it on",
         paragraphs: [
-          "RosterEase can keep a small summary from Apple’s MetricKit to help investigate crashes, hangs and resource use. It is off unless you turn it on during setup or in Settings > About > Local performance reports. Declining changes nothing else, and nothing is uploaded automatically.",
+          "RosterEase can keep a small summary from Apple’s MetricKit to help investigate crashes, hangs and resource use. It is off unless you turn it on. Declining changes nothing else, and nothing is uploaded automatically.",
+        ],
+        steps: [
+          "Open **Settings > About > Local performance reports**.",
+          "Turn on **Keep local performance reports**. You can also choose this during setup.",
         ],
       },
       {
