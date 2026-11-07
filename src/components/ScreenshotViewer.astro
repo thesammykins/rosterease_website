@@ -33,7 +33,9 @@
     let transition: ReturnType<typeof animate> | undefined;
 
     function sourceTransform() {
-      const source = trigger?.querySelector("img")?.getBoundingClientRect();
+      const source = (
+        trigger?.querySelector("[data-device]") ?? trigger?.querySelector("img")
+      )?.getBoundingClientRect();
       const target = settledBounds;
       if (!source || source.bottom < 0 || source.top > innerHeight)
         return "scale(.96)";
@@ -65,10 +67,18 @@
           event.preventDefault();
           if (dialog.open || closing) return;
           trigger = link;
-          const fullPicture = picture.cloneNode(true) as HTMLPictureElement;
+          // Enlarge the whole device so the screenshot keeps its frame.
+          const device = link.querySelector("[data-device]");
+          const enlarged = (device ?? picture).cloneNode(true) as HTMLElement;
+          const fullPicture = device
+            ? enlarged.querySelector("picture")!
+            : (enlarged as HTMLPictureElement);
           const image = fullPicture.querySelector("img");
           const source = fullPicture.querySelector("source");
-          imageContainer.replaceChildren(fullPicture);
+          const frame = enlarged.querySelector<HTMLImageElement>(".re-device-frame");
+          frame?.setAttribute("loading", "eager");
+          frame?.setAttribute("sizes", "90vw");
+          imageContainer.replaceChildren(enlarged);
           image?.setAttribute("loading", "eager");
           // The enlarged image must not keep selecting a small responsive preview.
           image?.removeAttribute("srcset");

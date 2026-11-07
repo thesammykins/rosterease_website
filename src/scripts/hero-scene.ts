@@ -32,7 +32,7 @@ export async function mountHeroScene(host: HTMLElement) {
       requestAnimationFrame(() => setTimeout(resolve, 0)),
     );
   const images = [
-    ...host.querySelectorAll<HTMLImageElement>(".re-hero-screen img"),
+    ...host.querySelectorAll<HTMLImageElement>(".re-hero-screen picture img"),
   ];
   if (images.length !== 2) return;
   const iphone = (

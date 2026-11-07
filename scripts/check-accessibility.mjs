@@ -216,7 +216,7 @@ for (const [route, html] of routes) {
 
 const css = await readFile(cssPath, "utf8");
 check(
-  block(css, ".re-phone .re-phone-frame").includes("pointer-events: none"),
+  block(css, ".re-device-frame").includes("pointer-events: none"),
   "Device artwork must not block interaction",
 );
 for (const feature of [

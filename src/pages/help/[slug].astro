@@ -1,7 +1,7 @@
 ---
 import RosterEaseLayout from "../../layouts/RosterEaseLayout.astro";
 import { getImage } from "astro:assets";
-import PhoneScreenshot from "../../components/PhoneScreenshot.astro";
+import DeviceFrame from "../../components/DeviceFrame.astro";
 import { guides, type Guide } from "../../lib/guides";
 import { helpRecordings, helpScreens } from "../../lib/screenshots";
 export function getStaticPaths() {
@@ -46,57 +46,63 @@ const posters = Object.fromEntries(
           ))
         }
       </nav>
-    </section><article class="re-prose">
+    </section><article class="re-prose re-help-article">
       {
-        guide.sections.map((section) => (
-          <section id={section.id}>
-            <h2>{section.title}</h2>
-            {section.paragraphs.map((paragraph) => (
-              <p>{paragraph}</p>
-            ))}
-            {section.steps && (
-              <ol>
-                {section.steps.map((step) => (
-                  <li>{step}</li>
+        guide.sections.map((section) => {
+          const hasMedia = Boolean(section.screens || section.recording);
+          return (
+            <section
+              id={section.id}
+              class:list={{ "re-help-section--media": hasMedia }}
+            >
+              <div>
+                <h2>{section.title}</h2>
+                {section.paragraphs.map((paragraph) => (
+                  <p>{paragraph}</p>
                 ))}
-              </ol>
-            )}
-            {section.screens && (
-              <div class="re-help-screens">
-                {section.screens.map((name) => (
-                  <PhoneScreenshot screen={helpScreens[name]} />
-                ))}
+                {section.steps && (
+                  <ol>
+                    {section.steps.map((step) => (
+                      <li>{step}</li>
+                    ))}
+                  </ol>
+                )}
               </div>
-            )}
-            {section.recording && (
-              <figure class="re-help-recording">
-                <video
-                  controls
-                  muted
-                  playsinline
-                  preload="none"
-                  poster={posters[section.recording].src}
-                  width="720"
-                  height={Math.round(
-                    (720 * helpRecordings[section.recording].poster.height) /
-                      helpRecordings[section.recording].poster.width,
+              {hasMedia && (
+                <div class="re-help-media">
+                  {section.recording && (
+                    <DeviceFrame device="iphone17" sizes="(max-width: 720px) 80vw, 280px">
+                      <video
+                        controls
+                        muted
+                        playsinline
+                        preload="none"
+                        poster={posters[section.recording].src}
+                        aria-label={helpRecordings[section.recording].label}
+                      >
+                        <source
+                          src={`/media/help/${section.recording}.webm`}
+                          type="video/webm"
+                        />
+                        <source
+                          src={`/media/help/${section.recording}.mp4`}
+                          type="video/mp4"
+                        />
+                      </video>
+                    </DeviceFrame>
                   )}
-                  aria-label={helpRecordings[section.recording].label}
-                >
-                  <source
-                    src={`/media/help/${section.recording}.webm`}
-                    type="video/webm"
-                  />
-                  <source
-                    src={`/media/help/${section.recording}.mp4`}
-                    type="video/mp4"
-                  />
-                </video>
-                <figcaption>{helpRecordings[section.recording].label}</figcaption>
-              </figure>
-            )}
-          </section>
-        ))
+                  {section.screens?.map((name) => (
+                    <DeviceFrame
+                      device="iphone17"
+                      screen={helpScreens[name]}
+                      sizes="(max-width: 720px) 45vw, 280px"
+                    />
+                  ))}
+                </div>
+              )}
+            </section>
+          );
+        })
       }<section>
         <h2>Need more help?</h2><p>
           <a href="/contact/">Contact support</a> with your build number and the step

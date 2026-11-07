@@ -1,8 +1,8 @@
 ---
 import RosterEaseLayout from "../layouts/RosterEaseLayout.astro";
-import AppScreenshot from "../components/AppScreenshot.astro";
-import PhoneScreenshot from "../components/PhoneScreenshot.astro";
+import DeviceFrame from "../components/DeviceFrame.astro";
 import { screens } from "../lib/screenshots";
+import { devices, type DeviceName } from "../lib/devices";
 import AppStoreBadge from "../components/AppStoreBadge.astro";
 ---
 
@@ -42,10 +42,15 @@ import AppStoreBadge from "../components/AppStoreBadge.astro";
           >Set up your first workplace →</a
         >
       </div><div class="re-feature-visual">
-        <PhoneScreenshot screen={screens.shiftCalendar} eager />
+        <DeviceFrame
+          device="iphone17"
+          screen={screens.shiftCalendar}
+          sizes="(max-width: 720px) 80vw, 320px"
+          eager
+        />
       </div>
     </section>
-    <section class="re-feature" id="field">
+    <section class="re-feature re-feature--stacked" id="field">
       <div>
         <p class="re-kicker">Field Worker</p><h2>
           Plan the order<br />of your visits.
@@ -65,33 +70,29 @@ import AppStoreBadge from "../components/AppStoreBadge.astro";
         </p><a class="re-text-link" href="/help/getting-started/#field"
           >Set up your visits →</a
         >
-      </div><div class="re-ipad-previews">
+      </div><div class="re-device-row">
         {
           [
-            { screen: screens.ipadFieldToday, label: "Today on iPad" },
-            { screen: screens.ipadFieldCalendar, label: "Calendar on iPad" },
-          ].map(({ screen, label }) => (
-            <figure>
-              <>
-                <a
-                  href={screen.light.src}
-                  data-screenshot
-                  aria-label={`Enlarge ${label} screenshot`}
-                >
-                  <AppScreenshot
-                    screen={screen}
-                    widths={[320, 480, 640, 960, 1206]}
-                    sizes="(max-width: 720px) calc(100vw - 40px), 280px"
-                  />
-                </a>
-                <figcaption>{label}</figcaption>
-              </>
-            </figure>
+            { device: "ipad" as DeviceName, screen: screens.ipadFieldToday, label: "Today on iPad" },
+            { device: "ipad" as DeviceName, screen: screens.ipadFieldCalendar, label: "Calendar on iPad" },
+          ].map(({ device, screen, label }) => (
+            <a
+              href={screen.light.src}
+              data-screenshot
+              aria-label={`Enlarge ${label} screenshot`}
+              style={`--device-aspect: ${devices[device].frame.width / devices[device].frame.height}`}
+            >
+              <DeviceFrame
+                device={device}
+                screen={screen}
+                sizes="(max-width: 720px) 45vw, 520px"
+              />
+            </a>
           ))
         }
       </div>
     </section>
-    <section class="re-feature" id="duo">
+    <section class="re-feature re-feature--stacked" id="duo">
       <div>
         <p class="re-kicker">iPhone Duo</p><h2>
           Folded or open.
@@ -99,28 +100,24 @@ import AppStoreBadge from "../components/AppStoreBadge.astro";
           Today fits the outer display when it's folded. Open it and your coming
           shifts sit beside the next one.
         </p>
-      </div><div class="re-ipad-previews re-duo-previews">
+      </div><div class="re-device-row">
         {
           [
-            { screen: screens.duoOuterShiftToday, label: "Folded" },
-            { screen: screens.duoInnerShiftToday, label: "Open" },
-          ].map(({ screen, label }) => (
-            <figure>
-              <>
-                <a
-                  href={screen.light.src}
-                  data-screenshot
-                  aria-label={`Enlarge ${label} iPhone Duo screenshot`}
-                >
-                  <AppScreenshot
-                    screen={screen}
-                    widths={[320, 480, 640, 960, 1206]}
-                    sizes="(max-width: 720px) calc(100vw - 40px), 360px"
-                  />
-                </a>
-                <figcaption>{label}</figcaption>
-              </>
-            </figure>
+            { device: "duoOuter" as DeviceName, screen: screens.duoOuterShiftToday, label: "Folded" },
+            { device: "duoInner" as DeviceName, screen: screens.duoInnerShiftToday, label: "Open" },
+          ].map(({ device, screen, label }) => (
+            <a
+              href={screen.light.src}
+              data-screenshot
+              aria-label={`Enlarge ${label} iPhone Duo screenshot`}
+              style={`--device-aspect: ${devices[device].frame.width / devices[device].frame.height}`}
+            >
+              <DeviceFrame
+                device={device}
+                screen={screen}
+                sizes="(max-width: 720px) 60vw, 760px"
+              />
+            </a>
           ))
         }
       </div>

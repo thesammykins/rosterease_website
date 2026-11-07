@@ -1,6 +1,6 @@
 ---
 import RosterEaseLayout from "../layouts/RosterEaseLayout.astro";
-import DeviceBody from "../components/DeviceBody.astro";
+import DeviceFrame from "../components/DeviceFrame.astro";
 import { screens } from "../lib/screenshots";
 import AppStoreBadge from "../components/AppStoreBadge.astro";
 const story = [
@@ -8,8 +8,6 @@ const story = [
     title: "Import your roster",
     text: "Import a screenshot, PDF or pasted text. Check the extracted shifts or clients before adding them to your plan.",
     images: { shift: screens.shiftImport, field: screens.fieldImport },
-    shift: "Build a repeating shift pattern from your source.",
-    field: "Bring in your client list and review visit details.",
     href: "/help/smart-import/",
     link: "How importing works",
   },
@@ -17,8 +15,6 @@ const story = [
     title: "Check your calendar",
     text: "See your repeating shifts or planned visits by week or month, and check the days ahead.",
     images: { shift: screens.shiftCalendar, field: screens.fieldCalendar },
-    shift: "Repeating rotations, overnight shifts and one-off changes.",
-    field: "Visit times, travel buffers and the order you choose.",
     href: "/app/",
     link: "Explore shifts and visits",
   },
@@ -26,8 +22,6 @@ const story = [
     title: "See what's next",
     text: "Open Today to check your next shift or visit, when to leave and what you have completed.",
     images: { shift: screens.shiftToday, field: screens.fieldToday },
-    shift: "Your next shift, workplace and leave plan.",
-    field: "Your next visit, directions and completion progress.",
     href: "/app/#everyday",
     link: "More about Today",
   },
@@ -54,24 +48,24 @@ const story = [
     </div>
     <div
       class="re-hero-stage"
-      aria-label="RosterEase Shift Worker and Field Worker Today screens"
+      aria-label="RosterEase Shifts and Visits Today screens"
     >
       <div class="re-hero-screens">
         <div class="re-hero-screen re-hero-shift">
-          <DeviceBody
+          <DeviceFrame
+            device="iphone17"
             screen={screens.shiftToday}
             eager
             draggable={false}
-            depth
             sizes="(max-width: 720px) min(229px, calc((100vw - 102px) / 2)), (max-width: 1120px) 240px, 300px"
           />
         </div>
         <div class="re-hero-screen re-hero-field">
-          <DeviceBody
+          <DeviceFrame
+            device="iphone17"
             screen={screens.fieldToday}
             eager
             draggable={false}
-            depth
             sizes="(max-width: 720px) min(229px, calc((100vw - 102px) / 2)), (max-width: 1120px) 240px, 300px"
           />
         </div>
@@ -127,14 +121,17 @@ const story = [
               <div class="re-worker-screens">
                 {(["shift", "field"] as const).map((worker) => (
                   <div data-worker-panel={worker}>
-                    <p class="re-worker-caption">{step[worker]}</p>
                     <a
                       class="re-screen-detail"
                       href={step.images[worker].dark.src}
                       data-screenshot
                       aria-label={`Enlarge ${worker} screenshot: ${step.title}`}
                     >
-                      <DeviceBody screen={step.images[worker]} />
+                      <DeviceFrame
+                        device="iphone17"
+                        screen={step.images[worker]}
+                        sizes="(max-width: 720px) 280px, 300px"
+                      />
                     </a>
                   </div>
                 ))}

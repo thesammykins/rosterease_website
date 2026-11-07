@@ -1,0 +1,71 @@
+---
+import { Image } from "astro:assets";
+import AppScreenshot from "./AppScreenshot.astro";
+import { devices, type Device, type DeviceName } from "../lib/devices";
+import type { AppScreen } from "../lib/screenshots";
+interface Props {
+  device: DeviceName;
+  // Rendered width of the whole device, as an <img sizes> value.
+  sizes: string;
+  // A screenshot; without one, the slot (such as a video) fills the screen.
+  screen?: AppScreen;
+  eager?: boolean;
+  draggable?: boolean;
+  class?: string;
+}
+const {
+  device,
+  sizes,
+  screen,
+  eager = false,
+  draggable = true,
+  class: className,
+} = Astro.props;
+const { frame, screen: opening, mask }: Device = devices[device];
+const percent = (value: number, total: number) => `${(value / total) * 100}%`;
+const style = [
+  `--device-ratio: ${frame.width} / ${frame.height}`,
+  `--screen-left: ${percent(opening.x, frame.width)}`,
+  `--screen-top: ${percent(opening.y, frame.height)}`,
+  `--screen-width: ${percent(opening.width, frame.width)}`,
+  `--screen-height: ${percent(opening.height, frame.height)}`,
+  mask && `--screen-mask: url("${mask.src}")`,
+]
+  .filter(Boolean)
+  .join("; ");
+const widths = [320, 480, 640, 960, 1280, 1600, 2400].filter(
+  (width) => width <= frame.width,
+);
+---
+
+<div
+  class:list={["re-device", `re-device--${device}`, className]}
+  style={style}
+  data-device
+>
+  {
+    screen ? (
+      <AppScreenshot
+        screen={screen}
+        eager={eager}
+        draggable={draggable}
+        sizes={sizes}
+        widths={widths.filter((width) => width <= opening.width)}
+      />
+    ) : (
+      <slot />
+    )
+  }
+  <Image
+    class="re-device-frame"
+    src={frame}
+    alt=""
+    aria-hidden="true"
+    widths={widths}
+    sizes={sizes}
+    format="webp"
+    quality={90}
+    loading={eager ? "eager" : "lazy"}
+    draggable="false"
+  />
+</div>

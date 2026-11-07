@@ -8,12 +8,12 @@ Warm off-white, forest text, mint actions, a sage product stage, editorial serif
 
 Both themes use the `--re-*` tokens. General radii follow the established scale. `--re-device-radius` is a geometry exception for the measured screenshot aperture, not a component-design radius.
 
-Intentional changes from the concept: real screenshot content; existing branding; generic dimensional frames in the hero and straight-on official phones on the product page; more precise product copy; a dedicated on-device explanation; support and legal navigation; responsive and appearance controls. No generated app UI, fake reviews or performance promises are used.
+Intentional changes from the concept: real screenshot content; existing branding; official, upright device bezels for every screenshot; more precise product copy; a dedicated on-device explanation; support and legal navigation; responsive and appearance controls. No generated app UI, fake reviews or performance promises are used.
 
 ## Device frames: research and decision
 
 - [Apple marketing guidelines](https://developer.apple.com/app-store/marketing/guidelines/#section-products) direct marketing to official bezels, unmodified, and prohibit tilting, animating, obscuring or simulating Apple product images.
-- [Apple Design Resources](https://developer.apple.com/design/resources/#product-bezels) supplies the iPhone 17 PNG. Download: `https://devimages-cdn.apple.com/design/resources/download/Bezel-iPhone-17.dmg`. The user explicitly authorised acceptance of the included licence on 5 September 2026. Its text is retained beside this document.
+- [Apple Design Resources](https://developer.apple.com/design/resources/#product-bezels) supplies the iPhone 17, iPad Pro (M5) and iPhone Duo PNGs (`Bezel-iPad-Pro-(M5).dmg`, `Bezel-iPhone-Duo.dmg`, downloaded 7 November 2026; same licence text). The iPhone 17 PNG: Download: `https://devimages-cdn.apple.com/design/resources/download/Bezel-iPhone-17.dmg`. The user explicitly authorised acceptance of the included licence on 5 September 2026. Its text is retained beside this document.
 - [Marvel devices.css](https://github.com/marvelapp/devices.css) and [Devices.css](https://github.com/picturepan2/devices.css) demonstrate lightweight CSS framing. They were considered but not adopted: official artwork is a better fit for this marketing use.
 - A WebGL model adds downloads and rendering work while recreating hardware unnecessarily. The site uses a responsive transparent bezel overlay with a real image beneath, no device library.
 
@@ -23,7 +23,7 @@ The source frame is retained byte-for-byte. Astro encodes proportionally resized
 
 [Apple HIG Motion](https://developer.apple.com/design/human-interface-guidelines/motion) supports brief, purposeful, optional movement. [HIG Accessibility](https://developer.apple.com/design/human-interface-guidelines/accessibility) and [Layout](https://developer.apple.com/design/human-interface-guidelines/layout) inform hierarchy, legibility and familiar controls; this is a website, so semantic HTML and browser conventions remain primary.
 
-The generic CSS-framed hero screens and editorial panels settle once as each section enters view. The generic frame has depth but no physical controls or logo; it is not an Apple product rendering. Screenshot dialogs also transition opacity and scale on entry and exit. Motion now provides bounded scroll-linked hero drift, pointer response and shared interaction feedback. There are no idle animation loops. See [MDN animation performance](https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/CSS_JavaScript_animation_performance). Reduced motion turns animations and smooth scrolling off. Content never waits for animation to become readable.
+Sections settle once as they enter view; official device artwork itself never tilts or moves. Screenshot dialogs also transition opacity and scale on entry and exit. Motion now provides bounded scroll-linked hero drift, pointer response and shared interaction feedback. There are no idle animation loops. See [MDN animation performance](https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/CSS_JavaScript_animation_performance). Reduced motion turns animations and smooth scrolling off. Content never waits for animation to become readable.
 
 Navigation and primary actions have 44px targets. A single labelled appearance icon opens native radio choices, with visible focus and selected states. Escape and outside clicks dismiss the disclosure. The native mobile disclosure works without JavaScript, with Escape dismissal added. Text and focus contrast are measured by the static checker. Browser review must still cover touch/reflow and keyboard behaviour.
 

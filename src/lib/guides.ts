@@ -151,7 +151,7 @@ export const guides: Guide[] = [
       },
       {
         id: "review",
-        screens: ["shiftImport", "fieldImport"],
+        screens: ["fieldImport"],
         recording: "import-review",
         title: "Review before applying",
         paragraphs: [
@@ -191,7 +191,6 @@ export const guides: Guide[] = [
     sections: [
       {
         id: "one-day",
-        screens: ["shift-changes"],
         recording: "change-one-day",
         title: "Change one day",
         paragraphs: [
@@ -231,7 +230,6 @@ export const guides: Guide[] = [
     sections: [
       {
         id: "record",
-        screens: ["recording-an-absence"],
         recording: "record-an-absence",
         title: "Record it from Today",
         paragraphs: [
@@ -633,7 +631,6 @@ export const guides: Guide[] = [
     sections: [
       {
         id: "export",
-        screens: ["backup-and-restore"],
         recording: "save-a-backup",
         title: "Save a backup",
         paragraphs: [
