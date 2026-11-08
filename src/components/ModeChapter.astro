@@ -1,0 +1,106 @@
+---
+import AppScreenshot from "./AppScreenshot.astro";
+import DeviceFrame from "./DeviceFrame.astro";
+import type { AppScreen } from "../lib/screenshots";
+interface Step {
+  title: string;
+  text: string;
+  href: string;
+  link: string;
+  screen: AppScreen;
+}
+interface Props {
+  id: string;
+  mode: "shift" | "field";
+  title: string;
+  steps: Step[];
+}
+const { id, mode, title, steps } = Astro.props;
+---
+
+<section
+  class={`re-chapter re-chapter--${mode}`}
+  id={id}
+  aria-labelledby={`${id}-title`}
+  data-chapter
+>
+  <div class="re-shell re-chapter-inner">
+    <h2 class="re-chapter-title" id={`${id}-title`}>{title}</h2>
+    <div class="re-chapter-body">
+      <ol class="re-chapter-steps" aria-label={`${title}, step by step`}>
+        {
+          steps.map((step, index) => (
+            <li class="re-chapter-step" data-chapter-step={index}>
+              <a
+                class="re-chapter-shot"
+                href={step.screen.light?.src ?? step.screen.dark.src}
+                data-screenshot
+                aria-label={`Enlarge ${title} screenshot: ${step.title}`}
+              >
+                <DeviceFrame
+                  device="iphone17"
+                  screen={step.screen}
+                  sizes="(max-width: 900px) min(70vw, 280px), 1px"
+                />
+              </a>
+              <div class="re-chapter-copy">
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+                <a class="re-text-link" href={step.href} data-astro-prefetch>
+                  {step.link} <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="re-chapter-stage" aria-hidden="true" data-chapter-stage>
+        <DeviceFrame device="iphone17" sizes="(max-width: 900px) 1px, 360px">
+          {
+            steps.map((step) => (
+              <AppScreenshot
+                screen={step.screen}
+                sizes="(max-width: 900px) 1px, 360px"
+                widths={[480, 720, 960]}
+                draggable={false}
+              />
+            ))
+          }
+        </DeviceFrame>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Desktop: the step nearest the middle of the screen is active, and the
+  // stage device shows its screen. The header chips follow the chapter in view.
+  const chapters = [...document.querySelectorAll<HTMLElement>("[data-chapter]")];
+  const chips = [...document.querySelectorAll<HTMLAnchorElement>(".re-chapter-nav a")];
+  function activate(chapter: HTMLElement, index: number) {
+    chapter.querySelectorAll("[data-chapter-step]").forEach((step, i) => step.classList.toggle("is-active", i === index));
+    chapter.querySelectorAll("[data-chapter-stage] picture").forEach((picture, i) => picture.classList.toggle("is-active", i === index));
+  }
+  chapters.forEach((chapter) => activate(chapter, 0));
+  const steps = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const step = entry.target as HTMLElement;
+        activate(step.closest("[data-chapter]")!, Number(step.dataset.chapterStep));
+      }
+    },
+    { rootMargin: "-45% 0px -45% 0px" },
+  );
+  document.querySelectorAll("[data-chapter-step]").forEach((step) => steps.observe(step));
+  const inView = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        chips.forEach((chip) => chip.setAttribute("aria-current", String(chip.hash === `#${entry.target.id}`)));
+      }
+    },
+    { rootMargin: "-40% 0px -55% 0px" },
+  );
+  chapters.forEach((chapter) => inView.observe(chapter));
+</script>

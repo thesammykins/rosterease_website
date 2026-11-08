@@ -7,7 +7,7 @@ interface Props {
   device: DeviceName;
   // Rendered width of the whole device, as an <img sizes> value.
   sizes: string;
-  // A screenshot; without one, the slot (such as a video) fills the screen.
+  // A screenshot. Slot content (a video, more screens) sits above it, under the bezel.
   screen?: AppScreen;
   eager?: boolean;
   draggable?: boolean;
@@ -44,7 +44,7 @@ const widths = [320, 480, 640, 960, 1280, 1600, 2400].filter(
   data-device
 >
   {
-    screen ? (
+    screen && (
       <AppScreenshot
         screen={screen}
         eager={eager}
@@ -52,10 +52,9 @@ const widths = [320, 480, 640, 960, 1280, 1600, 2400].filter(
         sizes={sizes}
         widths={widths.filter((width) => width <= opening.width)}
       />
-    ) : (
-      <slot />
     )
   }
+  <slot />
   <Image
     class="re-device-frame"
     src={frame}

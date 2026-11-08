@@ -1,6 +1,7 @@
 ---
 import { getImage } from "astro:assets";
 import type { AppScreen } from "../lib/screenshots";
+import { placeholder } from "../lib/placeholder";
 interface Props {
   screen: AppScreen;
   eager?: boolean;
@@ -41,10 +42,12 @@ const fullDark = await getImage({
   format: "webp",
   quality: 90,
 });
+const style = `--ph-light: ${await placeholder(screen.light ?? screen.dark)}; --ph-dark: ${await placeholder(screen.dark)}`;
 ---
 
 <picture
   data-app-screen
+  style={style}
   data-full-light={fullLight.src}
   data-full-dark={fullDark.src}
 >

@@ -79,57 +79,6 @@ export function initSiteMotion() {
       };
     }),
   );
-  let selectedWorker = document.querySelector<HTMLInputElement>(
-    'input[name="worker"]:checked',
-  )?.value;
-  document
-    .querySelectorAll<HTMLInputElement>('input[name="worker"]')
-    .forEach((input) => {
-      input.addEventListener(
-        "change",
-        () => {
-          document
-            .querySelectorAll<HTMLElement>(".re-worker-screens")
-            .forEach((container) => {
-              const oldGhost = container.querySelector(".re-worker-ghost");
-              if (oldGhost) {
-                animations.get(oldGhost)?.stop();
-                animations.delete(oldGhost);
-                touched.delete(oldGhost);
-                oldGhost.remove();
-              }
-              const previous = container.querySelector<HTMLElement>(
-                '[data-worker-panel="' + selectedWorker + '"]',
-              );
-              const next = container.querySelector<HTMLElement>(
-                '[data-worker-panel="' + input.value + '"]',
-              );
-              if (!previous || !next) return;
-              const ghost = previous.cloneNode(true) as HTMLElement;
-              ghost.removeAttribute("data-worker-panel");
-              ghost.className = "re-worker-ghost";
-              ghost.inert = true;
-              ghost.setAttribute("aria-hidden", "true");
-              container.append(ghost);
-              play(
-                ghost,
-                { opacity: [1, 0] },
-                { duration: 0.32, ease: "easeInOut" },
-              ).then(() => {
-                ghost.remove();
-                touched.delete(ghost);
-              });
-              play(
-                next,
-                { opacity: [0, 1] },
-                { duration: 0.32, ease: "easeInOut" },
-              );
-            });
-          selectedWorker = input.value;
-        },
-        { signal: listeners.signal },
-      );
-    });
   document
     .querySelectorAll<HTMLDetailsElement>(".re-appearance, .re-mobile-menu")
     .forEach((details) => {

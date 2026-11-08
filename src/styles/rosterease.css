@@ -24,7 +24,6 @@
   --re-footer: #133b35;
   --re-footer-text: #f4f5ed;
   --re-footer-muted: #c5d9d1;
-  --re-device-screen: #070a10;
   --re-device-radius: 13% / 6%;
   --re-radius-xs: 8px;
   --re-radius-sm: 12px;
@@ -314,9 +313,7 @@ p {
   user-select: none;
   pointer-events: none;
 }
-.re-story-visual {
-  position: relative;
-}
+
 .re-hero-canvas {
   position: absolute;
   inset: 0;
@@ -355,13 +352,20 @@ p {
   width: var(--screen-width);
   height: var(--screen-height);
   object-fit: cover;
-  background: var(--re-device-screen);
+  background: var(--ph, none) center / cover no-repeat, var(--re-bg-soft);
   -webkit-mask: var(--screen-mask, none) center / 100% 100% no-repeat;
   mask: var(--screen-mask, none) center / 100% 100% no-repeat;
 }
-.re-device--iphone17 > picture img,
-.re-device--iphone17 > video {
-  border-radius: var(--re-device-radius);
+[data-app-screen] {
+  --ph: var(--ph-light);
+}
+:root[data-theme="dark"] [data-app-screen] {
+  --ph: var(--ph-dark);
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="system"] [data-app-screen] {
+    --ph: var(--ph-dark);
+  }
 }
 .re-device-frame {
   position: absolute;
@@ -373,6 +377,10 @@ p {
 .re-hero-field {
   margin-top: 58px;
 }
+.re-stage-caption a {
+  color: inherit;
+  text-decoration: none;
+}
 .re-stage-caption {
   display: flex;
   justify-content: space-around;
@@ -381,54 +389,7 @@ p {
   font-size: 12px;
   letter-spacing: 0.03em;
 }
-.re-story {
-  padding-block: 28px var(--re-space-section-bottom);
-  border-top: 1px solid var(--re-line);
-}
-.re-story-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 28px;
-}
-.re-story-heading h2 {
-  font-size: 32px;
-}
-.re-story-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-}
-.re-story-row {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-.re-story-copy {
-  display: flex;
-  flex-direction: column;
-  padding: 0 0 22px;
-  flex: 1;
-}
-.re-step-number {
-  font: 24px/1 var(--re-serif);
-  display: block;
-  color: var(--re-muted);
-  margin-bottom: 12px;
-}
-.re-story-copy h3 {
-  font-family: var(--re-serif);
-  font-weight: 400;
-  font-size: 30px;
-}
-.re-story-copy p {
-  flex: 1;
-  color: var(--re-muted);
-  margin-top: 12px;
-  font-size: 15px;
-  max-width: 35ch;
-}
+
 .re-text-link {
   display: inline-flex;
   align-items: center;
@@ -438,69 +399,7 @@ p {
   font-weight: 500;
   text-decoration-thickness: 1px;
 }
-.re-story-copy .re-text-link {
-  margin-top: 16px;
-}
-.re-story-visual {
-  margin-top: 8px;
-}
-.re-screen-detail {
-  display: block;
-  width: min(100%, 300px);
-  margin-inline: auto;
-  cursor: zoom-in;
-}
-.re-worker-switch {
-  display: flex;
-  justify-self: center;
-  padding: 3px;
-  margin: 0;
-  gap: 3px;
-  border: 1px solid var(--re-line);
-  border-radius: var(--re-radius-sm);
-  background: var(--re-bg-soft);
-}
-.re-worker-switch label {
-  position: relative;
-  cursor: pointer;
-}
-.re-worker-switch input {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-}
-.re-worker-switch span {
-  display: grid;
-  place-items: center;
-  min-width: 88px;
-  min-height: 38px;
-  padding: 6px 18px;
-  border: 1px solid transparent;
-  border-radius: var(--re-radius-xs);
-  font-size: 13px;
-  color: var(--re-muted);
-}
-.re-worker-switch input:checked + span {
-  color: var(--re-text);
-  background: var(--re-surface);
-  border-color: var(--re-line-strong);
-}
-.re-worker-switch input:focus-visible + span {
-  outline: 3px solid var(--re-focus-ring);
-  outline-offset: 2px;
-}
-#screens [data-worker-panel="field"] {
-  display: none;
-}
-#screens:has(input[value="field"]:checked) [data-worker-panel="shift"] {
-  display: none;
-}
-#screens:has(input[value="field"]:checked) [data-worker-panel="field"] {
-  display: block;
-}
+
 [hidden] {
   display: none !important;
 }
@@ -608,9 +507,6 @@ html:has(.re-screenshot-dialog[open]) {
   background: var(--re-footer);
   color: var(--re-footer-text);
   border-radius: var(--re-radius-2xl);
-}
-.re-worker-screens {
-  min-width: 0;
 }
 
 .re-closing h2 {
@@ -1080,15 +976,7 @@ html:has(.re-screenshot-dialog[open]) {
   animation-duration: 320ms;
   animation-timing-function: ease-in-out;
 }
-.re-worker-screens {
-  position: relative;
-}
-.re-worker-ghost {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-}
+
 @media (prefers-reduced-motion: reduce) {
   @view-transition {
     navigation: none;
@@ -1153,19 +1041,9 @@ html:has(.re-screenshot-dialog[open]) {
     max-width: 520px;
     margin-inline: auto;
   }
-  .re-story-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  .re-story-row {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    align-items: center;
-    gap: 36px;
-  }
-  .re-story-copy h3 {
-    font-size: 32px;
-  }
+  
+  
+  
   .re-help-section--media {
     grid-template-columns: 1fr;
     gap: 28px;
@@ -1204,9 +1082,8 @@ html:has(.re-screenshot-dialog[open]) {
     width: calc(100% - 40px);
   }
   .re-header-inner {
-    min-height: 86px;
+    min-height: 64px;
     gap: 16px;
-    flex-wrap: wrap;
     position: relative;
   }
   .re-brand {
@@ -1221,16 +1098,11 @@ html:has(.re-screenshot-dialog[open]) {
     display: none;
   }
   .re-header-cta {
-    margin-left: auto;
-    font-size: 12px;
-    padding: 10px 12px;
-    gap: 10px;
-  }
-  .re-header-cta span {
     display: none;
   }
   .re-mobile-menu {
     display: block;
+    margin-left: auto;
   }
   .re-mobile-menu summary {
     font-size: 13px;
@@ -1248,7 +1120,7 @@ html:has(.re-screenshot-dialog[open]) {
   }
   .re-mobile-menu nav {
     position: absolute;
-    inset: 74px 0 auto;
+    inset: 60px 0 auto;
     background: var(--re-surface);
     border: 1px solid var(--re-line);
     border-radius: var(--re-radius-sm);
@@ -1295,41 +1167,15 @@ html:has(.re-screenshot-dialog[open]) {
   .re-stage-caption {
     margin-top: 18px;
   }
-  .re-story-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-  .re-story-row {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-  .re-story-heading {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 16px;
-  }
-  .re-story-copy {
-    display: grid;
-    grid-template-columns: 48px 1fr;
-    column-gap: 16px;
-  }
-  .re-step-number {
-    font-size: 36px;
-    grid-row: span 3;
-  }
-  .re-story-copy h3 {
-    font-size: 32px;
-  }
-  .re-story-copy p,
-  .re-story-copy .re-text-link {
-    grid-column: 2;
-  }
-  .re-story-visual {
-    margin-top: 20px;
-  }
-  .re-screen-detail {
-    width: min(100%, 280px);
-  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
   .re-help-media {
     gap: 12px;
   }
@@ -1420,10 +1266,405 @@ html:has(.re-screenshot-dialog[open]) {
   .re-header-inner {
     gap: 12px;
   }
-  .re-header-cta {
+}
+
+/* Shifts and Visits chapters (home). Phone: a swipeable row per mode.
+   Desktop: steps scroll beside one device whose screen follows them. */
+.re-chapters {
+  position: relative;
+}
+.re-chapter-nav {
+  position: sticky;
+  top: 100px;
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  width: max-content;
+  margin: 0 auto;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--re-surface-translucent);
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 0 0 1px var(--re-line);
+}
+.re-chapter-nav a {
+  min-width: 96px;
+  min-height: 40px;
+  display: grid;
+  place-items: center;
+  padding: 0 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--re-muted);
+}
+.re-chapter-nav a[aria-current="true"] {
+  color: var(--re-text);
+  background: var(--re-surface);
+  box-shadow: inset 0 0 0 1px var(--re-line-strong);
+}
+.re-chapter {
+  --mode: var(--re-shift);
+  padding-block: 56px 72px;
+  scroll-margin-top: 120px;
+}
+.re-chapter--field {
+  --mode: var(--re-route);
+  background: var(--re-bg-soft);
+}
+.re-chapter-title {
+  font: 400 clamp(40px, 6vw, 72px) / 1 var(--re-serif);
+  letter-spacing: -0.04em;
+  color: var(--mode);
+  margin: 0 0 32px;
+}
+.re-chapter-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  gap: 64px;
+}
+.re-chapter-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.re-chapter-step {
+  min-height: 64vh;
+  display: flex;
+  align-items: center;
+  opacity: 0.4;
+  transition: opacity 300ms ease;
+}
+.re-chapter-step.is-active,
+.re-chapter-step:focus-within {
+  opacity: 1;
+}
+.re-chapter-shot {
+  display: none;
+}
+.re-chapter-copy h3 {
+  font: 400 clamp(30px, 3.2vw, 44px) / 1.1 var(--re-serif);
+  margin: 0 0 14px;
+}
+.re-chapter-copy p {
+  color: var(--re-muted);
+  font-size: 18px;
+  max-width: 34ch;
+  margin: 0 0 12px;
+}
+.re-chapter-stage {
+  position: sticky;
+  top: calc(50vh - min(38vh, 380px));
+  align-self: start;
+  margin-block: 8vh;
+}
+.re-chapter-stage .re-device {
+  width: min(100%, calc(76vh * 1350 / 2760));
+  margin-inline: auto;
+}
+.re-chapter-stage .re-device > picture img {
+  opacity: 0;
+  transition: opacity 400ms ease;
+}
+.re-chapter-stage .re-device > picture.is-active img {
+  opacity: 1;
+}
+@media (max-width: 900px) {
+  .re-chapter {
+    padding-block: 40px 48px;
+  }
+  .re-chapter-title {
+    margin-bottom: 20px;
+  }
+  .re-chapter-body {
+    display: block;
+  }
+  .re-chapter-stage {
     display: none;
   }
-  .re-mobile-menu {
-    margin-left: auto;
+  .re-chapter-steps {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin-inline: -20px;
+    padding: 4px 20px 12px;
+    scrollbar-width: none;
+  }
+  .re-chapter-steps::-webkit-scrollbar {
+    display: none;
+  }
+  .re-chapter-step {
+    flex: 0 0 min(72vw, 300px);
+    min-height: 0;
+    display: block;
+    opacity: 1;
+    scroll-snap-align: start;
+  }
+  .re-chapter-shot {
+    display: block;
+    margin-bottom: 18px;
+    cursor: zoom-in;
+  }
+  .re-chapter-copy h3 {
+    font-size: 26px;
+  }
+  .re-chapter-copy p {
+    font-size: 16px;
+  }
+}
+
+/* Devices: the Duo opens around its hinge and the iPad turns as you scroll. */
+.re-showcase {
+  --open: 0;
+  --turn: 0;
+  height: 300vh;
+  border-top: 1px solid var(--re-line);
+}
+.re-showcase-sticky {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.re-showcase-inner h2 {
+  font: 400 clamp(36px, 5vw, 60px) / 1.05 var(--re-serif);
+  letter-spacing: -0.04em;
+  margin: 0 0 40px;
+}
+.re-showcase-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(24px, 5vw, 72px);
+}
+.re-showcase figure {
+  margin: 0;
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+}
+.re-showcase figcaption {
+  color: var(--re-muted);
+  font-size: 14px;
+}
+.re-duo {
+  width: min(640px, 52vw);
+  perspective: 2400px;
+}
+.re-duo-body {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3093 / 2247;
+  transform: translateX(calc(-25% * (1 - var(--open))));
+  transform-style: preserve-3d;
+}
+.re-duo-half {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+.re-duo-half .re-device {
+  width: 200%;
+}
+.re-duo-half--right {
+  left: 50%;
+}
+.re-duo-half--right .re-device {
+  margin-left: -100%;
+}
+.re-duo-half--left {
+  left: 0;
+  width: 100%;
+  backface-visibility: hidden;
+}
+.re-duo-leaf {
+  position: absolute;
+  inset: 0 50% 0 0;
+  transform-origin: 100% 50%;
+  transform: rotateY(calc((1 - var(--open)) * 180deg));
+  transform-style: preserve-3d;
+}
+.re-duo-cover {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}
+/* The cover becomes a window onto the inner display's right half, which it
+   covers when closed. The image is placed in the device's coordinates, so it
+   lines up with the inner display as the cover swings away. Offsets: the inner
+   screen's position relative to the outer screen opening (devices.ts). */
+.re-duo-cover .re-device > picture img {
+  opacity: calc(1 - min(var(--open) * 4, 1));
+}
+.re-duo-through {
+  position: absolute;
+  left: var(--screen-left);
+  top: var(--screen-top);
+  width: var(--screen-width);
+  height: var(--screen-height);
+  overflow: hidden;
+  -webkit-mask: var(--screen-mask, none) center / 100% 100% no-repeat;
+  mask: var(--screen-mask, none) center / 100% 100% no-repeat;
+  opacity: min(var(--open) * 4, 1);
+  filter: brightness(calc(0.82 + 0.18 * var(--open)));
+}
+.re-duo-through img {
+  position: absolute;
+  left: -110.15%;
+  top: -0.21%;
+  width: 207.7%;
+  max-width: none;
+  height: 100.43%;
+  object-fit: fill;
+}
+/* Softness grows toward each panel's moving edge and peaks mid-turn. */
+.re-duo-soft {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.re-duo-soft--cover {
+  filter: blur(calc(var(--open) * (1 - var(--open)) * 56px));
+  -webkit-mask: linear-gradient(to left, #000 0%, #000a 25%, #0000 60%);
+  mask: linear-gradient(to left, #000 0%, #000a 25%, #0000 60%);
+}
+.re-duo-soft-clip {
+  position: absolute;
+  left: var(--screen-left);
+  top: var(--screen-top);
+  width: var(--screen-width);
+  height: var(--screen-height);
+  overflow: hidden;
+  -webkit-mask: var(--screen-mask, none) center / 100% 100% no-repeat;
+  mask: var(--screen-mask, none) center / 100% 100% no-repeat;
+}
+.re-duo-soft--leaf {
+  filter: blur(calc((1 - var(--open)) * 16px));
+  -webkit-mask: linear-gradient(to right, #000 0%, #000a 18%, #0000 42%);
+  mask: linear-gradient(to right, #000 0%, #000a 18%, #0000 42%);
+}
+.re-duo-soft--leaf img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.re-duo-half .re-device > picture img,
+.re-duo-soft--leaf img {
+  filter: brightness(calc(0.62 + 0.38 * var(--open)));
+}
+.re-duo-glass {
+  position: absolute;
+  inset: 4% 6%;
+  border-radius: 9%;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    #ffffff00 25%,
+    #ffffff66 48%,
+    #ffffff10 56%,
+    #ffffff00 75%
+  ) no-repeat;
+  background-size: 260% 100%;
+  background-position: calc(100% - var(--open) * 160%) 0;
+  mix-blend-mode: screen;
+  opacity: calc(min(var(--open) * 4, 1) * (1 - var(--open)));
+}
+.re-ipad {
+  --ipad-h: min(440px, 58vh, 34vw);
+}
+.re-ipad-body {
+  width: var(--ipad-h);
+  height: var(--ipad-h);
+  display: grid;
+  place-items: center;
+}
+.re-ipad-body .re-device {
+  width: calc(var(--ipad-h) * 2300 / 3000);
+  transform: rotate(calc(var(--turn) * -90deg));
+}
+.re-ipad-body .re-device > picture img {
+  opacity: calc(1 - clamp(0, (var(--turn) - 0.4) * 5, 1));
+}
+.re-ipad--upright .re-ipad-body .re-device {
+  transform: none;
+}
+.re-ipad--upright .re-ipad-body .re-device > picture img {
+  opacity: 1;
+}
+.re-ipad-landscape {
+  position: absolute;
+  left: var(--screen-left);
+  top: var(--screen-top);
+  width: var(--screen-width);
+  height: var(--screen-height);
+  overflow: hidden;
+  -webkit-mask: var(--screen-mask, none) center / 100% 100% no-repeat;
+  mask: var(--screen-mask, none) center / 100% 100% no-repeat;
+  opacity: clamp(0, (var(--turn) - 0.4) * 5, 1);
+}
+.re-ipad-landscape img {
+  position: absolute;
+  left: -16.6667%;
+  top: 12.5%;
+  width: 133.3333%;
+  max-width: none;
+  height: 75%;
+  object-fit: cover;
+  transform: rotate(90deg);
+  background: var(--ph, none) center / cover no-repeat;
+}
+@media (max-width: 720px) {
+  .re-chapter-nav {
+    position: static;
+    margin-top: 8px;
+  }
+  .re-showcase-sticky {
+    align-items: flex-start;
+    padding-top: 84px;
+  }
+  .re-showcase-inner h2 {
+    font-size: 34px;
+  }
+  .re-showcase {
+    height: 260vh;
+  }
+  .re-showcase-inner h2 {
+    margin-bottom: 24px;
+  }
+  .re-showcase-stage {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .re-duo {
+    width: calc(100vw - 40px);
+  }
+  .re-ipad {
+    --ipad-h: min(260px, 32vh);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .re-showcase {
+    --open: 1;
+    --turn: 1;
+    height: auto;
+  }
+  .re-showcase-sticky {
+    position: static;
+    min-height: 0;
+    padding-block: 64px;
+  }
+  .re-chapter-stage .re-device > picture img {
+    transition: none;
   }
 }

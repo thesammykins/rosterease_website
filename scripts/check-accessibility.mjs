@@ -106,12 +106,12 @@ check(
 );
 
 check(
-  count(home, /<input\b[^>]*name="worker"/g) === 2,
-  "The showcase needs two shared worker choices",
+  count(home, /data-chapter-step=/g) === 6,
+  "Each mode chapter needs its three steps",
 );
 check(
-  count(home, /data-worker-panel=/g) === 6,
-  "Each worker choice needs a screenshot panel",
+  /id="shifts"/.test(home) && /id="visits"/.test(home),
+  "The home page needs a Shifts and a Visits chapter",
 );
 check(
   /<dialog[^>]*aria-label="App screenshot"/.test(home),

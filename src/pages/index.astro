@@ -3,27 +3,52 @@ import RosterEaseLayout from "../layouts/RosterEaseLayout.astro";
 import DeviceFrame from "../components/DeviceFrame.astro";
 import { screens } from "../lib/screenshots";
 import AppStoreBadge from "../components/AppStoreBadge.astro";
-const story = [
+import ModeChapter from "../components/ModeChapter.astro";
+import DeviceShowcase from "../components/DeviceShowcase.astro";
+const shiftSteps = [
   {
     title: "Import your roster",
-    text: "Import a screenshot, PDF or pasted text. Check the extracted shifts or clients before adding them to your plan.",
-    images: { shift: screens.shiftImport, field: screens.fieldImport },
+    text: "Import a screenshot, PDF or pasted text. Check the shifts before anything is added.",
     href: "/help/smart-import/",
     link: "How importing works",
+    screen: screens.shiftImport,
   },
   {
     title: "Check your calendar",
-    text: "See your repeating shifts or planned visits by week or month, and check the days ahead.",
-    images: { shift: screens.shiftCalendar, field: screens.fieldCalendar },
-    href: "/app/",
-    link: "Explore shifts and visits",
+    text: "See your rotation by week or month, with one-day changes marked.",
+    href: "/help/shift-changes/",
+    link: "Change one day",
+    screen: screens.shiftCalendar,
   },
   {
     title: "See what's next",
-    text: "Open Today to check your next shift or visit, when to leave and what you have completed.",
-    images: { shift: screens.shiftToday, field: screens.fieldToday },
-    href: "/app/#everyday",
-    link: "More about Today",
+    text: "Today shows when to leave, when you start and when you finish.",
+    href: "/app/#shift",
+    link: "More about Shifts",
+    screen: screens.shiftToday,
+  },
+];
+const fieldSteps = [
+  {
+    title: "Import your clients",
+    text: "Import a client list and check each client, address and visit window.",
+    href: "/help/smart-import/",
+    link: "How importing works",
+    screen: screens.fieldImport,
+  },
+  {
+    title: "Plan your route days",
+    text: "Each day shows its visits and how many are done.",
+    href: "/help/visit-routes/",
+    link: "Visit routes",
+    screen: screens.fieldCalendar,
+  },
+  {
+    title: "Follow today's visits",
+    text: "Your next visit, when to leave and what's done.",
+    href: "/app/#field",
+    link: "More about Visits",
+    screen: screens.fieldToday,
   },
 ];
 ---
@@ -48,13 +73,13 @@ const story = [
     </div>
     <div
       class="re-hero-stage"
-      aria-label="RosterEase Shifts and Visits Today screens"
+      aria-label="RosterEase Shifts calendar and Visits Today screens"
     >
       <div class="re-hero-screens">
         <div class="re-hero-screen re-hero-shift">
           <DeviceFrame
             device="iphone17"
-            screen={screens.shiftToday}
+            screen={screens.shiftCalendar}
             eager
             draggable={false}
             sizes="(max-width: 720px) min(229px, calc((100vw - 102px) / 2)), (max-width: 1120px) 240px, 300px"
@@ -71,77 +96,18 @@ const story = [
         </div>
       </div>
       <div class="re-stage-caption">
-        <span>Shifts</span><span>Visits</span>
+        <a href="#shifts">Shifts</a><a href="#visits">Visits</a>
       </div>
     </div>
   </section>
-  <section
-    class="re-shell re-story"
-    id="screens"
-    aria-label="From your roster to your day"
-  >
-    <div class="re-story-heading">
-      <h2>How RosterEase works</h2>
-      <fieldset class="re-worker-switch">
-        <legend class="re-visually-hidden">Choose a mode</legend>
-        {
-          (["shift", "field"] as const).map((worker) => (
-            <label>
-              <>
-                <input
-                  type="radio"
-                  name="worker"
-                  value={worker}
-                  checked={worker === "shift"}
-                />
-                <span>{worker === "shift" ? "Shifts" : "Visits"}</span>
-              </>
-            </label>
-          ))
-        }
-      </fieldset>
-    </div>
-    <div class="re-story-grid">
-      {
-        story.map((step, index) => (
-          <article class="re-story-row" data-motion-sequence>
-            <div class="re-story-copy">
-              <span class="re-step-number" aria-hidden="true">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <>
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
-              </>
-              <a class="re-text-link" href={step.href} data-astro-prefetch>
-                {step.link} <span aria-hidden="true">→</span>
-              </a>
-            </div>
-            <div class="re-story-visual">
-              <div class="re-worker-screens">
-                {(["shift", "field"] as const).map((worker) => (
-                  <div data-worker-panel={worker}>
-                    <a
-                      class="re-screen-detail"
-                      href={step.images[worker].dark.src}
-                      data-screenshot
-                      aria-label={`Enlarge ${worker === "shift" ? "Shifts" : "Visits"} screenshot: ${step.title}`}
-                    >
-                      <DeviceFrame
-                        device="iphone17"
-                        screen={step.images[worker]}
-                        sizes="(max-width: 720px) 280px, 300px"
-                      />
-                    </a>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </section>
+  <div class="re-chapters" id="screens">
+    <nav class="re-chapter-nav" aria-label="Modes">
+      <a href="#shifts" aria-current="true">Shifts</a><a href="#visits">Visits</a>
+    </nav>
+    <ModeChapter id="shifts" mode="shift" title="Shifts" steps={shiftSteps} />
+    <ModeChapter id="visits" mode="field" title="Visits" steps={fieldSteps} />
+  </div>
+  <DeviceShowcase />
   <section class="re-shell re-closing re-closing--privacy" data-motion-sequence>
     <span class="re-privacy-symbol" aria-hidden="true"
       ><svg
