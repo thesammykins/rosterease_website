@@ -1,16 +1,25 @@
 ---
 import AppScreenshot from "./AppScreenshot.astro";
 import DeviceFrame from "./DeviceFrame.astro";
-import { screens, type AppScreen } from "../lib/screenshots";
-// The landscape iPad capture is added once it exists; until then the iPad stays upright.
-const landscape = (screens as Record<string, AppScreen | undefined>).ipadLandscapeFieldToday;
+import { screens } from "../lib/screenshots";
+import { blurred } from "../lib/placeholder";
 // The Duo opens around its hinge: the left half of the inner display carries
 // the outer display on its back, as on the device. As on iPhone Duo, the cover
 // becomes a window onto the inner display beneath it (its right half, in
 // place), softest at the moving edge and sharp at the hinge, while the inner
-// display brightens as it opens. The iPad turns from
-// portrait to landscape. Scroll drives both through --open and --turn;
-// without motion, both show their end state.
+// display brightens as it opens. The iPad turns from portrait to landscape.
+//
+// Phones cap the memory a page may use for moving layers and redraw (flicker)
+// when it runs out, so images are requested at the size they show, the soft
+// layers use one small image blurred at build time, and the script moves a few
+// elements directly instead of restyling the whole section on every frame.
+const inner = screens.duoInnerShiftToday;
+const soft = {
+  light: await blurred(inner.light ?? inner.dark),
+  dark: await blurred(inner.dark),
+};
+const landscape = screens.ipadLandscapeFieldToday;
+const duoSizes = "(max-width: 720px) calc(100vw - 40px), 640px";
 ---
 
 <section class="re-showcase" aria-labelledby="showcase-title" data-showcase>
@@ -19,43 +28,46 @@ const landscape = (screens as Record<string, AppScreen | undefined>).ipadLandsca
       <h2 id="showcase-title">Works on iPhone, iPad and iPhone Duo</h2>
       <div class="re-showcase-stage">
         <figure class="re-duo" aria-label="iPhone Duo opening from the outer display to the inner display">
-          <div class="re-duo-body">
+          <div class="re-duo-body" data-duo-body>
             <div class="re-duo-half re-duo-half--right">
-              <DeviceFrame device="duoInner" screen={screens.duoInnerShiftToday} sizes="(max-width: 720px) 180vw, 1300px" draggable={false} />
+              <DeviceFrame device="duoInner" screen={inner} sizes={duoSizes} draggable={false}>
+                <span class="re-duo-dim" data-duo-dim></span>
+              </DeviceFrame>
             </div>
-            <div class="re-duo-leaf">
-              <div class="re-duo-half re-duo-half--left">
-                <DeviceFrame device="duoInner" screen={screens.duoInnerShiftToday} sizes="(max-width: 720px) 180vw, 1300px" draggable={false}>
+            <div class="re-duo-leaf" data-duo-leaf>
+              <div class="re-duo-half re-duo-half--left" data-duo-front>
+                <DeviceFrame device="duoInner" screen={inner} sizes={duoSizes} draggable={false}>
                   <div class="re-duo-soft-clip">
-                    <div class="re-duo-soft re-duo-soft--leaf">
-                      <AppScreenshot screen={screens.duoInnerShiftToday} sizes="(max-width: 720px) 180vw, 1300px" widths={[960, 1280, 1600]} draggable={false} />
-                    </div>
+                    <picture class="re-duo-soft re-duo-soft--leaf" data-duo-leaf-soft>
+                      <source media="(prefers-color-scheme: dark)" srcset={soft.dark} data-dark-source />
+                      <img src={soft.light} alt="" draggable="false" />
+                    </picture>
                   </div>
+                  <span class="re-duo-dim" data-duo-dim></span>
                 </DeviceFrame>
               </div>
-              <div class="re-duo-cover">
-                <DeviceFrame device="duoOuter" screen={screens.duoOuterShiftToday} sizes="(max-width: 720px) 90vw, 640px" draggable={false}>
-                  <div class="re-duo-through">
-                    <AppScreenshot screen={screens.duoInnerShiftToday} sizes="(max-width: 720px) 180vw, 1300px" widths={[960, 1280, 1600]} draggable={false} />
-                    <div class="re-duo-soft re-duo-soft--cover">
-                      <AppScreenshot screen={screens.duoInnerShiftToday} sizes="(max-width: 720px) 180vw, 1300px" widths={[960, 1280, 1600]} draggable={false} />
-                    </div>
+              <div class="re-duo-cover" data-duo-back>
+                <DeviceFrame device="duoOuter" screen={screens.duoOuterShiftToday} sizes="(max-width: 720px) 50vw, 320px" draggable={false}>
+                  <div class="re-duo-through" data-duo-through>
+                    <AppScreenshot screen={inner} sizes={duoSizes} widths={[480, 720, 960, 1280]} draggable={false} />
+                    <picture class="re-duo-soft re-duo-soft--cover" data-duo-cover-soft>
+                      <source media="(prefers-color-scheme: dark)" srcset={soft.dark} data-dark-source />
+                      <img src={soft.light} alt="" draggable="false" />
+                    </picture>
                   </div>
                 </DeviceFrame>
-                <span class="re-duo-glass"></span>
+                <span class="re-duo-glass" data-duo-glass></span>
               </div>
             </div>
           </div>
           <figcaption>iPhone Duo</figcaption>
         </figure>
-        <figure class:list={["re-ipad", !landscape && "re-ipad--upright"]} aria-label={landscape ? "iPad turning from portrait to landscape" : "iPad"}>
+        <figure class="re-ipad" aria-label="iPad turning from portrait to landscape">
           <div class="re-ipad-body">
-            <DeviceFrame device="ipad" screen={screens.ipadFieldToday} sizes="(max-width: 720px) 60vw, 420px" draggable={false}>
-              {landscape && (
-                <div class="re-ipad-landscape">
-                  <AppScreenshot screen={landscape} sizes="(max-width: 720px) 80vw, 560px" widths={[640, 960, 1280]} draggable={false} />
-                </div>
-              )}
+            <DeviceFrame device="ipad" screen={screens.ipadFieldToday} sizes="(max-width: 720px) 200px, 340px" draggable={false} class="re-ipad-device">
+              <div class="re-ipad-landscape" data-ipad-landscape>
+                <AppScreenshot screen={landscape} sizes="(max-width: 720px) 270px, 460px" widths={[480, 720, 960]} draggable={false} />
+              </div>
             </DeviceFrame>
           </div>
           <figcaption>iPad</figcaption>
@@ -67,30 +79,77 @@ const landscape = (screens as Record<string, AppScreen | undefined>).ipadLandsca
 
 <script>
   const section = document.querySelector<HTMLElement>("[data-showcase]");
+  const find = <T extends HTMLElement>(selector: string) => section?.querySelector<T>(selector) ?? null;
+  const body = find("[data-duo-body]");
+  const leaf = find("[data-duo-leaf]");
+  const front = find("[data-duo-front]");
+  const back = find("[data-duo-back]");
+  const coverShot = find(".re-duo-cover .re-device > picture img");
+  const through = find("[data-duo-through]");
+  const coverSoft = find("[data-duo-cover-soft]");
+  const leafSoft = find("[data-duo-leaf-soft]");
+  const glass = find("[data-duo-glass]");
+  const dims = [...(section?.querySelectorAll<HTMLElement>("[data-duo-dim]") ?? [])];
+  const ipad = find(".re-ipad-device");
+  const portrait = find(".re-ipad-device > picture img");
+  const turned = find("[data-ipad-landscape]");
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
   const clamp = (value: number) => Math.min(1, Math.max(0, value));
   const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
+  const written = new Map<HTMLElement, Record<string, string>>();
+  // Only touch an element when its value really changes.
+  const set = (element: HTMLElement | null, property: "transform" | "opacity" | "visibility" | "backgroundPosition", value: string) => {
+    if (!element) return;
+    const last = written.get(element) ?? {};
+    if (last[property] === value) return;
+    element.style[property] = value;
+    written.set(element, { ...last, [property]: value });
+  };
+  const fixed = (value: number) => value.toFixed(3);
+  // The viewport height without Safari's collapsing toolbar, read on resize only,
+  // so the animation doesn't jump as the toolbar slides away.
+  let viewport = document.documentElement.clientHeight;
   let frame = 0;
+
+  function render(open: number, turn: number) {
+    set(body, "transform", `translate3d(${fixed(-25 * (1 - open))}%, 0, 0)`);
+    set(leaf, "transform", `rotateY(${fixed((1 - open) * 180)}deg)`);
+    // Past halfway the inner face is towards you; before it, the cover.
+    set(front, "visibility", open >= 0.5 ? "visible" : "hidden");
+    set(back, "visibility", open < 0.5 ? "visible" : "hidden");
+    set(coverShot, "opacity", fixed(1 - Math.min(open * 4, 1)));
+    set(through, "opacity", fixed(Math.min(open * 4, 1)));
+    set(coverSoft, "opacity", fixed(open * (1 - open) * 4));
+    set(leafSoft, "opacity", fixed(Math.min((1 - open) * 2, 1)));
+    set(glass, "opacity", fixed(Math.min(open * 4, 1) * (1 - open)));
+    set(glass, "backgroundPosition", `${fixed(100 - open * 160)}% 0`);
+    dims.forEach((dim) => set(dim, "opacity", fixed((1 - open) * 0.38)));
+    const swap = clamp((turn - 0.44) * 8);
+    set(ipad, "transform", `rotate(${fixed(turn * -90)}deg)`);
+    set(portrait, "opacity", fixed(1 - swap));
+    set(turned, "opacity", fixed(swap));
+  }
+
   function update() {
     frame = 0;
     if (!section) return;
-    if (reduced.matches) {
-      section.style.setProperty("--open", "1");
-      section.style.setProperty("--turn", "1");
-      return;
-    }
+    section.classList.toggle("re-showcase--still", reduced.matches);
+    if (reduced.matches) return render(1, 1);
     const bounds = section.getBoundingClientRect();
-    const travel = bounds.height - innerHeight;
+    if (bounds.bottom < -viewport || bounds.top > viewport * 2) return;
+    const travel = bounds.height - viewport;
     const progress = travel > 0 ? clamp(-bounds.top / travel) : 1;
     // Each device holds still at both ends of its move so its screens can be read.
-    section.style.setProperty("--open", ease(clamp((progress - 0.08) / 0.4)).toFixed(4));
-    section.style.setProperty("--turn", ease(clamp((progress - 0.55) / 0.35)).toFixed(4));
+    render(ease(clamp((progress - 0.08) / 0.4)), ease(clamp((progress - 0.55) / 0.35)));
   }
   const schedule = () => {
     if (!frame) frame = requestAnimationFrame(update);
   };
   addEventListener("scroll", schedule, { passive: true });
-  addEventListener("resize", schedule);
+  addEventListener("resize", () => {
+    viewport = document.documentElement.clientHeight;
+    schedule();
+  });
   reduced.addEventListener("change", schedule);
   update();
 </script>

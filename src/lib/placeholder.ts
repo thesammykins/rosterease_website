@@ -19,3 +19,12 @@ export function placeholder(image: ImageMetadata): Promise<string> {
   }
   return result;
 }
+
+// A small, already blurred copy for the Duo's soft layers: blurring once at
+// build time keeps the phone from re-blurring large layers while scrolling.
+export async function blurred(image: ImageMetadata, width = 480, sigma = 6): Promise<string> {
+  const path = (image as ImageMetadata & { fsPath?: string }).fsPath;
+  if (!path) return "";
+  const data = await sharp(path).resize(width).blur(sigma).webp({ quality: 60 }).toBuffer();
+  return `data:image/webp;base64,${data.toString("base64")}`;
+}

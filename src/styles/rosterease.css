@@ -1415,17 +1415,16 @@ html:has(.re-screenshot-dialog[open]) {
   }
 }
 
-/* Devices: the Duo opens around its hinge and the iPad turns as you scroll. */
+/* Devices: the Duo opens around its hinge and the iPad turns as you scroll.
+   DeviceShowcase.astro moves the parts; these rules set their geometry. */
 .re-showcase {
-  --open: 0;
-  --turn: 0;
-  height: 300vh;
+  height: 300svh;
   border-top: 1px solid var(--re-line);
 }
 .re-showcase-sticky {
   position: sticky;
   top: 0;
-  min-height: 100vh;
+  height: 100svh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -1459,9 +1458,8 @@ html:has(.re-screenshot-dialog[open]) {
   position: relative;
   width: 100%;
   aspect-ratio: 3093 / 2247;
-  transform: translateX(calc(-25% * (1 - var(--open))));
+  transform: translate3d(-25%, 0, 0);
   transform-style: preserve-3d;
-  will-change: transform;
 }
 .re-duo-half {
   position: absolute;
@@ -1482,16 +1480,14 @@ html:has(.re-screenshot-dialog[open]) {
 .re-duo-half--left {
   left: 0;
   width: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+  visibility: hidden;
 }
 .re-duo-leaf {
   position: absolute;
   inset: 0 50% 0 0;
   transform-origin: 100% 50%;
-  transform: rotateY(calc((1 - var(--open)) * 180deg));
+  transform: rotateY(180deg);
   transform-style: preserve-3d;
-  will-change: transform;
 }
 .re-duo-cover {
   position: absolute;
@@ -1499,26 +1495,27 @@ html:has(.re-screenshot-dialog[open]) {
   display: flex;
   align-items: center;
   transform: rotateY(180deg);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 /* The cover becomes a window onto the inner display's right half, which it
-   covers when closed. The image is placed in the device's coordinates, so it
-   lines up with the inner display as the cover swings away. Offsets: the inner
-   screen's position relative to the outer screen opening (devices.ts). */
-.re-duo-cover .re-device > picture img {
-  opacity: calc(1 - min(var(--open) * 4, 1));
-}
-.re-duo-through {
+   covers when closed, placed in the device's coordinates so it lines up as the
+   cover swings away. Offsets: the inner screen relative to the outer screen
+   opening (devices.ts). */
+.re-duo-through,
+.re-duo-soft-clip,
+.re-duo-dim,
+.re-ipad-landscape {
   position: absolute;
   left: var(--screen-left);
   top: var(--screen-top);
   width: var(--screen-width);
   height: var(--screen-height);
   overflow: hidden;
+  pointer-events: none;
   -webkit-mask: var(--screen-mask, none) center / 100% 100% no-repeat;
   mask: var(--screen-mask, none) center / 100% 100% no-repeat;
-  opacity: min(var(--open) * 4, 1);
+}
+.re-duo-through {
+  opacity: 0;
 }
 .re-duo-through img {
   position: absolute;
@@ -1529,32 +1526,17 @@ html:has(.re-screenshot-dialog[open]) {
   height: 100.43%;
   object-fit: fill;
 }
-/* Softness grows toward each panel's moving edge and peaks mid-turn. The blur
-   is fixed and only its opacity changes, so scrolling never re-blurs. */
+/* Pre-blurred soft layers, faded in toward each panel's moving edge. */
 .re-duo-soft {
   position: absolute;
   inset: 0;
-  pointer-events: none;
+  opacity: 0;
 }
 .re-duo-soft--cover {
-  filter: blur(12px);
-  opacity: calc(var(--open) * (1 - var(--open)) * 4);
   -webkit-mask: linear-gradient(to left, #000 0%, #000a 25%, #0000 60%);
   mask: linear-gradient(to left, #000 0%, #000a 25%, #0000 60%);
 }
-.re-duo-soft-clip {
-  position: absolute;
-  left: var(--screen-left);
-  top: var(--screen-top);
-  width: var(--screen-width);
-  height: var(--screen-height);
-  overflow: hidden;
-  -webkit-mask: var(--screen-mask, none) center / 100% 100% no-repeat;
-  mask: var(--screen-mask, none) center / 100% 100% no-repeat;
-}
 .re-duo-soft--leaf {
-  filter: blur(14px);
-  opacity: min(calc((1 - var(--open)) * 2), 1);
   -webkit-mask: linear-gradient(to right, #000 0%, #000a 18%, #0000 42%);
   mask: linear-gradient(to right, #000 0%, #000a 18%, #0000 42%);
 }
@@ -1565,19 +1547,9 @@ html:has(.re-screenshot-dialog[open]) {
   height: 100%;
   object-fit: cover;
 }
-/* The inner display starts dim and brightens as it opens. */
-.re-duo-half .re-device::after {
-  content: "";
-  position: absolute;
-  left: var(--screen-left);
-  top: var(--screen-top);
-  width: var(--screen-width);
-  height: var(--screen-height);
+.re-duo-dim {
   background: #000;
-  opacity: calc((1 - var(--open)) * 0.38);
-  -webkit-mask: var(--screen-mask, none) center / 100% 100% no-repeat;
-  mask: var(--screen-mask, none) center / 100% 100% no-repeat;
-  pointer-events: none;
+  opacity: 0.38;
 }
 .re-duo-glass {
   position: absolute;
@@ -1592,12 +1564,11 @@ html:has(.re-screenshot-dialog[open]) {
     #ffffff00 75%
   ) no-repeat;
   background-size: 260% 100%;
-  background-position: calc(100% - var(--open) * 160%) 0;
   mix-blend-mode: screen;
-  opacity: calc(min(var(--open) * 4, 1) * (1 - var(--open)));
+  opacity: 0;
 }
 .re-ipad {
-  --ipad-h: min(440px, 58vh, 34vw);
+  --ipad-h: min(440px, 58svh, 34vw);
 }
 .re-ipad-body {
   width: var(--ipad-h);
@@ -1607,28 +1578,9 @@ html:has(.re-screenshot-dialog[open]) {
 }
 .re-ipad-body .re-device {
   width: calc(var(--ipad-h) * 2300 / 3000);
-  transform: rotate(calc(var(--turn) * -90deg));
-  will-change: transform;
-}
-.re-ipad-body .re-device > picture img {
-  opacity: calc(1 - clamp(0, (var(--turn) - 0.44) * 8, 1));
-}
-.re-ipad--upright .re-ipad-body .re-device {
-  transform: none;
-}
-.re-ipad--upright .re-ipad-body .re-device > picture img {
-  opacity: 1;
 }
 .re-ipad-landscape {
-  position: absolute;
-  left: var(--screen-left);
-  top: var(--screen-top);
-  width: var(--screen-width);
-  height: var(--screen-height);
-  overflow: hidden;
-  -webkit-mask: var(--screen-mask, none) center / 100% 100% no-repeat;
-  mask: var(--screen-mask, none) center / 100% 100% no-repeat;
-  opacity: clamp(0, (var(--turn) - 0.44) * 8, 1);
+  opacity: 0;
 }
 .re-ipad-landscape img {
   position: absolute;
@@ -1639,16 +1591,10 @@ html:has(.re-screenshot-dialog[open]) {
   height: 75%;
   object-fit: cover;
   transform: rotate(90deg);
-  background: var(--ph, none) center / cover no-repeat;
 }
 @media (max-width: 720px) {
-  .re-chapter-nav {
-    top: 68px;
-    margin-top: 8px;
-  }
-  .re-chapter {
-    padding-top: 28px;
-    scroll-margin-top: 124px;
+  .re-showcase {
+    height: 260svh;
   }
   .re-showcase-sticky {
     align-items: flex-start;
@@ -1656,11 +1602,6 @@ html:has(.re-screenshot-dialog[open]) {
   }
   .re-showcase-inner h2 {
     font-size: 34px;
-  }
-  .re-showcase {
-    height: 260vh;
-  }
-  .re-showcase-inner h2 {
     margin-bottom: 24px;
   }
   .re-showcase-stage {
@@ -1671,20 +1612,18 @@ html:has(.re-screenshot-dialog[open]) {
     width: calc(100vw - 40px);
   }
   .re-ipad {
-    --ipad-h: min(260px, 32vh);
+    --ipad-h: min(260px, 32svh);
   }
 }
+.re-showcase--still {
+  height: auto;
+}
+.re-showcase--still .re-showcase-sticky {
+  position: static;
+  height: auto;
+  padding-block: 64px;
+}
 @media (prefers-reduced-motion: reduce) {
-  .re-showcase {
-    --open: 1;
-    --turn: 1;
-    height: auto;
-  }
-  .re-showcase-sticky {
-    position: static;
-    min-height: 0;
-    padding-block: 64px;
-  }
   .re-chapter-stage .re-device > picture img {
     transition: none;
   }
