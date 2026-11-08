@@ -1,12 +1,12 @@
 # Website release readiness
 
-Updated 9 October 2026 (Australia/Melbourne). RosterEase is available on the App Store at the URL supplied by the owner. The App Store is the primary download destination. Optional TestFlight signup lives on `/beta/`.
+Updated 9 November 2026 (Australia/Melbourne) for RosterEase 1.1. RosterEase is available on the App Store at the URL supplied by the owner. The App Store is the primary download destination. Optional TestFlight signup lives on `/beta/`.
 
 ## Public destinations
 
 | Purpose | URL | Prepared behavior |
 | --- | --- | --- |
-| Marketing | `https://rosterease.app/` | App Store download badge, Shift/Field walkthrough |
+| Marketing | `https://rosterease.app/` | App Store download badge, Shifts/Visits walkthrough |
 | Download | `https://apps.apple.com/us/app/rosterease/id6762237930` | Shared destination for all App Store links |
 | Beta access | `https://rosterease.app/beta/` | TestFlight invitation, backup and feedback guidance |
 | Support | `https://rosterease.app/contact/` | Email, reporting details, help links |
@@ -14,9 +14,17 @@ Updated 9 October 2026 (Australia/Melbourne). RosterEase is available on the App
 | Terms | `https://rosterease.app/terms/` | Apple standard EULA and subscription management |
 | Product | `https://rosterease.app/app/` | Workflows, Free/Plus, download and beta-page link |
 | Data handling | `https://rosterease.app/on-device/` | On-device processing and optional sharing |
-| Help | `https://rosterease.app/help/` | Four guides; setup now starts with the App Store |
+| Help | `https://rosterease.app/help/` | One guide per in-app help link, with steps, screenshots and four looping recordings |
 
-## Launch pass
+## 1.1 launch pass
+
+- Field Worker is now Visits in the app; every page says Shifts and Visits, Shift Plus and Visits Plus.
+- `/app/` and `/terms/` describe the 1.1 plans: one workplace or five active clients free, the one-time setup week of Plus, and what each paid plan adds.
+- `/app/` covers dated, split and double shifts in import, saved locations, richer visit notes, Lock Screen widgets, the Live Activity and Siri. Backup copy describes the Keychain backup key and weekly backups instead of a passphrase.
+- Screenshots and recordings come from the 1.1 release source (see the capture manifests) under official device frames, including iPad and iPhone Duo.
+- Merge to `main` only when 1.1 is released on the App Store: the help guides describe 1.1 behaviour.
+
+## 1.0 launch pass
 
 - All download links use the supplied App Store URL. Apple artwork is unmodified, served locally, proportionate, stationary and surrounded by clear space. Each page has one badge. See [asset provenance](design/app-store-badge.md).
 - Removed pre-launch availability copy from the homepage, footer, product, setup guide and privacy/terms distribution wording. Beta participation remains optional.
