@@ -7,22 +7,22 @@ import ModeChapter from "../components/ModeChapter.astro";
 import DeviceShowcase from "../components/DeviceShowcase.astro";
 const shiftSteps = [
   {
-    title: "Import your roster",
-    text: "Import a screenshot, PDF or pasted text. Check the shifts before anything is added.",
+    title: "Add your roster in seconds",
+    text: "Take a photo of your roster, or paste it in. Check it over, then add it. No typing every shift.",
     href: "/help/smart-import/",
     link: "How importing works",
     screen: screens.shiftImport,
   },
   {
-    title: "Check your calendar",
-    text: "See your rotation by week or month, with one-day changes marked.",
+    title: "See your whole month",
+    text: "Days, nights and days off at a glance. Swap a day when plans change.",
     href: "/help/shift-changes/",
     link: "Change one day",
     screen: screens.shiftCalendar,
   },
   {
-    title: "See what's next",
-    text: "Today shows when to leave, when you start and when you finish.",
+    title: "Know when to leave",
+    text: "Today tells you when to head off, when you start and when you finish.",
     href: "/app/#shift",
     link: "More about Shifts",
     screen: screens.shiftToday,
@@ -30,22 +30,22 @@ const shiftSteps = [
 ];
 const fieldSteps = [
   {
-    title: "Import your clients",
-    text: "Import a client list and check each client, address and visit window.",
+    title: "Add your clients fast",
+    text: "Take a photo of your client list or open the file. Check each client, then add them.",
     href: "/help/smart-import/",
     link: "How importing works",
     screen: screens.fieldImport,
   },
   {
-    title: "Plan your route days",
-    text: "Each day shows its visits and how many are done.",
+    title: "See every day's visits",
+    text: "Each day shows how many visits you have and how many are done.",
     href: "/help/visit-routes/",
-    link: "Visit routes",
+    link: "Plan your visits",
     screen: screens.fieldCalendar,
   },
   {
-    title: "Follow today's visits",
-    text: "Your next visit, when to leave and what's done.",
+    title: "Go from visit to visit",
+    text: "Your next client, when to leave, and check in with one tap.",
     href: "/app/#field",
     link: "More about Visits",
     screen: screens.fieldToday,
@@ -56,7 +56,7 @@ const fieldSteps = [
 <RosterEaseLayout
   title="RosterEase"
   storeBadgeInFooter={false}
-  description="Plan repeating shifts and client visits on your iPhone or iPad. Import your roster on-device, check your calendar and see what is next."
+  description="Your shifts and client visits on your iPhone or iPad. Snap your roster, see your week and know when to leave."
 >
   <section class="re-shell re-hero" data-motion-sequence>
     <div class="re-hero-copy">
@@ -65,8 +65,8 @@ const fieldSteps = [
       </h1>
       <span class="re-rule" aria-hidden="true"></span>
       <p>
-        Import your roster, check your calendar and see your next shift or
-        visit. RosterEase keeps your workday plan on your iPhone or iPad.
+        Snap your roster and it's in. See your week and know when to leave.
+        Your plan stays on your iPhone or iPad.
       </p>
       <AppStoreBadge />
       <p class="re-availability">Available now for iPhone and iPad</p>
@@ -122,10 +122,9 @@ const fieldSteps = [
       ></span
     >
     <div>
-      <h2>Your roster is processed on-device.</h2><p>
-        Imports are processed on your device, without sending their contents to
-        a cloud AI service. You can plan without an account or ads, and choose
-        what to share.
+      <h2>Your roster stays on your phone.</h2><p>
+        RosterEase reads your roster on your phone. No account, no ads, and
+        nothing sent to an AI service. You choose what to share.
       </p><a class="re-text-link" href="/on-device/"
         >What stays on your device <span aria-hidden="true">→</span></a
       >

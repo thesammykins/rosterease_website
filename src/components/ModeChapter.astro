@@ -54,6 +54,18 @@ const { id, mode, title, steps } = Astro.props;
           ))
         }
       </ol>
+      <div class="re-chapter-dots" aria-label={`${title} steps`}>
+        {
+          steps.map((step, index) => (
+            <button
+              type="button"
+              data-chapter-dot={index}
+              aria-label={`Show step ${index + 1}: ${step.title}`}
+              aria-current={index === 0 ? "true" : "false"}
+            />
+          ))
+        }
+      </div>
       <div class="re-chapter-stage" aria-hidden="true" data-chapter-stage>
         <DeviceFrame device="iphone17" sizes="(max-width: 900px) 1px, 360px">
           {
@@ -103,4 +115,34 @@ const { id, mode, title, steps } = Astro.props;
     { rootMargin: "-40% 0px -55% 0px" },
   );
   chapters.forEach((chapter) => inView.observe(chapter));
+  // A tapped chip is selected straight away, before the scroll lands.
+  chips.forEach((chip) =>
+    chip.addEventListener("click", () =>
+      chips.forEach((other) => other.setAttribute("aria-current", String(other === chip))),
+    ),
+  );
+
+  // Phones: each chapter is a swipeable row. Dots show where you are and
+  // move to a step when tapped.
+  chapters.forEach((chapter) => {
+    const row = chapter.querySelector<HTMLElement>(".re-chapter-steps");
+    const items = [...chapter.querySelectorAll<HTMLElement>("[data-chapter-step]")];
+    const dots = [...chapter.querySelectorAll<HTMLButtonElement>("[data-chapter-dot]")];
+    if (!row) return;
+    const mark = () => {
+      const left = row.scrollLeft;
+      let current = 0;
+      items.forEach((item, i) => {
+        if (Math.abs(item.offsetLeft - row.offsetLeft - left - 20) < Math.abs(items[current].offsetLeft - row.offsetLeft - left - 20)) current = i;
+      });
+      dots.forEach((dot, i) => dot.setAttribute("aria-current", String(i === current)));
+    };
+    row.addEventListener("scroll", () => requestAnimationFrame(mark), { passive: true });
+    dots.forEach((dot, i) =>
+      dot.addEventListener("click", () => {
+        const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        row.scrollTo({ left: items[i].offsetLeft - row.offsetLeft - 20, behavior: reduced ? "auto" : "smooth" });
+      }),
+    );
+  });
 </script>

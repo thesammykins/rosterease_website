@@ -17,6 +17,8 @@ import ipadFieldTodayLight from "../assets/rosterease/screenshots/capture-2026-1
 import ipadFieldTodayDark from "../assets/rosterease/screenshots/capture-2026-11-07/ipadFieldToday-dark.png";
 import ipadFieldCalendarLight from "../assets/rosterease/screenshots/capture-2026-11-07/ipadFieldCalendar-light.png";
 import ipadFieldCalendarDark from "../assets/rosterease/screenshots/capture-2026-11-07/ipadFieldCalendar-dark.png";
+import ipadLandscapeFieldTodayLight from "../assets/rosterease/screenshots/capture-2026-11-07/ipadLandscapeFieldToday-light.png";
+import ipadLandscapeFieldTodayDark from "../assets/rosterease/screenshots/capture-2026-11-07/ipadLandscapeFieldToday-dark.png";
 import duoOuterShiftTodayLight from "../assets/rosterease/screenshots/capture-2026-11-07/duoOuterShiftToday-light.png";
 import duoOuterShiftTodayDark from "../assets/rosterease/screenshots/capture-2026-11-07/duoOuterShiftToday-dark.png";
 import duoInnerShiftTodayLight from "../assets/rosterease/screenshots/capture-2026-11-07/duoInnerShiftToday-light.png";
@@ -72,7 +74,7 @@ export interface AppScreen {
   alt: string;
 }
 
-// Native 7 November 2026 simulator captures of the 1.1 release source, synthetic fixtures;
+// Native 9 November 2026 simulator captures of the 1.1 release source (7d52a8f9), synthetic fixtures;
 // provenance is in each folder's capture-manifest.json.
 export const screens = {
   shiftToday: {
@@ -119,6 +121,11 @@ export const screens = {
     light: ipadFieldCalendarLight,
     dark: ipadFieldCalendarDark,
     alt: "Visits calendar on iPad with November visits and the selected day.",
+  },
+  ipadLandscapeFieldToday: {
+    light: ipadLandscapeFieldTodayLight,
+    dark: ipadLandscapeFieldTodayDark,
+    alt: "Visits Today on iPad in landscape: the visit in progress beside today's visits.",
   },
   duoOuterShiftToday: {
     light: duoOuterShiftTodayLight,

@@ -7,7 +7,17 @@
 - `fieldClients`: Client directory with a client's details and route instructions.
 - `shiftImport`: Smart Import review of a pasted Northside Day Surgery roster: workplace, time zone and a seven-day pattern ready to check before adding.
 - `fieldImport`: Smart Import review of three pasted clients with addresses, visit lengths and appointment windows, ready to check before adding.
+- `featureLocation`: After the shift: suggested 6:48 am to 7:52 pm from workplace arrival and departure, not yet confirmed.
+- `featureNotes`: Shift in progress with the pinned door-code note, the handover note and a check-in.
+- `featureSetup`: Setup, pattern step: the live roster preview filling in.
 - `ipadFieldCalendar`: Field month view with the planned visit days, and the selected day's visits beside it on iPad.
 - `ipadFieldToday`: Field Today with two visits done and Priya S. under Visiting now.
 - `duoOuterShiftToday`: Shift Today before a 7:00 day shift: leave-by time, workplace, travel.
+- `duoOuterFieldToday`: Field Today between visits: one visit done, Daniel O. next, with route progress.
+- `duoOuterShiftCalendar`: October month view: day and night shifts at Harbourside, an extra Northgate morning and days off, with today selected.
+- `duoOuterFieldCalendar`: Field month view with the planned visit days, and the selected day's visits beside it on iPad.
 - `duoInnerShiftToday`: Shift Today before a 7:00 day shift: leave-by time, workplace, travel.
+- `duoInnerFieldToday`: Field Today between visits: one visit done, Daniel O. next, with route progress.
+- `duoInnerShiftCalendar`: October month view: day and night shifts at Harbourside, an extra Northgate morning and days off, with today selected.
+- `duoInnerFieldCalendar`: Field month view with the planned visit days, and the selected day's visits beside it on iPad.
+- `ipadLandscapeFieldToday`: Visits Today on iPad in landscape, with the visit in progress beside today's visits.
