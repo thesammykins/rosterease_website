@@ -1317,7 +1317,13 @@ html:has(.re-screenshot-dialog[open]) {
   font: 400 clamp(40px, 6vw, 72px) / 1 var(--re-serif);
   letter-spacing: -0.04em;
   color: var(--mode);
+  margin: 0 0 12px;
+}
+.re-chapter-who {
   margin: 0 0 32px;
+  max-width: 34ch;
+  font-size: 1.125rem;
+  color: var(--re-muted);
 }
 .re-chapter-body {
   display: grid;

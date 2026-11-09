@@ -13,9 +13,10 @@ interface Props {
   id: string;
   mode: "shift" | "field";
   title: string;
+  who: string;
   steps: Step[];
 }
-const { id, mode, title, steps } = Astro.props;
+const { id, mode, title, who, steps } = Astro.props;
 ---
 
 <section
@@ -26,6 +27,7 @@ const { id, mode, title, steps } = Astro.props;
 >
   <div class="re-shell re-chapter-inner">
     <h2 class="re-chapter-title" id={`${id}-title`}>{title}</h2>
+    <p class="re-chapter-who">{who}</p>
     <div class="re-chapter-body">
       <ol class="re-chapter-steps" aria-label={`${title}, step by step`}>
         {

@@ -7,15 +7,15 @@ import ModeChapter from "../components/ModeChapter.astro";
 import DeviceShowcase from "../components/DeviceShowcase.astro";
 const shiftSteps = [
   {
-    title: "Add your roster in seconds",
-    text: "Take a photo of your roster, or paste it in. Check it over, then add it. No typing every shift.",
+    title: "Snap the roster, done",
+    text: "Take a photo of the roster on the wall, or paste it in. Every shift goes in for you. No typing it all out again.",
     href: "/help/smart-import/",
     link: "How importing works",
     screen: screens.shiftImport,
   },
   {
-    title: "See your whole month",
-    text: "Days, nights and days off at a glance. Swap a day when plans change.",
+    title: "Swaps take a tap",
+    text: "Swapped or picked up a shift? Change that day and you're done. Turn on Calendar Sync and your phone's calendar keeps up.",
     href: "/help/shift-changes/",
     link: "Change one day",
     screen: screens.shiftCalendar,
@@ -30,22 +30,22 @@ const shiftSteps = [
 ];
 const fieldSteps = [
   {
-    title: "Add your clients fast",
-    text: "Take a photo of your client list or open the file. Check each client, then add them.",
+    title: "Add your clients in one go",
+    text: "Take a photo of your client list or open the file. No typing them in one by one.",
     href: "/help/smart-import/",
     link: "How importing works",
     screen: screens.fieldImport,
   },
   {
-    title: "See every day's visits",
-    text: "Each day shows how many visits you have and how many are done.",
+    title: "See your week of visits",
+    text: "Every day shows how many visits you have and how many are done.",
     href: "/help/visit-routes/",
     link: "Plan your visits",
     screen: screens.fieldCalendar,
   },
   {
     title: "Go from visit to visit",
-    text: "Your next client, when to leave, and check in with one tap.",
+    text: "Who's next, when to leave, and check in with one tap. Your notes stay with each client.",
     href: "/app/#field",
     link: "More about Visits",
     screen: screens.fieldToday,
@@ -56,24 +56,25 @@ const fieldSteps = [
 <RosterEaseLayout
   title="RosterEase"
   storeBadgeInFooter={false}
-  description="Your shifts and client visits on your iPhone or iPad. Snap your roster, see your week and know when to leave."
+  description="Take a photo of your roster and every shift goes in. For shift workers and anyone visiting clients, on iPhone and iPad."
 >
   <section class="re-shell re-hero" data-motion-sequence>
     <div class="re-hero-copy">
       <h1 class="re-hero-title">
-        Plan your shifts.<br />Organise your visits.
+        Stop copying your roster into your calendar.
       </h1>
       <span class="re-rule" aria-hidden="true"></span>
       <p>
-        Snap your roster and it's in. See your week and know when to leave.
-        Your plan stays on your iPhone or iPad.
+        Take a photo of your roster and every shift goes in. Swaps take a
+        tap. Out visiting clients? Your visits, notes and check-ins live here
+        too.
       </p>
       <AppStoreBadge />
       <p class="re-availability">Available now for iPhone and iPad</p>
     </div>
     <div
       class="re-hero-stage"
-      aria-label="RosterEase Shifts calendar and Visits Today screens"
+      aria-label="RosterEase shift calendar and client visits screens"
     >
       <div class="re-hero-screens">
         <div class="re-hero-screen re-hero-shift">
@@ -96,16 +97,29 @@ const fieldSteps = [
         </div>
       </div>
       <div class="re-stage-caption">
-        <a href="#shifts">Shifts</a><a href="#visits">Visits</a>
+        <a href="#shifts">Shift work</a><a href="#visits">Visiting clients</a>
       </div>
     </div>
   </section>
   <div class="re-chapters" id="screens">
     <nav class="re-chapter-nav" aria-label="Modes">
-      <a href="#shifts" aria-current="true">Shifts</a><a href="#visits">Visits</a>
+      <a href="#shifts" aria-current="true">Shift work</a
+      ><a href="#visits">Visiting clients</a>
     </nav>
-    <ModeChapter id="shifts" mode="shift" title="Shifts" steps={shiftSteps} />
-    <ModeChapter id="visits" mode="field" title="Visits" steps={fieldSteps} />
+    <ModeChapter
+      id="shifts"
+      mode="shift"
+      title="Shift work"
+      who="Nurses, cooks, diner and café staff, retail and warehouse workers. One workplace or a few."
+      steps={shiftSteps}
+    />
+    <ModeChapter
+      id="visits"
+      mode="field"
+      title="Visiting clients"
+      who="Cleaners, dog walkers, pet groomers, gardeners, tradies, carers. Anyone on the road between clients."
+      steps={fieldSteps}
+    />
   </div>
   <DeviceShowcase />
   <section class="re-shell re-closing re-closing--privacy" data-motion-sequence>

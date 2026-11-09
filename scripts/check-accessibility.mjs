@@ -101,7 +101,8 @@ check(
   "Homepage needs the official App Store download badge",
 );
 check(
-  /Plan your shifts/.test(home) && /Organise your visits/.test(home),
+  /Stop copying your roster into your calendar/.test(home) &&
+    /Out visiting clients\?/.test(home),
   "Missing product-specific headline",
 );
 
