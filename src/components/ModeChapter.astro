@@ -33,18 +33,6 @@ const { id, mode, title, who, steps } = Astro.props;
         {
           steps.map((step, index) => (
             <li class="re-chapter-step" data-chapter-step={index}>
-              <a
-                class="re-chapter-shot"
-                href={step.screen.light?.src ?? step.screen.dark.src}
-                data-screenshot
-                aria-label={`Enlarge ${title} screenshot: ${step.title}`}
-              >
-                <DeviceFrame
-                  device="iphone17"
-                  screen={step.screen}
-                  sizes="(max-width: 900px) min(70vw, 280px), 1px"
-                />
-              </a>
               <div class="re-chapter-copy">
                 <h3>{step.title}</h3>
                 <p>{step.text}</p>
@@ -56,25 +44,13 @@ const { id, mode, title, who, steps } = Astro.props;
           ))
         }
       </ol>
-      <div class="re-chapter-dots" aria-label={`${title} steps`}>
-        {
-          steps.map((step, index) => (
-            <button
-              type="button"
-              data-chapter-dot={index}
-              aria-label={`Show step ${index + 1}: ${step.title}`}
-              aria-current={index === 0 ? "true" : "false"}
-            />
-          ))
-        }
-      </div>
       <div class="re-chapter-stage" aria-hidden="true" data-chapter-stage>
-        <DeviceFrame device="iphone17" sizes="(max-width: 900px) 1px, 360px">
+        <DeviceFrame device="iphone17" sizes="(max-width: 900px) 220px, 360px">
           {
             steps.map((step) => (
               <AppScreenshot
                 screen={step.screen}
-                sizes="(max-width: 900px) 1px, 360px"
+                sizes="(max-width: 900px) 220px, 360px"
                 widths={[480, 720, 960]}
                 draggable={false}
               />
@@ -95,20 +71,29 @@ const { id, mode, title, who, steps } = Astro.props;
     chapter.querySelectorAll("[data-chapter-step]").forEach((step, i) => step.classList.toggle("is-active", i === index));
     chapter.querySelectorAll("[data-chapter-stage] picture").forEach((picture, i) => picture.classList.toggle("is-active", i === index));
   }
-  // The step whose text is nearest the middle of the screen is active, so the
-  // lit text always sits beside the screenshot the stage shows.
+  // Desktop: the step whose text is nearest the middle of the screen is
+  // active, so the lit text sits beside the screenshot the stage shows.
+  // Phones: each step's text pins under the stage in turn and pushes the
+  // last one up behind it; a step is active once it is the more visible one.
   const current = new Map<HTMLElement, number>();
+  const phone = matchMedia("(max-width: 900px)");
   function follow() {
-    const middle = innerHeight / 2;
     for (const chapter of chapters) {
       const copies = [...chapter.querySelectorAll<HTMLElement>(".re-chapter-copy")];
       let nearest = 0;
-      let distance = Infinity;
-      copies.forEach((copy, i) => {
-        const box = copy.getBoundingClientRect();
-        const d = Math.abs((box.top + box.bottom) / 2 - middle);
-        if (d < distance) [nearest, distance] = [i, d];
-      });
+      if (phone.matches) {
+        const pin = parseFloat(getComputedStyle(copies[0]).top);
+        copies.forEach((copy, i) => {
+          if (copy.getBoundingClientRect().top <= pin + copy.offsetHeight / 2) nearest = i;
+        });
+      } else {
+        let distance = Infinity;
+        copies.forEach((copy, i) => {
+          const box = copy.getBoundingClientRect();
+          const d = Math.abs((box.top + box.bottom) / 2 - innerHeight / 2);
+          if (d < distance) [nearest, distance] = [i, d];
+        });
+      }
       if (current.get(chapter) !== nearest) {
         current.set(chapter, nearest);
         activate(chapter, nearest);
@@ -144,27 +129,4 @@ const { id, mode, title, who, steps } = Astro.props;
     ),
   );
 
-  // Phones: each chapter is a swipeable row. Dots show where you are and
-  // move to a step when tapped.
-  chapters.forEach((chapter) => {
-    const row = chapter.querySelector<HTMLElement>(".re-chapter-steps");
-    const items = [...chapter.querySelectorAll<HTMLElement>("[data-chapter-step]")];
-    const dots = [...chapter.querySelectorAll<HTMLButtonElement>("[data-chapter-dot]")];
-    if (!row) return;
-    const mark = () => {
-      const left = row.scrollLeft;
-      let current = 0;
-      items.forEach((item, i) => {
-        if (Math.abs(item.offsetLeft - row.offsetLeft - left - 20) < Math.abs(items[current].offsetLeft - row.offsetLeft - left - 20)) current = i;
-      });
-      dots.forEach((dot, i) => dot.setAttribute("aria-current", String(i === current)));
-    };
-    row.addEventListener("scroll", () => requestAnimationFrame(mark), { passive: true });
-    dots.forEach((dot, i) =>
-      dot.addEventListener("click", () => {
-        const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-        row.scrollTo({ left: items[i].offsetLeft - row.offsetLeft - 20, behavior: reduced ? "auto" : "smooth" });
-      }),
-    );
-  });
 </script>

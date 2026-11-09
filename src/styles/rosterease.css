@@ -1306,12 +1306,14 @@ html:has(.re-screenshot-dialog[open]) {
 }
 .re-chapter {
   --mode: var(--re-shift);
+  --chapter-bg: var(--re-bg);
   padding-block: 56px 72px;
   scroll-margin-top: 120px;
 }
 .re-chapter--field {
   --mode: var(--re-route);
-  background: var(--re-bg-soft);
+  --chapter-bg: var(--re-bg-soft);
+  background: var(--chapter-bg);
 }
 .re-chapter-title {
   font: 400 clamp(40px, 6vw, 72px) / 1 var(--re-serif);
@@ -1345,9 +1347,6 @@ html:has(.re-screenshot-dialog[open]) {
 .re-chapter-step.is-active,
 .re-chapter-step:focus-within {
   opacity: 1;
-}
-.re-chapter-shot {
-  display: none;
 }
 .re-chapter-copy h3 {
   font: 400 clamp(30px, 3.2vw, 44px) / 1.1 var(--re-serif);
@@ -1383,35 +1382,42 @@ html:has(.re-screenshot-dialog[open]) {
   .re-chapter-title {
     margin-bottom: 20px;
   }
+  /* Phones: the screenshot stays pinned under the mode switch. Each step's
+     text pins just below it and the next step slides up over it, so one
+     vertical swipe moves through every step of both chapters and a whole
+     step is always in view. Sized so that fits with Safari's toolbars
+     showing: header 64px, pill clearance 96px, phone 36svh, gap 16px. */
+  .re-chapter {
+    --stage-phone: min(36svh, 420px);
+    --stage-bottom: calc(64px + 96px + var(--stage-phone) + 16px);
+  }
   .re-chapter-body {
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
   .re-chapter-stage {
-    display: none;
+    order: -1;
+    align-self: stretch;
+    top: 64px;
+    z-index: 5;
+    margin: 0 -20px;
+    padding: 96px 20px 16px;
+    background: var(--chapter-bg);
   }
-  .re-chapter-steps {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    margin-inline: -20px;
-    padding: 4px 20px 12px;
-    scrollbar-width: none;
-  }
-  .re-chapter-steps::-webkit-scrollbar {
-    display: none;
+  .re-chapter-stage .re-device {
+    width: calc(var(--stage-phone) * 1350 / 2760);
   }
   .re-chapter-step {
-    flex: 0 0 min(64vw, 270px);
-    min-height: 0;
     display: block;
+    min-height: 70svh;
     opacity: 1;
-    scroll-snap-align: start;
   }
-  .re-chapter-shot {
-    display: block;
-    margin-bottom: 18px;
-    cursor: zoom-in;
+  .re-chapter-copy {
+    position: sticky;
+    top: var(--stage-bottom);
+    z-index: 4;
+    padding-block: 8px 24px;
+    background: var(--chapter-bg);
   }
   .re-chapter-copy h3 {
     font-size: 26px;
@@ -1613,7 +1619,7 @@ html:has(.re-screenshot-dialog[open]) {
   object-fit: cover;
   transform: rotate(90deg);
 }
-@media (max-width: 720px) {
+@media (max-width: 900px) {
   .re-showcase {
     height: 260svh;
   }
@@ -1629,11 +1635,17 @@ html:has(.re-screenshot-dialog[open]) {
     flex-direction: column;
     gap: 20px;
   }
-  .re-duo {
-    width: calc(100vw - 40px);
+  /* One above the other, sized so both fit the small viewport (Safari's
+     toolbars showing): header and heading take about 190px, the captions and
+     gap about 92px, the iPad 30svh, and the Duo is 0.7265 as tall as wide. */
+  .re-showcase figure {
+    gap: 8px;
   }
   .re-ipad {
-    --ipad-h: min(260px, 32svh);
+    --ipad-h: min(300px, 30svh);
+  }
+  .re-duo {
+    width: min(100vw - 40px, 520px, (70svh - 282px) / 0.7265);
   }
 }
 .re-showcase--still {
@@ -1650,42 +1662,3 @@ html:has(.re-screenshot-dialog[open]) {
   }
 }
 
-.re-chapter-dots {
-  display: none;
-}
-@media (max-width: 900px) {
-  .re-chapter-dots {
-    display: flex;
-    justify-content: center;
-    gap: 4px;
-    margin-top: 4px;
-  }
-  .re-chapter-dots button {
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    border: 0;
-    background: none;
-    display: grid;
-    place-items: center;
-    cursor: pointer;
-  }
-  .re-chapter-dots button::before {
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 999px;
-    background: var(--re-line-strong);
-    opacity: 0.45;
-    transition: width 200ms ease, opacity 200ms ease;
-  }
-  .re-chapter-dots button[aria-current="true"]::before {
-    width: 22px;
-    opacity: 1;
-    background: var(--mode);
-  }
-  .re-chapter-dots button:focus-visible {
-    outline: 3px solid var(--re-focus-ring);
-    border-radius: 8px;
-  }
-}
