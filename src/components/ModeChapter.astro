@@ -95,18 +95,38 @@ const { id, mode, title, who, steps } = Astro.props;
     chapter.querySelectorAll("[data-chapter-step]").forEach((step, i) => step.classList.toggle("is-active", i === index));
     chapter.querySelectorAll("[data-chapter-stage] picture").forEach((picture, i) => picture.classList.toggle("is-active", i === index));
   }
-  chapters.forEach((chapter) => activate(chapter, 0));
-  const steps = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        const step = entry.target as HTMLElement;
-        activate(step.closest("[data-chapter]")!, Number(step.dataset.chapterStep));
+  // The step whose text is nearest the middle of the screen is active, so the
+  // lit text always sits beside the screenshot the stage shows.
+  const current = new Map<HTMLElement, number>();
+  function follow() {
+    const middle = innerHeight / 2;
+    for (const chapter of chapters) {
+      const copies = [...chapter.querySelectorAll<HTMLElement>(".re-chapter-copy")];
+      let nearest = 0;
+      let distance = Infinity;
+      copies.forEach((copy, i) => {
+        const box = copy.getBoundingClientRect();
+        const d = Math.abs((box.top + box.bottom) / 2 - middle);
+        if (d < distance) [nearest, distance] = [i, d];
+      });
+      if (current.get(chapter) !== nearest) {
+        current.set(chapter, nearest);
+        activate(chapter, nearest);
       }
-    },
-    { rootMargin: "-45% 0px -45% 0px" },
-  );
-  document.querySelectorAll("[data-chapter-step]").forEach((step) => steps.observe(step));
+    }
+  }
+  let queued = false;
+  const schedule = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      queued = false;
+      follow();
+    });
+  };
+  addEventListener("scroll", schedule, { passive: true });
+  addEventListener("resize", schedule);
+  follow();
   const inView = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
