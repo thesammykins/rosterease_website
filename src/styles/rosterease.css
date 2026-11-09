@@ -1498,9 +1498,22 @@ html:has(.re-screenshot-dialog[open]) {
 .re-duo-cover {
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
   transform: rotateY(180deg);
+}
+/* Both official bezels share one pixel scale: the outer body (x 45-1534,
+   y 31-2161 of 1574x2194) is the inner right half (x 1546-3034, y 58-2188 of
+   3093x2247). Closed, outer pixel (X, Y) sits on inner (X + 1501, Y + 27);
+   the leaf is 1546.5 inner pixels wide and 2247 tall. */
+.re-duo-cover .re-device {
+  position: absolute;
+  left: -2.942%;
+  top: 1.202%;
+  width: 101.778%;
+}
+/* One set of buttons: the inner right half draws them, so the cover drops its
+   volume strip (rows 24-30) and side button (columns 1535+). */
+.re-duo-cover .re-device-frame {
+  clip-path: inset(1.42% 2.48% 0 0);
 }
 /* The cover becomes a window onto the inner display's right half, which it
    covers when closed, placed in the device's coordinates so it lines up as the
@@ -1523,13 +1536,15 @@ html:has(.re-screenshot-dialog[open]) {
 .re-duo-through {
   opacity: 0;
 }
+/* The inner screen (x 120, y 120, 2853x2007) seen through the outer opening
+   (x 88, y 80, 1398x2034), with the outer frame at (1501, 27) on the inner. */
 .re-duo-through img {
   position: absolute;
-  left: -110.15%;
-  top: -0.21%;
-  width: 207.7%;
+  left: -105.079%;
+  top: 0.639%;
+  width: 204.077%;
   max-width: none;
-  height: 100.43%;
+  height: 98.673%;
   object-fit: fill;
 }
 /* Pre-blurred soft layers, faded in toward each panel's moving edge. */
