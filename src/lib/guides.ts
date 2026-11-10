@@ -202,7 +202,7 @@ export const guides: Guide[] = [
         id: "one-day",
         title: "Change one day",
         paragraphs: [
-          "A one-off change affects only that day and leaves your rotation intact. To change future weeks, edit the rotation in the Workplace tab instead.",
+          "A one-off change affects only that day and leaves your rotation intact. To change future weeks, edit the rotation in **Workplaces** instead. **Settings > Workplaces > Manage workplaces** opens the same tab.",
         ],
         steps: [
           "Open **Calendar** and tap the date.",
@@ -293,7 +293,7 @@ export const guides: Guide[] = [
         id: "captures",
         title: "Optional captures",
         paragraphs: [
-          "In Settings > Notes & Templates you can allow photos, a location, a signature and voice notes. All are off until you turn them on, and each capture needs a tap. Turning an option off keeps what you already saved.",
+          "In **Settings > Notes & Templates**, choose which captures are available. Photos, signatures and voice notes are on by default; attaching a location and keeping photo locations are off. Your saved choices are kept. Each capture needs a tap, and turning an option off keeps what you already saved.",
           "How each one is kept, and what it can’t prove, is in How your records work.",
         ],
       },
@@ -304,12 +304,13 @@ export const guides: Guide[] = [
           "Each check-in records the device time in that shift’s notes, without a location.",
         ],
         steps: [
-          "Open **Settings > Notes & Templates** and turn on **Shift check-ins**.",
+          "In Shifts, open **Settings > Notifications** and turn on **Shift check-ins**.",
           "From an hour before a timed shift, tap **Check in** on Today.",
           "Tap **Check out** when you finish, up to 30 minutes after the shift ends.",
         ],
         after: [
-          "For reminders, turn on **Reminders Before Work** and **Remind Me to Check In and Out** in Settings > Notifications. You’re reminded ten minutes after an unchecked shift starts and when a checked-in shift ends.",
+          "Manual check-ins work with **Reminders** off and don’t need notification permission.",
+          "For reminders, turn on **Reminders** and **Remind Me to Check In and Out** in **Settings > Notifications**, and allow notifications when asked. You’re reminded ten minutes after an unchecked shift starts and when a checked-in shift ends. Reminders are for this device only.",
         ],
       },
     ],
@@ -486,9 +487,10 @@ export const guides: Guide[] = [
         steps: [
           "In Shifts, open **Settings > Calendar Sync** and choose a workplace.",
           "Turn on **Sync workplace shifts**.",
-          "Choose where events go: the app default, a dedicated workplace calendar or a specific iOS calendar.",
+          "Check the saved destination shown above **Destination**. To change it, choose the app default, a dedicated workplace calendar or a specific iOS calendar. Review the event-move summary, then tap **Save destination**.",
         ],
         after: [
+          "To change the shared default, expand **App calendar defaults**, choose the destination and tap **Apply default calendar**. This applies to every workplace set to **Use App Default**, including ones already syncing; workplace-specific destinations stay unchanged. Opening or closing the defaults does not move events. If applying is incomplete, use **Retry applying default calendar**.",
           "Each event shows the shift and workplace with the note “Synced from RosterEase”. Include Shift Info also adds each day’s Shift info, the optional text you add when changing a day in Calendar. Private notes stay in RosterEase. Anyone with access to the destination calendar may see what is written there.",
           "Do not delete an entire calendar to troubleshoot duplicate events.",
         ],
