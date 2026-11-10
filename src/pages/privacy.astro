@@ -16,8 +16,8 @@ const quickFacts = [
     href: "/contact/",
   },
   {
-    label: "Effective date",
-    value: "7 August 2026",
+    label: "Last updated",
+    value: "10 November 2026",
   },
 ];
 
@@ -72,11 +72,12 @@ const sections = [
   {
     title: "Backup and restore",
     paragraphs: [
-      "A backup can include your roster, workplace, client, visit, note, and preference data. Backups are created when you save one in the app, or weekly to a folder you choose if you turn on Weekly Automatic Backup.",
-      "Backups are encrypted with your backup key. RosterEase creates the key and keeps it in your device Keychain; it syncs with iCloud Keychain when that is on. You choose where backups are saved through Apple's file picker and other Apple system surfaces.",
+      "A backup can include your roster, workplace, client, visit, note history, photos, recordings and backed-up preferences. Device-local settings such as the privacy lock, automatic backup folder and local performance reports are excluded.",
+      "You can save a backup yourself or opt in to Weekly Automatic Backup and choose a folder. When due, RosterEase tries on opening the app and requests background opportunities from iOS. iOS decides when background work can run, so a particular day or time is not guaranteed. The app keeps four automatic backups in the chosen folder; manual exports are not pruned. Turning automatic backups off leaves existing files in place.",
+      "New backups are encrypted with a key RosterEase creates and keeps in your device Keychain; it syncs with iCloud Keychain when that is on. Older backups still need the key or passphrase used to create them. You choose where backups are saved through Apple's file picker and other Apple system surfaces.",
       "RosterEase does not upload or retain exported backup files on its own backend. If you save or share the file through iCloud Drive, Files, a messaging app, or another destination/provider, that provider's handling, retention, and deletion rules apply.",
       "Anyone with a backup file and its key may be able to restore its contents. Store and share them carefully. Encryption reduces risk but does not guarantee absolute security.",
-      "Restore is user-initiated: you select the file, enter its backup key when required, and confirm replacing the current RosterEase data on your device.",
+      "Restore is user-initiated: you select the file, enter its backup key or original passphrase when required, and confirm replacing RosterEase records and backed-up preferences on your device. Device-local privacy and automatic backup settings are not replaced.",
       "If you use Apple device backup, iCloud, or another system backup or restore feature, Apple or your chosen backup provider handles that data under their own terms and settings.",
     ],
   },

@@ -22,7 +22,9 @@ Updated 9 November 2026 (Australia/Melbourne) for RosterEase 1.1. RosterEase is 
 - `/app/` and `/terms/` describe the 1.1 plans: one workplace or five active clients free, the one-time setup week of Plus, and what each paid plan adds.
 - `/app/` covers dated, split and double shifts in import, saved locations, richer visit notes, Lock Screen widgets, the Live Activity and Siri. Backup copy describes the Keychain backup key and weekly backups instead of a passphrase.
 - Screenshots and recordings come from the 1.1 release source (see the capture manifests) under official device frames, including iPad and iPhone Duo.
-- Merge to `main` only when 1.1 is released on the App Store: the help guides describe 1.1 behaviour.
+- Keep the 1.1 website changes on `help-1.1` while the app awaits App Store approval, as the owner directed in [the R6 thread](https://ampcode.com/threads/T-01a1c394-2073-77e0-a822-66a0ad27f179). Before public 1.1 release, publish the help and privacy pages with new approval, then verify every URL from the app's `HelpArticleLink.swift` on `https://rosterease.app`. All 16 articles, the help index and privacy policy must resolve to the intended content. A local build or preview does not satisfy this release gate.
+- Obtain separate owner approvals for pushing `help-1.1`, merging the website and deploying it. A push to `main` triggers the Pages deployment workflow, so do not merge until both merge and deployment are approved. Do not manually dispatch the deployment without approval either.
+- The backup guide distinguishes 1.0 passphrases and raw store copies from 1.1 backup keys and exported backups. Weekly exports are opt-in and best-effort; do not promise a fixed backup day or retry time. See the [current source audit](design/help-source-audit.md#11-pre-release-r6-10-november-2026).
 
 ## 1.0 launch pass
 

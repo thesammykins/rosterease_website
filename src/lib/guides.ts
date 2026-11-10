@@ -65,7 +65,7 @@ export const guides: Guide[] = [
         id: "plans",
         title: "Plans and the trial",
         paragraphs: [
-          "Finishing setup starts a free week of full Plus. Nothing is charged and nothing renews. Afterwards RosterEase stays free unless you subscribe, and everything you saved stays. See Free and RosterEase Plus for what each plan includes.",
+          "Finishing your first setup starts a free week of full Plus. Nothing is charged and nothing renews. Afterwards RosterEase stays free unless you subscribe, and everything you saved stays. See Free and RosterEase Plus for what each plan includes.",
         ],
       },
       {
@@ -164,7 +164,7 @@ export const guides: Guide[] = [
         id: "assist",
         title: "Optional AI assist",
         paragraphs: [
-          "If a source is hard to read, Smart Import can offer Assist on this device. It uses Apple’s on-device model where your iPhone supports it. Where it isn’t available, ordinary import still works.",
+          "If a source is hard to read, Smart Import can offer Assist on this device. It uses Apple’s on-device model on supported devices. Where it isn’t available, ordinary import still works.",
           "An assist only proposes text. Compare it with the original and correct names, dates, times and rows before you analyse it.",
           "Free includes two successful assists a day on this device; failed or cancelled requests don’t count. Shift Plus and Visits Plus include more. Apple’s availability and usage limits still apply.",
         ],
@@ -340,7 +340,7 @@ export const guides: Guide[] = [
         screens: ["how-your-records-work"],
         title: "What a note can keep",
         paragraphs: [
-          "Records stay on your phone unless you turn on a feature that shares them.",
+          "Records stay on your device unless you turn on a feature that shares them.",
         ],
         steps: [
           "Photos are saved small. A photo’s location is removed unless Keep photo locations is on.",
@@ -354,7 +354,7 @@ export const guides: Guide[] = [
         title: "Signatures",
         paragraphs: [
           "Draw a signature or type a name to agree to the note as shown. Editing the note later needs a new signature.",
-          "The signature is sealed with a key that stays on this phone. The stamp shows whether the note is unchanged since signing, was sealed on another installation, couldn’t be sealed, or no longer matches. It is evidence of signing in RosterEase, not identity verification.",
+          "The signature is sealed with a key that stays on this device. The stamp shows whether the note is unchanged since signing, was sealed on another installation, couldn’t be sealed, or no longer matches. It is evidence of signing in RosterEase, not identity verification.",
         ],
       },
       {
@@ -561,7 +561,7 @@ export const guides: Guide[] = [
         ],
         steps: [
           "Open **Settings > Notifications** and turn on **Show Live Activities**.",
-          "If iOS has them turned off for RosterEase, tap **Open iOS Settings** and allow them.",
+          "If iOS has them turned off for RosterEase, tap **Turn on in iOS Settings** and allow them.",
         ],
       },
       {
@@ -577,6 +577,7 @@ export const guides: Guide[] = [
         title: "When it appears",
         paragraphs: [
           "Open RosterEase when your work day starts. A Live Activity appears when there is a current or upcoming shift or visit, and may not appear on a day off. A finished one leaves about 30 minutes later.",
+          "iOS limits a Live Activity to eight hours of live updates, so it may not last a whole long shift. Reopen RosterEase to refresh it while work is still in progress.",
         ],
       },
       {
@@ -651,6 +652,7 @@ export const guides: Guide[] = [
         screens: ["privacy-lock", "privacy-lock-screen"],
         title: "Turn on the privacy lock",
         paragraphs: [
+          "Set a device passcode in iOS or iPadOS Settings first. Without one, Require Unlock cannot protect RosterEase, even when the switch is on.",
           "Turning the lock off needs authentication. These settings stay on this device and aren’t in backups.",
         ],
         steps: [
@@ -669,14 +671,14 @@ export const guides: Guide[] = [
         id: "notifications",
         title: "Notifications and Show Previews",
         paragraphs: [
-          "Hidden notification details follow iPhone’s Show Previews. Always keeps details visible on the Lock Screen; Never hides them even after you unlock. For hiding only while locked, choose When Unlocked in iPhone Settings > Notifications. Changes apply to reminders not yet delivered.",
+          "Hidden notification details follow the device’s Show Previews setting. Always keeps details visible on the Lock Screen; Never hides them even after you unlock. For hiding only while locked, choose When Unlocked in iOS or iPadOS Settings > Notifications. Changes apply to reminders not yet delivered.",
         ],
       },
       {
         id: "widgets",
         title: "Lock Screen widgets",
         paragraphs: [
-          "Hidden widget details also need Lock Screen Widgets turned off in iPhone Settings > Face ID & Passcode > Allow Access When Locked. Otherwise iOS can show details while locked. RosterEase can’t read that setting.",
+          "Hidden widget details also need Lock Screen Widgets turned off in iOS or iPadOS Settings > Face ID & Passcode (or Touch ID & Passcode) > Allow Access When Locked. Otherwise the system can show details while locked. RosterEase can’t read that setting.",
         ],
       },
       {
@@ -706,14 +708,30 @@ export const guides: Guide[] = [
           "Choose where to save it in Files. RosterEase confirms with **Backup Saved**.",
         ],
         after: [
-          "A backup holds your records, note history and preferences, encrypted. **Weekly Automatic Backup** saves to a folder you choose each week and keeps the newest four.",
+          "A backup holds your records, note history, photos, recordings and saved preferences, encrypted. Device-local choices such as the privacy lock and automatic backup folder aren’t included.",
+        ],
+      },
+      {
+        id: "weekly",
+        title: "Choose weekly backups",
+        paragraphs: [
+          "Weekly backups are optional and free. RosterEase tries when a backup is due and you open the app, and requests background opportunities from iOS. iOS decides when background work can run; a backup is not guaranteed on a particular day or while the app is closed.",
+        ],
+        steps: [
+          "Open **Settings > Data Management** and turn on **Weekly Automatic Backup**.",
+          "Choose a folder in Files. RosterEase tries to save the first backup there.",
+          "Check **Last Backup** for a successful save. Use **Back up now** to try again, or **Choose folder** if the folder is unavailable.",
+        ],
+        after: [
+          "RosterEase keeps four automatic backups in that folder and removes older automatic files only after a new backup is verified. Manual exports are not pruned. Turning weekly backups off leaves the files already saved.",
+          "If a backup fails, your records remain on this device. RosterEase retries later; use Back up now if you need a copy sooner. An empty roster is not backed up.",
         ],
       },
       {
         id: "key",
         title: "Your backup key",
         paragraphs: [
-          "One backup key opens every backup, saved or weekly. RosterEase creates it and keeps it in Keychain; it syncs with iCloud Keychain when that’s on.",
+          "RosterEase creates a backup key for new manual and weekly backups and keeps it in Keychain. It syncs with iCloud Keychain when that’s on. An older backup still needs the key or passphrase used to save it, which may differ from the key shown now.",
           "Without the key, a backup can’t be opened. Show backup key in Data Management needs Face ID, Touch ID or your passcode. Keep a copy somewhere safe, especially without iCloud Keychain.",
         ],
       },
@@ -729,21 +747,28 @@ export const guides: Guide[] = [
         screens: ["backup-and-restore"],
         title: "Restore a backup",
         paragraphs: [
-          "Restoring replaces all RosterEase data and preferences on this device and updates Calendar Sync events. Save a backup of the current data first if you need it.",
+          "Restoring replaces RosterEase records and backed-up preferences on this device and updates Calendar Sync events. Save a backup of the current data first if you need it. Device-local privacy and automatic backup settings stay as they are.",
         ],
         steps: [
           "In **Settings > Data Management**, tap **Restore backup** and choose the file.",
-          "If the key isn’t in iCloud Keychain, enter the backup key used to save it.",
+          "RosterEase tries keys already saved in Keychain. If asked for a Backup key, enter the key used to save that file. For a backup exported from 1.0, enter its original passphrase here.",
           "Review what the backup contains, then confirm.",
         ],
       },
       {
         id: "earlier-version",
-        screens: ["backup-and-restore-recovery"],
         title: "Data from version 1.0",
         paragraphs: [
-          "This version stores your roster in a new layout and can’t open data from the earlier version. If you see Start fresh with this version, tap Save a copy to keep the old data in Files first.",
-          "Starting fresh sets that data aside on this device; nothing is deleted. Then set up again, or restore a backup you saved from the earlier version.",
+          "Before updating from 1.0, export an encrypted backup and keep the passphrase you chose in that version. A 1.0 backup can still be restored in 1.1.",
+          "Version 1.1 uses a new data layout. When it recognises your 1.0 data, it shows Bring your data to this version. Save a copy keeps the old store files in Files; it is not the same as an exported backup.",
+        ],
+        steps: [
+          "Tap **Continue** and confirm setting the old data aside on this device.",
+          "Setup opens **Bring Back Your Data**. Tap **Bring back 1.0 data**, review the contents and confirm to restore it.",
+          "Or tap **Choose backup file** to restore an exported backup instead. Enter its original passphrase if asked for a Backup key.",
+        ],
+        after: [
+          "The set-aside data stays inside the app. Resetting app data or uninstalling can remove it, so keep a separate backup. If recovery fails or the screen says Start fresh with this version instead, save a copy and contact support before resetting or uninstalling.",
         ],
       },
       {
