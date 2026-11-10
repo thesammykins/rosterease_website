@@ -138,8 +138,8 @@ export const guides: Guide[] = [
         ],
         steps: [
           "In Shifts, open **Workplaces**, tap the **…** menu, then **Import roster**. In Visits, use **Import clients** in **Clients**.",
-          "Tap **Paste text**, **File or PDF**, **Photo** or **Scan document** and add your roster.",
-          "Tap **Analyze roster**, or **Analyze visits** for clients.",
+          "Choose **Paste text**, **File or PDF**, **Photo** or **Scan document** and add your roster or client list. Files, photos and scans are analysed automatically after their text is extracted.",
+          "For pasted or edited text, tap **Analyze roster** or **Analyze visits**; if a review is already shown, use **Re-analyze roster** or **Re-analyze visits**.",
           "Check the review below, then tap **Import roster** or **Import clients**.",
         ],
       },
@@ -170,7 +170,7 @@ export const guides: Guide[] = [
           "Check names, dates, shift times and overnight boundaries.",
           "For visits, check each client, address, duration, appointment window and visit days. An import that leaves out visit days keeps the existing choices.",
           "Correct ambiguous or unsupported rows, or exclude them where the review allows it. Do not dismiss a warning you have not understood.",
-          "Review the effect on the existing plan before you apply. Open Today and Calendar afterward to check the result.",
+          "Review the effect on the existing plan before you apply. After importing, check the result for changes and warnings, then open Today and Calendar to check the saved plan.",
         ],
       },
       {
@@ -401,7 +401,7 @@ export const guides: Guide[] = [
   {
     slug: "visit-routes",
     title: "How visit routes are built",
-    description: "Where route days come from, when they change, and why today and past days are protected.",
+    description: "Where route days come from, when they change and which visits are protected.",
     sections: [
       {
         id: "built",
@@ -416,15 +416,15 @@ export const guides: Guide[] = [
         id: "rebuilding",
         title: "Rebuilding",
         paragraphs: [
-          "Changing clients, work days or the travel buffer, or importing clients, updates unfinished planned visits on upcoming days. Manual add-ons, finished visits and the visit you’re checked in to stay.",
-          "To rebuild one future day, select it in Calendar and regenerate it. Visit order may change, missing clients may be added, and removed clients may drop off.",
+          "Changing clients, work days or the travel buffer, or importing clients, can update unfinished generated visits today as well as on upcoming days. Manual visits and visits protected by recorded actions stay, including finished visits and the visit you’re checked in to.",
+          "To rebuild one future day, select it in **Calendar** and tap **Rebuild Day**. Visit order may change, missing clients may be added, and removed clients may drop off.",
         ],
       },
       {
         id: "protected",
-        title: "Protected days",
+        title: "Calendar’s rebuild limit",
         paragraphs: [
-          "Today and past route days are protected: Calendar won’t regenerate them. Use Today to finish current visits.",
+          "Calendar can rebuild future days, not today or past days. Use Today to finish current visits.",
         ],
       },
       {
