@@ -7,9 +7,13 @@ export interface Guide {
     title: string;
     paragraphs: string[];
     steps?: string[];
+    // Notes that read after the steps, such as follow-ups and cautions.
+    after?: string[];
   }[];
 }
 
+// Each slug is a `HelpArticle` case in the app (Sources/Shared/HelpArticleLink.swift).
+// Removing or renaming one breaks a "Learn more" link in a shipped build.
 export const guides: Guide[] = [
   {
     slug: "getting-started",
@@ -20,7 +24,8 @@ export const guides: Guide[] = [
         id: "before-you-start",
         title: "Start with your own schedule",
         paragraphs: [
-          "Install RosterEase from the App Store and open the app. Choose the worker mode that matches the plan you want to manage. You do not need a RosterEase account.",
+          "Install RosterEase from the App Store and open the app. You do not need a RosterEase account.",
+          "Choose Shifts for rostered shifts at a workplace, like nursing, retail or hospitality. Choose Visits for going to clients’ homes or sites, like home care, cleaning or mobile trades.",
           "Screen labels and available features can vary by app version; include your version and build number when asking for help.",
         ],
       },
@@ -28,26 +33,41 @@ export const guides: Guide[] = [
         id: "shift",
         title: "For shift work",
         paragraphs: [
-          "Use Shift Worker for a repeating roster. You can enter it yourself or use Smart Import and review the result.",
+          "In Shifts, enter your roster yourself or use Smart Import and review the result.",
         ],
         steps: [
           "Add a workplace and check its timezone and location.",
           "Set up shift types, including start and end times. Check overnight shifts carefully.",
-          "Build your repeating pattern and confirm the date it starts.",
-          "Review the calendar before using Today or enabling Calendar sync. Use a per-day change for an exception to the pattern.",
+          "Build your repeating pattern and confirm the date it starts. With no rotation, choose “I don't have a rotation, just add shifts”.",
+          "Review the calendar before using Today or turning on Calendar Sync. Use a one-off change in Calendar for an exception to the pattern.",
         ],
       },
       {
         id: "field",
         title: "For client visits",
         paragraphs: [
-          "Use Field Worker to plan ordered visits. Begin with your client details or import a supported client list.",
+          "In Visits, plan ordered visits. Begin with your client details or import a client list.",
         ],
         steps: [
           "Add clients, locations, visit durations and any appointment windows.",
-          "Review the active clients, work days and visit order in your setup. If your build offers Visit Days for each client, check those too: a visit must fall on both an enabled work day and a selected client day.",
-          "Choose a travel buffer. Optional Maps estimates are a separate choice.",
-          "Check Today and future route days before relying on the plan. Recheck the schedule after changing client or work-day details.",
+          "Check each client’s visit days and your work days. A visit is planned only on a day that is both.",
+          "Choose a travel buffer in Settings > Travel. Apple Maps estimates are a separate choice.",
+          "Check Today and future route days before relying on the plan.",
+        ],
+      },
+      {
+        id: "plans",
+        title: "Plans and the trial",
+        paragraphs: [
+          "Finishing your first setup starts a free week of full Plus. Nothing is charged and nothing renews. Afterwards RosterEase stays free unless you subscribe, and everything you saved stays. See Free and RosterEase Plus for what each plan includes.",
+        ],
+      },
+      {
+        id: "work-type",
+        title: "Switching between Shifts and Visits",
+        paragraphs: [
+          "The work type is fixed after setup. To switch, save a backup in Settings > Data Management, reset app data there, then complete setup again.",
+          "Reset deletes this device’s records, notes, settings and automatic backup setup, and tries to remove synced Calendar events first. Saved backup files and the backup key remain.",
         ],
       },
       {
@@ -55,7 +75,51 @@ export const guides: Guide[] = [
         title: "A quick check before your first day",
         paragraphs: [
           "Compare the plan with your original roster or appointments. Check dates, timezone, shift boundaries, travel and any warnings. RosterEase helps organise your plan; it does not verify it with your employer or clients.",
-          "Calendar access, Maps estimates and private-note sharing are optional. You can begin planning without turning them all on.",
+          "Calendar access, Maps estimates and other optional features can wait. You can begin planning without turning them on.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "plus-plans",
+    title: "Free and RosterEase Plus",
+    description: "What the free plan includes, what Plus adds and how the setup trial works.",
+    sections: [
+      {
+        id: "free",
+        title: "What’s free",
+        paragraphs: [
+          "Shifts: one workplace with your roster, Calendar, widgets, backups, notes and checking in and out by hand.",
+          "Visits: five active clients with routes, visit progress, notes, Calendar, widgets and backups.",
+          "Live Activities and the Siri shortcuts that open Today, Calendar and Import are free too, as are two successful AI import assists a day on each device.",
+        ],
+      },
+      {
+        id: "plus",
+        title: "What Plus adds",
+        paragraphs: [
+          "Shift Plus adds more workplaces, worked times suggested from location, pinned workplace notes, Siri roster answers and actions, and more AI import assists.",
+          "Visits Plus adds more active clients, Siri visit answers and actions, and more AI import assists. It includes Shift Plus.",
+          "Each plan is monthly or annual, at the price the App Store shows. Subscriptions renew until you cancel them in your App Store account settings.",
+        ],
+      },
+      {
+        id: "trial",
+        title: "Your trial and subscribing",
+        paragraphs: [
+          "Finishing setup starts a free week of full Plus. Nothing is charged and nothing renews. The trial is given once. Resetting app data doesn’t start another, and reinstalling usually doesn’t either.",
+        ],
+        steps: [
+          "Open **Settings > RosterEase Plus** to see when your trial ends.",
+          "To keep Plus, tap **See Plus Plans**, choose annual or monthly, and tap **Subscribe**.",
+          "Tap **Restore purchases** to bring back a subscription you already have.",
+        ],
+      },
+      {
+        id: "ending",
+        title: "If a subscription ends",
+        paragraphs: [
+          "Everything you saved stays. Adding past the free limits and the automated extras stop: pinned notes read as ordinary notes, location monitoring stops and Siri roster answers stop.",
         ],
       },
     ],
@@ -67,11 +131,33 @@ export const guides: Guide[] = [
       "What Smart Import supports, what to check, and how to handle a result that needs work.",
     sections: [
       {
+        id: "start",
+        title: "Start an import",
+        paragraphs: [
+          "Smart Import turns a roster or client list into a plan you check before anything is added.",
+        ],
+        steps: [
+          "In Shifts, open **Workplaces**, tap the **…** menu, then **Import roster**. In Visits, use **Import clients** in **Clients**.",
+          "Tap **Paste text**, **File or PDF**, **Photo** or **Scan document** and add your roster.",
+          "Tap **Analyze roster**, or **Analyze visits** for clients.",
+          "Check the review below, then tap **Import roster** or **Import clients**.",
+        ],
+      },
+      {
         id: "source",
         title: "Choose a readable source",
         paragraphs: [
-          "Smart Import supports pasted text and supported image or PDF sources. Text extraction and parsing happen on your device. A clear, complete source is easier to review than a cropped or blurred screenshot.",
+          "Smart Import reads pasted text, images and PDFs. Text in photos and PDFs is read on your device. A clear, complete source is easier to review than a cropped or blurred screenshot.",
           "Import only information you are authorised to use. Avoid unnecessary private notes or sensitive workplace information.",
+        ],
+      },
+      {
+        id: "assist",
+        title: "Optional AI assist",
+        paragraphs: [
+          "If a source is hard to read, Smart Import can offer Assist on this device. It uses Apple’s on-device model on supported devices. Where it isn’t available, ordinary import still works.",
+          "An assist only proposes text. Compare it with the original and correct names, dates, times and rows before you analyse it.",
+          "Free includes two successful assists a day on this device; failed or cancelled requests don’t count. Shift Plus and Visits Plus include more. Apple’s availability and usage limits still apply.",
         ],
       },
       {
@@ -81,19 +167,20 @@ export const guides: Guide[] = [
           "Extracted text can contain mistakes. The review step is where you check the proposed changes, warnings and source rows before applying them.",
         ],
         steps: [
-          "Check names, dates, shift times, overnight boundaries and the proposed pattern.",
-          "For visits, check each client, address, duration and appointment window. In builds with per-client Visit Days, check those selections too. An import that omits visit days preserves the existing choices.",
-          "Correct ambiguous or unsupported rows, or explicitly exclude them where the review allows it. Do not dismiss a warning you have not understood.",
+          "Check names, dates, shift times and overnight boundaries.",
+          "For visits, check each client, address, duration, appointment window and visit days. An import that leaves out visit days keeps the existing choices.",
+          "Correct ambiguous or unsupported rows, or exclude them where the review allows it. Do not dismiss a warning you have not understood.",
           "Review the effect on the existing plan before you apply. Open Today and Calendar afterward to check the result.",
         ],
       },
       {
         id: "limits",
-        title: "Understand the shape of the import",
+        title: "Dated shifts or a rotation",
         paragraphs: [
-          "Shift imports create a repeating rotation. A dated roster is not automatically imported as independent dated shifts: any conversion to a pattern must be reviewed and confirmed.",
-          "Split shifts and several workplaces in one import are not supported. Import does not guarantee that every roster layout, handwriting style or PDF can be understood.",
-          "Field import preserves the supported visit order. It does not optimise a route or infer an entire client-management workflow from a document.",
+          "A dated roster can be imported as dated shifts or as a repeating rotation.",
+          "As dated shifts, each row becomes a shift on its date, and two rows on one date make a split or double shift. Dates before today are not added. As a rotation, the rows become a cycle that repeats after the last date.",
+          "One import covers one workplace. Import does not guarantee that every roster layout, handwriting style or PDF can be understood.",
+          "Client imports keep the order of the source. RosterEase does not optimise a route.",
         ],
       },
       {
@@ -107,6 +194,284 @@ export const guides: Guide[] = [
     ],
   },
   {
+    slug: "shift-changes",
+    title: "Change a shift or your rotation",
+    description: "One-off changes, extra shifts, short-rest warnings and roster change notes.",
+    sections: [
+      {
+        id: "one-day",
+        title: "Change one day",
+        paragraphs: [
+          "A one-off change affects only that day and leaves your rotation intact. To change future weeks, edit the rotation in the Workplace tab instead.",
+        ],
+        steps: [
+          "Open **Calendar** and tap the date.",
+          "Tap **Change Just This Day**.",
+          "Change the shift type, times or shift info. Choose **Off** to take the day off.",
+          "Tap **Save change**. To return the day to the pattern later, open it again and tap **Remove change**.",
+        ],
+      },
+      {
+        id: "extra",
+        title: "Add a split or double shift",
+        paragraphs: [
+          "Two shifts on one day make a split or double shift. Adding one doesn’t remove what’s already there.",
+        ],
+        steps: [
+          "Open **Calendar** and tap the date.",
+          "Tap **Add Another Shift**, or **Add a Shift** on a day off.",
+          "Choose the workplace, shift type and times, then tap **Add shift**.",
+        ],
+      },
+      {
+        id: "rest",
+        title: "Short rest warnings",
+        paragraphs: [
+          "When you change or add a shift, RosterEase tells you if it overlaps another shift or leaves less than 10 hours of rest before or after it. Today shows “Short rest · under 10 h”. These are notes only; you can still save.",
+        ],
+      },
+      {
+        id: "changed",
+        title: "What changed since you last looked",
+        paragraphs: [
+          "Today compares your roster with what it last showed you and lists days that changed, such as “Changed since Mon: Sat now Night 7:00 pm”. Changes from Calendar, an import or a rotation edit all count. Dismissing the note accepts the roster as it is now.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "recording-an-absence",
+    title: "Record an absence",
+    description: "Mark a shift you aren’t working without changing your rotation.",
+    sections: [
+      {
+        id: "record",
+        title: "Record it from Today",
+        paragraphs: [
+        ],
+        steps: [
+          "On **Today**, tap **Not working today** on your shift card, or swipe the card left.",
+          "Choose an absence type, such as **Not working today** or **Sick day**.",
+          "Tap **Save**. Today marks the day as not working and offers **Undo**.",
+        ],
+        after: [
+          "Not working today records an absence without health detail. Sick day is for when illness kept you from working. A shift that ended without a record asks you to record it as worked or not working.",
+        ],
+      },
+      {
+        id: "effect",
+        title: "What it changes",
+        paragraphs: [
+          "The absence is recorded in RosterEase only; your workplace is not notified. It doesn’t count as a completed shift. Your rotation, future shifts and Calendar events stay unchanged.",
+          "Undo not working on Today restores the previous record.",
+        ],
+      },
+      {
+        id: "types",
+        title: "Absence types",
+        paragraphs: [
+          "In Settings > Absence Types, choose the type Today starts with and add your own. Renaming or removing a type changes future choices only; recorded absences keep their label.",
+          "Your own types stay on this device. Recorded labels are included in backups.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "notes-and-check-ins",
+    title: "Notes and check-ins",
+    description: "Write dated notes, add optional captures and record check-in times.",
+    sections: [
+      {
+        id: "notes",
+        title: "Notes",
+        paragraphs: [
+          "In Shifts, a note is saved with its workplace and the date of the shift. In Visits, check in to a visit from Today to add notes for that client. The first line of a note becomes its title.",
+          "Editing a saved note adds a revision; earlier versions stay. With Shift Plus you can pin a note so it shows on every shift card at that workplace. Without Plus it reads as an ordinary note.",
+        ],
+      },
+      {
+        id: "captures",
+        title: "Optional captures",
+        paragraphs: [
+          "In Settings > Notes & Templates you can allow photos, a location, a signature and voice notes. All are off until you turn them on, and each capture needs a tap. Turning an option off keeps what you already saved.",
+          "How each one is kept, and what it can’t prove, is in How your records work.",
+        ],
+      },
+      {
+        id: "check-ins",
+        title: "Check in and out",
+        paragraphs: [
+          "Each check-in records the device time in that shift’s notes, without a location.",
+        ],
+        steps: [
+          "Open **Settings > Notes & Templates** and turn on **Shift check-ins**.",
+          "From an hour before a timed shift, tap **Check in** on Today.",
+          "Tap **Check out** when you finish, up to 30 minutes after the shift ends.",
+        ],
+        after: [
+          "For reminders, turn on **Reminders Before Work** and **Remind Me to Check In and Out** in Settings > Notifications. You’re reminded ten minutes after an unchecked shift starts and when a checked-in shift ends.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "how-your-records-work",
+    title: "How your records work",
+    description: "What a saved note keeps, what a signature shows, and what records can’t prove.",
+    sections: [
+      {
+        id: "kept",
+        title: "What a note can keep",
+        paragraphs: [
+          "Records stay on your device unless you turn on a feature that shares them.",
+        ],
+        steps: [
+          "Photos are saved small. A photo’s location is removed unless Keep photo locations is on.",
+          "A location is one point with its accuracy and time, never a route. Place names are looked up with Apple when shown.",
+          "Voice notes record up to 15 minutes. Transcription runs on this device and can make mistakes, so check the transcript before attaching. Audio is not uploaded for transcription.",
+          "Template fields include text, numbers, yes or no, choices, checklists, dates, times, durations, a 1–5 scale and photos. Saved notes keep the fields they were written with.",
+        ],
+      },
+      {
+        id: "signatures",
+        title: "Signatures",
+        paragraphs: [
+          "Draw a signature or type a name to agree to the note as shown. Editing the note later needs a new signature.",
+          "The signature is sealed with a key that stays on this device. The stamp shows whether the note is unchanged since signing, was sealed on another installation, couldn’t be sealed, or no longer matches. It is evidence of signing in RosterEase, not identity verification.",
+        ],
+      },
+      {
+        id: "history",
+        title: "Visit history",
+        paragraphs: [
+          "In Visits, check-ins, finished visits and visits that didn’t happen are kept in Settings > Privacy > Visit History. Undo adds a correction instead of erasing. In Shifts, check-ins and their corrections stay with the shift.",
+        ],
+      },
+      {
+        id: "limits",
+        title: "What records can’t prove",
+        paragraphs: [
+          "Times come from the device clock. Locations, signatures and check-ins don’t independently verify attendance or identity, and author labels are entered by you. Completion and payroll are separate from check-ins.",
+          "Note templates provide editable fields. They do not validate clinical decisions or make RosterEase an approved clinical-record system. Use your organisation’s approved system where required.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "location-review",
+    title: "Suggest worked times from location",
+    description: "How location review notices arrivals at a pinned workplace, the access it needs, and what happens without Plus.",
+    sections: [
+      {
+        id: "what",
+        title: "What it does",
+        paragraphs: [
+          "In Shifts, location review notices when you arrive at and leave a workplace whose pin you’ve confirmed, then suggests those times for you to confirm. It never records a shift on its own.",
+          "It watches 150 m around each confirmed pin with a shift today or tomorrow, up to 20 workplaces. Arrivals more than two hours either side of a shift are ignored.",
+        ],
+      },
+      {
+        id: "set-up",
+        title: "Set it up",
+        paragraphs: [],
+        steps: [
+          "Open Settings > Privacy > Location Review and turn it on.",
+          "Allow location While Using, then Always. With While Using, suggestions need the app open. iOS asks only once; after that, change it in iOS Settings.",
+          "Keep Precise Location on. Approximate location can’t resolve 150 m.",
+          "Drag each workplace’s pin onto the entrance you use and confirm it.",
+        ],
+      },
+      {
+        id: "kept",
+        title: "What is kept",
+        paragraphs: [
+          "No other location history is kept. Arrivals and departures clear once that workplace day is reviewed and the undo window passes, or 30 days after its last shift ends.",
+        ],
+      },
+      {
+        id: "without-plus",
+        title: "Without Plus",
+        paragraphs: [
+          "Location review needs Shift Plus; Visits Plus includes it. If a subscription ends, monitoring stops. Saved pins and suggestions stay, and you can remove a pin, but moving or confirming one needs Plus. Checking in and out by hand stays free.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "visit-routes",
+    title: "How visit routes are built",
+    description: "Where route days come from, when they change, and why today and past days are protected.",
+    sections: [
+      {
+        id: "built",
+        title: "Where routes come from",
+        paragraphs: [
+          "In Visits, RosterEase plans the next two weeks from your active clients, your work days and each client’s visit days.",
+          "Visits follow the order in Clients from 8:00, with your travel buffer between them and each appointment window respected. Clients at the same saved location stay together where their windows allow.",
+          "RosterEase does not optimise the order. Imports keep the order of the source.",
+        ],
+      },
+      {
+        id: "rebuilding",
+        title: "Rebuilding",
+        paragraphs: [
+          "Changing clients, work days or the travel buffer, or importing clients, updates unfinished planned visits on upcoming days. Manual add-ons, finished visits and the visit you’re checked in to stay.",
+          "To rebuild one future day, select it in Calendar and regenerate it. Visit order may change, missing clients may be added, and removed clients may drop off.",
+        ],
+      },
+      {
+        id: "protected",
+        title: "Protected days",
+        paragraphs: [
+          "Today and past route days are protected: Calendar won’t regenerate them. Use Today to finish current visits.",
+        ],
+      },
+      {
+        id: "addresses",
+        title: "Address quality",
+        paragraphs: [
+          "A blank address, or one without a street number and street name, shows a warning. Add a full street address before relying on Apple Maps travel times; RosterEase won’t guess a route from a missing or broad location.",
+          "Other warnings ask you to fit a visit’s duration inside its appointment window, or to shorten durations, buffers or windows when the route runs past the end of the day.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "travel-time",
+    title: "Leave-by times and travel estimates",
+    description: "How RosterEase works out when to leave, what the buffer does, and what Apple Maps receives.",
+    sections: [
+      {
+        id: "leave-by",
+        title: "How leave-by is worked out",
+        paragraphs: [
+          "Leave-by is your start time minus the travel time RosterEase allows. Without an Apple Maps estimate, that is your travel buffer. With one, it is the estimated drive plus your buffer.",
+          "In Visits, a visit at the same address as the one before needs no travel, and the first visit without an estimate shows its start time instead.",
+        ],
+      },
+      {
+        id: "buffer",
+        title: "Set your buffer and start location",
+        paragraphs: [
+          "Leave-by uses the buffer whenever there’s no Apple Maps estimate.",
+        ],
+        steps: [
+          "Open **Settings > Travel**.",
+          "Set **Travel Buffer** between 5 and 120 minutes. It starts at 15.",
+          "Set **Start Location** to where you usually leave from.",
+        ],
+      },
+      {
+        id: "apple-maps",
+        title: "Apple Maps estimates",
+        paragraphs: [
+          "Apple Maps Estimates is off until you turn it on in Settings > Travel. Estimates are optional and use addresses without client names or notes: the start and destination addresses are sent to Apple for a driving estimate.",
+          "If no estimate is available, for example with an incomplete address or no network, your buffer is used instead. An estimate is not a guarantee; allow for traffic, parking and access.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "calendar-and-privacy",
     title: "Choose what leaves the app",
     description:
@@ -114,27 +479,41 @@ export const guides: Guide[] = [
     sections: [
       {
         id: "calendar",
-        title: "Calendar is an explicit choice",
+        title: "Turn on Calendar Sync",
         paragraphs: [
-          "In Shift Worker, open Settings > Calendar Sync and select a workplace. Review its destination calendar before enabling sync. Grant the requested system permission if you want to use the feature. Field Worker does not have Calendar Sync.",
-          "RosterEase uses generic event-note copy by default. Private shift notes are included only if you enable Include Shift Notes. Anyone with access to the destination calendar may be able to see what is written there.",
-          "If permission is denied, review RosterEase permissions in iOS or iPadOS Settings. Reopen the app, check the selected calendar and verify a sample event. Do not delete an entire calendar to troubleshoot duplicate events.",
+          "Visits does not have Calendar Sync.",
+        ],
+        steps: [
+          "In Shifts, open **Settings > Calendar Sync** and choose a workplace.",
+          "Turn on **Sync workplace shifts**.",
+          "Choose where events go: the app default, a dedicated workplace calendar or a specific iOS calendar.",
+        ],
+        after: [
+          "Each event shows the shift and workplace with the note “Synced from RosterEase”. Include Shift Info also adds each day’s Shift info, the optional text you add when changing a day in Calendar. Private notes stay in RosterEase. Anyone with access to the destination calendar may see what is written there.",
+          "Do not delete an entire calendar to troubleshoot duplicate events.",
+        ],
+      },
+      {
+        id: "calendar-permission",
+        title: "Calendar permission",
+        paragraphs: [
+          "RosterEase asks for full calendar access because it creates, updates and removes the events it syncs. Access to add events only is not enough. If access is missing, tap Allow Calendar Access or change it in iOS Settings, then check a sample event.",
         ],
       },
       {
         id: "maps",
         title: "Maps receives location details",
         paragraphs: [
-          "Opening directions sends the selected address or location text to Maps. Client names and private notes are not included in that request.",
-          "Review Settings > Travel Defaults for optional Apple Maps travel estimates, which are off by default. If enabled, address text is used for the estimate. A travel estimate is not a guarantee of arrival time; keep your own buffer for traffic, parking and access.",
+          "Opening directions sends the selected address to Maps. Client names and private notes are not included.",
+          "Apple Maps travel estimates are off by default. See Leave-by times and travel estimates for what they send.",
         ],
       },
       {
         id: "display",
         title: "Consider what is visible",
         paragraphs: [
-          "Open Settings > Privacy & Display to review privacy controls. When privacy lock is on, widgets show private placeholders instead of roster or visit details.",
-          "App privacy controls do not remove details you have already chosen to share through Calendar, an exported file or a support message. Review each destination separately.",
+          "Settings > Privacy controls what notifications, widgets, Live Activities, Siri and app previews show. See Use the privacy lock.",
+          "App privacy controls do not remove details you have already shared through Calendar, an exported file or a support message. Review each destination separately.",
         ],
       },
       {
@@ -148,52 +527,277 @@ export const guides: Guide[] = [
     ],
   },
   {
+    slug: "live-activities",
+    title: "Follow your work on the Lock Screen",
+    description: "What the RosterEase Live Activity shows, when it appears and how to keep it private.",
+    sections: [
+      {
+        id: "turn-on",
+        title: "Turn it on",
+        paragraphs: [
+          "Live Activities are optional and free. This is a setting for this device. It stays off on other devices, including after you restore a backup.",
+        ],
+        steps: [
+          "Open **Settings > Notifications** and turn on **Show Live Activities**.",
+          "If iOS has them turned off for RosterEase, tap **Turn on in iOS Settings** and allow them.",
+        ],
+      },
+      {
+        id: "shows",
+        title: "What it shows",
+        paragraphs: [
+          "For a shift: when to leave, then a countdown to your finish, your next shift and the rest before it. For visits: how many visits are done, the next visit and when the route ends.",
+          "It appears on the Lock Screen and, on supported iPhones, in the Dynamic Island. Times use the workplace or route time zone.",
+        ],
+      },
+      {
+        id: "when",
+        title: "When it appears",
+        paragraphs: [
+          "Open RosterEase when your work day starts. A Live Activity appears when there is a current or upcoming shift or visit, and may not appear on a day off. A finished one leaves about 30 minutes later.",
+          "iOS limits a Live Activity to eight hours of live updates, so it may not last a whole long shift. Reopen RosterEase to refresh it while work is still in progress.",
+        ],
+      },
+      {
+        id: "private",
+        title: "Keep it private",
+        paragraphs: [
+          "Turn on Hide Live Activity details in Settings > Privacy. It then shows generic content, such as “Shift details private”, everywhere, including the Dynamic Island and StandBy, even after you unlock.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "siri",
+    title: "Use Siri and Shortcuts",
+    description: "What you can ask, what Siri can record, and how answers stay private.",
+    sections: [
+      {
+        id: "free",
+        title: "Free shortcuts",
+        paragraphs: [
+          "Opening Today, Calendar and Import is free. Try “Open today in RosterEase”.",
+        ],
+      },
+      {
+        id: "answers",
+        title: "Ask Siri about your roster",
+        paragraphs: [
+          "Roster answers need Shift Plus or Visits Plus. Ask about today, tomorrow or a day this week, your next shift or visit, when you finish, or the next seven days. In Shortcuts, Read Roster Day accepts any date.",
+        ],
+        steps: [
+          "Open **Settings > Siri & Shortcuts** and turn on **Allow Siri roster answers**.",
+          "Ask Siri, for example “When’s my next shift in RosterEase?”",
+        ],
+        after: [
+          "Answers come from what is saved in RosterEase, not changes your employer hasn’t added to the app.",
+        ],
+      },
+      {
+        id: "actions",
+        title: "Recording with Siri",
+        paragraphs: [
+          "In Shifts, Siri can mark today’s shift worked or not working, check you in or out when Shift check-ins are on, and add a quick note. In Visits, it can check you in to your next visit or mark the visit you’re at complete.",
+          "Siri says what it will save and waits for you to confirm. You can undo from Today.",
+        ],
+      },
+      {
+        id: "privacy",
+        title: "Privacy",
+        paragraphs: [
+          "Unlock your device before asking for roster details. Siri says “Visit 2 of 5” instead of a client’s name unless you turn on Say client names. Addresses, phone numbers and note contents are never shared with Siri or Shortcuts.",
+          "Hide details in Siri answers, in Settings > Privacy, gives generic answers and counts even after you authenticate. Authentication is still required, and a paired device may satisfy it. Siri can speak aloud, so consider who can hear.",
+        ],
+      },
+      {
+        id: "apple-intelligence",
+        title: "Apple Intelligence",
+        paragraphs: [
+          "These shortcuts work with Siri without Apple Intelligence. Newer Siri features depend on your device, software, language, region and Apple settings.",
+          "RosterEase reads saved shifts and visits on your device, passes the answer you asked for to Siri and saves only changes you confirm. It does not send answers to a RosterEase AI server or keep a Siri conversation history.",
+          "Apple manages Siri processing. Apple Intelligence can process requests on device or use Private Cloud Compute for more complex requests. Apple says data processed by Private Cloud Compute is not retained.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "privacy-lock",
+    title: "Use the privacy lock",
+    description: "Require Face ID, Touch ID or your passcode, and choose what shows outside the app.",
+    sections: [
+      {
+        id: "lock",
+        title: "Turn on the privacy lock",
+        paragraphs: [
+          "Set a device passcode in iOS or iPadOS Settings first. Without one, Require Unlock cannot protect RosterEase, even when the switch is on.",
+          "Turning the lock off needs authentication. These settings stay on this device and aren’t in backups.",
+        ],
+        steps: [
+          "Open **Settings > Privacy** and turn on **Require Unlock**. Face ID, Touch ID or your passcode now opens RosterEase.",
+          "Choose **Ask Again** to set how long you can be away first, from Immediately to 1 Hour.",
+        ],
+      },
+      {
+        id: "outside",
+        title: "Details outside RosterEase",
+        paragraphs: [
+          "You can hide details in notifications, widgets, Live Activities, Siri answers and app switcher previews. Each is separate from Require Unlock, and everything inside the app stays visible.",
+        ],
+      },
+      {
+        id: "notifications",
+        title: "Notifications and Show Previews",
+        paragraphs: [
+          "Hidden notification details follow the device’s Show Previews setting. Always keeps details visible on the Lock Screen; Never hides them even after you unlock. For hiding only while locked, choose When Unlocked in iOS or iPadOS Settings > Notifications. Changes apply to reminders not yet delivered.",
+        ],
+      },
+      {
+        id: "widgets",
+        title: "Lock Screen widgets",
+        paragraphs: [
+          "Hidden widget details also need Lock Screen Widgets turned off in iOS or iPadOS Settings > Face ID & Passcode (or Touch ID & Passcode) > Allow Access When Locked. Otherwise the system can show details while locked. RosterEase can’t read that setting.",
+        ],
+      },
+      {
+        id: "siri",
+        title: "Siri on paired devices",
+        paragraphs: [
+          "With Hide details in Siri answers on, Siri gives generic answers and counts, even after authentication. Siri still requires authentication, and a paired device may satisfy it. Siri can speak aloud, so consider who can hear.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "backup-and-restore",
     title: "Keep a copy of your plan",
     description:
-      "Create an encrypted backup and understand what restoring will replace.",
+      "Save encrypted backups, keep your backup key, and understand what restoring replaces.",
     sections: [
       {
         id: "export",
-        title: "Create a backup",
+        title: "Save a backup",
         paragraphs: [
-          "Start a backup when you want to save a copy. Exports are encrypted using a passphrase you choose; RosterEase does not back up automatically to a cloud service.",
         ],
         steps: [
-          "Open Settings > Data Management and find Backups.",
-          "Enter a Backup passphrase of at least 8 characters and repeat it in Confirm passphrase. Tap Export Backup once the button is enabled.",
-          "Save the file through the Apple system picker to a location you can find again.",
-          "Keep the passphrase securely and separately from the file. Check that the export completed before depending on it.",
+          "On **Today**, tap the settings button, then **Data Management**.",
+          "Tap **Save backup…**.",
+          "Choose where to save it in Files. RosterEase confirms with **Backup Saved**.",
+        ],
+        after: [
+          "A backup holds your records, note history, photos, recordings and saved preferences, encrypted. Device-local choices such as the privacy lock and automatic backup folder aren’t included.",
+        ],
+      },
+      {
+        id: "weekly",
+        title: "Choose weekly backups",
+        paragraphs: [
+          "Weekly backups are optional and free. RosterEase tries when a backup is due and you open the app, and requests background opportunities from iOS. iOS decides when background work can run; a backup is not guaranteed on a particular day or while the app is closed.",
+        ],
+        steps: [
+          "Open **Settings > Data Management** and turn on **Weekly Automatic Backup**.",
+          "Choose a folder in Files. RosterEase tries to save the first backup there.",
+          "Check **Last Backup** for a successful save. Use **Back up now** to try again, or **Choose folder** if the folder is unavailable.",
+        ],
+        after: [
+          "RosterEase keeps four automatic backups in that folder and removes older automatic files only after a new backup is verified. Manual exports are not pruned. Turning weekly backups off leaves the files already saved.",
+          "If a backup fails, your records remain on this device. RosterEase retries later; use Back up now if you need a copy sooner. An empty roster is not backed up.",
+        ],
+      },
+      {
+        id: "key",
+        title: "Your backup key",
+        paragraphs: [
+          "RosterEase creates a backup key for new manual and weekly backups and keeps it in Keychain. It syncs with iCloud Keychain when that’s on. An older backup still needs the key or passphrase used to save it, which may differ from the key shown now.",
+          "Without the key, a backup can’t be opened. Show backup key in Data Management needs Face ID, Touch ID or your passcode. Keep a copy somewhere safe, especially without iCloud Keychain.",
         ],
       },
       {
         id: "storage",
         title: "Your file, your storage choice",
         paragraphs: [
-          "A backup can include roster, workplace, client, visit and preference data. RosterEase does not keep a server copy of your exported file or recover your chosen passphrase.",
-          "If you choose iCloud Drive or another provider, that provider's retention, sharing and deletion rules apply. Anyone with the file and passphrase may be able to restore the contents.",
+          "RosterEase does not keep a server copy of your backup or your key. If you save to iCloud Drive or another provider, its retention, sharing and deletion rules apply. Anyone with the file and the key may be able to restore it.",
         ],
       },
       {
         id: "restore",
-        title: "Check before restoring",
+        title: "Restore a backup",
         paragraphs: [
-          "Restore replaces the current RosterEase data on this device. Export a separate copy of the current plan first if you need to keep it.",
+          "Restoring replaces RosterEase records and backed-up preferences on this device and updates Calendar Sync events. Save a backup of the current data first if you need it. Device-local privacy and automatic backup settings stay as they are.",
         ],
         steps: [
-          "Open Settings > Data Management > Backups and tap Restore Backup. Choose the file and enter its passphrase when requested.",
-          "Review the backup preview and any compatibility or capacity messages.",
-          "Confirm replacement only when you are sure you have the right file.",
-          "Check your workplaces, clients, calendar and preferences after restore.",
+          "In **Settings > Data Management**, tap **Restore backup** and choose the file.",
+          "RosterEase tries keys already saved in Keychain. If asked for a Backup key, enter the key used to save that file. For a backup exported from 1.0, enter its original passphrase here.",
+          "Review what the backup contains, then confirm.",
+        ],
+      },
+      {
+        id: "earlier-version",
+        title: "Data from version 1.0",
+        paragraphs: [
+          "Before updating from 1.0, export an encrypted backup and keep the passphrase you chose in that version. A 1.0 backup can still be restored in 1.1.",
+          "Version 1.1 uses a new data layout. When it recognises your 1.0 data, it shows Bring your data to this version. Save a copy keeps the old store files in Files; it is not the same as an exported backup.",
+        ],
+        steps: [
+          "Tap **Continue** and confirm setting the old data aside on this device.",
+          "Setup opens **Bring Back Your Data**. Tap **Bring back 1.0 data**, review the contents and confirm to restore it.",
+          "Or tap **Choose backup file** to restore an exported backup instead. Enter its original passphrase if asked for a Backup key.",
+        ],
+        after: [
+          "The set-aside data stays inside the app. Resetting app data or uninstalling can remove it, so keep a separate backup. If recovery fails or the screen says Start fresh with this version instead, save a copy and contact support before resetting or uninstalling.",
         ],
       },
       {
         id: "problems",
         title: "If restore cannot continue",
         paragraphs: [
-          "For a wrong passphrase, check the original value rather than creating a new one. For an invalid or unsupported file, keep the original backup and contact support with the error text.",
-          "Free can restore a backup with one Shift Worker workplace. A backup containing multiple workplaces requires the corresponding Plus access.",
-          "If the app cannot open, preserve the installation and your backup files. Do not uninstall or reset it as a first troubleshooting step: local data may be lost. Contact support before taking destructive action.",
+          "For an invalid or unsupported file, keep the original backup and contact support with the error text.",
+          "The free plan restores a backup with one workplace or up to five active clients; a larger backup needs Plus.",
+          "If the app cannot open, keep the installation and your backup files. Do not uninstall or reset it as a first step: local data may be lost. Contact support before taking destructive action.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "performance-reports",
+    title: "Local performance reports",
+    description: "An optional summary of crashes and resource use that stays on your device until you share it.",
+    sections: [
+      {
+        id: "off",
+        title: "Turn it on",
+        paragraphs: [
+          "RosterEase can keep a small summary from Apple’s MetricKit to help investigate crashes, hangs and resource use. It is off unless you turn it on. Declining changes nothing else, and nothing is uploaded automatically.",
+        ],
+        steps: [
+          "Open **Settings > About > Local performance reports**.",
+          "Turn on **Keep local performance reports**. You can also choose this during setup.",
+        ],
+      },
+      {
+        id: "kept",
+        title: "What is kept",
+        paragraphs: [
+          "Kept: report intervals, CPU time, peak memory and disk writes; counts of crashes, hangs, CPU exceptions and disk-write exceptions; and the app version, build and iOS version when each report arrived.",
+          "Not kept: raw reports or stack traces, names, roster or client records, notes, locations, file paths, account IDs, keys or device identifiers.",
+          "Only reports covering time after you turned this on are accepted. Delivery is best-effort: metrics usually arrive at most daily, and a crash report needs a later launch.",
+        ],
+      },
+      {
+        id: "limits",
+        title: "Limits and deleting",
+        paragraphs: [
+          "Up to 7 days, 20 reports and 10 MiB are kept, oldest removed first. Expired reports are removed the next time the app runs, not while it is closed. Reports are excluded from backups.",
+          "Turning the option off stops collection and deletes the reports. If deletion fails, the app tells you and lets you retry. It can’t remove Apple’s own diagnostics or copies you’ve shared.",
+        ],
+      },
+      {
+        id: "sharing",
+        title: "Sharing is your choice",
+        paragraphs: [],
+        steps: [
+          "Tap Unlock and review JSON and authenticate with Face ID, Touch ID or your passcode.",
+          "Read the exact file shown.",
+          "Tap Share reviewed JSON and choose where it goes. RosterEase can’t delete copies you’ve shared.",
         ],
       },
     ],

@@ -1,5 +1,6 @@
 ---
 import RosterEaseLayout from "../../layouts/RosterEaseLayout.astro";
+import HelpText from "../../components/HelpText.astro";
 import { guides, type Guide } from "../../lib/guides";
 export function getStaticPaths() {
   return guides.map((guide) => ({
@@ -18,7 +19,10 @@ const { guide } = Astro.props;
     <section class="re-page-intro">
       <a class="re-breadcrumb" href="/help/">← All help guides</a><h1>
         {guide.title}
-      </h1><p>{guide.description}</p><nav
+      </h1><p>{guide.description}</p><p>
+        These guides cover RosterEase 1.1. Check your version in Settings &gt; About;
+        older versions have different controls and features.
+      </p><nav
         class="re-subnav"
         aria-label="Guide contents"
       >
@@ -34,15 +38,18 @@ const { guide } = Astro.props;
           <section id={section.id}>
             <h2>{section.title}</h2>
             {section.paragraphs.map((paragraph) => (
-              <p>{paragraph}</p>
+              <p><HelpText text={paragraph} /></p>
             ))}
             {section.steps && (
               <ol>
                 {section.steps.map((step) => (
-                  <li>{step}</li>
+                  <li><HelpText text={step} /></li>
                 ))}
               </ol>
             )}
+            {section.after?.map((paragraph) => (
+              <p><HelpText text={paragraph} /></p>
+            ))}
           </section>
         ))
       }<section>
