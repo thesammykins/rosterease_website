@@ -1,3 +1,14 @@
+# RosterEase website
+
+Static Astro site. Node comes from `mise.toml`. Before pushing, run:
+
+```sh
+npm ci && npm run check:a11y && npm run check:motion
+```
+
+(~10s). Pushing `main` deploys to GitHub Pages. Record a one-off approval as a
+commit trailer, `Approved-by: Sammy <link to her message>`, not in this file.
+
 # Standing approvals
 
 - Sammy approved pushing the FAQ/support pages live while keeping the rest of the website changes back ([10 November approval](https://ampcode.com/threads/T-01a1bdd5-f840-7150-a262-fcbe949823dc#M-034uyrRl3i3IAFg6n87Ugx)). Publish the R6 help articles and index from a separate branch based on `main`, with only their renderer, text helper and sitemap entries. This approval covers pushing those selective changes to this repository and `main` for its normal Pages deployment, not merging the full `help-1.1` branch, the homepage redesign or other marketing changes. No app release build, archive, upload or submission is authorized.
