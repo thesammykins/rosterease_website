@@ -1,6 +1,6 @@
 {
-  "capturedOn": "2026-11-09",
-  "appSourceCommit": "7d52a8f9",
+  "capturedOn": "2026-11-12",
+  "appSourceCommit": "7d52a8f9, bf04010",
   "build": "RosterEase Debug, iOS Simulator, -rostereaseMarketingCapture and a paid Plus entitlement",
   "timeZone": "Australia/Sydney",
   "captureMethod": "simctl io screenshot --type=png; native pixels, unaltered",
@@ -12,25 +12,25 @@
       "file": "shiftToday-light.png",
       "width": 1206,
       "height": 2622,
-      "sha256": "1058c46b803729e72c4987a8918315d2b58b547c212297f4558bddb6af03203f",
+      "sha256": "ab2657867ee7ccc69dbdbfe7f2937acd8fa5fd5bb27ce3f0c3b5bb4d2ddb94b4",
       "device": "RosterEase QA iPhone 17",
       "appearance": "light",
       "fixture": "marketing-week",
       "appClock": "2026-10-20T05:55:00+11:00",
-      "appRevision": "7d52a8f9",
-      "runtime": "27.0"
+      "appRevision": "bf04010",
+      "runtime": "27.3"
     },
     {
       "file": "shiftToday-dark.png",
       "width": 1206,
       "height": 2622,
-      "sha256": "a81ef8cd32e77b857ab84d2ac0a8c98065a348b0454fa3a6ea86b6be7539375d",
+      "sha256": "4e6c4585adeb00e480b58bd19e354aef245db8d14d4d370263fd1c7e2e451423",
       "device": "RosterEase QA iPhone 17",
       "appearance": "dark",
       "fixture": "marketing-week",
       "appClock": "2026-10-20T05:55:00+11:00",
-      "appRevision": "7d52a8f9",
-      "runtime": "27.0"
+      "appRevision": "bf04010",
+      "runtime": "27.3"
     },
     {
       "file": "fieldToday-light.png",
@@ -300,25 +300,25 @@
       "file": "duoOuterShiftToday-light.png",
       "width": 1398,
       "height": 2034,
-      "sha256": "316130074de837a06cd1ca0ad6d18c1e6065da98eeeb6db8144f0f6d01f9df1d",
+      "sha256": "f287785da378d7b1e81540887693a40abd1d5a167135ffec6495b6c7397bdcee",
       "device": "RosterEase QA iPhone Duo",
       "appearance": "light",
       "fixture": "marketing-week",
       "appClock": "2026-11-04T05:55:00+11:00",
-      "appRevision": "7d52a8f9",
-      "runtime": "27.1"
+      "appRevision": "bf04010",
+      "runtime": "27.3"
     },
     {
       "file": "duoOuterShiftToday-dark.png",
       "width": 1398,
       "height": 2034,
-      "sha256": "ee7b404e0e11eff6e21b7eeedebaad523450be850b491e9a008155a98e0edc5a",
+      "sha256": "048b99421a035416c1d76da90c5f966ee066979682546ed9deca9666e2fb948c",
       "device": "RosterEase QA iPhone Duo",
       "appearance": "dark",
       "fixture": "marketing-week",
       "appClock": "2026-11-04T05:55:00+11:00",
-      "appRevision": "7d52a8f9",
-      "runtime": "27.1"
+      "appRevision": "bf04010",
+      "runtime": "27.3"
     },
     {
       "file": "duoOuterFieldToday-light.png",
@@ -396,25 +396,25 @@
       "file": "duoInnerShiftToday-light.png",
       "width": 2853,
       "height": 2007,
-      "sha256": "23b9aeeba43bbc865ad83f18d2207a5ab6a6d4d0101a903831086ba64f0ac3a9",
+      "sha256": "36d60671da787b1cdf20beb8ece007892b6e4c110115639af61c9aaebe530a27",
       "device": "RosterEase QA iPhone Duo",
       "appearance": "light",
       "fixture": "marketing-week",
       "appClock": "2026-11-04T05:55:00+11:00",
-      "appRevision": "7d52a8f9",
-      "runtime": "27.1"
+      "appRevision": "bf04010",
+      "runtime": "27.3"
     },
     {
       "file": "duoInnerShiftToday-dark.png",
       "width": 2853,
       "height": 2007,
-      "sha256": "57c5b2a5ed37d0e4cf67ca8e609e14082924273201b717277eb3066f04e3d7bc",
+      "sha256": "fc5b2871cbffdf8538a81f24a408400c90406365908bdbb2d44deaca3e1d477f",
       "device": "RosterEase QA iPhone Duo",
       "appearance": "dark",
       "fixture": "marketing-week",
       "appClock": "2026-11-04T05:55:00+11:00",
-      "appRevision": "7d52a8f9",
-      "runtime": "27.1"
+      "appRevision": "bf04010",
+      "runtime": "27.3"
     },
     {
       "file": "duoInnerFieldToday-light.png",

@@ -1,15 +1,10 @@
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 
-// Serve only the artwork's inputs; repository files are not exposed by this preview.
+// The artwork embeds its fonts and composited native screens.
+// Serve only that document; repository files are not exposed by this preview.
 const files = new Map([
   ["/", ["docs/design/social-preview.html", "text/html"]],
-  ["/styles.css", ["src/styles/rosterease.css", "text/css"]],
-  ["/icon.svg", ["src/assets/rosterease/rosterease-app-icon.svg", "image/svg+xml"]],
-  ...["shift-today-dark", "field-today-dark"].map((name) => [
-    `/screens/${name}.png`,
-    [`src/assets/rosterease/screenshots/capture-2026-10-01/${name}.png`, "image/png"],
-  ]),
 ]);
 
 createServer(async (request, response) => {

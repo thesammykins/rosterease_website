@@ -70,8 +70,9 @@ export interface AppScreen {
   alt: string;
 }
 
-// Native 9 November 2026 simulator captures of the 1.1 release source (7d52a8f9), synthetic fixtures;
-// provenance is in each folder's capture-manifest.json.
+// Native simulator captures with synthetic fixtures. Today and affected help
+// stills were refreshed on 12 November; each folder's manifest records the
+// per-image source revision. These do not attest to the App Store binary.
 export const screens = {
   shiftToday: {
     light: shiftTodayLight,

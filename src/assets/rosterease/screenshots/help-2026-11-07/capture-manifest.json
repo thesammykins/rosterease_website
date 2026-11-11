@@ -1,6 +1,6 @@
 {
-  "capturedOn": "2026-11-07",
-  "appSourceCommit": "a5014a3b",
+  "capturedOn": "2026-11-12",
+  "appSourceCommit": "a5014a3b, bf04010",
   "build": "RosterEase Debug, iOS Simulator, -rostereaseMarketingCapture and a paid Plus entitlement",
   "timeZone": "Australia/Sydney",
   "captureMethod": "simctl io screenshot --type=png; native pixels, unaltered",
@@ -132,49 +132,49 @@
       "file": "shift-changes-today-light.png",
       "width": 1206,
       "height": 2622,
-      "sha256": "d6a2a3ebcc9c3cf77a59cfcd3dcaf6289b63cde4b0ead6efa5e3bab3fd040f0f",
+      "sha256": "74f1f37f26cd9ec745eb909e90dc7ff128bb5ad184878c739b7e1a8c8955580a",
       "device": "RosterEase QA iPhone 17",
       "appearance": "light",
       "fixture": "marketing-week-roster-changes",
       "appClock": "2026-10-20T05:55:00+11:00",
-      "appRevision": "a5014a3b",
-      "runtime": "27.0"
+      "appRevision": "bf04010",
+      "runtime": "27.3"
     },
     {
       "file": "shift-changes-today-dark.png",
       "width": 1206,
       "height": 2622,
-      "sha256": "bd4ec3f606c371d148204795462ae91b2aaea8319bb3c8bf5eba48933c7b89c8",
+      "sha256": "714ce4195117b1d68cf61c97589bd7aef16e3bb45712f885a034189d5546b222",
       "device": "RosterEase QA iPhone 17",
       "appearance": "dark",
       "fixture": "marketing-week-roster-changes",
       "appClock": "2026-10-20T05:55:00+11:00",
-      "appRevision": "a5014a3b",
-      "runtime": "27.0"
+      "appRevision": "bf04010",
+      "runtime": "27.3"
     },
     {
       "file": "recording-an-absence-light.png",
       "width": 1206,
       "height": 2622,
-      "sha256": "65d49b9688920f81529a34ea7555e0f3bd45341f2c94cd3ebe6536742f0d28b5",
+      "sha256": "2d0246fb960ed170d688b0469649881a9ade365f90e07236d53f93fb2b5f570f",
       "device": "RosterEase QA iPhone 17",
       "appearance": "light",
       "fixture": "marketing-week",
       "appClock": "2026-10-20T05:55:00+11:00",
-      "appRevision": "a5014a3b",
-      "runtime": "27.0"
+      "appRevision": "bf04010",
+      "runtime": "27.3"
     },
     {
       "file": "recording-an-absence-dark.png",
       "width": 1206,
       "height": 2622,
-      "sha256": "077f11a6a654ef5fe0b00945bfa52f3a176357259faa3a23fa6b77b2dd9f5e49",
+      "sha256": "4207e14cc137d27b7c9f458e60db516b15592604b2d7e0ab7a0e50ea9ee74cdb",
       "device": "RosterEase QA iPhone 17",
       "appearance": "dark",
       "fixture": "marketing-week",
       "appClock": "2026-10-20T05:55:00+11:00",
-      "appRevision": "a5014a3b",
-      "runtime": "27.0"
+      "appRevision": "bf04010",
+      "runtime": "27.3"
     },
     {
       "file": "notes-and-check-ins-light.png",
@@ -348,25 +348,25 @@
       "file": "calendar-and-privacy-light.png",
       "width": 1206,
       "height": 2622,
-      "sha256": "f497db7b37a431618d4d876ea124e39274038a7031b59d19686adc4a437d79ec",
+      "sha256": "1cad6883fd822a52f214003d762593fa55264983f21180ab3aa4c9675f7bee6c",
       "device": "RosterEase QA iPhone 17",
       "appearance": "light",
-      "fixture": "marketing-week",
+      "fixture": "marketing-video-shift",
       "appClock": "2026-10-20T10:40:00+11:00",
-      "appRevision": "a5014a3b",
-      "runtime": "27.0"
+      "appRevision": "bf04010",
+      "runtime": "27.3"
     },
     {
       "file": "calendar-and-privacy-dark.png",
       "width": 1206,
       "height": 2622,
-      "sha256": "0acfd7fa9cd3e92d8db3ae735c08ef0e90f3a31db6c56a56d99d7bafc35a56c8",
+      "sha256": "fb9968c4aac842c1931ec5627601b0d6422a5c132776221681f766aa203f779b",
       "device": "RosterEase QA iPhone 17",
       "appearance": "dark",
-      "fixture": "marketing-week",
+      "fixture": "marketing-video-shift",
       "appClock": "2026-10-20T10:40:00+11:00",
-      "appRevision": "a5014a3b",
-      "runtime": "27.0"
+      "appRevision": "bf04010",
+      "runtime": "27.3"
     },
     {
       "file": "privacy-lock-light.png",
