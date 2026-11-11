@@ -1,0 +1,7 @@
+For notes you write often, make a template with the fields you need. Open Settings, then Notes, and Manage Templates.
+
+Tap Create template and give it a name. We'll call this one Home visit. Name the first field Visit summary and choose Long text as its format.
+
+Add another field for Follow-up needed, with Yes or no as its format. You can make a field required if it must be filled in before saving a note.
+
+Check the labels, then save the template. When you write a note, choose Home visit from the template menu. Saving the template hasn't created a visit note yet.

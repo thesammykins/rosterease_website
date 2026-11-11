@@ -1,0 +1,67 @@
+---
+import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import catalogue from "../assets/rosterease/support-guides/catalogue.json";
+
+interface Props {
+  guide: (typeof catalogue)[number];
+}
+const { guide } = Astro.props;
+const posters = import.meta.glob<ImageMetadata>(
+  "../assets/rosterease/support-guides/*/poster.png",
+  { eager: true, import: "default" },
+);
+const transcripts = import.meta.glob<string>(
+  "../assets/rosterease/support-guides/*/transcript.txt",
+  { eager: true, query: "?raw", import: "default" },
+);
+const directory = `../assets/rosterease/support-guides/${guide.id}`;
+const poster = await getImage({
+  src: posters[`${directory}/poster.png`],
+  width: 720,
+  format: "webp",
+  quality: 85,
+});
+const paragraphs = transcripts[`${directory}/transcript.txt`].trim().split(/\n\s*\n/);
+const media = `/media/help/narrated/${guide.id}`;
+---
+
+<div class="re-support-guide">
+  <h3 id={`watch-${guide.id}`}>{guide.title}</h3>
+  <p class="re-support-guide__duration">{Math.round(guide.seconds)} seconds</p>
+  <video
+    controls
+    playsinline
+    preload="none"
+    width="1080"
+    height="1920"
+    poster={poster.src}
+    aria-labelledby={`watch-${guide.id}`}
+    data-support-guide
+  >
+    <source src={`${media}/guide.mp4`} type="video/mp4" />
+    <track
+      kind="captions"
+      src={`${media}/captions.vtt`}
+      srclang="en"
+      label="English"
+      default
+    />
+    <p><a href={`${media}/guide.mp4`}>Download the video</a> or read the transcript below.</p>
+  </video>
+  <details class="re-support-guide__transcript">
+    <summary>Read transcript<span class="re-visually-hidden">: {guide.title}</span></summary>
+    {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+  </details>
+</div>
+
+<script>
+  const videos = document.querySelectorAll<HTMLVideoElement>("video[data-support-guide]");
+  videos.forEach((video) => {
+    video.addEventListener("play", () => {
+      videos.forEach((other) => {
+        if (other !== video) other.pause();
+      });
+    });
+  });
+</script>

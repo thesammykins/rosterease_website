@@ -1,0 +1,7 @@
+In Shifts, open Settings, then Calendar Sync. Allow Calendar access if you want the app to create and update events.
+
+Choose the destination for this workplace. Here we're using a dedicated workplace calendar. Read the summary before tapping Save destination.
+
+Changing the destination can move events the app already manages. Wait for the result, then check your calendar.
+
+Include Shift Info is separate from private notes. Leave it off if you don't want that extra shift information in events. Visits doesn't have this Calendar Sync setting. The written guide covers the other choices about what leaves the app.

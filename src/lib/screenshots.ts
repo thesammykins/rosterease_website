@@ -63,10 +63,6 @@ import help_backupAndRestoreRecoveryLight from "../assets/rosterease/screenshots
 import help_backupAndRestoreRecoveryDark from "../assets/rosterease/screenshots/help-2026-11-07/backup-and-restore-recovery-dark.png";
 import help_performanceReportsLight from "../assets/rosterease/screenshots/help-2026-11-07/performance-reports-light.png";
 import help_performanceReportsDark from "../assets/rosterease/screenshots/help-2026-11-07/performance-reports-dark.png";
-import changeOneDayStart from "../assets/rosterease/screenshots/help-2026-11-07/recordings/change-one-day-start.png";
-import importReviewStart from "../assets/rosterease/screenshots/help-2026-11-07/recordings/import-review-start.png";
-import recordAnAbsenceStart from "../assets/rosterease/screenshots/help-2026-11-07/recordings/record-an-absence-start.png";
-import saveABackupStart from "../assets/rosterease/screenshots/help-2026-11-07/recordings/save-a-backup-start.png";
 
 export interface AppScreen {
   dark: ImageMetadata;
@@ -245,31 +241,3 @@ export const helpScreens = {
 } satisfies Record<string, AppScreen>;
 
 export type HelpScreen = keyof typeof helpScreens;
-
-export interface HelpRecording {
-  // First frame, shown until the loop starts.
-  start: ImageMetadata;
-  label: string;
-}
-// Silent light-mode loops: public/media/help/<name>.mp4 and .webm, plus
-// <name>-mobile.* at 480 px wide for phones.
-export const helpRecordings = {
-  "change-one-day": {
-    start: changeOneDayStart,
-    label: "Changing one day from the calendar",
-  },
-  "import-review": {
-    start: importReviewStart,
-    label: "Reviewing a Smart Import before adding it",
-  },
-  "record-an-absence": {
-    start: recordAnAbsenceStart,
-    label: "Recording an absence from Today",
-  },
-  "save-a-backup": {
-    start: saveABackupStart,
-    label: "Saving a backup to Files",
-  },
-} satisfies Record<string, HelpRecording>;
-
-export type HelpRecordingName = keyof typeof helpRecordings;

@@ -1,0 +1,7 @@
+Open Settings, then Siri and Shortcuts. With Plus, you can turn on Allow Siri roster answers here.
+
+The examples on this screen are a place to start. Siri reads the shifts or visits you've saved, so check the plan is up to date first.
+
+For visits, client names stay off unless you choose to say them. Addresses, phone numbers and notes aren't shared with Siri.
+
+If you ask Siri to record an action, it waits for your confirmation before saving. You can undo from Today. Opening Today, Calendar or Import is free.

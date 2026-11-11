@@ -1,0 +1,7 @@
+From Workplaces, open the more menu and choose Import roster. This example starts with pasted shift text.
+
+Tap Analyze, then check the proposed workplace, dates and times against the original. These two shifts are on the same day, so don't mistake them for a repeating rotation.
+
+Fix anything that's wrong before you apply the import. Applying adds the plan; opening the preview hasn't saved it yet.
+
+Read the result, then check the workplace and Calendar. Photos, files and scans start analysing after their text is extracted. If you edit pasted text, run Analyze again before using that result.

@@ -1,0 +1,7 @@
+In Clients, open the more menu and choose Import clients. The app may first ask you to review the requirements for the information you'll keep. Read that before continuing.
+
+This example uses pasted text. Tap Analyze and check each proposed client, address, duration and appointment window against the original.
+
+Check the visit days as well. A visit is only planned on a day that's both a client visit day and one of your work days.
+
+Apply the import when the details are right, then read the result and check the clients you've saved. An import is a starting plan for you to review, not confirmation of an appointment.

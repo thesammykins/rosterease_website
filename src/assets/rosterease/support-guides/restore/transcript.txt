@@ -1,0 +1,7 @@
+Restoring a backup replaces the records on this device. Save a backup of what you have now before you start.
+
+In Settings, open Data Management, then Restore Backup. Choose the backup file in Files. You'll need the key used to save it if this device doesn't already have that key.
+
+Read the restore summary before confirming. Check that you've chosen the right file, because this isn't a way to merge two sets of records.
+
+Confirm the restore when you're ready, then check Today and your saved records. Device-only settings, including the privacy lock, need checking separately afterwards.

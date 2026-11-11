@@ -1,0 +1,7 @@
+If you want to check what RosterEase keeps, open Settings, then Privacy. Tap How Your Records Work.
+
+Your notes and visits stay on this phone unless you share them through another feature. Editing a saved note keeps the earlier version.
+
+A check-in records the device's time. It doesn't independently prove attendance, and a signature doesn't verify someone's identity.
+
+Backups are encrypted, so keep your backup key somewhere safe. For the detail on photos, recordings and signatures, use the written guide below.

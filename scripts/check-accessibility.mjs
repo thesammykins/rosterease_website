@@ -1,4 +1,5 @@
 import { readFile, readdir, stat } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import { join, resolve } from "node:path";
 import { gzipSync } from "node:zlib";
 
@@ -214,6 +215,72 @@ for (const [route, html] of routes) {
     }
   }
 }
+
+const supportGuides = JSON.parse(
+  await readFile("src/assets/rosterease/support-guides/catalogue.json", "utf8"),
+);
+check(
+  new Set(supportGuides.map((guide) => guide.id)).size === supportGuides.length,
+  "Narrated guide IDs must be unique",
+);
+for (const [route, html] of routes) {
+  if (!route.startsWith("/help/")) continue;
+  const recordings = supportGuides.filter(
+    (guide) => route === `/help/${guide.article}`,
+  );
+  check(recordings.length > 0, `${route}: missing narrated walkthrough`);
+  const videos = html.match(/<video\b[\s\S]*?<\/video>/g) ?? [];
+  check(videos.length === recordings.length, `${route}: wrong walkthrough count`);
+  for (const video of videos) {
+    const openingTag = video.slice(0, video.indexOf(">") + 1);
+    check(
+      /\bcontrols(?:\s|>)/.test(openingTag),
+      `${route}: video needs native controls`,
+    );
+    check(
+      /\bpreload="none"/.test(openingTag),
+      `${route}: do not preload walkthroughs`,
+    );
+    check(
+      !/\b(?:autoplay|muted|loop)(?:\s|>)/.test(openingTag),
+      `${route}: walkthroughs must wait for playback with sound`,
+    );
+    check(
+      /<track\b[^>]*kind="captions"[^>]*srclang="en"/.test(video),
+      `${route}: missing English captions`,
+    );
+  }
+}
+for (const guide of supportGuides) {
+  const route = `/help/${guide.article}`;
+  const html = routes.get(route);
+  check(html, `Unknown narrated guide article: ${route}`);
+  check(
+    html.includes(`src="/media/help/narrated/${guide.id}/guide.mp4"`),
+    `${route}: missing ${guide.id} video`,
+  );
+  check(
+    html.includes(`src="/media/help/narrated/${guide.id}/captions.vtt"`),
+    `${route}: missing ${guide.id} captions`,
+  );
+  const summaries = [...html.matchAll(/<summary\b[^>]*>([\s\S]*?)<\/summary>/g)]
+    .map((match) => match[1].replace(/<[^>]*>/g, "").trim());
+  check(
+    summaries.includes(`Read transcript: ${guide.title}`),
+    `${route}: missing labelled transcript for ${guide.id}`,
+  );
+  for (const [name, expected] of Object.entries(guide.files)) {
+    const root = (name === "guide.mp4" || name === "captions.vtt")
+      ? "public/media/help/narrated"
+      : "src/assets/rosterease/support-guides";
+    const file = join(root, guide.id, name);
+    const actual = createHash("sha256").update(await readFile(file)).digest("hex");
+    check(actual === expected, `${file}: differs from reviewed asset`);
+  }
+}
+console.log(
+  `${supportGuides.length} narrated walkthroughs: article mapping, controls, captions, transcripts and reviewed asset hashes passed`,
+);
 
 const css = await readFile(cssPath, "utf8");
 check(

@@ -1,0 +1,7 @@
+With Shift Plus, location review can suggest worked times for you to check. It doesn't mark a shift worked by itself.
+
+Open Settings, then Privacy, and find Location Review. Turn it on, then check the access status underneath. Your workplace also needs the right map pin.
+
+Allow the location access the app asks for if you want it to notice arrivals and departures in the background.
+
+This recording shows the setup, not a real journey. When a suggestion appears on Today, check the times before confirming it. If the suggestion is wrong, edit or dismiss it.

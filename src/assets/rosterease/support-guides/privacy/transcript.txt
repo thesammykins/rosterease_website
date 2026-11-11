@@ -1,0 +1,7 @@
+Before turning on the privacy lock, make sure your device has a passcode. Open Settings, then Privacy, and turn on Require Unlock.
+
+Ask Again sets how long you can be away before the app asks you to authenticate. We'll keep five minutes here.
+
+The switches below control details outside the app. Each is separate from the lock. Here we're hiding Live Activity details so they stay generic even after the phone is unlocked.
+
+Notifications and Lock Screen widgets also depend on your iPhone settings. Check the written guide for those steps. These choices stay on this device.

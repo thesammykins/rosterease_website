@@ -1,0 +1,9 @@
+Choose Shifts for rostered work at a workplace. You'll build the plan here without needing an account.
+
+Add the workplace name and, if it's useful, a location. Check the time zone too, especially if you work across different zones.
+
+Open a shift type to check its start and end times. An end time earlier than the start means it finishes the next day.
+
+Now build the repeating pattern. Tap a day to cycle through your shift types. Here we're changing the first day to Off. Check the pattern's start date before continuing.
+
+Read the review, then finish setup. Check Calendar and Today against your original roster before relying on the plan. A one-off change later belongs in Calendar, not in this repeating pattern.

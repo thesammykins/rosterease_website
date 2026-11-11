@@ -1,0 +1,9 @@
+To keep a copy of your records, open Settings, then Data Management. Tap Save Backup.
+
+Choose where to keep the file in Files and save it. Wait for Backup Saved before you leave.
+
+The copy is encrypted. It includes your records, note history and attachments, but not device-only choices such as the privacy lock.
+
+Keep your backup key somewhere safe as well. Without the key used for that file, you can't open it. RosterEase doesn't keep a server copy of your backup or key.
+
+Weekly backups are a separate option on this screen.

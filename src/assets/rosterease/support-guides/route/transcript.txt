@@ -1,0 +1,7 @@
+Start on Today and check who's next. This is a five-client day, with two visits already finished.
+
+When you arrive, tap Check in for the client you're visiting. Check their name before adding a note.
+
+When the visit is finished, mark it complete. Today moves on to the next client, and the count goes up to three of five.
+
+Routes follow your client order, not an optimised driving route. Check addresses and appointment windows before relying on the plan. Changes to clients can update unfinished visits, but a visit you're checked in to is protected.

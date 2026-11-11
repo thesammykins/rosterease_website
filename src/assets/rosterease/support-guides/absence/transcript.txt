@@ -1,0 +1,9 @@
+Say you're off sick today. You can record that here without changing your rotation.
+
+Find your shift on Today and tap Not working today. We'll choose Sick day here, then tap Save.
+
+There's the absence at the top. It won't count as a shift you've worked. Your future shifts and Calendar events stay as they were.
+
+If you need to let your workplace know, do that separately. This only records the absence in RosterEase.
+
+If you picked the wrong reason, tap Undo beside the record to go back to what was there before.

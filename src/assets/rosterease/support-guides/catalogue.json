@@ -1,0 +1,296 @@
+[
+  {
+    "id": "setup-shifts",
+    "title": "Set up your shifts",
+    "mode": "shifts",
+    "voice": "marin",
+    "article": "getting-started",
+    "seconds": 50.1,
+    "files": {
+      "guide.mp4": "a4e5df08f6288931d67bae8f05d53a2b3015c738046248a93a0a6a30e483c811",
+      "captions.vtt": "224d0255bab71fa545d3a7e564ad4f3ad6e6bc5a2ec9e9999480165a52967a72",
+      "poster.png": "95e0d08d77eff13870c7649b1c96e5943a7807ab32243b45f5b1e2c22d6f86fe",
+      "transcript.txt": "1895cd76dafdae4c9d9b312a6c337c10eeb2f2704843514e8605186d54ed116e"
+    }
+  },
+  {
+    "id": "setup-visits",
+    "title": "Set up client visits",
+    "mode": "visits",
+    "voice": "cedar",
+    "article": "getting-started",
+    "seconds": 51.667,
+    "files": {
+      "guide.mp4": "5ee09255810a6a025d90c4fcf01d7b7d4401874c32f0b579a823f4cfcd3f7501",
+      "captions.vtt": "864d02ced536a3d2265a04011c812e7d7a2b5e7b29c4baea53819898659bb37c",
+      "poster.png": "1db95355970eee9f0fda8c835ebb945f0aaf9e9fb993aacf50b4ae0cfbac49f4",
+      "transcript.txt": "babc618006dfd7124607a0c10155c2dcfaafd84762832207a6b6de8ce019100f"
+    }
+  },
+  {
+    "id": "plus",
+    "title": "Free and Plus plans",
+    "mode": "shifts",
+    "voice": "cedar",
+    "article": "plus-plans",
+    "seconds": 44.6,
+    "files": {
+      "guide.mp4": "de10bfb922e6ed10d976be39b7fc64d6d3a2e5a75826677c0c269da09481fd03",
+      "captions.vtt": "ece11ba6ea7ef1a2961d3e3df8859de3456adcbf559bde11ec7aadd65622e12b",
+      "poster.png": "cbddb99d044afba221804aebf1daad0e9ee6caa9ae745b1db03af5dee83bc317",
+      "transcript.txt": "ef18818a8fb4749cafd9bd596ff283574f1cd8a0fc0d672765c02ce7e208f7f2"
+    }
+  },
+  {
+    "id": "import-shifts",
+    "title": "Import shift text",
+    "mode": "shifts",
+    "voice": "marin",
+    "article": "smart-import",
+    "seconds": 45.167,
+    "files": {
+      "guide.mp4": "6eb9e463bfe874d2a0f65f1c597196830645051c2702546caae086913ff0a917",
+      "captions.vtt": "4421a7f89c08072fa662407ee68497244de2d2ba123daac3a7d85f89de0ff970",
+      "poster.png": "df47125ac1d0709e962f98a22a891c9e01914886adb9171ad0d988a20a2ba0e5",
+      "transcript.txt": "03cd14c6e32b268938a7281fd65e9a9d420cafd15b055f96b2e99d890c56c8a1"
+    }
+  },
+  {
+    "id": "import-visits",
+    "title": "Import a client list",
+    "mode": "visits",
+    "voice": "cedar",
+    "article": "smart-import",
+    "seconds": 42.9,
+    "files": {
+      "guide.mp4": "42986b9a0bead22f3738ac9f010a348f52f62aec350d2f6a4e14db4d707a9be9",
+      "captions.vtt": "040e06600328972ad3dee6eea935cfea1b3b5768aa4a64e88a8ce5848ea3ea6f",
+      "poster.png": "bf06d98b3edb48441e1a41b3931ae51f44408b1d6162e9dc00cf131e537e03ae",
+      "transcript.txt": "5e8f924dbaf1b2b2b9d6f6e77fb8327dddb388e31f606697f5361d84bf40a0c0"
+    }
+  },
+  {
+    "id": "change-one-day",
+    "title": "Change one day",
+    "mode": "shifts",
+    "voice": "marin",
+    "article": "shift-changes",
+    "seconds": 38.734,
+    "files": {
+      "guide.mp4": "1dd75cfc69cab93d7b84b3aa19439cf685186c131aa4b1b6a6c99decfbb5a789",
+      "captions.vtt": "bcb0ba8d0c4bfc5e907ca7cace8f2fe8bee95734fe5e1bf2ddcac9c99b148fda",
+      "poster.png": "9605efa6c02db1fca3789f6828c8fb30b2a61519ac6e87e11d532cca4201ee8d",
+      "transcript.txt": "c2575c627517639decd1bd67aa64702873eea7f1d505dedf03c67e20247aae42"
+    }
+  },
+  {
+    "id": "absence",
+    "title": "Record an absence",
+    "mode": "shifts",
+    "voice": "cedar",
+    "article": "recording-an-absence",
+    "seconds": 40.0,
+    "files": {
+      "guide.mp4": "6e82d2eb84c31dadb218f1d73327f6fb60464c56774945e8977ab048e8ef53f5",
+      "captions.vtt": "5aef90f944deffcc24ad4cfe676a73967e6ab95e7a257f1cf8bf529b8ded1fe2",
+      "poster.png": "6ce7311ddcf8f1e884b1586ee356517973d61894054548b052ea843331f290fc",
+      "transcript.txt": "aeccc49765303e4a26e69197d97fd299f0a489d39554a9d677d432f959652a07"
+    }
+  },
+  {
+    "id": "shift-checkin",
+    "title": "Check in and out",
+    "mode": "shifts",
+    "voice": "cedar",
+    "article": "notes-and-check-ins",
+    "seconds": 40.067,
+    "files": {
+      "guide.mp4": "a390d166bf42bc3bf071a6d567521e419cb74b8e68e525d606d3f25fff68cd62",
+      "captions.vtt": "147ec8c996b2167ae100ef2b0eeee306d385e6d42090fd9ebd6d1b8ed53d1c23",
+      "poster.png": "209cee4f1516437ce7f7859e560b3e7a2ebb070dc7ef94c667d910f80616521a",
+      "transcript.txt": "5c3625b3a419007c5a7d08f7f4a39a2a60da738cd37c67201220c67900479dec"
+    }
+  },
+  {
+    "id": "visit-note",
+    "title": "Save a visit note",
+    "mode": "visits",
+    "voice": "marin",
+    "article": "notes-and-check-ins",
+    "seconds": 32.0,
+    "files": {
+      "guide.mp4": "2dbbadf06ce9170979fa2c5ad12072432c33029f4f37378a25982ff69a8957f2",
+      "captions.vtt": "39361dc4b23c3adac16ad585a2d97c4e1d6b99e58c35d0f63792ff31570a6e9b",
+      "poster.png": "fa5b462a0942025ddc58d64da964973e99cf9eaecbb851d8c15996ee5c06d99d",
+      "transcript.txt": "fe5d7f5cbf71728651e1c0aac41812b34b46bb8f3bfac062c5272d743feb9398"
+    }
+  },
+  {
+    "id": "create-template",
+    "title": "Create a note template",
+    "mode": "visits",
+    "voice": "cedar",
+    "article": "notes-and-check-ins",
+    "seconds": 42.7,
+    "files": {
+      "guide.mp4": "00aa2d21cdcaaca949e3fcf49c2cf2300ada46122b6652a6fe6125a371d92194",
+      "captions.vtt": "b34a32e5d65c9828017ee8047c53af1bda3aefabe893d17927a9fd9f49bd8ac5",
+      "poster.png": "c8183ef8a89fda9beccd8bbdd856a276c307c91d1b3f1fc496771e22b6f47515",
+      "transcript.txt": "c6fc76b373d38217de08067585849e036f67aee51619eecb6cd41bbed9323740"
+    }
+  },
+  {
+    "id": "records",
+    "title": "How your records work",
+    "mode": "visits",
+    "voice": "cedar",
+    "article": "how-your-records-work",
+    "seconds": 33.767,
+    "files": {
+      "guide.mp4": "e6fff7ca35f28a6bab4f15f4de744b3e6957ecd7d477434e3fbe4ba76348e26c",
+      "captions.vtt": "1917782e7ffd7bd8b7d9d4b30d354ac517f238193a4eb87a178c4821f87c4796",
+      "poster.png": "340cc9a8da63ab43aaa9b23972b2caa4a2526b6867b55a542c8256808bcc3f07",
+      "transcript.txt": "d55e3380437cc27faf114f4f9295ceaf5df43240547b90e5823ec4bc242aec44"
+    }
+  },
+  {
+    "id": "location",
+    "title": "Set up location review",
+    "mode": "shifts",
+    "voice": "marin",
+    "article": "location-review",
+    "seconds": 37.767,
+    "files": {
+      "guide.mp4": "a06e0bbbe7725fce3d4e6621b41bf6ce0c50a1c19991362a6998656f33a00fef",
+      "captions.vtt": "686c98f1787f40b0c082c40a1766e8e46bff077c633365802bdec7edb0f83505",
+      "poster.png": "5c9c5f7f342b5aa6aa5497544f62eac8b1591d3d746aa206f8e9b4307dc8d256",
+      "transcript.txt": "54683b28f1e3284116e5206c51d80e92fd6c8d90ad8061d977a6baa24cde5e20"
+    }
+  },
+  {
+    "id": "route",
+    "title": "Work through your visits",
+    "mode": "visits",
+    "voice": "marin",
+    "article": "visit-routes",
+    "seconds": 39.2,
+    "files": {
+      "guide.mp4": "78dacf631e81114c64f76b50ca7e3c08d370d69e3643b6f98c41f2c208a1955c",
+      "captions.vtt": "412edfb1fd85fc5c427543f862dacdca1f72a97f137b0f82f0671f366e964f17",
+      "poster.png": "ee64ec76800448e96c8e7780035f4f621c0d3609350cb3a1fef2f32620ec61b7",
+      "transcript.txt": "72e6ea204f11bfb7ca23ee14b290b2a78b1b8af587507c0d07848bf48d60e5c8"
+    }
+  },
+  {
+    "id": "travel",
+    "title": "Set your travel buffer",
+    "mode": "shifts",
+    "voice": "cedar",
+    "article": "travel-time",
+    "seconds": 35.6,
+    "files": {
+      "guide.mp4": "0d1967ecbd876527a27a382e2e3cecd11aab205c9f9a7af7d89d3c977e1f5810",
+      "captions.vtt": "c4c69eb1c93fed9c06e420d96f0efb8fcad08d324dd98ed9d0408522d8c44fa1",
+      "poster.png": "980268a3dd9926990e49c163e0e643d61cee7fa3538b776a433211a8bd9cbc57",
+      "transcript.txt": "4cdeea663ff7d5683048d1bcb43da3ab4b98eeb4fb3d8ad32b90150e1fb39065"
+    }
+  },
+  {
+    "id": "calendar-sync",
+    "title": "Choose a Calendar destination",
+    "mode": "shifts",
+    "voice": "marin",
+    "article": "calendar-and-privacy",
+    "seconds": 42.234,
+    "files": {
+      "guide.mp4": "2e9a4a0c7091a17c14f003cd6d214790223810e5da28647701e2264e0155cb9f",
+      "captions.vtt": "fcff623ce64e458df58977e3f0b8941fcdfc838670c5fc33ddf1d52328dedd69",
+      "poster.png": "54255c975001cd9d3fb26bf379e2c42495efd4f0b394f3263d0e00c311cfba0f",
+      "transcript.txt": "bc99139673f2a698d49970aca3847c6348b4e32cad25eab33e1202d534db4ac6"
+    }
+  },
+  {
+    "id": "live-activities",
+    "title": "Show Live Activities",
+    "mode": "shifts",
+    "voice": "cedar",
+    "article": "live-activities",
+    "seconds": 32.5,
+    "files": {
+      "guide.mp4": "bc9cc5ab6a7370ea8452e2c57e1a2aab36d1e48150d7bee867e1706e5ebeb406",
+      "captions.vtt": "a8e40bb9056485e29d676d6bc191f6143769303d66152a7308811c08107cb9f6",
+      "poster.png": "13044bd08d20503921ca9c143fbe6f391d0ece3c05e6c66fe002b9e41e7f152a",
+      "transcript.txt": "d977fe85868592123c92e68d0ba2bfa70228cce890f2dc3617a4b98bf690e6e4"
+    }
+  },
+  {
+    "id": "siri",
+    "title": "Set up Siri answers",
+    "mode": "visits",
+    "voice": "marin",
+    "article": "siri",
+    "seconds": 36.967,
+    "files": {
+      "guide.mp4": "60f9aa7169799671dbb5694a4d8101284c17fe005e9fd3d1055693cf8b387119",
+      "captions.vtt": "52a3aed7c344a1587132b6302d328124d30014c25f31351497791d65a9bb4637",
+      "poster.png": "17c360961b988b99ca5b8ded34548988bd3c7dfe42cc82c839fe2418a4f4c153",
+      "transcript.txt": "caa3e64a0d19f603f50e1db7cd0c2bb25d0eb2d3f07b42f577e7c169d68b89de"
+    }
+  },
+  {
+    "id": "privacy",
+    "title": "Use the privacy lock",
+    "mode": "visits",
+    "voice": "cedar",
+    "article": "privacy-lock",
+    "seconds": 39.067,
+    "files": {
+      "guide.mp4": "bf2824272053b4ccc07f5c82249d94be11d31ed3e753556e6609952025917a95",
+      "captions.vtt": "4414735a5ed5d99b4e1a7872f0f49d8c18af04ee99cf57789655d86153814d92",
+      "poster.png": "e0d88e4b8a516b4afc2508f77407668c43f7098143670ba69a5d772b5a33c184",
+      "transcript.txt": "b7560888e0efea0b2861c745f5192390fa89fd353272bd7f02929a2f91647d08"
+    }
+  },
+  {
+    "id": "backup",
+    "title": "Save a backup",
+    "mode": "shifts",
+    "voice": "marin",
+    "article": "backup-and-restore",
+    "seconds": 40.2,
+    "files": {
+      "guide.mp4": "9e6579aad900d595b6b4e9f11f746b4757353d9c1efae8659e7951efaecd5f93",
+      "captions.vtt": "8f92380111c687fad14e0b8c84481031c1af8837a69815ef1618a04f19fc7d9a",
+      "poster.png": "cbba0cb8e3328ef446d20d273a68bfeb429988f03b73893729ee41bc80e45eea",
+      "transcript.txt": "33e7c2f32ef92bf2cb7fe3279f868eaa7113a4af366d0bf20de44e0f424acdb1"
+    }
+  },
+  {
+    "id": "restore",
+    "title": "Restore a saved backup",
+    "mode": "shifts",
+    "voice": "cedar",
+    "article": "backup-and-restore",
+    "seconds": 39.6,
+    "files": {
+      "guide.mp4": "baa69277c318464419bff4ffaa0ae871b0ce7691cc0823799244df16c7d0ff06",
+      "captions.vtt": "4385b343d7e0a6332a8f3c750aec99e0d5a79b52ec787b2618b2a31922d81d32",
+      "poster.png": "c8c07e8dff62529b43249a7602e49a8444e2a5f4ec9ca622cadea4de7740edb5",
+      "transcript.txt": "5bd1ccf550560d3609b6b7654b502f23e75ea95ea25b047f93ba3b0c7a375f60"
+    }
+  },
+  {
+    "id": "performance",
+    "title": "Local performance reports",
+    "mode": "shifts",
+    "voice": "marin",
+    "article": "performance-reports",
+    "seconds": 40.0,
+    "files": {
+      "guide.mp4": "4cbfebd4f0edc1fd556273ea250dff4fd12dfb9ff2c1fdf416554e4b32198be4",
+      "captions.vtt": "2b48ef208a9ad93ddee1d0b6aa53f0b52ef9d28f0e948eae8a57752ab7efa556",
+      "poster.png": "96077cd619efd3df0cabe907112aa591053109c0c89bcd48b715c4ac33798c64",
+      "transcript.txt": "1aa2aa90d24dbae5b78e76ebd1c55fbe17fdc149868f0a4f4a015d9bc29c4434"
+    }
+  }
+]

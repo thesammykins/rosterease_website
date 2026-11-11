@@ -1,0 +1,7 @@
+If you're helping investigate a problem, open Settings, then About, and choose Local performance reports.
+
+This is off until you choose to keep reports. Turning it on keeps a small summary on this device. It doesn't upload anything automatically.
+
+Reports may take a day or a later launch to arrive, so an empty list doesn't mean it's broken.
+
+When there's something to share, unlock and review the JSON first. Read what's there before sharing it. Turning the setting off deletes the local reports, not copies you've already shared.

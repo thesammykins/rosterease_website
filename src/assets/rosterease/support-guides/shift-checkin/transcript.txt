@@ -1,0 +1,7 @@
+If you want to keep check-in times, open Settings, then Notifications, and turn on Shift check-ins.
+
+Go back to Today and find the shift you're starting. Tap Check in when you begin. That saves the time from this device.
+
+When you finish, tap Check out. Checking out records a time, but it doesn't mark the shift as worked. Make that attendance choice on Today separately.
+
+If a time needs correcting, open the shift's notes and check-in record. Keep the time you actually worked, rather than leaving a mistaken tap as the record.

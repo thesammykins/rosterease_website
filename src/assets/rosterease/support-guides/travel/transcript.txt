@@ -1,0 +1,7 @@
+Open Settings, then Travel. Your travel buffer is the extra time you want around a journey.
+
+Tap Start Location to set a start address or area, then save it. Check that it's the place you'll actually be leaving from.
+
+Apple Maps estimates are optional. If you turn them on, addresses are sent to Apple for the estimate, not your private notes. Without an estimate, the app uses the buffer.
+
+A leave-by time is a planning aid, not a promise that you'll arrive on time. Check the journey and allow for anything the estimate won't know about.

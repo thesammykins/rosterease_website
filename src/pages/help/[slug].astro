@@ -1,10 +1,11 @@
 ---
 import RosterEaseLayout from "../../layouts/RosterEaseLayout.astro";
-import { getImage } from "astro:assets";
 import DeviceFrame from "../../components/DeviceFrame.astro";
 import HelpText from "../../components/HelpText.astro";
+import NarratedGuide from "../../components/NarratedGuide.astro";
+import catalogue from "../../assets/rosterease/support-guides/catalogue.json";
 import { guides, type Guide } from "../../lib/guides";
-import { helpRecordings, helpScreens } from "../../lib/screenshots";
+import { helpScreens } from "../../lib/screenshots";
 export function getStaticPaths() {
   return guides.map((guide) => ({
     params: { slug: guide.slug },
@@ -15,21 +16,7 @@ interface Props {
   guide: Guide;
 }
 const { guide } = Astro.props;
-const posters = Object.fromEntries(
-  await Promise.all(
-    guide.sections
-      .flatMap((section) => (section.recording ? [section.recording] : []))
-      .map(async (name) => [
-        name,
-        await getImage({
-          src: helpRecordings[name].start,
-          width: 720,
-          format: "webp",
-          quality: 85,
-        }),
-      ]),
-  ),
-);
+const recordings = catalogue.filter((recording) => recording.article === guide.slug);
 ---
 
 <RosterEaseLayout title={guide.title} description={guide.description}>
@@ -41,6 +28,7 @@ const posters = Object.fromEntries(
         class="re-subnav"
         aria-label="Guide contents"
       >
+        <a href="#watch">Watch</a>
         {
           guide.sections.map((section) => (
             <a href={`#${section.id}`}>{section.title}</a>
@@ -48,9 +36,16 @@ const posters = Object.fromEntries(
         }
       </nav>
     </section><article class="re-prose re-help-article">
+      <section id="watch" aria-labelledby="watch-heading">
+        <h2 id="watch-heading">Watch the walkthrough{recordings.length > 1 ? "s" : ""}</h2>
+        <p>Narration uses AI-generated voices. You can also follow the written steps below.</p>
+        <div class="re-support-guides">
+          {recordings.map((recording) => <NarratedGuide guide={recording} />)}
+        </div>
+      </section>
       {
         guide.sections.map((section) => {
-          const hasMedia = Boolean(section.screens || section.recording);
+          const hasMedia = Boolean(section.screens);
           return (
             <section
               id={section.id}
@@ -74,48 +69,6 @@ const posters = Object.fromEntries(
               </div>
               {hasMedia && (
                 <div class="re-help-media">
-                  {section.recording && (
-                    <DeviceFrame
-                      device="iphone17"
-                      sizes="(max-width: 720px) 80vw, 280px"
-                    >
-                      <video
-                        autoplay
-                        muted
-                        loop
-                        playsinline
-                        disablepictureinpicture
-                        disableremoteplayback
-                        poster={posters[section.recording].src}
-                        aria-label={helpRecordings[section.recording].label}
-                        data-help-recording
-                      >
-                        <source
-                          media="(max-width: 720px)"
-                          src={`/media/help/${section.recording}-mobile.webm`}
-                          type="video/webm"
-                        />
-                        <source
-                          media="(max-width: 720px)"
-                          src={`/media/help/${section.recording}-mobile.mp4`}
-                          type="video/mp4"
-                        />
-                        <source
-                          src={`/media/help/${section.recording}.webm`}
-                          type="video/webm"
-                        />
-                        <source
-                          src={`/media/help/${section.recording}.mp4`}
-                          type="video/mp4"
-                        />
-                      </video>
-                      <button
-                        class="re-recording-toggle"
-                        type="button"
-                        aria-label="Pause recording"
-                      />
-                    </DeviceFrame>
-                  )}
                   {section.screens?.map((name) => (
                     <DeviceFrame
                       device="iphone17"
@@ -138,34 +91,3 @@ const posters = Object.fromEntries(
     </article>
   </div>
 </RosterEaseLayout>
-<script>
-  // Recordings loop silently while on screen. Tapping one pauses or resumes it;
-  // with Reduce Motion on they wait on their first frame until tapped.
-  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  document
-    .querySelectorAll<HTMLVideoElement>("video[data-help-recording]")
-    .forEach((video) => {
-      const toggle = video.parentElement?.querySelector<HTMLButtonElement>(
-        ".re-recording-toggle",
-      );
-      let held = reduceMotion;
-      if (held) video.pause();
-      const label = () =>
-        toggle?.setAttribute(
-          "aria-label",
-          video.paused ? "Play recording" : "Pause recording",
-        );
-      video.addEventListener("play", label);
-      video.addEventListener("pause", label);
-      label();
-      toggle?.addEventListener("click", () => {
-        held = !video.paused;
-        if (held) video.pause();
-        else void video.play().catch(() => {});
-      });
-      new IntersectionObserver(([entry]) => {
-        if (!entry.isIntersecting) video.pause();
-        else if (!held) void video.play().catch(() => {});
-      }).observe(video);
-    });
-</script>

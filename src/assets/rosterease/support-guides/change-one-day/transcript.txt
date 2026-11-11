@@ -1,0 +1,7 @@
+For a one-off change, open Calendar and select the date you need. Open the shift editor for that day. We'll choose Off here, then save the change.
+
+That changes this day without rewriting the rotation for future weeks. Check the saved day against what you meant to change.
+
+If it should follow the pattern again, open the editor and remove the change. To change the repeating rotation itself, use Workplaces instead.
+
+And if you're recording that you didn't work a planned shift, use Not working today on Today.

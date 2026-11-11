@@ -1,0 +1,7 @@
+We're already checked in for this visit. Check the client's name here before you start, so you know who the note is for.
+
+Tap the pencil beside their name, then write what you need to record in Note text.
+
+Have a quick read through before you tap Save. Then open the saved note to check the details.
+
+If you spot something later, tap Revise, make the change and save again. The earlier version stays in the history, so you can look back at what it said.

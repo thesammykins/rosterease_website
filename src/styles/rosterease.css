@@ -762,17 +762,43 @@ html:has(.re-screenshot-dialog[open]) {
   color: var(--re-text);
   font-weight: 600;
 }
-.re-recording-toggle {
-  position: absolute;
-  left: var(--screen-left);
-  top: var(--screen-top);
-  width: var(--screen-width);
-  height: var(--screen-height);
-  padding: 0;
-  border: 0;
-  border-radius: var(--re-device-radius);
-  background: transparent;
+.re-help-article .re-support-guides {
+  max-width: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 360px));
+  gap: 40px;
+  margin-top: 32px;
+  align-items: start;
+}
+.re-support-guide {
+  min-width: 0;
+}
+.re-support-guide h3 {
+  font-size: 22px;
+}
+.re-support-guide p.re-support-guide__duration {
+  margin: 4px 0 16px;
+  font-size: 15px;
+}
+.re-support-guide video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 9 / 16;
+  border-radius: var(--re-radius-sm);
+  background: #faf9f6;
+}
+.re-support-guide__transcript {
+  margin-top: 16px;
+}
+.re-support-guide__transcript summary {
   cursor: pointer;
+  color: var(--re-accent);
+  width: fit-content;
+  padding-block: 8px;
+}
+.re-support-guide__transcript p {
+  font-size: 16px;
 }
 .re-note {
   padding: 22px 26px;
@@ -1661,4 +1687,3 @@ html:has(.re-screenshot-dialog[open]) {
     transition: none;
   }
 }
-

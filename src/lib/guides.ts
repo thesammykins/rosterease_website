@@ -1,4 +1,4 @@
-import type { HelpRecordingName, HelpScreen } from "./screenshots";
+import type { HelpScreen } from "./screenshots";
 
 export interface Guide {
   slug: string;
@@ -12,7 +12,6 @@ export interface Guide {
     // Notes that read after the steps, such as follow-ups and cautions.
     after?: string[];
     screens?: HelpScreen[];
-    recording?: HelpRecordingName;
   }[];
 }
 
@@ -141,7 +140,6 @@ export const guides: Guide[] = [
       {
         id: "start",
         title: "Start an import",
-        recording: "import-review",
         paragraphs: [
           "Smart Import turns a roster or client list into a plan you check before anything is added.",
         ],
@@ -210,7 +208,6 @@ export const guides: Guide[] = [
     sections: [
       {
         id: "one-day",
-        recording: "change-one-day",
         title: "Change one day",
         paragraphs: [
           "A one-off change affects only that day and leaves your rotation intact. To change future weeks, edit the rotation in **Workplaces** instead. **Settings > Workplaces > Manage workplaces** opens the same tab.",
@@ -259,7 +256,6 @@ export const guides: Guide[] = [
     sections: [
       {
         id: "record",
-        recording: "record-an-absence",
         title: "Record it from Today",
         paragraphs: [
         ],
@@ -700,7 +696,6 @@ export const guides: Guide[] = [
     sections: [
       {
         id: "export",
-        recording: "save-a-backup",
         title: "Save a backup",
         paragraphs: [
         ],

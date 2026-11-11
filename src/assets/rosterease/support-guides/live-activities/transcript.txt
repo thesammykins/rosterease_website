@@ -1,0 +1,7 @@
+To follow your day without opening the app each time, open Settings, then Notifications. Turn on Show Live Activities.
+
+If they don't appear, check that iOS allows Live Activities for RosterEase as well.
+
+Open RosterEase when your work day starts. The activity can show your shift, or your progress through visits. It may not appear on a day off.
+
+For a long day, reopen the app to refresh it. And if you don't want the details visible, hide Live Activity details in Privacy.

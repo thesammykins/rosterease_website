@@ -1,0 +1,9 @@
+Choose Visits if your day takes you to clients' homes or sites. Start with your service area and where you'll leave from, then check your work days.
+
+Before adding client information, check the privacy requirements for your work. If the app asks you to review them, choose the answer that fits your work.
+
+Add a client with their name, address and usual visit length. Check their visit days. A visit needs to fall on both a client visit day and one of your work days.
+
+We'll add three clients here so there's a day to plan, not just one appointment. Check the client order and addresses in the review, then finish setup.
+
+Open Today and Calendar to check the plan. You can set your travel buffer in Settings, under Travel. The route follows client order; it isn't an optimised driving route.
