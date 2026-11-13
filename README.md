@@ -36,7 +36,7 @@ The app icon matches the current app branding source. The shared `og-image.png` 
 
 Screens use unaltered native captures with synthetic fixtures. The local 12 November refresh replaces Shifts Today on iPhone 17 and both Duo displays, plus the help images for travel, roster changes, absence and Calendar Sync, in light and dark. These were captured against app sources at `28b65585` (capture-recipe commit `bf04010`), not an attested release binary. The other images retain their earlier provenance after the UI audit. [Website capture provenance](src/assets/rosterease/screenshots/capture-2026-11-07/capture-manifest.json) and [help capture provenance](src/assets/rosterease/screenshots/help-2026-11-07/capture-manifest.json) record each image's revision, fixture, dimensions and hash. Astro produces responsive WebP files at build time. Screenshot previews zoom from the selected image into a native dialog and load a sharper WebP after opening. The visible preview stays in place until it is ready.
 
-This refresh remains local on `help-1.1`. Do not push, merge, deploy or upload assets until Sammy authorises the coordinated launch after App Review approves 1.1.
+Sammy approved the coordinated 1.1 website launch on [13 November 2026](https://ampcode.com/threads/T-01a1bdd5-f840-7150-a262-fcbe949823dc#M-034wadF18rYGCHMeleEvTk), superseding the earlier branch hold. Merge `help-1.1` into `main` for the normal Pages deployment and coordinate readiness with the App Store release. App Store listing artwork remains owned by the listing thread; its uploaded close-up header/search assets take precedence over the legacy local header layouts.
 
 Every screenshot sits under an official Apple bezel through `DeviceFrame.astro`: iPhone 17 Black, iPad Pro (M5) 13" Space Black, and iPhone Duo Night Sky outer and inner. `src/lib/devices.ts` holds each screen opening, which matches the captures pixel for pixel; each screen is masked to its opening in Apple's artwork (`scripts/build-screen-masks.mjs`), so no screenshot shows past a bezel. The hero shows the same upright frames until its desktop 3D model loads. Do not stretch screenshots from another device into a frame. The artwork's licence is retained in `docs/design/`.
 
@@ -52,7 +52,7 @@ These are scoped demonstrations, not a spoken replacement for each article. Siri
 
 `check:a11y` also checks article coverage, controls, captions, transcripts and reviewed-asset hashes. Before changing an export, review the complete video and update its captions, transcript, poster and catalogue hashes together. Browser-check playback, caption loading, transcript keyboard access, multiple-player behaviour, narrow layouts, themes and reduced motion. Earlier silent recordings in `public/media/help/` and their provenance remain historical assets; no current page loads them.
 
-Keep this integration on `help-1.1` for review. The Pages workflow deploys on `main` or manual dispatch, not a push to `help-1.1`. Do not merge or dispatch it without approval.
+The narrated integration is included in the approved coordinated 1.1 launch. The Pages workflow deploys on `main` or manual dispatch, not a push to `help-1.1`; use the normal `main` push rather than a separate manual deployment.
 
 The shared App Store link lives in `src/lib/rosterease.ts`. Apple's unmodified black download badge is served locally; [badge provenance and display rules](docs/design/app-store-badge.md) document its source. TestFlight signup lives only on `/beta/`.
 

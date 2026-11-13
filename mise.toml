@@ -1,0 +1,2 @@
+[tools]
+node = "24" # matches the app repo's mise.toml and the Pages build
