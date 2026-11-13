@@ -7,90 +7,85 @@ import catalogue from "../../assets/rosterease/support-guides/catalogue.json";
 import { guides, type Guide } from "../../lib/guides";
 import { helpScreens } from "../../lib/screenshots";
 export function getStaticPaths() {
-  return guides.map((guide) => ({
-    params: { slug: guide.slug },
-    props: { guide },
-  }));
+  return guides.map((guide) => ({ params: { slug: guide.slug }, props: { guide } }));
 }
-interface Props {
-  guide: Guide;
-}
+interface Props { guide: Guide; }
 const { guide } = Astro.props;
 const recordings = catalogue.filter((recording) => recording.article === guide.slug);
 ---
 
 <RosterEaseLayout title={guide.title} description={guide.description}>
   <div class="re-shell">
-    <section class="re-page-intro">
-      <a class="re-breadcrumb" href="/help/">← All help guides</a><h1>
-        {guide.title}
-      </h1><p>{guide.description}</p><p>
-        These guides cover RosterEase 1.1. Check your version in Settings &gt; About;
-        older versions have different controls and features.
-      </p><nav
-        class="re-subnav"
-        aria-label="Guide contents"
-      >
-        <a href="#watch">Watch</a>
+    <header class="re-help-intro">
+      <a class="re-breadcrumb" href="/help/">← All help guides</a>
+      <h1>{guide.title}</h1>
+      <p class="re-help-intro__description">{guide.description}</p>
+      <p class="re-help-intro__version">
+        RosterEase 1.1 · Check your version in Settings &gt; About.
+        Older versions have different controls and features.
+      </p>
+    </header>
+    <div class="re-help-layout">
+      <nav class="re-help-contents" aria-label="Guide contents">
+        <details open data-help-contents>
+          <summary>In this guide</summary>
+          <div>
+            <a href="#watch">Video guides</a>
+            {guide.sections.map((section) => <a href={`#${section.id}`}>{section.title}</a>)}
+          </div>
+        </details>
+      </nav>
+      <article class="re-prose re-help-article">
+        <section id="watch" aria-labelledby="watch-heading" class="re-help-watch">
+          <h2 id="watch-heading">Watch a walkthrough</h2>
+          <div class="re-support-guides">
+            {recordings.map((recording) => <NarratedGuide guide={recording} />)}
+          </div>
+        </section>
         {
           guide.sections.map((section) => (
-            <a href={`#${section.id}`}>{section.title}</a>
-          ))
-        }
-      </nav>
-    </section><article class="re-prose re-help-article">
-      <section id="watch" aria-labelledby="watch-heading">
-        <h2 id="watch-heading">Watch the walkthrough{recordings.length > 1 ? "s" : ""}</h2>
-        <p>Narration uses AI-generated voices. You can also follow the written steps below.</p>
-        <div class="re-support-guides">
-          {recordings.map((recording) => <NarratedGuide guide={recording} />)}
-        </div>
-      </section>
-      {
-        guide.sections.map((section) => {
-          const hasMedia = Boolean(section.screens);
-          return (
-            <section
-              id={section.id}
-              class:list={{ "re-help-section--media": hasMedia }}
-            >
+            <section id={section.id} class:list={{ "re-help-section--media": Boolean(section.screens) }}>
               <div>
                 <h2>{section.title}</h2>
-                {section.paragraphs.map((paragraph) => (
-                  <p><HelpText text={paragraph} /></p>
-                ))}
+                {section.paragraphs.map((paragraph) => <p><HelpText text={paragraph} /></p>)}
                 {section.steps && (
                   <ol class="re-help-steps">
-                    {section.steps.map((step) => (
-                      <li><HelpText text={step} /></li>
-                    ))}
+                    {section.steps.map((step) => <li><HelpText text={step} /></li>)}
                   </ol>
                 )}
-                {section.after?.map((paragraph) => (
-                  <p><HelpText text={paragraph} /></p>
-                ))}
+                {section.after?.map((paragraph) => <p><HelpText text={paragraph} /></p>)}
               </div>
-              {hasMedia && (
+              {section.screens && (
                 <div class="re-help-media">
-                  {section.screens?.map((name) => (
+                  {section.screens.map((name) => (
                     <DeviceFrame
                       device="iphone17"
                       screen={helpScreens[name]}
-                      sizes="(max-width: 720px) 45vw, 280px"
+                      sizes="(max-width: 720px) 80vw, 240px"
                     />
                   ))}
                 </div>
               )}
             </section>
-          );
-        })
-      }<section>
-        <h2>Need more help?</h2><p>
-          <a href="/contact/">Contact support</a> with your build number and the step
-          you reached. Please redact personal or workplace-confidential details from
-          any examples.
-        </p><p><a href="/privacy/">Read the Privacy Policy</a></p>
-      </section>
-    </article>
+          ))
+        }
+        <section>
+          <h2>Need more help?</h2>
+          <p><a href="/contact/">Contact support</a> with your build number and the step you reached. Please redact personal or workplace-confidential details from any examples.</p>
+          <p><a href="/privacy/">Read the Privacy Policy</a></p>
+        </section>
+      </article>
+    </div>
   </div>
 </RosterEaseLayout>
+
+<script>
+  const contents = document.querySelector<HTMLDetailsElement>("[data-help-contents]")!;
+  const narrow = matchMedia("(max-width: 1080px)");
+  const updateContents = () => { contents.open = !narrow.matches; };
+  updateContents();
+  narrow.addEventListener("change", updateContents);
+  contents.addEventListener("click", (event) => {
+    if (narrow.matches && event.target instanceof Element && event.target.closest("a")) contents.open = false;
+  });
+</script>

@@ -255,6 +255,14 @@ for (const guide of supportGuides) {
   const route = `/help/${guide.article}`;
   const html = routes.get(route);
   check(html, `Unknown narrated guide article: ${route}`);
+  const dialog = html.match(new RegExp(`<dialog\\b[^>]*id="video-${guide.id}"[\\s\\S]*?<\\/dialog>`))?.[0];
+  check(
+    html.includes(`aria-controls="video-${guide.id}"`) &&
+      dialog?.includes(`aria-labelledby="watch-${guide.id}"`) &&
+      dialog.includes(`src="/media/help/narrated/${guide.id}/guide.mp4"`) &&
+      dialog.includes('aria-label="Close video"'),
+    `${route}: ${guide.id} needs a labelled player dialog and connected launcher`,
+  );
   check(
     html.includes(`src="/media/help/narrated/${guide.id}/guide.mp4"`),
     `${route}: missing ${guide.id} video`,
