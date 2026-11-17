@@ -571,6 +571,14 @@ export const guides: Guide[] = [
         ],
       },
       {
+        id: "widget",
+        title: "Lock Screen widget",
+        paragraphs: [
+          "Add the RosterEase widget to your Lock Screen for the next thing to do without a Live Activity. It shows what the time is for, such as Leave, Ends or Back Wed, then the time, then the shift and place.",
+          "While a shift or route is under way, the widget fills in as it goes. After work it shows when you're back and how long you have to rest.",
+        ],
+      },
+      {
         id: "when",
         title: "When it appears",
         paragraphs: [
@@ -751,6 +759,9 @@ export const guides: Guide[] = [
           "RosterEase tries keys already saved in Keychain. If asked for a Backup key, enter the key used to save that file. For a backup exported from 1.0, enter its original passphrase here.",
           "Review what the backup contains, then confirm.",
         ],
+        after: [
+          "If a file is incomplete or damaged, RosterEase says so instead of asking for a Backup key. Choose another copy of the backup.",
+        ],
       },
       {
         id: "earlier-version",
@@ -800,7 +811,7 @@ export const guides: Guide[] = [
         id: "kept",
         title: "What is kept",
         paragraphs: [
-          "Kept: report intervals, CPU time, peak memory and disk writes; counts of crashes, hangs, CPU exceptions and disk-write exceptions; and the app version, build and iOS version when each report arrived.",
+          "Kept: report intervals, CPU time, peak memory and disk writes; launch and hang times and why the app closed; counts of crashes, hangs, slow launches, CPU exceptions and disk-write exceptions; and the app version, build and iOS version when each report arrived.",
           "Not kept: raw reports or stack traces, names, roster or client records, notes, locations, file paths, account IDs, keys or device identifiers.",
           "Only reports covering time after you turned this on are accepted. Delivery is best-effort: metrics usually arrive at most daily, and a crash report needs a later launch.",
         ],

@@ -13,6 +13,8 @@ trailer, `Approved-by: Sammy <link to her message>`.
 
 - **Coordinated 1.1 launch, 13 November 2026:** Sammy approved “triggering the push of all the changes that we've made to the website so that everything can go live all at the same time” and “go live now” after App Review approval ([direct approval](https://ampcode.com/threads/T-01a1bdd5-f840-7150-a262-fcbe949823dc#M-034wadF18rYGCHMeleEvTk)). Push the held `help-1.1` website work, merge it into `main`, allow its normal Pages deployment to `rosterease.app`, and verify the public homepage and help pages. Coordinate readiness with the App Store release thread. This supersedes the earlier website branch/deployment holds below for this launch only; it does not authorize pushing held app-repository commits or posting social material. The listing thread owns App Store header/search artwork; its approved uploaded close-ups supersede the legacy local header layouts.
 
+- **1.1.1 website copy, 17 November 2026:** Sammy approved pushing the 1.1.1 copy (help version notices, Lock Screen widget, damaged-backup message, app event log and performance-report wording) to `main` for its normal Pages deployment, held until 1.1.1 is released on the App Store: “Wait until released, i've set it to auto-release on review” ([thread](https://ampcode.com/threads/T-5d1e4f6e-a140-4bf2-a962-fafc36fbeab8)). Covers only that commit and this record.
+
 ## Earlier approvals and holds
 
 These remain the history of the selective publications. Their website launch holds are superseded by the coordinated 1.1 approval above.
